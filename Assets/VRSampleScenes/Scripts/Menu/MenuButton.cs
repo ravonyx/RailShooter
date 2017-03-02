@@ -16,7 +16,8 @@ namespace VRStandardAssets.Menu
 
         [SerializeField] private string m_SceneToLoad;                      // The name of the scene to load.
         [SerializeField] private VRCameraFade m_CameraFade;                 // This fades the scene out when a new scene is about to be loaded.
-        [SerializeField] private SelectionRadial m_SelectionRadial;         // This controls when the selection is complete.
+        [SerializeField] private SelectionRadial m_SelectionRadialVR;         // This controls when the selection is complete.
+        [SerializeField] private SelectionRadial m_SelectionRadialMouse;         // This controls when the selection is complete.
         [SerializeField] private VRInteractiveItem m_InteractiveItem;       // The interactive item for where the user should click to load the level.
 
 
@@ -27,7 +28,8 @@ namespace VRStandardAssets.Menu
         {
             m_InteractiveItem.OnOver += HandleOver;
             m_InteractiveItem.OnOut += HandleOut;
-            m_SelectionRadial.OnSelectionComplete += HandleSelectionComplete;
+            m_SelectionRadialVR.OnSelectionComplete += HandleSelectionComplete;
+            m_SelectionRadialMouse.OnSelectionComplete += HandleSelectionComplete;
         }
 
 
@@ -35,14 +37,16 @@ namespace VRStandardAssets.Menu
         {
             m_InteractiveItem.OnOver -= HandleOver;
             m_InteractiveItem.OnOut -= HandleOut;
-            m_SelectionRadial.OnSelectionComplete -= HandleSelectionComplete;
+            m_SelectionRadialVR.OnSelectionComplete -= HandleSelectionComplete;
+            m_SelectionRadialMouse.OnSelectionComplete -= HandleSelectionComplete;
         }
 
 
         private void HandleOver()
         {
             // When the user looks at the rendering of the scene, show the radial.
-            m_SelectionRadial.Show();
+            m_SelectionRadialVR.Show();
+            m_SelectionRadialMouse.Show();
             m_GazeOver = true;
         }
 
@@ -50,7 +54,8 @@ namespace VRStandardAssets.Menu
         private void HandleOut()
         {
             // When the user looks away from the rendering of the scene, hide the radial.
-            m_SelectionRadial.Hide();
+            m_SelectionRadialVR.Hide();
+            m_SelectionRadialMouse.Hide();
 
             m_GazeOver = false;
         }

@@ -782,6 +782,14 @@ Prefab:
       propertyPath: m_SceneToLoad
       value: MainScene
       objectReference: {fileID: 0}
+    - target: {fileID: 11461874, guid: 8425dec361a86f6419d316a88d6c87d9, type: 2}
+      propertyPath: m_SelectionRadialVR
+      value: 
+      objectReference: {fileID: 2126730145}
+    - target: {fileID: 11461874, guid: 8425dec361a86f6419d316a88d6c87d9, type: 2}
+      propertyPath: m_SelectionRadialMouse
+      value: 
+      objectReference: {fileID: 1132596635}
     m_RemovedComponents:
     - {fileID: 8247036, guid: 8425dec361a86f6419d316a88d6c87d9, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 8425dec361a86f6419d316a88d6c87d9, type: 2}
@@ -1255,6 +1263,14 @@ Prefab:
       propertyPath: m_SceneToLoad
       value: MainScene
       objectReference: {fileID: 0}
+    - target: {fileID: 11417264, guid: 904806be95c6f7644bf0c8303943662e, type: 2}
+      propertyPath: m_SelectionRadialVR
+      value: 
+      objectReference: {fileID: 2126730145}
+    - target: {fileID: 11417264, guid: 904806be95c6f7644bf0c8303943662e, type: 2}
+      propertyPath: m_SelectionRadialMouse
+      value: 
+      objectReference: {fileID: 1132596635}
     m_RemovedComponents:
     - {fileID: 8290214, guid: 904806be95c6f7644bf0c8303943662e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 904806be95c6f7644bf0c8303943662e, type: 2}
@@ -2141,6 +2157,14 @@ Prefab:
       propertyPath: m_SceneToLoad
       value: MainScene
       objectReference: {fileID: 0}
+    - target: {fileID: 11450468, guid: 91b3bfdb6dd0b8847af2aed0f548e04a, type: 2}
+      propertyPath: m_SelectionRadialVR
+      value: 
+      objectReference: {fileID: 2126730145}
+    - target: {fileID: 11450468, guid: 91b3bfdb6dd0b8847af2aed0f548e04a, type: 2}
+      propertyPath: m_SelectionRadialMouse
+      value: 
+      objectReference: {fileID: 1132596635}
     m_RemovedComponents:
     - {fileID: 8213178, guid: 91b3bfdb6dd0b8847af2aed0f548e04a, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 91b3bfdb6dd0b8847af2aed0f548e04a, type: 2}
@@ -2619,6 +2643,14 @@ Prefab:
       propertyPath: m_SceneToLoad
       value: MainScene
       objectReference: {fileID: 0}
+    - target: {fileID: 11419562, guid: 19eafe53a7aadc644bc46200d92edfcb, type: 2}
+      propertyPath: m_SelectionRadialVR
+      value: 
+      objectReference: {fileID: 2126730145}
+    - target: {fileID: 11419562, guid: 19eafe53a7aadc644bc46200d92edfcb, type: 2}
+      propertyPath: m_SelectionRadialMouse
+      value: 
+      objectReference: {fileID: 1132596635}
     m_RemovedComponents:
     - {fileID: 8257470, guid: 19eafe53a7aadc644bc46200d92edfcb, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 19eafe53a7aadc644bc46200d92edfcb, type: 2}

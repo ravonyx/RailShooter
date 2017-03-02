@@ -61,6 +61,7 @@ namespace VRStandardAssets.Utils
 
         public void Show()
         {
+            Debug.Log("Show");
             m_Selection.gameObject.SetActive(true);
             m_IsSelectionRadialActive = true;
         }
@@ -68,6 +69,7 @@ namespace VRStandardAssets.Utils
 
         public void Hide()
         {
+            Debug.Log("Hide");
             m_Selection.gameObject.SetActive(false);
             m_IsSelectionRadialActive = false;
 

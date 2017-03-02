@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Slider: {fileID: 0}
   m_InteractiveItem: {fileID: 1942867348}
   m_VRInput: {fileID: 1833860350}
+  m_MouseInput: {fileID: 1132596634}
   m_BarCanvas: {fileID: 0}
   m_Renderer: {fileID: 704221363}
   m_SelectionRadial: {fileID: 2126730145}
@@ -280,6 +281,7 @@ MonoBehaviour:
   m_Slider: {fileID: 0}
   m_InteractiveItem: {fileID: 1207963380}
   m_VRInput: {fileID: 1833860350}
+  m_MouseInput: {fileID: 1132596634}
   m_BarCanvas: {fileID: 0}
   m_Renderer: {fileID: 704221363}
   m_SelectionRadial: {fileID: 2126730145}
@@ -776,6 +778,10 @@ Prefab:
       propertyPath: m_Transform
       value: 
       objectReference: {fileID: 1207963379}
+    - target: {fileID: 11461874, guid: 8425dec361a86f6419d316a88d6c87d9, type: 2}
+      propertyPath: m_SceneToLoad
+      value: MainScene
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8247036, guid: 8425dec361a86f6419d316a88d6c87d9, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 8425dec361a86f6419d316a88d6c87d9, type: 2}
@@ -1245,6 +1251,10 @@ Prefab:
       propertyPath: m_Transform
       value: 
       objectReference: {fileID: 1942867347}
+    - target: {fileID: 11417264, guid: 904806be95c6f7644bf0c8303943662e, type: 2}
+      propertyPath: m_SceneToLoad
+      value: MainScene
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8290214, guid: 904806be95c6f7644bf0c8303943662e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 904806be95c6f7644bf0c8303943662e, type: 2}
@@ -2127,6 +2137,10 @@ Prefab:
       propertyPath: m_Transform
       value: 
       objectReference: {fileID: 764291725}
+    - target: {fileID: 11450468, guid: 91b3bfdb6dd0b8847af2aed0f548e04a, type: 2}
+      propertyPath: m_SceneToLoad
+      value: MainScene
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8213178, guid: 91b3bfdb6dd0b8847af2aed0f548e04a, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 91b3bfdb6dd0b8847af2aed0f548e04a, type: 2}
@@ -2601,6 +2615,10 @@ Prefab:
       propertyPath: m_Transform
       value: 
       objectReference: {fileID: 1947940831}
+    - target: {fileID: 11419562, guid: 19eafe53a7aadc644bc46200d92edfcb, type: 2}
+      propertyPath: m_SceneToLoad
+      value: MainScene
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8257470, guid: 19eafe53a7aadc644bc46200d92edfcb, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 19eafe53a7aadc644bc46200d92edfcb, type: 2}
@@ -2729,6 +2747,33 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 412658, guid: 5c94e14eb82829e48986ce947fd5ad93, type: 2}
   m_PrefabInternal: {fileID: 924716622}
+--- !u!1 &1132596633 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1330714802250736, guid: db91d5ef7b1c33e468271ea09b20b00c,
+    type: 2}
+  m_PrefabInternal: {fileID: 301218987}
+--- !u!114 &1132596634 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114183406109704776, guid: db91d5ef7b1c33e468271ea09b20b00c,
+    type: 2}
+  m_PrefabInternal: {fileID: 301218987}
+  m_Script: {fileID: 11500000, guid: 809670ee42bf66748a72d128f58ff230, type: 3}
+--- !u!114 &1132596635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1132596633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03fb8390bc96a7f4cafebf5efc362f62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SelectionDuration: 2
+  m_HideOnStart: 1
+  m_Selection: {fileID: 1474864673}
+  m_VRInput: {fileID: 1833860350}
+  m_MouseInput: {fileID: 1132596634}
 --- !u!1 &1182027538
 GameObject:
   m_ObjectHideFlags: 0
@@ -2795,6 +2840,7 @@ MonoBehaviour:
   m_Slider: {fileID: 0}
   m_InteractiveItem: {fileID: 310010678}
   m_VRInput: {fileID: 1833860350}
+  m_MouseInput: {fileID: 1132596634}
   m_BarCanvas: {fileID: 0}
   m_Renderer: {fileID: 704221363}
   m_SelectionRadial: {fileID: 2126730145}
@@ -2927,6 +2973,12 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 473928, guid: 40a3c2cb7308fdd49b8526fc1020e4eb, type: 2}
   m_PrefabInternal: {fileID: 1388602774}
+--- !u!114 &1474864673 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114617087413717382, guid: db91d5ef7b1c33e468271ea09b20b00c,
+    type: 2}
+  m_PrefabInternal: {fileID: 301218987}
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &1655933477
 Prefab:
   m_ObjectHideFlags: 0
@@ -3138,6 +3190,7 @@ MonoBehaviour:
   m_Slider: {fileID: 0}
   m_InteractiveItem: {fileID: 1947940832}
   m_VRInput: {fileID: 1833860350}
+  m_MouseInput: {fileID: 1132596634}
   m_BarCanvas: {fileID: 0}
   m_Renderer: {fileID: 704221363}
   m_SelectionRadial: {fileID: 2126730145}
@@ -3276,6 +3329,7 @@ MonoBehaviour:
   m_HideOnStart: 1
   m_Selection: {fileID: 338687176}
   m_VRInput: {fileID: 1833860350}
+  m_MouseInput: {fileID: 1132596634}
 --- !u!114 &2126730146
 MonoBehaviour:
   m_ObjectHideFlags: 0

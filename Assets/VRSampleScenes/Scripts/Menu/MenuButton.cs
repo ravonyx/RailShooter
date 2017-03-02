@@ -28,7 +28,6 @@ namespace VRStandardAssets.Menu
             m_InteractiveItem.OnOver += HandleOver;
             m_InteractiveItem.OnOut += HandleOut;
             m_SelectionRadial.OnSelectionComplete += HandleSelectionComplete;
-            m_InteractiveItem.OnClick += HandleClick;
         }
 
 
@@ -37,7 +36,6 @@ namespace VRStandardAssets.Menu
             m_InteractiveItem.OnOver -= HandleOver;
             m_InteractiveItem.OnOut -= HandleOut;
             m_SelectionRadial.OnSelectionComplete -= HandleSelectionComplete;
-            m_InteractiveItem.OnClick -= HandleClick;
         }
 
 
@@ -64,14 +62,6 @@ namespace VRStandardAssets.Menu
             if(m_GazeOver)
                 StartCoroutine (ActivateButton());
         }
-
-        private void HandleClick()
-        {
-            //OnButtonSelected(this);
-            // Load the level.
-            SceneManager.LoadScene(m_SceneToLoad, LoadSceneMode.Single);
-        }
-
 
         private IEnumerator ActivateButton()
         {

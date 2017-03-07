@@ -150,8 +150,11 @@ public class BezierSplineInspector : Editor
         Handles.color = Color.blue;
         for (int i = 0; i < spline.stopPoints.Count; i++)
         {
-            if(Handles.Button(spline.stopPoints[i], handleRotation, 2.0f * handleSize, 2.0f * pickSize, Handles.DotCap))
+            if (Handles.Button(spline.stopPoints[i], handleRotation, 2.0f * handleSize, 2.0f * pickSize, Handles.DotCap))
+            {
                 positionToDelete = spline.stopPoints[i];
+                Repaint();
+            }
         }
 
 	}

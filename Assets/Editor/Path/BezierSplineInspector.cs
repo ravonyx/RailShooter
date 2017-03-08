@@ -7,8 +7,8 @@ public class BezierSplineInspector : Editor
 
 	private const int stepsPerCurve = 10;
 	private const float directionScale = 0.5f;
-	private const float handleSize = 0.04f;
-	private const float pickSize = 0.06f;
+	private const float handleSize = 0.05f;
+	private const float pickSize = 0.1f;
 
 	private static Color[] modeColors = 
     {
@@ -24,8 +24,9 @@ public class BezierSplineInspector : Editor
 	private int selectedIndexCtrlPoint = -1;
 	private float selectedIndexStopPoint = -1;
 
-    private Vector3 positionToDelete = Vector3.zero;
+    private float positionToDelete = -1.0f;
 
+    bool managePoints = false;
     public override void OnInspectorGUI ()
     {
 		spline = target as BezierSpline;
@@ -39,33 +40,42 @@ public class BezierSplineInspector : Editor
 			spline.Loop = loop;
 		}
 
-		if (selectedIndexCtrlPoint >= 0 && selectedIndexCtrlPoint < spline.ControlPointCount)
-			DrawSelectedPointInspector();
-        if (selectedIndexStopPoint >= 0)
-            DrawStopPointInspector();
-
-        if(positionToDelete != Vector3.zero)
+        if(managePoints = GUILayout.Toggle(managePoints, "Manage points"))
+            Repaint();
+       
+        if(managePoints)
         {
-            if (GUILayout.Button("Delete Point"))
+            if (positionToDelete != -1.0f)
             {
-                Undo.RecordObject(spline, "Delete Point");
-                spline.DeleteStopPoint(positionToDelete);
-                EditorUtility.SetDirty(spline);
-                positionToDelete = Vector3.zero;
+                if (GUILayout.Button("Delete Point"))
+                {
+                    Undo.RecordObject(spline, "Delete Point");
+                    spline.DeleteStopPoint(positionToDelete);
+                    EditorUtility.SetDirty(spline);
+                    positionToDelete = -1.0f;
+                }
             }
+            GUILayout.Label("List of all stop points");
+            for (int i = 0; i < spline.stopPoints.Count; i++)
+            {
+                EditorGUILayout.Vector3Field("Position", spline.GetPoint(spline.stopPoints[i]));
+            }
+
+            if (selectedIndexStopPoint >= 0)
+                DrawStopPointInspector();
         }
 
-        if (GUILayout.Button("Add Curve"))
+        else
         {
-            Undo.RecordObject(spline, "Add Curve");
-            spline.AddCurve();
-            EditorUtility.SetDirty(spline);
-        }
+            if (selectedIndexCtrlPoint >= 0 && selectedIndexCtrlPoint < spline.ControlPointCount)
+                DrawSelectedPointInspector();
 
-        GUILayout.Label("List of all stop points");
-        for (int i = 0; i < spline.stopPoints.Count ; i++)
-        {
-            EditorGUILayout.Vector3Field("Position", spline.stopPoints[i]);
+            if (GUILayout.Button("Add Curve"))
+            {
+                Undo.RecordObject(spline, "Add Curve");
+                spline.AddCurve();
+                EditorUtility.SetDirty(spline);
+            }
         }
     }
 
@@ -77,7 +87,7 @@ public class BezierSplineInspector : Editor
         if (GUILayout.Button("Add To Stop Point"))
         {
             Undo.RecordObject(spline, "Add Stop Point");
-            spline.AddStopPoint(spline.GetPoint(selectedIndexStopPoint));
+            spline.AddStopPoint(selectedIndexStopPoint);
             EditorUtility.SetDirty(spline);
         }
     }
@@ -93,14 +103,6 @@ public class BezierSplineInspector : Editor
 			EditorUtility.SetDirty(spline);
 			spline.SetControlPoint(selectedIndexCtrlPoint, point);
 		}
-		EditorGUI.BeginChangeCheck();
-		BezierControlPointMode mode = (BezierControlPointMode)EditorGUILayout.EnumPopup("Mode", spline.GetControlPointMode(selectedIndexCtrlPoint));
-		if (EditorGUI.EndChangeCheck())
-        {
-			Undo.RecordObject(spline, "Change Point Mode");
-			spline.SetControlPointMode(selectedIndexCtrlPoint, mode);
-			EditorUtility.SetDirty(spline);
-		}
 	}
 
 	private void OnSceneGUI ()
@@ -109,81 +111,95 @@ public class BezierSplineInspector : Editor
 		handleTransform = spline.transform;
 		handleRotation = Tools.pivotRotation == PivotRotation.Local ? handleTransform.rotation : Quaternion.identity;
 		
-		Vector3 p0 = ShowPoint(0);
-		for (int i = 1; i < spline.ControlPointCount; i += 3)
+        //Draw controls points with Bezier
+        if(!managePoints)
         {
-			Vector3 p1 = ShowPoint(i);
-			Vector3 p2 = ShowPoint(i + 1);
-			Vector3 p3 = ShowPoint(i + 2);
-			
-			Handles.color = Color.gray;
-			Handles.DrawLine(p0, p1);
-			Handles.DrawLine(p2, p3);
-			
-			Handles.DrawBezier(p0, p3, p1, p2, Color.white, null, 2f);
-			p0 = p3;
-		}
-		ShowDirections();
-	}
+            Vector3 p0 = DrawControlPoint(0);
+            for (int i = 1; i < spline.ControlPointCount; i += 3)
+            {
+                Vector3 p1 = DrawControlPoint(i);
+                Vector3 p2 = DrawControlPoint(i + 1);
+                Vector3 p3 = DrawControlPoint(i + 2);
 
-	private void ShowDirections ()
+                Handles.color = Color.gray;
+                Handles.DrawLine(p0, p1);
+                Handles.DrawLine(p2, p3);
+
+                Handles.DrawBezier(p0, p3, p1, p2, Color.white, null, 2f);
+                p0 = p3;
+            }
+        }
+		
+		ShowDirections();
+        DrawPointsAndStopPoints();
+    }
+
+	private void ShowDirections()
     {
-		Handles.color = Color.green;
+		Handles.color = Color.red;
 		Vector3 point = spline.GetPoint(0f);
 		Handles.DrawLine(point, point + spline.GetDirection(0f) * directionScale);
 		int steps = stepsPerCurve * spline.CurveCount;
 		for (int i = 1; i <= steps; i++)
         {
 			point = spline.GetPoint(i / (float)steps);
-			Handles.DrawLine(point, point + spline.GetDirection(i / (float)steps) * directionScale);
-
-
             Handles.color = Color.red;
-            if (Handles.Button(point, handleRotation, 2.0f * handleSize, 2.0f * pickSize, Handles.SphereCap))
-            {
-                selectedIndexStopPoint = i / (float)steps;
-                Repaint();
-                positionToDelete = Vector3.zero;
-            }
+            Handles.DrawLine(point, point + spline.GetDirection(i / (float)steps) * directionScale);
         }
+	}
 
+    private void DrawPointsAndStopPoints()
+    {
+            //Draw all points on curve
+            Handles.color = Color.gray;
+            Vector3 point = spline.GetPoint(0f);
+            int steps = stepsPerCurve * spline.CurveCount;
+
+            for (int i = 1; i <= steps; i++)
+            {
+                point = spline.GetPoint(i / (float)steps);
+                if (Handles.Button(point, handleRotation, handleSize, pickSize, Handles.SphereCap))
+                {
+                    selectedIndexStopPoint = i / (float)steps;
+                    positionToDelete = -1.0f;
+                    Repaint();
+                }
+            }
+
+        //Draw all stop points in blue
         Handles.color = Color.blue;
         for (int i = 0; i < spline.stopPoints.Count; i++)
         {
-            if (Handles.Button(spline.stopPoints[i], handleRotation, 2.0f * handleSize, 2.0f * pickSize, Handles.DotCap))
+            if (Handles.Button(spline.GetPoint(spline.stopPoints[i]), handleRotation, handleSize, pickSize, Handles.DotCap))
             {
                 positionToDelete = spline.stopPoints[i];
                 Repaint();
             }
         }
+    }
 
-	}
-
-    private Vector3 ShowPoint (int index)
+    private Vector3 DrawControlPoint (int index)
     {
-		Vector3 point = handleTransform.TransformPoint(spline.GetControlPoint(index));
-		float size = HandleUtility.GetHandleSize(point);
-		if (index == 0) {
-			size *= 2f;
-		}
-		Handles.color = modeColors[(int)spline.GetControlPointMode(index)];
-		if (Handles.Button(point, handleRotation, size * handleSize, size * pickSize, Handles.DotCap))
+		Vector3 controlPoint = handleTransform.TransformPoint(spline.GetControlPoint(index));
+
+        Handles.color = Color.gray;
+		if (Handles.Button(controlPoint, handleRotation, handleSize, pickSize, Handles.DotCap))
         {
             selectedIndexCtrlPoint = index;
-			Repaint();
-            positionToDelete = Vector3.zero;
+            positionToDelete = -1;
+            Repaint();
         }
 		if (selectedIndexCtrlPoint == index)
         {
 			EditorGUI.BeginChangeCheck();
-			point = Handles.DoPositionHandle(point, handleRotation);
+            controlPoint = Handles.DoPositionHandle(controlPoint, handleRotation);
 			if (EditorGUI.EndChangeCheck())
             {
 				Undo.RecordObject(spline, "Move Point");
 				EditorUtility.SetDirty(spline);
-				spline.SetControlPoint(index, handleTransform.InverseTransformPoint(point));
+				spline.SetControlPoint(index, handleTransform.InverseTransformPoint(controlPoint));
 			}
 		}
-		return point;
+		return controlPoint;
 	}
 }

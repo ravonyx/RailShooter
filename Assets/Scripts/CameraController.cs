@@ -15,9 +15,12 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     public float sensitivity;
 
+    public Vector3 lookDirection;
+
     void Start()
     {
-       // if (!Application.isEditor)
+        // if (!Application.isEditor)
+        lookDirection = Vector3.zero;
         UnityEngine.Cursor.visible = false;
         isActive = true;
         _cameraRotation = Vector2.zero;
@@ -27,14 +30,8 @@ public class CameraController : MonoBehaviour
     {
         if (!isActive)
             return;
-
-        float y = -Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
-        float x = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
-
-        _cameraRotation.y += y;
-        _cameraRotation.x += x;
-        _cameraRotation.y = ClampAngle(_cameraRotation.y, _yMinLimit, _yMaxLimit);
-        transform.localRotation = Quaternion.Euler(_cameraRotation.y, _cameraRotation.x, 0);
+        lookDirection += new Vector3(Input.GetAxis("Mouse X"), -Input.GetAxis("Mouse Y"), 0.0f);
+        transform.localRotation = Quaternion.Euler(lookDirection.y, lookDirection.x, 0.0f);
     }
 
     float ClampAngle(float angle, float min, float max)

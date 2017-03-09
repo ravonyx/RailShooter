@@ -88,8 +88,7 @@ namespace VRStandardAssets.ShootingGallery
         void LateUpdate()
         {
             transform.rotation = m_MouseCameraTransform.transform.rotation;
-           transform.position = m_MouseCameraTransform.position;
-
+            transform.position = m_MouseCameraTransform.position;
         }
 
         private void HandleDown ()

@@ -17,43 +17,35 @@ public class SplineWalker : MonoBehaviour
     void Start()
     {
         camera = GetComponent<CameraController>();
-        camera.isActive = (isWalking == true) ? false : true;
         epsilonVector = new Vector3(Single.Epsilon, Single.Epsilon, Single.Epsilon);
         stopPoints = spline.stopPoints;
     }
 
     private void Update ()
     {
-        if(isWalking)
-		    progress += Time.deltaTime / duration;
-		if (progress > 1f) 
-				progress = 1f;
-
-		Vector3 position = spline.GetPoint(progress);
-        float dist = Vector3.Distance(position, spline.GetPoint(spline.stopPoints[0]));
-        if (dist <= 0.01f)
+        camera.isActive = (isWalking == true) ? false : true;
+        if (isWalking)
         {
-            Debug.Log("look direction end walk " + camera.lookDirection);
+            progress += Time.deltaTime / duration;
+            if (progress > 1f)
+                progress = 1f;
 
-            camera.isActive = true;
-            isWalking = false;
+            Vector3 position = spline.GetPoint(progress);
+            float dist = Vector3.Distance(position, spline.GetPoint(spline.stopPoints[0]));
+            if (dist <= 0.01f || progress == 1f)
+                isWalking = false;
+            else
+                transform.localPosition = position;
+
+            if (lookForward)
+            {
+                camera.lookDirection += new Vector3(spline.GetDirection(progress).x, spline.GetDirection(progress).y, 0.0f);
+                Quaternion q = Quaternion.LookRotation(spline.GetDirection(progress));
+                Debug.Log(" look direction  " + camera.lookDirection);
+                transform.localRotation = Quaternion.Euler(q.eulerAngles.x, q.eulerAngles.y, 0.0f);
+            }
         }
-        else
-        {
-            camera.isActive = false;
-            transform.localPosition = position;
+        if (Input.GetKeyDown(KeyCode.Space))
             isWalking = true;
-        }
-        if (lookForward && isWalking)
-        {
-            camera.lookDirection += new Vector3(spline.GetDirection(progress).x, spline.GetDirection(progress).y, 0.0f);
-
-            Quaternion q = Quaternion.LookRotation(spline.GetDirection(progress));
-            Debug.Log(" look direction  " + camera.lookDirection);
-            transform.localRotation = Quaternion.Euler(q.eulerAngles.x, q.eulerAngles.y, 0.0f);
-
-            //transform.LookAt(position + spline.GetDirection(progress));
-        }
-        //transform.localRotation = Qua Quaternion.LookRotation(relativePos);
     }
 }

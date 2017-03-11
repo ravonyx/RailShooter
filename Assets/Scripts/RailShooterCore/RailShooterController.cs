@@ -14,6 +14,7 @@ namespace Assets.RailShooter
     public class RailShooterController : MonoBehaviour
     {
         [SerializeField] private SessionData.GameType m_GameType;       // Whether this is a 180 or 360 shooter.
+
         [SerializeField] private int m_IdealTargetNumber = 5;           // How many targets aim to be on screen at once.
         [SerializeField] private float m_BaseSpawnProbability = 0.7f;   // When there are the ideal number of targets, this is the probability another will spawn.
         [SerializeField] private float m_GameLength = 60f;              // Time a game lasts in seconds.
@@ -22,6 +23,7 @@ namespace Assets.RailShooter
         [SerializeField] private float m_SphereSpawnInnerRadius = 5f;   // For the 360 shooter, the nearest targets can spawn.
         [SerializeField] private float m_SphereSpawnOuterRadius = 10f;  // For the 360 shooter, the furthest targets can spawn.
         [SerializeField] private float m_SphereSpawnMaxHeight = 15f;    // For the 360 shooter, the highest targets can spawn.
+
         [SerializeField] private SelectionSlider m_SelectionSlider;     // Used to confirm the user has understood the intro UI.
         [SerializeField] private Transform m_Camera;                    // Used to determine where targets can spawn.
         [SerializeField] private SelectionRadial m_SelectionRadial;     // Used to continue past the outro.
@@ -33,9 +35,11 @@ namespace Assets.RailShooter
         [SerializeField] private InputWarnings m_InputWarnings;         // Tap warnings need to be on for the intro and outro but off for the game itself.
 
 
+        //control movement of player
+        [SerializeField] private SplineWalker m_SplineWalker;         
+
         private float m_SpawnProbability;                               // The current probability that a target will spawn at the next interval.
         private float m_ProbabilityDelta;                               // The difference to the probability caused by a target spawning or despawning.
-
 
         public bool IsPlaying { get; private set; }                     // Whether or not the game is currently playing.
 
@@ -90,6 +94,7 @@ namespace Assets.RailShooter
             // Wait for the UI on the player's gun to fade in.
             yield return StartCoroutine(m_UIController.ShowPlayerUI());
 
+            m_SplineWalker.isWalking = true;
             // The game is now playing.
             IsPlaying = true;
 
@@ -199,7 +204,7 @@ namespace Assets.RailShooter
         private Vector3 SpawnPosition ()
         {
             // If this game is a 180 game then the random spawn position should be within the given collider.
-            if (m_GameType == SessionData.GameType.SHOOTER180)
+            if (m_GameType == SessionData.GameType.SERIOUSSHOOTER)
             {
                 // Find the centre and extents of the spawn collider.
                 Vector3 center = m_SpawnCollider.bounds.center;

@@ -2,58 +2,53 @@ using UnityEngine;
 
 namespace VRStandardAssets.Common
 {
-    // This class is used to keep score during a game and save
-    // the highscores to PlayerPrefs.
+    //keep score during a game and save to PlayerPrefs
     public static class SessionData
     {
-        // This enum shows all the types of games that use scores.
         public enum GameType
         {
-            FLYER,
-            SHOOTER180,
+            SERIOUSSHOOTER,
+            TUTORIAL,
             SHOOTER360
         };
 
+        //players prefs name
+        private const string k_SeriousShooterData = "seriousShooterData";             
+        private const string k_TutorialData = "tutorialData";
+        private const string k_Shooter360Data = "shooter360Data";
 
-        private const string k_FlyerData = "flyerData";             // These are the names given to PlayerPrefs based on game type.
-        private const string k_Shooter180 = "shooter180Data";
-        private const string k_Shooter360 = "shooter360Data";
-
-
-        private static int s_HighScore;                             // Used to store the highscore for the current game type.
-        private static int s_Score;                                 // Used to store the current game's score.
-        private static string s_CurrentGame;                        // The name of the current game type.
-
+        private static int s_HighScore;       
+        //current score                      
+        private static int s_Score;       
+        //name of current game                          
+        private static string s_CurrentGame;                       
 
         public static int HighScore { get { return s_HighScore; } }
         public static int Score { get { return s_Score; } }
-
 
         public static void SetGameType(GameType gameType)
         {
             // Set the name of the current game based on the game type.
             switch (gameType)
             {
-                case GameType.FLYER:
-                    s_CurrentGame = k_FlyerData;
+                case GameType.SERIOUSSHOOTER:
+                    s_CurrentGame = k_SeriousShooterData;
                     break;
 
-                case GameType.SHOOTER180:
-                    s_CurrentGame = k_Shooter180;
+                case GameType.TUTORIAL:
+                    s_CurrentGame = k_TutorialData;
                     break;
 
                 case GameType.SHOOTER360:
-                    s_CurrentGame = k_Shooter360;
+                    s_CurrentGame = k_Shooter360Data;
                     break;
 
                 default:
                     Debug.LogError("Invalid GameType");
                     break;
             }
-
             Restart();
         }
-
 
         public static void Restart()
         {
@@ -62,7 +57,6 @@ namespace VRStandardAssets.Common
             s_HighScore = GetHighScore();
         }
 
-
         public static void AddScore(int score)
         {
             // Add to the current score and check if the high score needs to be set.
@@ -70,13 +64,11 @@ namespace VRStandardAssets.Common
             CheckHighScore();
         }
 
-
         public static int GetHighScore()
         {
             // Get the value of the highscore from the game name.
             return PlayerPrefs.GetInt(s_CurrentGame, 0);
         }
-
 
         private static void CheckHighScore()
         {
@@ -84,7 +76,6 @@ namespace VRStandardAssets.Common
             if (s_Score > s_HighScore)
                 SetHighScore();
         }
-
 
         private static void SetHighScore()
         {

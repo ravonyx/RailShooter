@@ -125,11 +125,11 @@ public class BezierSpline : MonoBehaviour
         Array.Resize(ref points, points.Length + 3);
         int newSize = CurveCount;
 
-        point.x += 1f;
+        point.z += 1f;
 		points[points.Length - 3] = point;
-		point.x += 1f;
+		point.z += 1f;
 		points[points.Length - 2] = point;
-		point.x += 1f;
+		point.z += 1f;
 		points[points.Length - 1] = point;
 
         for (int i = 0; i < stopPoints.Count; i++)

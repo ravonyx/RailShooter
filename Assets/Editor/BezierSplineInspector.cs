@@ -131,7 +131,8 @@ public class BezierSplineInspector : Editor
         }
 		
 		ShowDirections();
-        DrawPointsAndStopPoints();
+        if (managePoints)
+            DrawPointsAndStopPoints();
     }
 
 	private void ShowDirections()
@@ -150,6 +151,7 @@ public class BezierSplineInspector : Editor
 
     private void DrawPointsAndStopPoints()
     {
+
             //Draw all points on curve
             Handles.color = Color.gray;
             Vector3 point = spline.GetPoint(0f);
@@ -158,7 +160,7 @@ public class BezierSplineInspector : Editor
             for (int i = 1; i <= steps; i++)
             {
                 point = spline.GetPoint(i / (float)steps);
-                if (Handles.Button(point, handleRotation, handleSize, pickSize, Handles.SphereCap))
+                if (Handles.Button(point, handleRotation, 6.0f * handleSize, 6.0f * pickSize, Handles.SphereCap))
                 {
                     selectedIndexStopPoint = i / (float)steps;
                     positionToDelete = -1.0f;
@@ -170,7 +172,7 @@ public class BezierSplineInspector : Editor
         Handles.color = Color.blue;
         for (int i = 0; i < spline.stopPoints.Count; i++)
         {
-            if (Handles.Button(spline.GetPoint(spline.stopPoints[i]), handleRotation, handleSize, pickSize, Handles.DotCap))
+            if (Handles.Button(spline.GetPoint(spline.stopPoints[i]), handleRotation, 6.0f * handleSize, 6.0f * pickSize, Handles.DotCap))
             {
                 positionToDelete = spline.stopPoints[i];
                 Repaint();
@@ -183,7 +185,7 @@ public class BezierSplineInspector : Editor
 		Vector3 controlPoint = handleTransform.TransformPoint(spline.GetControlPoint(index));
 
         Handles.color = Color.gray;
-		if (Handles.Button(controlPoint, handleRotation, handleSize, pickSize, Handles.DotCap))
+		if (Handles.Button(controlPoint, handleRotation, 6.0f * handleSize, 6.0f * pickSize, Handles.DotCap))
         {
             selectedIndexCtrlPoint = index;
             positionToDelete = -1;

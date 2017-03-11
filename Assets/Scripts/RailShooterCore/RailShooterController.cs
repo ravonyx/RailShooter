@@ -94,23 +94,22 @@ namespace Assets.RailShooter
             // Wait for the UI on the player's gun to fade in.
             yield return StartCoroutine(m_UIController.ShowPlayerUI());
 
-            m_SplineWalker.isWalking = true;
-            // The game is now playing.
             IsPlaying = true;
-
-            // Make sure the reticle is being shown.
             m_Reticle.Show ();
 
             // Reset the score.
             SessionData.Restart ();
 
-            // Wait for the play updates to finish.
-            yield return StartCoroutine (PlayUpdate ());
+            for(int i = 0; i < m_SplineWalker.stopPoints.Count; i++)
+            {
+                //walk at next point
+                yield return StartCoroutine(m_SplineWalker.PlayUpdate());
+                //spawn update 
+                yield return StartCoroutine(PlayUpdate());
+            }
 
-            // Wait for the gun's UI to fade.
+            //gun UI fade out
             yield return StartCoroutine(m_UIController.HidePlayerUI());
-
-            // The game is no longer playing.
             IsPlaying = false;
         }
 

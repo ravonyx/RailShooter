@@ -790,6 +790,10 @@ Prefab:
       propertyPath: m_SelectionRadialMouse
       value: 
       objectReference: {fileID: 1132596635}
+    - target: {fileID: 11434664, guid: 8425dec361a86f6419d316a88d6c87d9, type: 2}
+      propertyPath: m_InteractiveItem
+      value: 
+      objectReference: {fileID: 1207963380}
     m_RemovedComponents:
     - {fileID: 8247036, guid: 8425dec361a86f6419d316a88d6c87d9, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 8425dec361a86f6419d316a88d6c87d9, type: 2}
@@ -1271,6 +1275,10 @@ Prefab:
       propertyPath: m_SelectionRadialMouse
       value: 
       objectReference: {fileID: 1132596635}
+    - target: {fileID: 11476294, guid: 904806be95c6f7644bf0c8303943662e, type: 2}
+      propertyPath: m_InteractiveItem
+      value: 
+      objectReference: {fileID: 1942867348}
     m_RemovedComponents:
     - {fileID: 8290214, guid: 904806be95c6f7644bf0c8303943662e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 904806be95c6f7644bf0c8303943662e, type: 2}
@@ -1466,7 +1474,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MenuSceneName: MainMenu
   m_VRInput: {fileID: 1833860350}
-  m_VRCameraFade: {fileID: 2126730146}
+  m_mouseInput: {fileID: 0}
+  m_CameraFade: {fileID: 0}
 --- !u!114 &544071586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2165,6 +2174,10 @@ Prefab:
       propertyPath: m_SelectionRadialMouse
       value: 
       objectReference: {fileID: 1132596635}
+    - target: {fileID: 11480060, guid: 91b3bfdb6dd0b8847af2aed0f548e04a, type: 2}
+      propertyPath: m_InteractiveItem
+      value: 
+      objectReference: {fileID: 310010678}
     m_RemovedComponents:
     - {fileID: 8213178, guid: 91b3bfdb6dd0b8847af2aed0f548e04a, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 91b3bfdb6dd0b8847af2aed0f548e04a, type: 2}
@@ -2651,6 +2664,10 @@ Prefab:
       propertyPath: m_SelectionRadialMouse
       value: 
       objectReference: {fileID: 1132596635}
+    - target: {fileID: 11443544, guid: 19eafe53a7aadc644bc46200d92edfcb, type: 2}
+      propertyPath: m_InteractiveItem
+      value: 
+      objectReference: {fileID: 1947940832}
     m_RemovedComponents:
     - {fileID: 8257470, guid: 19eafe53a7aadc644bc46200d92edfcb, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 19eafe53a7aadc644bc46200d92edfcb, type: 2}

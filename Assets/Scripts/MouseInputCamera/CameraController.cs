@@ -30,8 +30,23 @@ public class CameraController : MonoBehaviour
     {
         if (!isActive)
             return;
-        lookDirection += new Vector3(Input.GetAxis("Mouse X"), -Input.GetAxis("Mouse Y"), 0.0f);
+
+
+
+        float y = -Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
+        float x = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
+
+        // _cameraRotation.y += y;
+        // _cameraRotation.x += x;
+        // _cameraRotation.
+        // transform.localRotation = Quaternion.Euler(_cameraRotation.y, _cameraRotation.x, 0);
+
+        lookDirection += new Vector3(x, y, 0.0f);
+        lookDirection.y = ClampAngle(lookDirection.y, _yMinLimit, _yMaxLimit);
         transform.localRotation = Quaternion.Euler(lookDirection.y, lookDirection.x, 0.0f);
+
+        //lookDirection += new Vector3(Input.GetAxis("Mouse X"), -Input.GetAxis("Mouse Y"), 0.0f);
+        //transform.localRotation = Quaternion.Euler(lookDirection.y, lookDirection.x, 0.0f);
     }
 
     float ClampAngle(float angle, float min, float max)

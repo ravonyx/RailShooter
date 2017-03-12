@@ -2606,6 +2606,18 @@ MonoBehaviour:
   m_Selection: {fileID: 1474864673}
   m_VRInput: {fileID: 1833860350}
   m_MouseInput: {fileID: 1132596634}
+--- !u!114 &1132596636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1132596633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f38c580de7ecbb4598dce7a9fd01d1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockCursor: 1
 --- !u!1 &1182027538
 GameObject:
   m_ObjectHideFlags: 0

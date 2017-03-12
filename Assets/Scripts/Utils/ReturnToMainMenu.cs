@@ -21,6 +21,8 @@ namespace VRStandardAssets.Utils
                 m_mouseInput.OnCancel += HandleCancel;
             else
                 m_VRInput.OnCancel += HandleCancel;
+
+            m_CameraFade = Camera.main.GetComponent<CameraFade>();
         }
 
 

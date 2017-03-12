@@ -25,6 +25,11 @@ namespace VRStandardAssets.Menu
         private bool m_GazeOver;                                            
 
 
+        void Start()
+        {
+            m_CameraFade = Camera.main.GetComponent<CameraFade>();
+        }
+
         private void OnEnable ()
         {
             m_InteractiveItem.OnOver += HandleOver;

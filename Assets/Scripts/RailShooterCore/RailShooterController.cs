@@ -20,14 +20,19 @@ namespace Assets.RailShooter
         [SerializeField] private float m_GameLength = 60f;              // Time a game lasts in seconds.
         [SerializeField] private float m_SpawnInterval = 1f;            // How frequently a target could spawn.
         [SerializeField] private float m_EndDelay = 1.5f;               // The time the user needs to wait between the outro UI and being able to continue.
-        [SerializeField] private float m_SphereSpawnInnerRadius = 5f;   // For the 360 shooter, the nearest targets can spawn.
-        [SerializeField] private float m_SphereSpawnOuterRadius = 10f;  // For the 360 shooter, the furthest targets can spawn.
-        [SerializeField] private float m_SphereSpawnMaxHeight = 15f;    // For the 360 shooter, the highest targets can spawn.
+
+        //shooter 360 variables
+        [SerializeField] private float m_SphereSpawnInnerRadius = 5f;   
+        [SerializeField] private float m_SphereSpawnOuterRadius = 10f; 
+        [SerializeField] private float m_SphereSpawnMaxHeight = 15f;    
 
         [SerializeField] private SelectionSlider m_SelectionSlider;     // Used to confirm the user has understood the intro UI.
+
+        //camera variables
         [SerializeField] private Transform m_Camera;                    // Used to determine where targets can spawn.
         [SerializeField] private SelectionRadial m_SelectionRadial;     // Used to continue past the outro.
         [SerializeField] private Reticle m_Reticle;                     // This is turned on and off when it is required and not.
+
         [SerializeField] private Image m_TimerBar;                      // The time remaining is shown on the UI for the gun, this is a reference to the image showing the time remaining.
         [SerializeField] private ObjectPool m_TargetObjectPool;         // The object pool that stores all the targets.
         [SerializeField] private BoxCollider m_SpawnCollider;           // For the 180 shooter, the volume that the targets can spawn within.
@@ -53,6 +58,10 @@ namespace Assets.RailShooter
             // That means that if the ideal number of targets was 5, the base probability was 0.7 then the delta is 0.06.
             // So if there are no targets, the probability of one spawning will be 1, then 0.94, then 0.88, etc.
             m_ProbabilityDelta = (1f - m_BaseSpawnProbability) / m_IdealTargetNumber;
+
+            m_Camera = Camera.main.transform;
+            m_SelectionRadial = m_Camera.GetComponent<SelectionRadial>();
+            m_Reticle = m_Camera.GetComponent<Reticle>();
 
             // Continue looping through all the phases.
             while (true)
@@ -103,6 +112,7 @@ namespace Assets.RailShooter
             for(int i = 0; i < m_SplineWalker.stopPoints.Count; i++)
             {
                 //walk at next point
+                yield return StartCoroutine(m_SplineWalker.StartPhase());
                 yield return StartCoroutine(m_SplineWalker.PlayUpdate());
                 //spawn update 
                 yield return StartCoroutine(PlayUpdate());
@@ -141,43 +151,26 @@ namespace Assets.RailShooter
 
         private IEnumerator PlayUpdate ()
         {
-            // When the updates start, the probability of a target spawning is 100%.
             m_SpawnProbability = 1f;
-
-            // The time remaining is the full length of the game length.
             float gameTimer = m_GameLength;
-
-            // The amount of time before the next spawn is the full interval.
             float spawnTimer = m_SpawnInterval;
 
-            // While there is still time remaining...
             while (gameTimer > 0f)
             {
-                // ... check if the timer for spawning has reached zero.
                 if (spawnTimer <= 0f)
                 {
-                    // If it's time to spawn, check if a spawn should happen based on the probability.
                     if (Random.value < m_SpawnProbability)
                     {
-                        // If a spawn should happen, restart the timer for spawning.
                         spawnTimer = m_SpawnInterval;
-
-                        // Decrease the probability of a spawn next time because there are now more targets.
                         m_SpawnProbability -= m_ProbabilityDelta;
-
-                        // Spawn a target.
                         Spawn (gameTimer);
                     }
                 }
-
-                // Wait for the next frame.
                 yield return null;
 
-                // Decrease the timers by the time that was waited.
                 gameTimer -= Time.deltaTime;
                 spawnTimer -= Time.deltaTime;
 
-                // Set the timer bar to be filled by the amount 
                 m_TimerBar.fillAmount = gameTimer / m_GameLength;
             }
         }
@@ -185,24 +178,22 @@ namespace Assets.RailShooter
 
         private void Spawn (float timeRemaining)
         {
-            // Get a reference to a target instance from the object pool.
             GameObject target = m_TargetObjectPool.GetGameObjectFromPool ();
-
-            // Set the target's position to a random position. 
+            //random position. 
             target.transform.position = SpawnPosition();
 
-            // Find a reference to the ShootingTarget script on the target gameobject and call it's Restart function.
+            //shooting target restart
             RailShooterTarget shootingTarget = target.GetComponent<RailShooterTarget>();
             shootingTarget.Restart(timeRemaining);
 
-            // Subscribe to the OnRemove event.
+            //on remove event
             shootingTarget.OnRemove += HandleTargetRemoved;
         }
 
 
         private Vector3 SpawnPosition ()
         {
-            // If this game is a 180 game then the random spawn position should be within the given collider.
+            //this game is a 180 
             if (m_GameType == SessionData.GameType.SERIOUSSHOOTER)
             {
                 // Find the centre and extents of the spawn collider.
@@ -218,10 +209,10 @@ namespace Assets.RailShooter
                 return new Vector3(x, y, z);
             }
 
-            // Otherwise the game is 360 and the spawn should be within a cylinder shape.
-            // Find a random point on a unit circle and give it a radius between the inner and outer radii.
-            Vector2 randomCirclePoint = Random.insideUnitCircle.normalized *
-                                  Random.Range (m_SphereSpawnInnerRadius, m_SphereSpawnOuterRadius);
+            //Otherwise the game is 360 a
+            //random point on a unit circle and give it a radius between the inner and outer radii.
+            Vector2 randomCirclePoint = Random.insideUnitCircle * Random.Range(m_SphereSpawnInnerRadius, m_SphereSpawnOuterRadius) +
+                new Vector2(m_Camera.transform.position.x, m_Camera.transform.position.z);
 
             // Find a random height between the camera's height and the maximum.
             float randomHeight = Random.Range (m_Camera.position.y, m_SphereSpawnMaxHeight);

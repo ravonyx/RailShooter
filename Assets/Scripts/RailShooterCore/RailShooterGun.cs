@@ -61,39 +61,33 @@ namespace Assets.RailShooter
 
         private void Update()
         {
+			if (!VRSettings.enabled)
+				return;
 
-           // // Smoothly interpolate this gameobject's rotation towards that of the user/camera.
-           // transform.rotation = Quaternion.Slerp(transform.rotation, InputTracking.GetLocalRotation(VRNode.Head),
-           //     m_Damping * (1 - Mathf.Exp(k_DampingCoef * Time.deltaTime)));
-           // 
-           // // Move this gameobject to the camera.
-           // transform.position = m_CameraTransform.position;
-           //
-           // // Find a rotation for the gun to be pointed at the reticle.
-           // Quaternion lookAtRotation = Quaternion.LookRotation (m_Reticle.ReticleTransform.position - m_GunContainer.position);
-           //
-           // // Smoothly interpolate the gun's rotation towards that rotation.
-           // m_GunContainer.rotation = Quaternion.Slerp (m_GunContainer.rotation, lookAtRotation,
-           //     m_GunContainerSmoothing * Time.deltaTime);
+			// Smoothly interpolate this gameobject's rotation towards that of the user/camera.
+			transform.rotation = Quaternion.Slerp(transform.rotation, InputTracking.GetLocalRotation(VRNode.Head),
+				m_Damping * (1 - Mathf.Exp(k_DampingCoef * Time.deltaTime)));
 
+			// Move this gameobject to the camera.
+			transform.position = m_VRCameraTransform.position;
+			Debug.Log(transform.position);
 
-            // Smoothly interpolate this gameobject's rotation towards that of the user/camera.
-            //transform.rotation = Quaternion.Slerp(transform.rotation, InputTracking.GetLocalRotation(VRNode.Head),
-            //    m_Damping * (1 - Mathf.Exp(k_DampingCoef * Time.deltaTime)));
+			// Find a rotation for the gun to be pointed at the reticle.
+			Quaternion lookAtRotation = Quaternion.LookRotation(m_VRReticle.ReticleTransform.position - m_GunContainer.position);
 
-            // Find a rotation for the gun to be pointed at the reticle.
-            //Quaternion lookAtRotation = Quaternion.LookRotation(m_MouseReticle.ReticleTransform.position - m_GunContainer.position);
-            //
-            //// Smoothly interpolate the gun's rotation towards that rotation.
-            //m_GunContainer.rotation = Quaternion.Slerp(m_GunContainer.rotation, lookAtRotation,
-            //    m_GunContainerSmoothing * Time.deltaTime);
+			// Smoothly interpolate the gun's rotation towards that rotation.
+			m_GunContainer.rotation = Quaternion.Slerp(m_GunContainer.rotation, lookAtRotation,
+				m_GunContainerSmoothing * Time.deltaTime);
+		}
 
-        }
         void LateUpdate()
         {
-            transform.rotation = m_MouseCameraTransform.transform.rotation;
-            transform.position = m_MouseCameraTransform.position;
-        }
+			if (!VRSettings.enabled)
+			{
+				transform.rotation = m_MouseCameraTransform.transform.rotation;
+				transform.position = m_MouseCameraTransform.position;
+			}
+		}
 
         private void HandleDown ()
         {

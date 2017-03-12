@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using System.Collections;
+using UnityEngine.VR;
 
 public class SplineWalker : MonoBehaviour
 {
@@ -30,16 +31,17 @@ public class SplineWalker : MonoBehaviour
     public IEnumerator StartPhase()
     {
         if (lookForward)
-            camera.isActive = false;
+		{
+			camera.isActive = false;
+			float duration = 1.0f;
+			for (t = 0.0f; t < duration; t += Time.deltaTime)
+			{
+				Quaternion q = Quaternion.LookRotation(spline.GetDirection(progress));
+				transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(q.eulerAngles.x, q.eulerAngles.y, 0.0f), t / duration);
 
-        float duration = 1.0f;
-        for (t = 0.0f; t < duration; t += Time.deltaTime)
-        {
-            Quaternion q = Quaternion.LookRotation(spline.GetDirection(progress));
-            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(q.eulerAngles.x, q.eulerAngles.y, 0.0f), t/ duration);
-
-            yield return null;
-        }
+				yield return null;
+			}
+		}
     }
 
     public IEnumerator PlayUpdate ()
@@ -51,7 +53,10 @@ public class SplineWalker : MonoBehaviour
             if (progress > 1f)
                 progress = 1f;
             Vector3 position = spline.GetPoint(progress);
-            transform.localPosition = position;
+			if (VRSettings.enabled)
+				transform.parent.localPosition = position;
+			else
+				transform.localPosition = position;
             dist = Vector3.Distance(position, spline.GetPoint(spline.stopPoints[indexStopPoint]));
             if (lookForward)
             {

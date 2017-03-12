@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using VRStandardAssets.Common;
 using VRStandardAssets.Utils;
+using UnityEngine.VR;
 
 namespace Assets.RailShooter
 {
@@ -62,6 +63,7 @@ namespace Assets.RailShooter
             m_Camera = Camera.main.transform;
             m_SelectionRadial = m_Camera.GetComponent<SelectionRadial>();
             m_Reticle = m_Camera.GetComponent<Reticle>();
+			m_SplineWalker = m_Camera.GetComponent<SplineWalker>();
 
             // Continue looping through all the phases.
             while (true)

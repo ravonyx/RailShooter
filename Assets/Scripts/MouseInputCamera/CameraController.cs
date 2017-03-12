@@ -5,8 +5,8 @@ using UnityEngine.VR;
 
 public class CameraController : MonoBehaviour
 {
-    private int _yMinLimit = -40;
-    private int _yMaxLimit = 50;
+    private int _yMinLimit = -80;
+    private int _yMaxLimit = 80;
 
     private Vector2 _cameraRotation;
 

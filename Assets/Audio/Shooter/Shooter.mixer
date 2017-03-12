@@ -5,7 +5,7 @@ AudioMixerController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Shooter360
+  m_Name: Shooter
   m_OutputGroup: {fileID: 0}
   m_MasterGroup: {fileID: 24300001}
   m_Snapshots:
@@ -23,7 +23,7 @@ AudioMixerController:
     - 4b98574a62b3bcd4e82c3deab04bb333
     name: View
   m_CurrentViewIndex: 0
-  m_TargetSnapshot: {fileID: 24500003}
+  m_TargetSnapshot: {fileID: 24559432}
 --- !u!243 &24300001
 AudioMixerGroupController:
   m_ObjectHideFlags: 0

@@ -278,7 +278,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MenuSceneName: MainMenu
   m_VRInput: {fileID: 114072544182322776}
-  m_VRCameraFade: {fileID: 114223414570166114}
+  m_mouseInput: {fileID: 0}
+  m_CameraFade: {fileID: 0}
 --- !u!114 &114536614668915954
 MonoBehaviour:
   m_ObjectHideFlags: 1

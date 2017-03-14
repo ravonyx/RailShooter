@@ -1385,6 +1385,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114255831384363042, guid: db91d5ef7b1c33e468271ea09b20b00c,
+        type: 2}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1132596648}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db91d5ef7b1c33e468271ea09b20b00c, type: 2}
   m_IsPrefabParent: 0
@@ -2782,6 +2787,11 @@ MonoBehaviour:
 --- !u!20 &1132596647 stripped
 Camera:
   m_PrefabParentObject: {fileID: 20922249162795508, guid: db91d5ef7b1c33e468271ea09b20b00c,
+    type: 2}
+  m_PrefabInternal: {fileID: 301218987}
+--- !u!4 &1132596648 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4152701896344324, guid: db91d5ef7b1c33e468271ea09b20b00c,
     type: 2}
   m_PrefabInternal: {fileID: 301218987}
 --- !u!1 &1182027538

@@ -408,7 +408,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 1
   sensitivity: 300
-  lookDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &114694798558391722
 MonoBehaviour:
   m_ObjectHideFlags: 1

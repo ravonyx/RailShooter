@@ -102,7 +102,8 @@ namespace Assets.RailShooter
         private IEnumerator PlayPhase ()
         {
             // Wait for the UI on the player's gun to fade in.
-            yield return StartCoroutine(m_UIController.ShowPlayerUI());
+            if (SessionData.GetGameType() == SessionData.GameType.SHOOTER360)
+                yield return StartCoroutine(m_UIController.ShowPlayerUI());
 
             IsPlaying = true;
             m_Reticle.Show ();
@@ -120,7 +121,8 @@ namespace Assets.RailShooter
             }
 
             //gun UI fade out
-            yield return StartCoroutine(m_UIController.HidePlayerUI());
+            if (SessionData.GetGameType() == SessionData.GameType.SHOOTER360)
+                yield return StartCoroutine(m_UIController.HidePlayerUI());
             IsPlaying = false;
         }
 

@@ -129,7 +129,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 421084, guid: 3838180081f91be43bfe0130c54e4560, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 19835124, guid: 3838180081f91be43bfe0130c54e4560, type: 2}
       propertyPath: InitialModule.startColor.maxColor.rgba
@@ -146,6 +146,10 @@ Prefab:
     - target: {fileID: 19835124, guid: 3838180081f91be43bfe0130c54e4560, type: 2}
       propertyPath: InitialModule.startSize.scalar
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134604, guid: 3838180081f91be43bfe0130c54e4560, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3838180081f91be43bfe0130c54e4560, type: 2}
@@ -2562,7 +2566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4441bdb13c47e6f48b3e1816ca0788d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GameType: 0
+  m_GameType: 2
   m_IdealTargetNumber: 20
   m_BaseSpawnProbability: 0.7
   m_GameLength: 20
@@ -2572,12 +2576,8 @@ MonoBehaviour:
   m_SphereSpawnOuterRadius: 12
   m_SphereSpawnMaxHeight: 6
   m_SelectionSlider: {fileID: 1148047542}
-  m_Camera: {fileID: 0}
-  m_SelectionRadial: {fileID: 0}
-  m_Reticle: {fileID: 0}
   m_TimerBar: {fileID: 1042604709}
   m_TargetObjectPool: {fileID: 707436989}
-  m_SpawnCollider: {fileID: 0}
   m_UIController: {fileID: 1176611588}
   m_InputWarnings: {fileID: 927360101}
   m_SplineWalker: {fileID: 1391780791}
@@ -8103,7 +8103,7 @@ Prefab:
     - target: {fileID: 114689429528024924, guid: db91d5ef7b1c33e468271ea09b20b00c,
         type: 2}
       propertyPath: sensitivity
-      value: 600
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 1330714802250736, guid: db91d5ef7b1c33e468271ea09b20b00c, type: 2}
       propertyPath: m_IsActive
@@ -14720,7 +14720,7 @@ Transform:
   - {fileID: 745474207}
   - {fileID: 1153307604}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1494584180
 MonoBehaviour:
@@ -16126,6 +16126,10 @@ Prefab:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 103798, guid: 565fa42cafc247f4f87fd720db4871ad, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 131734, guid: 565fa42cafc247f4f87fd720db4871ad, type: 2}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}

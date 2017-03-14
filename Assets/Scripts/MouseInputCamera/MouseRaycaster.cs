@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RailShooter.Utils;
+using VRStandardAssets.Common;
 
 namespace VRStandardAssets.Utils
 {
@@ -55,48 +56,54 @@ namespace VRStandardAssets.Utils
 
         void Update()
         {
-            // Show the debug ray if required
-            if (m_ShowDebugRay)
-            {
-                Debug.DrawRay(m_Camera.position, m_Camera.forward * 5.0f, Color.blue, 1.0f);
-            }
-
-            // Create a ray that points forwards from the camera.
-            Ray ray = new Ray(m_Camera.position, m_Camera.forward);
+            Ray ray = new Ray();
             RaycastHit hit;
 
+            if (SessionData.GetGameType() == SessionData.GameType.SERIOUSSHOOTER)
+            {
+                var mousePos = Input.mousePosition;
+                mousePos.z = 5.0f;
+                mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (m_ShowDebugRay)
+                    Debug.DrawRay(mousePos, ray.direction * 5.0f, Color.blue, 1.0f);
+            }
+            else
+            {
+                if (m_ShowDebugRay)
+                    Debug.DrawRay(m_Camera.position, m_Camera.forward * 5.0f, Color.blue, 1.0f);
+                ray = new Ray(m_Camera.position, m_Camera.forward);
+            }
 
             if (Physics.Raycast(ray, out hit, m_RayLength, ~m_ExclusionLayers))
             {
                 InteractiveItem interactible = hit.collider.GetComponent<InteractiveItem>(); //attempt to get the InteractiveItem on the hit object
                 m_CurrentInteractible = interactible;
-
-                // If we hit an interactive item and it's not the same as the last interactive item, then call Over
+            
                 if (interactible && interactible != m_LastInteractible)
                     interactible.Over();
-
-                // Deactive the last interactive item 
+            
                 if (interactible != m_LastInteractible)
                     DeactiveLastInteractible();
-
+            
                 m_LastInteractible = interactible;
-
-                // Something was hit, set at the hit position.
+            
                 if (m_Reticle)
                     m_Reticle.SetPosition(hit);
-
-                /* if (OnRaycasthit != null)
-                     OnRaycasthit(hit);*/
             }
             else
             {
-                // Nothing was hit, deactive the last interactive item.
                 DeactiveLastInteractible();
                 m_CurrentInteractible = null;
 
-                // Position the reticle at default distance.
                 if (m_Reticle)
-                    m_Reticle.SetPosition();
+                {
+                    if (SessionData.GetGameType() == SessionData.GameType.SERIOUSSHOOTER)
+                        m_Reticle.SetPosition2D();
+                    else
+                        m_Reticle.SetPosition();
+                }
             }
         }
         private void DeactiveLastInteractible()

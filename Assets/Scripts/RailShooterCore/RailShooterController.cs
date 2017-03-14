@@ -14,7 +14,7 @@ namespace Assets.RailShooter
 
     public class RailShooterController : MonoBehaviour
     {
-        [SerializeField] private SessionData.GameType m_GameType;       // Whether this is a 180 or 360 shooter.
+        [SerializeField] private SessionData.GameType m_GameType;      
 
         [SerializeField] private int m_IdealTargetNumber = 5;           // How many targets aim to be on screen at once.
         [SerializeField] private float m_BaseSpawnProbability = 0.7f;   // When there are the ideal number of targets, this is the probability another will spawn.
@@ -27,37 +27,29 @@ namespace Assets.RailShooter
         [SerializeField] private float m_SphereSpawnOuterRadius = 10f; 
         [SerializeField] private float m_SphereSpawnMaxHeight = 15f;    
 
-        [SerializeField] private SelectionSlider m_SelectionSlider;     // Used to confirm the user has understood the intro UI.
+        [SerializeField] private SelectionSlider m_SelectionSlider;     
 
         //camera variables
-        [SerializeField] private Transform m_Camera;                    // Used to determine where targets can spawn.
-        [SerializeField] private SelectionRadial m_SelectionRadial;     // Used to continue past the outro.
-        [SerializeField] private Reticle m_Reticle;                     // This is turned on and off when it is required and not.
+        private Transform m_Camera;                    
+        private SelectionRadial m_SelectionRadial;     
+        private Reticle m_Reticle;                     
 
         [SerializeField] private Image m_TimerBar;                      // The time remaining is shown on the UI for the gun, this is a reference to the image showing the time remaining.
         [SerializeField] private ObjectPool m_TargetObjectPool;         // The object pool that stores all the targets.
-        [SerializeField] private BoxCollider m_SpawnCollider;           // For the 180 shooter, the volume that the targets can spawn within.
         [SerializeField] private UIController m_UIController;           // Used to encapsulate the UI.
         [SerializeField] private InputWarnings m_InputWarnings;         // Tap warnings need to be on for the intro and outro but off for the game itself.
-
 
         //control movement of player
         [SerializeField] private SplineWalker m_SplineWalker;         
 
-        private float m_SpawnProbability;                               // The current probability that a target will spawn at the next interval.
-        private float m_ProbabilityDelta;                               // The difference to the probability caused by a target spawning or despawning.
-
-        public bool IsPlaying { get; private set; }                     // Whether or not the game is currently playing.
-
+        private float m_SpawnProbability;                               
+        private float m_ProbabilityDelta;          
+                             
+        public bool IsPlaying { get; private set; }                     
 
         private IEnumerator Start()
         {
-            // Set the game type for the score to be recorded correctly.
             SessionData.SetGameType(m_GameType);
-
-            // The probability difference for each spawn is difference between 100% and the base probabilty per the number or targets wanted.
-            // That means that if the ideal number of targets was 5, the base probability was 0.7 then the delta is 0.06.
-            // So if there are no targets, the probability of one spawning will be 1, then 0.94, then 0.88, etc.
             m_ProbabilityDelta = (1f - m_BaseSpawnProbability) / m_IdealTargetNumber;
 
             m_Camera = Camera.main.transform;
@@ -65,7 +57,15 @@ namespace Assets.RailShooter
             m_Reticle = m_Camera.GetComponent<Reticle>();
 			m_SplineWalker = m_Camera.GetComponent<SplineWalker>();
 
-            // Continue looping through all the phases.
+            if (SessionData.GetGameType() == SessionData.GameType.SHOOTER360)
+            {
+                m_Camera.GetComponent<CameraController>().enabled = true;
+                m_Camera.GetComponent<HideLockMouse>().enabled = true;
+            }
+            else
+                m_Camera.GetComponent<CameraController>().enabled = false;
+
+            //loop to all phases
             while (true)
             {
                 yield return StartCoroutine (StartPhase ());
@@ -73,7 +73,6 @@ namespace Assets.RailShooter
                 yield return StartCoroutine (EndPhase ());
             }
         }
-
 
         private IEnumerator StartPhase ()
         {
@@ -198,41 +197,37 @@ namespace Assets.RailShooter
             //this game is a 180 
             if (m_GameType == SessionData.GameType.SERIOUSSHOOTER)
             {
-                // Find the centre and extents of the spawn collider.
-                Vector3 center = m_SpawnCollider.bounds.center;
-                Vector3 extents = m_SpawnCollider.bounds.extents;
+                float x = Random.value;
+                float y = Random.value;
+                if (x == 0)
+                    x = 0.1f;
+                else if (x == 1)
+                    x = 0.9f;
+                if (y == 0)
+                    y = 0.1f;
+                else if (y == 1)
+                    y = 0.9f;
 
-                // Get a random value between the extents on each axis.
-                float x = Random.Range(center.x - extents.x, center.x + extents.x);
-                float y = Random.Range(center.y - extents.y, center.y + extents.y);
-                float z = Random.Range(center.z - extents.z, center.z + extents.z);
-                
-                // Return the point these random values make.
-                return new Vector3(x, y, z);
+                var pos = new Vector3(Random.value, Random.value, 5);
+                pos = Camera.main.ViewportToWorldPoint(pos);
+
+                return new Vector3(pos.x, pos.y, pos.z);
             }
 
-            //Otherwise the game is 360 a
-            //random point on a unit circle and give it a radius between the inner and outer radii.
-            Vector2 randomCirclePoint = Random.insideUnitCircle * Random.Range(m_SphereSpawnInnerRadius, m_SphereSpawnOuterRadius) +
-                new Vector2(m_Camera.transform.position.x, m_Camera.transform.position.z);
-
-            // Find a random height between the camera's height and the maximum.
-            float randomHeight = Random.Range (m_Camera.position.y, m_SphereSpawnMaxHeight);
-
-            // The the random point on the circle is on the XZ plane and the random height is the Y axis.
-            return new Vector3(randomCirclePoint.x, randomHeight, randomCirclePoint.y);
+            //Otherwise the game is 360
+            else
+            {
+                Vector2 randomCirclePoint = Random.insideUnitCircle * Random.Range(m_SphereSpawnInnerRadius, m_SphereSpawnOuterRadius) +
+                    new Vector2(m_Camera.transform.position.x, m_Camera.transform.position.z);
+                float randomHeight = Random.Range(m_Camera.position.y, m_SphereSpawnMaxHeight);
+                return new Vector3(randomCirclePoint.x, randomHeight, randomCirclePoint.y);
+            }
         }
-
 
         private void HandleTargetRemoved(RailShooterTarget target)
         {
-            // Now that the event has been hit, unsubscribe from it.
             target.OnRemove -= HandleTargetRemoved;
-
-            // Return the target to it's object pool.
             m_TargetObjectPool.ReturnGameObjectToPool (target.gameObject);
-
-            // Increase the likelihood of a spawn next time because there are fewer targets now.
             m_SpawnProbability += m_ProbabilityDelta;
         }
     }

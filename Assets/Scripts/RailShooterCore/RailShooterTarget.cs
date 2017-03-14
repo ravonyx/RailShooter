@@ -14,7 +14,6 @@ namespace Assets.RailShooter
     {
         public event Action<RailShooterTarget> OnRemove;                   // This event is triggered when the target needs to be removed.
 
-
         [SerializeField] private int m_Score = 1;                       // This is the amount added to the users score when the target is hit.
         [SerializeField] private float m_TimeOutDuration = 2f;          // How long the target lasts before it disappears.
         [SerializeField] private float m_DestroyTimeOutDuration = 2f;   // When the target is hit, it shatters.  This is how long before the shattered pieces disappear.
@@ -23,14 +22,12 @@ namespace Assets.RailShooter
         [SerializeField] private AudioClip m_SpawnClip;                 // The audio clip that plays when the target appears.
         [SerializeField] private AudioClip m_MissedClip;                // The audio clip that plays when the target disappears without being hit.
 
-
         private Transform m_CameraTransform;                            // Used to make sure the target is facing the camera.
         private InteractiveItem m_InteractiveItem;                    // Used to handle the user clicking whilst looking at the target.
         private AudioSource m_Audio;                                    // Used to play the various audio clips.
         private Renderer m_Renderer;                                    // Used to make the target disappear before it is removed.
         private Collider m_Collider;                                    // Used to make sure the target doesn't interupt other shots happening.
         private bool m_IsEnding;                                        // Whether the target is currently being removed by another source.
-        
         
         private void Awake()
         {
@@ -60,7 +57,6 @@ namespace Assets.RailShooter
             // Ensure the event is completely unsubscribed when the target is destroyed.
             OnRemove = null;
         }
-        
 
         public void Restart (float gameTimeRemaining)
         {
@@ -75,18 +71,16 @@ namespace Assets.RailShooter
             m_Audio.clip = m_SpawnClip;
             m_Audio.Play();
 
-            // Make sure the target is facing the camera.
             transform.LookAt(m_CameraTransform);
-
+           
             // Start the time out for when the target would naturally despawn.
-            StartCoroutine (MissTarget());
+            StartCoroutine(MissTarget());
 
             // Start the time out for when the game ends.
             // Note this will only come into effect if the game time remaining is less than the time out duration.
             StartCoroutine (GameOver (gameTimeRemaining));
         }
         
-
         private IEnumerator MissTarget()
         {
             // Wait for the target to disappear naturally.

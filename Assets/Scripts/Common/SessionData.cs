@@ -28,7 +28,6 @@ namespace VRStandardAssets.Common
 
         public static void SetGameType(GameType gameType)
         {
-            // Set the name of the current game based on the game type.
             switch (gameType)
             {
                 case GameType.SERIOUSSHOOTER:
@@ -48,6 +47,21 @@ namespace VRStandardAssets.Common
                     break;
             }
             Restart();
+        }
+        public static SessionData.GameType GetGameType()
+        {
+            switch (s_CurrentGame)
+            {
+                case k_SeriousShooterData:
+                    return SessionData.GameType.SERIOUSSHOOTER;
+
+                case k_TutorialData:
+                    return SessionData.GameType.TUTORIAL;
+
+                case k_Shooter360Data:
+                    return SessionData.GameType.SHOOTER360;
+            }
+            return SessionData.GameType.SHOOTER360;
         }
 
         public static void Restart()

@@ -37,7 +37,7 @@ public class SplineWalker : MonoBehaviour
 			for (t = 0.0f; t < duration; t += Time.deltaTime)
 			{
 				Quaternion q = Quaternion.LookRotation(spline.GetDirection(progress));
-				transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(q.eulerAngles.x, q.eulerAngles.y, 0.0f), t / duration);
+				transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(q.eulerAngles.x + 10, q.eulerAngles.y, 0.0f), t / duration);
 
 				yield return null;
 			}
@@ -47,7 +47,7 @@ public class SplineWalker : MonoBehaviour
     public IEnumerator PlayUpdate ()
     {
         float dist = 1.0f;
-        while (dist > 0.01f && progress != 1f)
+        while (dist > 0.1f && progress != 1f)
         {
             progress += Time.deltaTime / duration;
             if (progress > 1f)
@@ -61,13 +61,11 @@ public class SplineWalker : MonoBehaviour
             if (lookForward)
             {
                 Quaternion q = Quaternion.LookRotation(spline.GetDirection(progress));
-                transform.localRotation = Quaternion.Euler(q.eulerAngles.x, q.eulerAngles.y, 0.0f);
+                transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(q.eulerAngles.x + 10, q.eulerAngles.y, 0.0f), Time.deltaTime * 1.8f);
             }
             yield return null;
         }
-        camera.isActive = true;
-        camera.lookDirection = new Vector3(transform.localEulerAngles.y, transform.localEulerAngles.x, 0.0f);
+        camera.Reset();
         indexStopPoint++;
     }
-
 }

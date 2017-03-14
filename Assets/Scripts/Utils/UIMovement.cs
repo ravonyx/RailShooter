@@ -21,9 +21,9 @@ namespace RailShooter.Utils
             m_DistanceFromCamera = Vector3.Distance (m_UIElement.position, m_Camera.position);
         }
 
-
         private void Update()
         {
+            m_UIElement.transform.parent.position = new Vector3(m_UIElement.transform.parent.position.x, m_Camera.position.y, m_UIElement.transform.parent.position.z);
             if(m_LookatCamera)
                 m_UIElement.rotation = Quaternion.LookRotation(m_UIElement.position - m_Camera.position);
 

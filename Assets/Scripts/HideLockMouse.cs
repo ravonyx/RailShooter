@@ -14,6 +14,6 @@ public class HideLockMouse : MonoBehaviour
             lockCursor = !lockCursor;
         }
         Cursor.lockState = lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
-        Cursor.visible = !lockCursor;
+       // Cursor.visible = !lockCursor;
     }
 }

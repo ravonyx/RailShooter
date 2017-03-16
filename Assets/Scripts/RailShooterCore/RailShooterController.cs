@@ -16,17 +16,20 @@ namespace Assets.RailShooter
     {
         [SerializeField] private SessionData.GameType m_GameType;      
 
-        [SerializeField] private int m_IdealTargetNumber = 5;           // How many targets aim to be on screen at once.
-        [SerializeField] private float m_BaseSpawnProbability = 0.7f;   // When there are the ideal number of targets, this is the probability another will spawn.
-        [SerializeField] private float m_GameLength = 60f;              // Time a game lasts in seconds.
-        [SerializeField] private float m_SpawnInterval = 1f;            // How frequently a target could spawn.
-        [SerializeField] private float m_EndDelay = 1.5f;               // The time the user needs to wait between the outro UI and being able to continue.
-
+        //values for spawning enemies
+        [SerializeField] private int m_IdealTargetNumber = 5;           
+        [SerializeField] private float m_BaseSpawnProbability = 0.7f;   
+        [SerializeField] private float m_GameLength = 60f;              
+        [SerializeField] private float m_SpawnInterval = 1f;
         //shooter 360 variables
-        [SerializeField] private float m_SphereSpawnInnerRadius = 5f;   
-        [SerializeField] private float m_SphereSpawnOuterRadius = 10f; 
-        [SerializeField] private float m_SphereSpawnMaxHeight = 15f;    
+        [SerializeField]
+        private float m_SphereSpawnInnerRadius = 5f;
+        [SerializeField]
+        private float m_SphereSpawnOuterRadius = 10f;
+        [SerializeField]
+        private float m_SphereSpawnMaxHeight = 15f;
 
+        [SerializeField] private Transform m_Start;              
         [SerializeField] private SelectionSlider m_SelectionSlider;     
 
         //camera variables
@@ -63,7 +66,10 @@ namespace Assets.RailShooter
                 m_Camera.GetComponent<HideLockMouse>().enabled = true;
             }
             else
+            {
                 m_Camera.GetComponent<CameraController>().enabled = false;
+                m_Camera.GetComponent<HideLockMouse>().enabled = false;
+            }
 
             //loop to all phases
             while (true)
@@ -76,25 +82,17 @@ namespace Assets.RailShooter
 
         private IEnumerator StartPhase ()
         {
-            // Wait for the intro UI to fade in.
             yield return StartCoroutine (m_UIController.ShowIntroUI ());
 
-            // Show the reticle (since there is now a selection slider) and hide the radial.
             m_Reticle.Show ();
             m_SelectionRadial.Hide ();
 
-            // Turn on the tap warnings for the selection slider.
             m_InputWarnings.TurnOnDoubleTapWarnings ();
             m_InputWarnings.TurnOnSingleTapWarnings ();
-
-            // Wait for the selection slider to finish filling.
             yield return StartCoroutine (m_SelectionSlider.WaitForBarToFill ());
 
-            // Turn off the tap warnings since it will now be tap to fire.
             m_InputWarnings.TurnOffDoubleTapWarnings ();
             m_InputWarnings.TurnOffSingleTapWarnings ();
-
-            // Wait for the intro UI to fade out.
             yield return StartCoroutine (m_UIController.HideIntroUI ());
         }
 
@@ -129,26 +127,22 @@ namespace Assets.RailShooter
 
         private IEnumerator EndPhase ()
         {
-            // Hide the reticle since the radial is about to be used.
             m_Reticle.Hide ();
-            
-            // In order, wait for the outro UI to fade in then wait for an additional delay.
             yield return StartCoroutine (m_UIController.ShowOutroUI ());
-            yield return new WaitForSeconds(m_EndDelay);
             
-            // Turn on the tap warnings.
             m_InputWarnings.TurnOnDoubleTapWarnings();
             m_InputWarnings.TurnOnSingleTapWarnings();
-
-            // Wait for the radial to fill (this will show and hide the radial automatically).
             yield return StartCoroutine(m_SelectionRadial.WaitForSelectionRadialToFill());
-
-            // The radial is now filled so stop the warnings.
+           
             m_InputWarnings.TurnOffDoubleTapWarnings();
             m_InputWarnings.TurnOffSingleTapWarnings();
-
-            // Wait for the outro UI to fade out.
             yield return StartCoroutine(m_UIController.HideOutroUI());
+
+            m_SplineWalker.Reset();
+            //reset transform of camera
+            Camera.main.transform.position = m_Start.position;
+            Camera.main.transform.rotation = m_Start.rotation;
+            m_Camera = Camera.main.transform;
         }
 
 
@@ -201,16 +195,17 @@ namespace Assets.RailShooter
             {
                 float x = Random.value;
                 float y = Random.value;
+                float offset = 0.5f;
                 if (x == 0)
-                    x = 0.1f;
+                    x += offset;
                 else if (x == 1)
-                    x = 0.9f;
+                    x -= offset;
                 if (y == 0)
-                    y = 0.1f;
+                    y += offset;
                 else if (y == 1)
-                    y = 0.9f;
+                    y -= offset;
 
-                var pos = new Vector3(Random.value, Random.value, 5);
+                var pos = new Vector3(x, y, 5);
                 pos = Camera.main.ViewportToWorldPoint(pos);
 
                 return new Vector3(pos.x, pos.y, pos.z);

@@ -28,6 +28,12 @@ public class SplineWalker : MonoBehaviour
             stopPoints = spline.stopPoints;
     }
 
+    public void Reset()
+    {
+        progress = 0.0f;
+        indexStopPoint = 0;
+    }
+
     public IEnumerator StartPhase()
     {
         if (SessionData.GetGameType() == SessionData.GameType.SERIOUSSHOOTER)
@@ -38,7 +44,7 @@ public class SplineWalker : MonoBehaviour
 			for (t = 0.0f; t < duration; t += Time.deltaTime)
 			{
 				Quaternion q = Quaternion.LookRotation(spline.GetDirection(progress));
-				transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(q.eulerAngles.x + 10, q.eulerAngles.y, 0.0f), t / duration);
+				transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0.0f, q.eulerAngles.y, 0.0f), t / duration);
 
 				yield return null;
 			}
@@ -58,15 +64,18 @@ public class SplineWalker : MonoBehaviour
 				transform.parent.localPosition = position;
 			else
 				transform.localPosition = position;
+
             dist = Vector3.Distance(position, spline.GetPoint(spline.stopPoints[indexStopPoint]));
+            Debug.Log(dist);
             if (SessionData.GetGameType() == SessionData.GameType.SERIOUSSHOOTER)
             {
                 Quaternion q = Quaternion.LookRotation(spline.GetDirection(progress));
-                transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(q.eulerAngles.x + 10, q.eulerAngles.y, 0.0f), Time.deltaTime * 1.8f);
+                transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0.0f, q.eulerAngles.y, 0.0f), Time.deltaTime * 1.8f);
             }
             yield return null;
         }
         camera.Reset();
         indexStopPoint++;
+        Debug.Log(indexStopPoint);
     }
 }

@@ -38,6 +38,7 @@ namespace VRStandardAssets.Utils
         private bool m_GazeOver;                                            // Whether the user is currently looking at the bar.
         private float m_Timer;                                              // Used to determine how much of the bar should be filled.
         private Coroutine m_FillBarRoutine;                                 // Reference to the coroutine that controls the bar filling up, used to stop it if required.
+        private CanvasGroup m_CanvasGroup;                                 // Reference to the coroutine that controls the bar filling up, used to stop it if required.
 
 
         private const string k_SliderMaterialPropertyName = "_SliderValue"; // The name of the property on the SlidingUV shader that needs to be changed in order for it to fill.
@@ -57,6 +58,8 @@ namespace VRStandardAssets.Utils
 
             m_InteractiveItem.OnOver += HandleOver;
             m_InteractiveItem.OnOut += HandleOut;
+
+            m_CanvasGroup = GetComponent<CanvasGroup>();
         }
         private void OnDisable ()
         {
@@ -194,9 +197,12 @@ namespace VRStandardAssets.Utils
             // The user is now looking at the bar.
             m_GazeOver = true;
 
-            // Play the clip appropriate for when the user starts looking at the bar.
-            m_Audio.clip = m_OnOverClip;
-            m_Audio.Play();
+            if(m_CanvasGroup.alpha == 1)
+            {
+                // Play the clip appropriate for when the user starts looking at the bar.
+                m_Audio.clip = m_OnOverClip;
+                m_Audio.Play();
+            }
         }
 
 

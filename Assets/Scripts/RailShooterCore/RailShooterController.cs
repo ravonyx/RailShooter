@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using VRStandardAssets.Common;
 using VRStandardAssets.Utils;
 using UnityEngine.VR;
+using RailShooter.Utils;
 
 namespace Assets.RailShooter
 {
@@ -42,8 +43,11 @@ namespace Assets.RailShooter
         [SerializeField] private UIController m_UIController;           // Used to encapsulate the UI.
         [SerializeField] private InputWarnings m_InputWarnings;         // Tap warnings need to be on for the intro and outro but off for the game itself.
 
+        [SerializeField]
+        private CameraFade m_CameraFade;           // Reference to the script that fades the scene to black.
+
         //control movement of player
-        [SerializeField] private SplineWalker m_SplineWalker;         
+        [SerializeField] private PathWalker m_PathWalker;         
 
         private float m_SpawnProbability;                               
         private float m_ProbabilityDelta;          
@@ -52,13 +56,15 @@ namespace Assets.RailShooter
 
         private IEnumerator Start()
         {
+            m_CameraFade = Camera.main.GetComponent<CameraFade>();
+
             SessionData.SetGameType(m_GameType);
             m_ProbabilityDelta = (1f - m_BaseSpawnProbability) / m_IdealTargetNumber;
 
             m_Camera = Camera.main.transform;
             m_SelectionRadial = m_Camera.GetComponent<SelectionRadial>();
             m_Reticle = m_Camera.GetComponent<Reticle>();
-			m_SplineWalker = m_Camera.GetComponent<SplineWalker>();
+            m_PathWalker = m_Camera.GetComponent<PathWalker>();
 
             if (SessionData.GetGameType() == SessionData.GameType.SHOOTER360)
             {
@@ -109,11 +115,11 @@ namespace Assets.RailShooter
             // Reset the score.
             SessionData.Restart ();
 
-            for(int i = 0; i < m_SplineWalker.stopPoints.Count; i++)
+            for(int i = 0; i < m_PathWalker.stopPoints.Count; i++)
             {
                 //walk at next point
-                yield return StartCoroutine(m_SplineWalker.StartPhase());
-                yield return StartCoroutine(m_SplineWalker.PlayUpdate());
+                yield return StartCoroutine(m_PathWalker.StartPhase());
+                yield return StartCoroutine(m_PathWalker.PlayUpdate());
                 //spawn update 
                 yield return StartCoroutine(PlayUpdate());
             }
@@ -138,11 +144,14 @@ namespace Assets.RailShooter
             m_InputWarnings.TurnOffSingleTapWarnings();
             yield return StartCoroutine(m_UIController.HideOutroUI());
 
-            m_SplineWalker.Reset();
+            m_PathWalker.Reset();
+
             //reset transform of camera
+            yield return StartCoroutine(m_CameraFade.BeginFadeOut(true));
             Camera.main.transform.position = m_Start.position;
             Camera.main.transform.rotation = m_Start.rotation;
             m_Camera = Camera.main.transform;
+            yield return StartCoroutine(m_CameraFade.BeginFadeIn(true));
         }
 
 

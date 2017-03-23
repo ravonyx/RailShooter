@@ -197,7 +197,7 @@ namespace VRStandardAssets.Utils
             // The user is now looking at the bar.
             m_GazeOver = true;
 
-            if(m_CanvasGroup.alpha == 1)
+            if(m_CanvasGroup && m_CanvasGroup.alpha == 1)
             {
                 // Play the clip appropriate for when the user starts looking at the bar.
                 m_Audio.clip = m_OnOverClip;

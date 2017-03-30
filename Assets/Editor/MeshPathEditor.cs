@@ -33,7 +33,7 @@ public class MeshPathEditor : Editor
                 if (GUILayout.Button("Add To Stop Point"))
                 {
                     path.AddStopPoint(selectedIndexStopPoint);
-                    EditorUtility.SetDirty(meshPath);
+                    EditorUtility.SetDirty(path);
                 }
             }
             if (positionToDelete != -1.0f)
@@ -41,7 +41,7 @@ public class MeshPathEditor : Editor
                 if (GUILayout.Button("Delete Point"))
                 {
                     path.DeleteStopPoint(positionToDelete);
-                    EditorUtility.SetDirty(meshPath);
+                    EditorUtility.SetDirty(path);
                     positionToDelete = -1.0f;
                 }
             }

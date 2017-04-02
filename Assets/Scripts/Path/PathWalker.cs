@@ -33,7 +33,7 @@ public class PathWalker : MonoBehaviour
         progress = 1.0f;
     }
 
-    public IEnumerator StartPhase()
+  /*  public IEnumerator StartPhase()
     {
         if (SessionData.GetGameType() == SessionData.GameType.SERIOUSSHOOTER)
         {
@@ -48,7 +48,7 @@ public class PathWalker : MonoBehaviour
                 yield return null;
             }
         }
-    }
+    }*/
 
     public IEnumerator PlayUpdate()
     {

@@ -8,7 +8,7 @@ namespace RailShooter.Utils
     // allows for random variation in prefabs.
     public class ObjectPool : MonoBehaviour
     {
-        [SerializeField] private GameObject[] m_Prefabs;            
+        [SerializeField] private GameObject m_Prefab;            
         [SerializeField] private int m_NumberInPool;                
 
         private List<ShooterBullet> m_Pool = new List<ShooterBullet> ();  
@@ -23,9 +23,7 @@ namespace RailShooter.Utils
 
         private void AddToPool ()
         {
-            int randomIndex = Random.Range (0, m_Prefabs.Length);
-
-            GameObject instance = Instantiate(m_Prefabs[randomIndex]);
+            GameObject instance = Instantiate(m_Prefab);
             instance.transform.parent = transform;
             instance.gameObject.SetActive (false);
 

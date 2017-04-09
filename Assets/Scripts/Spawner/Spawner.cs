@@ -57,7 +57,7 @@
             shootingTarget.Restart(timeRemaining);
 
             //on remove event
-            shootingTarget.OnRemove += HandleTargetRemoved;
+            -é.OnRemove += HandleTargetRemoved;
         }
 
 

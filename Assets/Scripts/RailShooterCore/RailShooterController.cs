@@ -34,8 +34,6 @@ namespace Assets.RailShooter
                              
         public bool IsPlaying { get; private set; }
 
-
-
         private IEnumerator Start()
         {
             m_CameraFade = Camera.main.GetComponent<CameraFade>();
@@ -87,11 +85,10 @@ namespace Assets.RailShooter
             // Reset the score.
             SessionData.Restart ();
 
-            for(int i = 0; i < m_PathWalker.stopPoints.Count; i++)
-            {
-                yield return StartCoroutine(m_PathWalker.PlayUpdate());
-                //yield return StartCoroutine(PlayUpdate());
-            }
+           for(int i = 0; i < m_PathWalker.stopPoints.Count; i++)
+               yield return StartCoroutine(m_PathWalker.PlayUpdate());
+
+            yield return new WaitForSeconds(120.0f);
 
             //gun UI fade out
             yield return StartCoroutine(m_UIController.HidePlayerUI());

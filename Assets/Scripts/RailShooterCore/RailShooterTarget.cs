@@ -25,8 +25,11 @@ namespace Assets.RailShooter
         private AudioSource m_Audio;                                    
         private Renderer m_Renderer;                                   
         private Collider m_Collider;                                    
-        private bool m_IsEnding;                                        
-        
+        private bool m_IsEnding;
+
+        public PKFxFX m_ParticleExplosion;
+
+
         private void Awake()
         {
             m_CameraTransform = Camera.main.transform;
@@ -104,10 +107,37 @@ namespace Assets.RailShooter
                 OnRemove (this);
         }*/
 
+            void OnTriggerEnter(Collider other)
+        {
+            Debug.Log(other.name);
+            if (m_IsEnding)
+                return;
+
+            m_IsEnding = true;
+
+            m_Renderer.enabled = false;
+            m_Collider.enabled = false;
+
+            m_Audio.clip = m_DestroyClip;
+            m_Audio.Play();
+
+            m_ParticleExplosion.StartEffect();
+
+            SessionData.AddScore(m_Score);
+
+            if (m_HasVoronoi)
+            {
+                GameObject destroyedTarget = Instantiate(m_DestroyPrefab, transform.position, transform.rotation) as GameObject;
+                Destroy(destroyedTarget, m_DestroyTimeOutDuration);
+            }
+
+            if (OnRemove != null)
+                OnRemove(this);
+        }
 
         private void HandleDown()
         {
-            if (m_IsEnding)
+            /*if (m_IsEnding)
                 return;
 
             m_IsEnding = true;
@@ -127,7 +157,7 @@ namespace Assets.RailShooter
             }
 
             if (OnRemove != null)
-                OnRemove(this);
+                OnRemove(this);*/
         }
     }
 }

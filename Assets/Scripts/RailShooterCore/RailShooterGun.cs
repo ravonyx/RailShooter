@@ -10,26 +10,36 @@ namespace Assets.RailShooter
     // scenes, including it's movement and shooting.
     public class RailShooterGun : MonoBehaviour
     {
-        [SerializeField] private float m_Damping = 0.5f;                                // The damping with which this gameobject follows the camera.
-        [SerializeField] private float m_GunContainerSmoothing = 10f;                   // How fast the gun arm follows the reticle.
-        [SerializeField] private AudioSource m_GunAudio;                                // The audio source which plays the sound of the gun firing.
-        [SerializeField] private RailShooterController m_ShootingGalleryController; // Reference to the controller so the gun cannot fire whilst the game isn't playing.
-        [SerializeField] private VREyeRaycaster m_EyeRaycaster;                         // Used to detect whether the gun is currently aimed at something.
-        [SerializeField] private VRInput m_VRInput;                                     // Used to tell the gun when to fire.
-        [SerializeField] private MouseRaycaster m_MouseRaycaster;
+        //VR Parameters
+
+        // The damping with which this gameobject follows the camera.
+        [SerializeField] private float m_Damping = 0.5f;                                
+        // How fast the gun arm follows the reticle.
+        [SerializeField] private float m_GunContainerSmoothing = 10f;
+        // This is the coefficient used to ensure smooth damping of this gameobject.
+        private const float k_DampingCoef = -20f;                                       
+
+        [SerializeField] private AudioSource m_GunAudio;                                
+        //ref to controller => to know if game is playing
+        [SerializeField] private RailShooterController m_ShootingGalleryController; 
+
+        [SerializeField] private VREyeRaycaster m_EyeRaycaster;                         
+        [SerializeField] private VRInput m_VRInput;                                     
         [SerializeField] private MouseInput m_MouseInput;
 
-        [SerializeField] private Transform m_VRCameraTransform;                           // Used as a reference to move this gameobject towards.
-        [SerializeField] private Transform m_MouseCameraTransform;                           // Used as a reference to move this gameobject towards.
+        [SerializeField] private Transform m_VRCameraTransform;                           
+        [SerializeField] private Transform m_MouseCameraTransform;                          
 
-        [SerializeField] private Transform m_GunContainer;                              // This contains the gun arm needs to be moved smoothly.
-        [SerializeField] private Transform m_GunEnd;                                    // This is where the line renderer should start from.
-        [SerializeField] private Reticle m_VRReticle;                                     // This is what the gun arm should be aiming at.
-        [SerializeField] private Reticle m_MouseReticle;                                     // This is what the gun arm should be aiming at.
+        [SerializeField] private Transform m_GunContainer;                             
+        [SerializeField] private Transform m_GunEnd;         
+        
+        //reticle to know where firing                         
+        [SerializeField] private Reticle m_VRReticle;                                    
+        [SerializeField] private Reticle m_MouseReticle;                                   
 
         [SerializeField] private ObjectPool m_ProjectilesPool;
+        [SerializeField] private float m_Speed;
 
-        private const float k_DampingCoef = -20f;                                       // This is the coefficient used to ensure smooth damping of this gameobject.
 
         private void OnEnable ()
         {
@@ -77,22 +87,36 @@ namespace Assets.RailShooter
             if (!m_ShootingGalleryController.IsPlaying)
                 return;
 
-            RailShooterTarget shootingTarget = m_EyeRaycaster.CurrentInteractible ? m_EyeRaycaster.CurrentInteractible.GetComponent<RailShooterTarget>() : null;
-            Transform target = shootingTarget ? shootingTarget.transform : null;
+            Vector3 shootingTarget = Vector3.zero;
+            if (VRSettings.enabled == true)
+                shootingTarget = m_VRReticle.ReticleTransform.position;
+            else
+                shootingTarget = m_MouseReticle.ReticleTransform.position;
 
-            Fire(target);
+            Fire(shootingTarget);
         }
 
 
-        private void Fire(Transform target)
+        private void Fire(Vector3 target)
         {
             m_GunAudio.Play();
 
+            Ray r = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+            RaycastHit rh = new RaycastHit();
+            Vector3 aimPoint = r.GetPoint(500.0f);
+            if (Physics.Raycast(r, out rh))
+                aimPoint = rh.point;
+            
             ShooterBullet m_Projectile = m_ProjectilesPool.GetGameObjectFromPool();
+            Vector3 direction = (aimPoint - m_GunEnd.position).normalized;
 
-            m_Projectile.transform.position = m_GunEnd.transform.position;
-            m_Projectile.Rb.AddForce(m_GunEnd.forward * 1500.0f);
+            Debug.DrawRay(m_GunEnd.position, direction, Color.red, 5.0f);
+
+            m_Projectile.transform.parent = m_GunEnd;
+            m_Projectile.transform.position = m_GunEnd.position;
+            m_Projectile.transform.parent = null;
+
+            m_Projectile.Rigidbody.AddForce(direction * m_Speed);
         }
-
     }
 }

@@ -14,6 +14,8 @@ public class HideLockMouse : MonoBehaviour
             lockCursor = !lockCursor;
         }
         Cursor.lockState = lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
+        GetComponent<CameraController>().enabled = lockCursor;
+
         Cursor.visible = !lockCursor;
     }
 }

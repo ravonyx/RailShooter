@@ -69,10 +69,5 @@ namespace Assets.RailShooter
         {
             m_FX.SetAttribute(new PKFxManager.Attribute("Direction", m_Direction));
         }
-
-        private void OnCollisionEnter(Collision other)
-        {
-            Remove();
-        }
     }
 }

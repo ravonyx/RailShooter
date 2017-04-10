@@ -107,16 +107,16 @@ namespace Assets.RailShooter
             if (Physics.Raycast(r, out rh))
                 aimPoint = rh.point;
             
-            ShooterBullet m_Projectile = m_ProjectilesPool.GetGameObjectFromPool();
+            ShooterBullet projectile = m_ProjectilesPool.GetGameObjectFromPool();
             Vector3 direction = (aimPoint - m_GunEnd.position).normalized;
 
             Debug.DrawRay(m_GunEnd.position, direction, Color.red, 5.0f);
 
-            m_Projectile.transform.parent = m_GunEnd;
-            m_Projectile.transform.position = m_GunEnd.position;
-            m_Projectile.transform.parent = null;
+            projectile.transform.parent = m_GunEnd;
+            projectile.transform.position = m_GunEnd.position;
+            projectile.transform.parent = null;
 
-            m_Projectile.Rigidbody.AddForce(direction * m_Speed);
+            projectile.Rigidbody.AddForce(direction * m_Speed);
         }
     }
 }

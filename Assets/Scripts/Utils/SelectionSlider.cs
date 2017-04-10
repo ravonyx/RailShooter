@@ -4,25 +4,24 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.VR;
 using RailShooter.Utils;
+using VRStandardAssets.Utils;
 
-namespace VRStandardAssets.Utils
+namespace RailShooter.Utils
 {
-    // This class works similarly to the SelectionRadial class except
-    // it has a physical manifestation in the scene.  This can be
-    // either a UI slider or a mesh with the SlidingUV shader.  The
-    // functions as a bar that fills up whilst the user looks at it
-    // and holds down the Fire1 button.
     public class SelectionSlider : MonoBehaviour
     {
-        public event Action OnBarFilled;                                    // This event is triggered when the bar finishes filling.
+        public event Action OnBarFilled;
 
+        //time it takes for the bar to fill.
+        [SerializeField] private float m_Duration = 2f;    
+        //audios feedback                 
+        [SerializeField] private AudioSource m_Audio;                      
+        [SerializeField] private AudioClip m_OnOverClip;                  
+        [SerializeField] private AudioClip m_OnFilledClip;                 
 
-        [SerializeField] private float m_Duration = 2f;                     // The length of time it takes for the bar to fill.
-        [SerializeField] private AudioSource m_Audio;                       // Reference to the audio source that will play effects when the user looks at it and when it fills.
-        [SerializeField] private AudioClip m_OnOverClip;                    // The clip to play when the user looks at the bar.
-        [SerializeField] private AudioClip m_OnFilledClip;                  // The clip to play when the bar finishes filling.
-        [SerializeField] private Slider m_Slider;                           // Optional reference to the UI slider (unnecessary if using a standard Renderer).
-        [SerializeField] private InteractiveItem m_InteractiveItem;       
+        [SerializeField] private Slider m_Slider;                           
+        [SerializeField] private InteractiveItem m_InteractiveItem;    
+           
         [SerializeField] private VRInput m_VRInput;
         [SerializeField] private MouseInput m_MouseInput;
         [SerializeField] private GameObject m_BarCanvas;                    // Optional reference to the GameObject that holds the slider (only necessary if DisappearOnBarFill is true).

@@ -1,0 +1,445 @@
+Version = 1.11.3.33940;
+CParticleEffect	$LOCAL$/Resource
+{
+	EditorInfosPosition = int2(73, 52);
+	OnSpawn = "$LOCAL$/Spawner";
+	CustomAttributes = "$LOCAL$/_GlobalAttributes";
+}
+CActionFactoryParticleSpawnerBase	$LOCAL$/Sparks
+{
+	EditorInfosPosition = int2(-288, -61);
+	Descriptor = "$LOCAL$/CParticleDescriptor_AE135B2A";
+	SpawnCountMode = TotalParticleCount;
+	FluxFactorExpression = "SparkCount";
+}
+CParticleDescriptor	$LOCAL$/CParticleDescriptor_AE135B2A
+{
+	EditorInfosPosition = int2(-392, -44);
+	Renderer = "$LOCAL$/CParticleRenderer_Billboard_9136D2F4";
+	CustomFields = 
+	{
+		"$LOCAL$/CParticleFieldDeclaration_048EFCAD",
+		"$LOCAL$/CParticleFieldDeclaration_C207E847",
+	};
+	SpawnEvaluator = "$LOCAL$/CCompilerSyntaxNodeExpression_5566F5E7";
+	States = 
+	{
+		"$LOCAL$/CParticleState_3AF8190E",
+	};
+	CompileCache = 
+	{
+		"$LOCAL$/CCompilerBlobCache_2AABB80E",
+	};
+}
+CActionFactoryWithChilds	$LOCAL$/Spawner
+{
+	EditorInfosPosition = int2(-162, -81);
+	ChildList = 
+	{
+		"$LOCAL$/Sparks",
+	};
+}
+CParticleRenderer_Billboard	$LOCAL$/CParticleRenderer_Billboard_9136D2F4
+{
+	EditorInfosPosition = int2(-508, -63);
+	CustomName = "Billboard";
+	Diffuse = "Textures/Point128x128.dds";
+	BillboardMode = VelocityCapsuleAlign;
+	AxisScale = 5.0000001e-002;
+}
+CCompilerSyntaxNodeExpression	$LOCAL$/CCompilerSyntaxNodeExpression_5566F5E7
+{
+	EditorInfosPosition = int2(-508, 22);
+	Expression = "function void	Eval()
+{
+	Life = 1*Spread;
+	Size = select(rand(0.005,0.007),rand(0.01,0.02),rand(0,1)>0.7)*GlobalScale;
+	Velocity = ((vrand().x0z+float3(0,rand(0,1),0))*1.2*Spread)*GlobalScale;
+	Accel = float3(0,-3,0)*GlobalScale;
+	Color = float4(SparkColor,1)*SparkIntensity*rand(1,3);
+}
+";
+}
+CParticleState	$LOCAL$/CParticleState_3AF8190E
+{
+	EditorInfosPosition = int2(-508, 65);
+	StateName = "State_0";
+	Evolvers = 
+	{
+		"$LOCAL$/CParticleEvolver_Physics_36D6D4BD",
+	};
+}
+CParticleEvolver_Physics	$LOCAL$/CParticleEvolver_Physics_36D6D4BD
+{
+	EditorInfosPosition = int2(-590, 86);
+	CustomName = "Physics";
+	WorldInteractionMode = OneWay;
+	DieOnContact = true;
+}
+CParticleAttributeList	$LOCAL$/_GlobalAttributes
+{
+	EditorInfosPosition = int2(-599, -20);
+	AttributeList = 
+	{
+		"$LOCAL$/CParticleAttributeDeclaration_A34F1D43",
+		"$LOCAL$/CParticleAttributeDeclaration_DCF6D274",
+		"$LOCAL$/CParticleAttributeDeclaration_30F7F916",
+		"$LOCAL$/CParticleAttributeDeclaration_AE30E291",
+		"$LOCAL$/CParticleAttributeDeclaration_C13DFC28",
+	};
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_A34F1D43
+{
+	AttributeName = "GlobalScale";
+	DefaultValueF4 = float4(1.0000000e+000, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	MaxValueF4 = float4(5.0000000e+000, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_AE30E291
+{
+	AttributeName = "SparkIntensity";
+	DefaultValueF4 = float4(2.0000000e+000, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	MaxValueF4 = float4(1.0000000e+001, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_C13DFC28
+{
+	AttributeName = "SparkCount";
+	DefaultValueF4 = float4(5.0000000e+000, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	MaxValueF4 = float4(2.0000000e+001, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_048EFCAD
+{
+	FieldName = "Accel";
+	FieldType = float3;
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_DCF6D274
+{
+	AttributeName = "Spread";
+	DefaultValueF4 = float4(1.0000000e+000, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	MaxValueF4 = float4(5.0000000e+000, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_C207E847
+{
+	FieldName = "Color";
+	FieldType = float4;
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_30F7F916
+{
+	AttributeName = "SparkColor";
+	AttributeType = float3;
+	DefaultValueF4 = float4(1.0000000e+000, 5.0000000e-001, 0.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	MaxValueF4 = float4(1.0000000e+000, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CCompilerBlobCache	$LOCAL$/CCompilerBlobCache_2AABB80E
+{
+	Identifier = "IR";
+	Blob = 
+	{
+		295,
+		-67466099,
+		320,
+		280,
+		36,
+		0,
+		10,
+		0,
+		17,
+		16,
+		1000593162,
+		1000593162,
+		1000593162,
+		1000593162,
+		1000593162,
+		1000593162,
+		1000593162,
+		1000593162,
+		1004888130,
+		1004888130,
+		1004888130,
+		1004888130,
+		1004888130,
+		1004888130,
+		1004888130,
+		1004888130,
+		1008981770,
+		1008981770,
+		1008981770,
+		1008981770,
+		1008981770,
+		1008981770,
+		1008981770,
+		1008981770,
+		1017370378,
+		1017370378,
+		1017370378,
+		1017370378,
+		1017370378,
+		1017370378,
+		1017370378,
+		1017370378,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1060320051,
+		1060320051,
+		1060320051,
+		1060320051,
+		1060320051,
+		1060320051,
+		1060320051,
+		1060320051,
+		1067030938,
+		1067030938,
+		1067030938,
+		1067030938,
+		1067030938,
+		1067030938,
+		1067030938,
+		1067030938,
+		0,
+		-1069547520,
+		0,
+		0,
+		-1069547520,
+		0,
+		0,
+		-1069547520,
+		1077936128,
+		1077936128,
+		1077936128,
+		1077936128,
+		1077936128,
+		1077936128,
+		1077936128,
+		1077936128,
+		65621,
+		1835587,
+		38668288,
+		100369,
+		134366344,
+		1325924609,
+		8921859,
+		65548,
+		-2010971313,
+		50465793,
+		587419392,
+		67895944,
+		55115781,
+		201557010,
+		1359742466,
+		280579,
+		-872218164,
+		35390275,
+		55314434,
+		67896712,
+		54823938,
+		201524488,
+		134152259,
+		72813572,
+		449775359,
+		16776962,
+		270008576,
+		1208745991,
+		-1601525244,
+		-872019968,
+		-2010971057,
+		84151305,
+		-1979430912,
+		168821950,
+		72010761,
+		135007146,
+		71879690,
+		10890,
+		1216872964,
+		2787844,
+		-2013264384,
+		128582732,
+		134678024,
+		145359948,
+		-2012806136,
+		212468812,
+		-1945629940,
+		201983044,
+		88869893,
+		134745002,
+		88375300,
+		134613770,
+		203294275,
+		105383943,
+		-1517778773,
+		1132989453,
+		135142406,
+		-1962522616,
+		251723778,
+		105678862,
+		218632379,
+		105875471,
+		202213411,
+		1207961861,
+		166662,
+		-871559679,
+		263915084,
+		-938602484,
+		252380740,
+		123079689,
+	};
+	Externals = 
+	{
+		"$LOCAL$/CCompilerBlobCacheExternal_3E9790E9",
+		"$LOCAL$/CCompilerBlobCacheExternal_ABB09D60",
+		"$LOCAL$/CCompilerBlobCacheExternal_450AD7A3",
+		"$LOCAL$/CCompilerBlobCacheExternal_C55FADA2",
+		"$LOCAL$/CCompilerBlobCacheExternal_4D3D2C0D",
+		"$LOCAL$/CCompilerBlobCacheExternal_C6FF0554",
+		"$LOCAL$/CCompilerBlobCacheExternal_0928A4A7",
+		"$LOCAL$/CCompilerBlobCacheExternal_12EF3CF6",
+		"$LOCAL$/CCompilerBlobCacheExternal_227583F1",
+		"$LOCAL$/CCompilerBlobCacheExternal_A4848908",
+	};
+	ExternalCalls = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_7AB9D86B",
+	};
+	EntryPoints = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_CCF41C95",
+	};
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_3E9790E9
+{
+	NameGUID = "Spread";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_ABB09D60
+{
+	NameGUID = "InvLife";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_450AD7A3
+{
+	NameGUID = "GlobalScale";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_C55FADA2
+{
+	NameGUID = "Size";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_4D3D2C0D
+{
+	NameGUID = "ParticleContextS";
+	TypeName = "pCtxS";
+	NativeType = -1;
+	StorageSize = 8;
+	MetaType = 4;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_C6FF0554
+{
+	NameGUID = "Velocity";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_0928A4A7
+{
+	NameGUID = "Accel";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_12EF3CF6
+{
+	NameGUID = "SparkColor";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 12;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_227583F1
+{
+	NameGUID = "SparkIntensity";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_A4848908
+{
+	NameGUID = "Color";
+	TypeName = "float4";
+	NativeType = 31;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_7AB9D86B
+{
+	SymbolName = "vrand";
+	SymbolSlot = -1;
+	FunctionTraits = 32;
+	Args = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionArg_4F6EDA0A",
+	};
+}
+CCompilerBlobCacheFunctionArg	$LOCAL$/CCompilerBlobCacheFunctionArg_4F6EDA0A
+{
+	Type = -1;
+	TypeName = "pCtxS";
+	MetaType = 4;
+	Attributes = 4;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_CCF41C95
+{
+	SymbolName = "Eval";
+}

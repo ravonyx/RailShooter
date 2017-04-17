@@ -14,6 +14,9 @@ namespace Assets.RailShooter
         [SerializeField]
         private bool m_AutoGuided;
         [SerializeField]
+        private bool m_DirectionStatus;
+
+        [SerializeField]
         private float m_Speed;
 
         [SerializeField]
@@ -62,7 +65,7 @@ namespace Assets.RailShooter
             CancelInvoke();
         }
 
-        private void Remove()
+        public void Remove()
         {
             transform.rotation = Quaternion.identity;
             m_Rigidbody.velocity = Vector3.zero;
@@ -77,7 +80,11 @@ namespace Assets.RailShooter
 
         void Update()
         {
-            m_FX.SetAttribute(new PKFxManager.Attribute("Direction", m_Direction));
+            if (m_FX.IsPlaying() == false)
+                m_FX.StartEffect();
+
+            if(m_DirectionStatus)
+                m_FX.SetAttribute(new PKFxManager.Attribute("Direction", m_Direction));
             if(m_AutoGuided)
             {
                 transform.position = Vector3.MoveTowards(transform.position, m_Player.position, m_Speed * Time.deltaTime);

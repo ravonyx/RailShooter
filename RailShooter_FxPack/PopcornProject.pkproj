@@ -115,7 +115,7 @@
     <PlatformSettings>
       <PlatformName>Unity</PlatformName>
       <BuildOutputPath>../Assets/StreamingAssets/PackFx</BuildOutputPath>
-      <IsSelected>false</IsSelected>
+      <IsSelected>true</IsSelected>
     </PlatformSettings>
   </PlatformSettingsList>
   <ExternalResourcesPathList />

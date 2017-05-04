@@ -63,7 +63,7 @@ namespace VRStandardAssets.Utils
         {
             m_ReticleTransform.position = hit.point;
             m_ReticleTransform.localScale = m_OriginalScale * hit.distance;
-            
+
             if (m_UseNormal)
                 m_ReticleTransform.rotation = Quaternion.FromToRotation (Vector3.forward, hit.normal);
             else

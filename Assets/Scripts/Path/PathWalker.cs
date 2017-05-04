@@ -18,6 +18,7 @@ public class PathWalker : MonoBehaviour
     private int indexStopPoint = 0;
     private float progress = 1.0f;
     private float dist = 1.0f;
+    private bool m_Walking;
 
     void Start()
     {
@@ -50,25 +51,34 @@ public class PathWalker : MonoBehaviour
         }
     }*/
 
+    void Update()
+    {
+        if (!m_Walking)
+            return;
+
+        progress += Time.deltaTime * speed / path.totalDistance;
+        progress = Mathf.Clamp(progress, 0, path.totalDistance);
+
+        Vector3 position = path.GetPathPoint(progress).point;
+        Vector3 transformedPos = pathTransform.TransformPoint(position);
+        transform.position = new Vector3(transformedPos.x, transformedPos.y + 1.5f, transformedPos.z);
+        dist = Vector3.Distance(position, path.GetPathPoint(path.stopPoints[indexStopPoint]).point);
+
+        Debug.Log("Finish walking");
+    }
+
     public IEnumerator PlayUpdate()
     {
-        float totalDist = path.totalDistance;
+        m_Walking = true;
         dist = 1.0f;
-
-        while (dist > 0.1f && progress < totalDist)
+        while (dist > 0.1f && progress < path.totalDistance)
         {
-            progress += Time.deltaTime * speed / totalDist;
-            progress = Mathf.Clamp(progress, 0, totalDist);
-
-            Vector3 position = path.GetPathPoint(progress).point;
-            Vector3 transformedPos = pathTransform.TransformPoint(position);
-            transform.position = new Vector3(transformedPos.x, transformedPos.y + 1.5f, transformedPos.z);
-            dist = Vector3.Distance(position, path.GetPathPoint(path.stopPoints[indexStopPoint]).point);
-            Quaternion q = Quaternion.LookRotation(path.GetPathPoint(progress).forward);
-            transform.localRotation = Quaternion.Euler(0.0f, q.eulerAngles.y, 0.0f);
             yield return null;
+            // Quaternion q = Quaternion.LookRotation(path.GetPathPoint(progress).forward);
+            // transform.localRotation = Quaternion.Euler(0.0f, q.eulerAngles.y, 0.0f);
         }
-        camera.Reset();
+        m_Walking = false;
+        //camera.Reset();
         indexStopPoint++;
     }
 }

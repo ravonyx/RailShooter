@@ -53,63 +53,13 @@ namespace Assets.RailShooter
             OnRemove = null;
         }
 
-       /* public void Restart (float gameTimeRemaining)
+        void OnTriggerEnter(Collider other)
         {
-            m_Renderer.enabled = true;
-            m_Collider.enabled = true;
-
-            m_IsEnding = false;
-            
-            m_Audio.clip = m_SpawnClip;
-            m_Audio.Play();
-
-            transform.LookAt(m_CameraTransform);
-           
-            StartCoroutine(MissTarget());
-            StartCoroutine (GameOver (gameTimeRemaining));
-        }
-        
-        private IEnumerator MissTarget()
-        {
-            yield return new WaitForSeconds (m_TimeOutDuration);
-
-            if(m_IsEnding)
-                yield break;
-
-            m_IsEnding = true;
-
-            m_Renderer.enabled = false;
-            m_Collider.enabled = false;
-            
-            m_Audio.clip = m_MissedClip;
-            m_Audio.Play();
-
-            yield return new WaitForSeconds(m_MissedClip.length);
-
-            if (OnRemove != null)
-                OnRemove(this);
+          
         }
 
-
-        private IEnumerator GameOver (float gameTimeRemaining)
+        private void HandleDown()
         {
-            yield return new WaitForSeconds (gameTimeRemaining);
-
-            if(m_IsEnding)
-                yield break;
-
-            m_IsEnding = true;
-
-            m_Renderer.enabled = false;
-            m_Collider.enabled = false;
-
-            if (OnRemove != null)
-                OnRemove (this);
-        }*/
-
-            void OnTriggerEnter(Collider other)
-        {
-            Debug.Log(other.name);
             if (m_IsEnding)
                 return;
 
@@ -133,31 +83,6 @@ namespace Assets.RailShooter
 
             if (OnRemove != null)
                 OnRemove(this);
-        }
-
-        private void HandleDown()
-        {
-            /*if (m_IsEnding)
-                return;
-
-            m_IsEnding = true;
-
-            m_Renderer.enabled = false;
-            m_Collider.enabled = false;
-
-            m_Audio.clip = m_DestroyClip;
-            m_Audio.Play();
-
-            SessionData.AddScore(m_Score);
-
-            if(m_HasVoronoi)
-            {
-                GameObject destroyedTarget = Instantiate(m_DestroyPrefab, transform.position, transform.rotation) as GameObject;
-                Destroy(destroyedTarget, m_DestroyTimeOutDuration);
-            }
-
-            if (OnRemove != null)
-                OnRemove(this);*/
         }
     }
 }

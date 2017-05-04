@@ -21,8 +21,10 @@ public class CameraController : MonoBehaviour
         isActive = true;
     }
 
-    void LateUpdate()
+    void Update()
     {
+        Debug.Log("Finish rotate camera");
+
         if (!isActive)
             return;
 
@@ -32,6 +34,7 @@ public class CameraController : MonoBehaviour
         lookDirection += new Vector3(y, x, 0.0f);
         lookDirection.x = Clamp(lookDirection.x, _yMinLimit, _yMaxLimit);
         transform.localRotation = Quaternion.Euler(lookDirection.x, lookDirection.y, 0.0f);
+
     }
 
     public void Reset()

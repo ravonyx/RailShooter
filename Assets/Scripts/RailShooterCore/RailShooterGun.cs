@@ -24,6 +24,7 @@ namespace Assets.RailShooter
         [SerializeField] private RailShooterController m_ShootingGalleryController; 
 
         [SerializeField] private VREyeRaycaster m_EyeRaycaster;                         
+        [SerializeField] private MouseRaycaster m_MouseRayCaster;
         [SerializeField] private VRInput m_VRInput;                                     
         [SerializeField] private MouseInput m_MouseInput;
 
@@ -40,6 +41,17 @@ namespace Assets.RailShooter
         [SerializeField] private ObjectPool m_ProjectilesPool;
         [SerializeField] private float m_Speed;
 
+        [SerializeField]
+        private PKFxFX m_ShootParticles;
+
+        [SerializeField]
+        private float m_DefaultLineLength = 70f;
+        [SerializeField]
+        private LineRenderer m_GunFlare;   
+        [SerializeField]
+        private ParticleSystem m_FlareParticles;                     
+        [SerializeField]
+        private float m_GunFlareVisibleSeconds = 0.07f;                
 
         private void OnEnable ()
         {
@@ -59,64 +71,72 @@ namespace Assets.RailShooter
 
         private void Update()
         {
-			if (!VRSettings.enabled)
-				return;
+            /* if (!VRSettings.enabled)
+             {
+                 transform.rotation = m_MouseCameraTransform.rotation;
+                 transform.position = m_MouseCameraTransform.position;
+                 Debug.Log("Finish place gun mesh");
 
-			transform.rotation = Quaternion.Slerp(transform.rotation, InputTracking.GetLocalRotation(VRNode.Head),
-				m_Damping * (1 - Mathf.Exp(k_DampingCoef * Time.deltaTime)));
+             }*/
+            if (VRSettings.enabled)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, InputTracking.GetLocalRotation(VRNode.Head),
+              m_Damping * (1 - Mathf.Exp(k_DampingCoef * Time.deltaTime)));
 
-			transform.position = m_VRCameraTransform.position;
-			Debug.Log(transform.position);
+                transform.position = m_VRCameraTransform.position;
+                Debug.Log(transform.position);
 
-			Quaternion lookAtRotation = Quaternion.LookRotation(m_VRReticle.ReticleTransform.position - m_GunContainer.position);
-			m_GunContainer.rotation = Quaternion.Slerp(m_GunContainer.rotation, lookAtRotation,
-				m_GunContainerSmoothing * Time.deltaTime);
-		}
-
-        void LateUpdate()
-        {
-			if (!VRSettings.enabled)
-			{
-				transform.rotation = m_MouseCameraTransform.transform.rotation;
-				transform.position = m_MouseCameraTransform.position;
-			}
-		}
+                Quaternion lookAtRotation = Quaternion.LookRotation(m_VRReticle.ReticleTransform.position - m_GunContainer.position);
+                m_GunContainer.rotation = Quaternion.Slerp(m_GunContainer.rotation, lookAtRotation,
+                    m_GunContainerSmoothing * Time.deltaTime);
+            }
+        }
 
         private void HandleDown ()
         {
-            if (!m_ShootingGalleryController.IsPlaying)
+           if (!m_ShootingGalleryController.IsPlaying)
                 return;
 
-            Vector3 shootingTarget = Vector3.zero;
-            if (VRSettings.enabled == true)
-                shootingTarget = m_VRReticle.ReticleTransform.position;
+            RailShooterTarget shootingTarget;
+            if (VRSettings.enabled)
+                shootingTarget = m_EyeRaycaster.CurrentInteractible ? m_EyeRaycaster.CurrentInteractible.GetComponent<RailShooterTarget>() : null;
             else
-                shootingTarget = m_MouseReticle.ReticleTransform.position;
+                shootingTarget = m_MouseRayCaster.CurrentInteractible ? m_MouseRayCaster.CurrentInteractible.GetComponent<RailShooterTarget>() : null;
 
-            Fire(shootingTarget);
+            Transform target = shootingTarget ? shootingTarget.transform : null;
+            Debug.Log("shoot");
+            StartCoroutine(Fire(target));
         }
 
-
-        private void Fire(Vector3 target)
+        private IEnumerator Fire(Transform target)
         {
             m_GunAudio.Play();
+            float lineLength = m_DefaultLineLength;
 
-            Ray r = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-            RaycastHit rh = new RaycastHit();
-            Vector3 aimPoint = r.GetPoint(500.0f);
-            if (Physics.Raycast(r, out rh))
-                aimPoint = rh.point;
-            
-            ShooterBullet projectile = m_ProjectilesPool.GetGameObjectFromPool();
-            Vector3 direction = (aimPoint - m_GunEnd.position).normalized;
+           if (target)
+               lineLength = Vector3.Distance(m_GunEnd.position, target.position);
 
-            Debug.DrawRay(m_GunEnd.position, direction, Color.red, 5.0f);
+            yield return new WaitForEndOfFrame();
+            m_ShootParticles.StartEffect();
 
-            projectile.transform.parent = m_GunEnd;
-            projectile.transform.position = m_GunEnd.position;
-            projectile.transform.parent = null;
+            m_GunFlare.enabled = true;
+            yield return StartCoroutine(MoveLineRenderer(lineLength));
+            m_GunFlare.enabled = false;
 
-            projectile.Rigidbody.AddForce(direction * m_Speed);
+            m_ShootParticles.StopEffect();
+        }
+
+        private IEnumerator MoveLineRenderer(float lineLength)
+        {
+            float timer = 0f;
+            while (timer < m_GunFlareVisibleSeconds)
+            {
+                m_GunFlare.SetPosition(0, m_GunEnd.position);
+                m_GunFlare.SetPosition(1, m_GunEnd.position + m_GunEnd.forward * lineLength);
+
+                yield return null;
+                timer += Time.deltaTime;
+            }
         }
     }
 }

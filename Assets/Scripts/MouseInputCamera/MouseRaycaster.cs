@@ -67,7 +67,7 @@ namespace VRStandardAssets.Utils
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 if (m_ShowDebugRay)
-                    Debug.DrawRay(mousePos, ray.direction * 5.0f, Color.blue, 1.0f);
+                    Debug.DrawRay(mousePos, ray.direction * 5.0f, Color.green, 1.0f);
             }
             else
             {
@@ -80,7 +80,6 @@ namespace VRStandardAssets.Utils
             {
                 InteractiveItem interactible = hit.collider.GetComponent<InteractiveItem>(); //attempt to get the InteractiveItem on the hit object
                 m_CurrentInteractible = interactible;
-            
                 if (interactible && interactible != m_LastInteractible)
                     interactible.Over();
             
@@ -91,6 +90,7 @@ namespace VRStandardAssets.Utils
             
                 if (m_Reticle)
                     m_Reticle.SetPosition(hit);
+
             }
             else
             {

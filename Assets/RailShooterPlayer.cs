@@ -23,7 +23,7 @@ public class RailShooterPlayer : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(m_CurrentLife);
+
     }
 
     void OnTriggerEnter(Collider other)

@@ -9,43 +9,43 @@ namespace Assets.RailShooter
 {
     public class RailShooterTarget : MonoBehaviour
     {
-        public event Action<RailShooterTarget> OnRemove;                   
+        public event Action<RailShooterTarget> OnRemove;
 
-        [SerializeField] private int m_Score = 1;                      
+        [SerializeField]
+        private bool m_gainPoints;
 
-        [SerializeField] private float m_DestroyTimeOutDuration = 2f;   // When the target is hit, it shatters.  This is how long before the shattered pieces disappear.
-        [SerializeField] private GameObject m_DestroyPrefab;            // The prefab for the shattered target.
+        [SerializeField]
+        private int m_score = 1;                      
 
-        [SerializeField] private AudioClip m_DestroyClip;               // The audio clip to play when the target shatters.
-        [SerializeField] private Boolean m_HasVoronoi;
+        [SerializeField]
+        private float m_destroyTimeOutDuration = 2f;   // When the target is hit, it shatters.  This is how long before the shattered pieces disappear.
+        [SerializeField]
+        private GameObject m_destroyPrefab;            // The prefab for the shattered target.
 
-        private Transform m_CameraTransform;     
-                               
-        private InteractiveItem m_InteractiveItem;                   
-        private AudioSource m_Audio;                                    
-        private Renderer m_Renderer;                                   
-        private Collider m_Collider;                                    
-        private bool m_IsEnding;
+        [SerializeField]
+        private Boolean m_hasVoronoi;
 
-        public PKFxFX m_ParticleExplosion;
+        private InteractiveItem m_interactiveItem;                   
+        private AudioSource m_audio;                                    
+        private Renderer m_renderer;                                   
+        private bool m_isEnding;
 
+        public PKFxFX m_particleExplosion;
 
         private void Awake()
         {
-            m_CameraTransform = Camera.main.transform;
-            m_Audio = GetComponent<AudioSource> ();
-            m_InteractiveItem = GetComponent<InteractiveItem>();
-            m_Renderer = GetComponent<Renderer>();
-            m_Collider = GetComponent<Collider>();
+            m_audio = GetComponent<AudioSource> ();
+            m_interactiveItem = GetComponent<InteractiveItem>();
+            m_renderer = GetComponent<Renderer>();
         }
 
         private void OnEnable ()
         {
-            m_InteractiveItem.OnDown += HandleDown;
+            m_interactiveItem.OnDown += HandleDown;
         }
         private void OnDisable ()
         {
-            m_InteractiveItem.OnDown -= HandleDown;
+            m_interactiveItem.OnDown -= HandleDown;
         }
 
         private void OnDestroy()
@@ -55,32 +55,30 @@ namespace Assets.RailShooter
 
         void OnTriggerEnter(Collider other)
         {
-          
+            Debug.Log("trigger enter " + gameObject.name);
         }
 
         private void HandleDown()
         {
-            if (m_IsEnding)
+            if (m_isEnding)
                 return;
 
-            m_IsEnding = true;
+            m_isEnding = true;
+            m_renderer.enabled = false;
 
-            m_Renderer.enabled = false;
-            m_Collider.enabled = false;
+            if(m_audio)
+                m_audio.Play();
+            if(m_particleExplosion)
+                m_particleExplosion.StartEffect();
 
-            m_Audio.clip = m_DestroyClip;
-            m_Audio.Play();
+            if(m_gainPoints)
+                SessionData.AddScore(m_score);
 
-            m_ParticleExplosion.StartEffect();
-
-            SessionData.AddScore(m_Score);
-
-            if (m_HasVoronoi)
+            if (m_hasVoronoi)
             {
-                GameObject destroyedTarget = Instantiate(m_DestroyPrefab, transform.position, transform.rotation) as GameObject;
-                Destroy(destroyedTarget, m_DestroyTimeOutDuration);
+                GameObject destroyedTarget = Instantiate(m_destroyPrefab, transform.position, transform.rotation) as GameObject;
+                Destroy(destroyedTarget, m_destroyTimeOutDuration);
             }
-
             if (OnRemove != null)
                 OnRemove(this);
         }

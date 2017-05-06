@@ -63,8 +63,6 @@ public class PathWalker : MonoBehaviour
         Vector3 transformedPos = pathTransform.TransformPoint(position);
         transform.position = new Vector3(transformedPos.x, transformedPos.y + 1.5f, transformedPos.z);
         dist = Vector3.Distance(position, path.GetPathPoint(path.stopPoints[indexStopPoint]).point);
-
-        Debug.Log("Finish walking");
     }
 
     public IEnumerator PlayUpdate()

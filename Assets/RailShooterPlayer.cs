@@ -21,14 +21,8 @@ public class RailShooterPlayer : MonoBehaviour
         m_CurrentLife = m_LifeMax;
     }
 
-    void Update()
-    {
-
-    }
-
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("On trigger enter");
         m_CurrentLife -= m_LifeToRemove;
         float lifeValue = m_CurrentLife / m_LifeMax;
         Debug.Log(lifeValue);

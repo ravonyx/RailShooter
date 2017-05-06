@@ -1,10 +1,9 @@
-Version = 1.10.3.31086;
+Version = 1.11.3.33940;
 CParticleEffect	$LOCAL$/Resource
 {
 	EditorInfosPosition = int2(73, 52);
 	OnSpawn = "$LOCAL$/Spawner";
 	CustomAttributes = "$LOCAL$/_GlobalAttributes";
-	Autostart = true;
 }
 CNEdEditorParticle_Data	$LOCAL$/EDITOR
 {
@@ -78,10 +77,10 @@ CParticleState	$LOCAL$/CParticleState_3AF8190E
 {
 	EditorInfosPosition = int2(-508, 65);
 	StateName = "State_0";
-}
-CEntityWithTransformsFactory	$LOCAL$/CEntityWithTransformsFactory_96A00101
-{
-	EditorInfosPosition = int2(303, -79);
+	Evolvers = 
+	{
+		"$LOCAL$/LocalSpace_1",
+	};
 }
 CParticleAttributeList	$LOCAL$/_GlobalAttributes
 {
@@ -133,6 +132,7 @@ CNEdEditorBackdrop_Light	$LOCAL$/_Backdrop_Light
 CNEdEditorLightFactory	$LOCAL$/_Backdrop_Light_Factory
 {
 	NearClipPlane = 1.0000000e+002;
+	LightSize = 9.9999998e-003;
 	SpotFalloff = 8.8541701e-002;
 	Magnitude = 1.0000000e+005;
 }
@@ -184,6 +184,7 @@ CParticleState	$LOCAL$/CParticleState_19E73872
 	StateName = "State_0";
 	Evolvers = 
 	{
+		"$LOCAL$/LocalSpace_3",
 		"$LOCAL$/CParticleEvolver_Physics_7DD3271D",
 	};
 }
@@ -214,14 +215,6 @@ CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_4890098D
 	FieldName = "Color";
 	FieldType = float4;
 }
-CCompilerSyntaxNodeExpression	$LOCAL$/CCompilerSyntaxNodeExpression_A6B3EC76
-{
-	Expression = "function void	Eval()
-{
-	
-}
-";
-}
 CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_87552ED0
 {
 	FieldName = "Axis";
@@ -241,9 +234,9 @@ CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_9FF20792
 }
 CNEdEditorBackdrop_Model3D	$LOCAL$/CNEdEditorBackdrop_Model3D_A8E094BD
 {
-	UniformScale = 2.9999995e+000;
 	Position = float3(-2.4525008e+000, -3.4753532e+000, 7.4567389e-001);
 	EulerOrientation = float3(0.0000000e+000, -8.9913765e+001, 0.0000000e+000);
+	UniformScale = 2.9999995e+000;
 	ResourceModel = "Meshes/popman_weapon.fbx";
 }
 CParticleRenderer_List	$LOCAL$/CParticleRenderer_List_B3914E84
@@ -322,6 +315,10 @@ CParticleState	$LOCAL$/CParticleState_89C47052
 {
 	EditorInfosPosition = int2(-508, 65);
 	StateName = "State_0";
+	Evolvers = 
+	{
+		"$LOCAL$/LocalSpace_2",
+	};
 }
 CActionFactoryParticleSpawnerBase	$LOCAL$/MZFlashSide
 {
@@ -359,4 +356,16 @@ CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_11D7F4E7
 	HasMin = true;
 	MaxValueF4 = float4(2.0000000e+001, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
 	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CParticleEvolver_Localspace	$LOCAL$/LocalSpace_1
+{
+	CustomName = "Localspace";
+}
+CParticleEvolver_Localspace	$LOCAL$/LocalSpace_2
+{
+	CustomName = "Localspace";
+}
+CParticleEvolver_Localspace	$LOCAL$/LocalSpace_3
+{
+	CustomName = "Localspace";
 }

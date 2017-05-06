@@ -71,14 +71,12 @@ namespace Assets.RailShooter
 
         private void Update()
         {
-            /* if (!VRSettings.enabled)
-             {
-                 transform.rotation = m_MouseCameraTransform.rotation;
-                 transform.position = m_MouseCameraTransform.position;
-                 Debug.Log("Finish place gun mesh");
-
-             }*/
-            if (VRSettings.enabled)
+            if (!VRSettings.enabled)
+            {
+                transform.rotation = m_MouseCameraTransform.rotation;
+                transform.position = m_MouseCameraTransform.position;
+            }
+            else
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, InputTracking.GetLocalRotation(VRNode.Head),
               m_Damping * (1 - Mathf.Exp(k_DampingCoef * Time.deltaTime)));
@@ -104,7 +102,6 @@ namespace Assets.RailShooter
                 shootingTarget = m_MouseRayCaster.CurrentInteractible ? m_MouseRayCaster.CurrentInteractible.GetComponent<RailShooterTarget>() : null;
 
             Transform target = shootingTarget ? shootingTarget.transform : null;
-            Debug.Log("shoot");
             StartCoroutine(Fire(target));
         }
 
@@ -117,13 +114,13 @@ namespace Assets.RailShooter
                lineLength = Vector3.Distance(m_GunEnd.position, target.position);
 
             yield return new WaitForEndOfFrame();
+
             m_ShootParticles.StartEffect();
 
             m_GunFlare.enabled = true;
             yield return StartCoroutine(MoveLineRenderer(lineLength));
             m_GunFlare.enabled = false;
 
-            m_ShootParticles.StopEffect();
         }
 
         private IEnumerator MoveLineRenderer(float lineLength)

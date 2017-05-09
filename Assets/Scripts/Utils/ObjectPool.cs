@@ -11,7 +11,7 @@ namespace RailShooter.Utils
         [SerializeField] private GameObject m_Prefab;            
         [SerializeField] private int m_NumberInPool;                
 
-        private List<ShooterBullet> m_Pool = new List<ShooterBullet> ();  
+        private List<RailShooterBullet> m_Pool = new List<RailShooterBullet>();  
 
         private void Awake ()
         {
@@ -27,17 +27,17 @@ namespace RailShooter.Utils
             instance.transform.parent = transform;
             instance.gameObject.SetActive (false);
 
-            m_Pool.Add(instance.GetComponent<ShooterBullet>());
+            m_Pool.Add(instance.GetComponent<RailShooterBullet>());
         }
 
 
-        public ShooterBullet GetGameObjectFromPool ()
+        public RailShooterBullet GetGameObjectFromPool ()
         {
             //resize if none left in pool
             if (m_Pool.Count == 0)
                 AddToPool ();
-            
-            ShooterBullet ret = m_Pool[0];
+
+            RailShooterBullet ret = m_Pool[0];
             m_Pool.RemoveAt(0);
 
             ret.gameObject.SetActive (true);
@@ -47,7 +47,7 @@ namespace RailShooter.Utils
         }
 
 
-        public void ReturnGameObjectToPool (ShooterBullet go)
+        public void ReturnGameObjectToPool (RailShooterBullet go)
         {
             m_Pool.Add (go);
 

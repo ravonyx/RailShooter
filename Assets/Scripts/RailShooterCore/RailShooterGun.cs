@@ -49,9 +49,10 @@ namespace Assets.RailShooter
         [SerializeField]
         private LineRenderer m_GunFlare;   
         [SerializeField]
-        private ParticleSystem m_FlareParticles;                     
+        private float m_GunFlareVisibleSeconds = 0.1f;
+
         [SerializeField]
-        private float m_GunFlareVisibleSeconds = 0.07f;                
+        private RailShooterPlayer m_playerHealth;
 
         private void OnEnable ()
         {
@@ -95,11 +96,11 @@ namespace Assets.RailShooter
            if (!m_ShootingGalleryController.IsPlaying)
                 return;
 
-            RailShooterTarget shootingTarget;
+            RailShooterEntity shootingTarget;
             if (VRSettings.enabled)
-                shootingTarget = m_EyeRaycaster.CurrentInteractible ? m_EyeRaycaster.CurrentInteractible.GetComponent<RailShooterTarget>() : null;
+                shootingTarget = m_EyeRaycaster.CurrentInteractible ? m_EyeRaycaster.CurrentInteractible.GetComponent<RailShooterEntity>() : null;
             else
-                shootingTarget = m_MouseRayCaster.CurrentInteractible ? m_MouseRayCaster.CurrentInteractible.GetComponent<RailShooterTarget>() : null;
+                shootingTarget = m_MouseRayCaster.CurrentInteractible ? m_MouseRayCaster.CurrentInteractible.GetComponent<RailShooterEntity>() : null;
 
             Transform target = shootingTarget ? shootingTarget.transform : null;
             StartCoroutine(Fire(target));
@@ -107,20 +108,22 @@ namespace Assets.RailShooter
 
         private IEnumerator Fire(Transform target)
         {
+            if (target != null && target.name == "Health")
+                m_playerHealth.StartCoroutine("EvolveLife", true);
+
             m_GunAudio.Play();
             float lineLength = m_DefaultLineLength;
-
-           if (target)
-               lineLength = Vector3.Distance(m_GunEnd.position, target.position);
+            if (target)
+                lineLength = Vector3.Distance(m_GunEnd.position, target.position);
 
             yield return new WaitForEndOfFrame();
 
+            //shoot line + muzzle flash
             m_ShootParticles.StartEffect();
 
             m_GunFlare.enabled = true;
             yield return StartCoroutine(MoveLineRenderer(lineLength));
             m_GunFlare.enabled = false;
-
         }
 
         private IEnumerator MoveLineRenderer(float lineLength)

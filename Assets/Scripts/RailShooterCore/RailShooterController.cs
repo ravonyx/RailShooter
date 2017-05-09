@@ -12,8 +12,6 @@ namespace Assets.RailShooter
     {
         [SerializeField] private SessionData.GameType m_GameType;      
 
-
-
         [SerializeField] private Transform m_Start;              
         [SerializeField] private SelectionSlider m_SelectionSlider;     
 
@@ -85,10 +83,12 @@ namespace Assets.RailShooter
             // Reset the score.
             SessionData.Restart ();
 
-           for(int i = 0; i < m_PathWalker.stopPoints.Count; i++)
-               yield return StartCoroutine(m_PathWalker.PlayUpdate());
-
-            yield return new WaitForSeconds(120.0f);
+            for (int i = 0; i < m_PathWalker.StopPoints.Count; i++)
+            {
+                yield return StartCoroutine(m_PathWalker.PlayUpdate());
+                Debug.Log("wait seconds 120");
+                yield return new WaitForSeconds(120.0f);
+            }
 
             //gun UI fade out
             yield return StartCoroutine(m_UIController.HidePlayerUI());

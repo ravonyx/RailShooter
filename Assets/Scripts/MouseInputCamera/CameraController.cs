@@ -9,36 +9,36 @@ public class CameraController : MonoBehaviour
     private int _yMaxLimit = 80;
 
     [SerializeField]
-    public bool isActive;
+    private bool m_isActive;
     [SerializeField]
-    public float sensitivity;
+    private float m_sensitivity;
 
-    private Vector3 lookDirection;
+    private Vector3 m_lookDirection;
 
     void Start()
     {
-        lookDirection = Vector3.zero;
-        isActive = true;
+        m_lookDirection = Vector3.zero;
+        m_isActive = true;
     }
 
     void Update()
     {
-        if (!isActive)
+        if (!m_isActive)
             return;
 
-        float y = -Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
-        float x = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
+        float y = -Input.GetAxis("Mouse Y") * Time.deltaTime * m_sensitivity;
+        float x = Input.GetAxis("Mouse X") * Time.deltaTime * m_sensitivity;
 
-        lookDirection += new Vector3(y, x, 0.0f);
-        lookDirection.x = Clamp(lookDirection.x, _yMinLimit, _yMaxLimit);
-        transform.localRotation = Quaternion.Euler(lookDirection.x, lookDirection.y, 0.0f);
+        m_lookDirection += new Vector3(y, x, 0.0f);
+        m_lookDirection.x = Clamp(m_lookDirection.x, _yMinLimit, _yMaxLimit);
+        transform.localRotation = Quaternion.Euler(m_lookDirection.x, m_lookDirection.y, 0.0f);
     }
 
     public void Reset()
     {
-        lookDirection = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, 0.0f);
-        lookDirection.x = RemapAngle(lookDirection.x, _yMinLimit, _yMaxLimit);
-        isActive = true;
+        m_lookDirection = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, 0.0f);
+        m_lookDirection.x = RemapAngle(m_lookDirection.x, _yMinLimit, _yMaxLimit);
+        m_isActive = true;
     }
 
     float RemapAngle(float angle, float min, float max)

@@ -525,10 +525,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14901bfcc4b6b9a4a9681dd7f8abe4de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  XMin: -4.7
-  XMax: 4.7
-  YMin: 3.5
-  Ymax: -3.5
+  XMin: -2.7
+  XMax: 2.7
+  YMin: 2.5
+  Ymax: -2.5
   XIncrement: 0.5
   YIncrement: 1
   tick: 0.5

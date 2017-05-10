@@ -26,7 +26,10 @@ public class Eyemanager : MonoBehaviour {
     [SerializeField]
     TargetMove targetMoveScript;
     [SerializeField]
+    string PythonPath;
+    [SerializeField]
     string path;
+    
    // FoveInterface.EyeRays leftEye;
     Vector3 LeftEye;
     Vector3 RightEye;
@@ -40,6 +43,7 @@ public class Eyemanager : MonoBehaviour {
         framelistLeft = new FrameContainer();
         framelistRight = new FrameContainer();
 
+       // createPlotlyCurve();
     }
 	
 	// Update is called once per frame
@@ -82,6 +86,56 @@ public class Eyemanager : MonoBehaviour {
         rightSerializer.Serialize(rightStream, framelistRight);
         rightStream.Close();
     }
+    void writeEyesDataCSV()
+    {
+        FileStream leftStream = new FileStream(path + "/leftDatas.csv", FileMode.Create);
+        StreamWriter leftStreamWriter = new StreamWriter(leftStream);
+        leftStreamWriter.WriteLine( "eyeX,eyeY,eyeZ,timestamp");
+        for(int i = 0; i < framelistLeft.FrameList.Count;i++)
+        {
+            leftStreamWriter.WriteLine(framelistLeft.FrameList[i].EyePos.x.ToString() + ','
+                + framelistLeft.FrameList[i].EyePos.y.ToString() + ','
+                + framelistLeft.FrameList[i].EyePos.z.ToString() + ','
+                + framelistLeft.FrameList[i].timeStamp.ToString());
+           
+        }
+        leftStreamWriter.Close();
+        leftStream.Close();
+
+        FileStream rightStream = new FileStream(path + "/rightDatas.csv", FileMode.Create);
+        StreamWriter rightStreamWriter = new StreamWriter(rightStream);
+        rightStreamWriter.WriteLine("eyeX,eyeY,eyeZ,timestamp");
+        for (int i = 0; i < framelistRight.FrameList.Count; i++)
+        {
+            rightStreamWriter.WriteLine(framelistRight.FrameList[i].EyePos.x.ToString() + ','
+                + framelistRight.FrameList[i].EyePos.y.ToString() + ','
+                + framelistRight.FrameList[i].EyePos.z.ToString() + ','
+                + framelistRight.FrameList[i].timeStamp.ToString());
+        }
+        rightStreamWriter.Close();
+        rightStream.Close();
+
+        createPlotlyCurve();
+    }
+
+    void createPlotlyCurve()
+    {
+       
+        string strCmdText = "/C " + PythonPath;
+        strCmdText += " Med\\plotCurve";
+        strCmdText += " " +path + "\\leftDatas.csv";
+        strCmdText += " leftEyeCurve";
+       // Debug.Log(strCmdText);
+        System.Diagnostics.Process.Start("CMD.exe", strCmdText);
+
+        strCmdText = "";
+        strCmdText = "/C " + PythonPath;
+        strCmdText += " Med\\plotCurve";
+        strCmdText += " " + path + "\\rightDatas.csv";
+        strCmdText += " rightEyeCurve";
+        // Debug.Log(strCmdText);
+        System.Diagnostics.Process.Start("CMD.exe", strCmdText);
+    }
     void readEyeData()
     {
 
@@ -91,6 +145,6 @@ public class Eyemanager : MonoBehaviour {
     {
         acquireEyeDatas = state;
         if (!state)
-            WriteEyesData();
+            writeEyesDataCSV();
     }
 }

@@ -243,7 +243,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetMoveScript: {fileID: 1924503832}
-  path: ./
+  PythonPath: C:\Python27\python.exe
+  path: Med
 --- !u!1 &884943426
 GameObject:
   m_ObjectHideFlags: 0

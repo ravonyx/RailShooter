@@ -8,15 +8,16 @@ import sys
 
 print 'Argument List:', str(sys.argv)
 fileName = sys.argv[1];
+filOutName = sys.argv[2]
 print fileName
 df = pd.read_csv(fileName)
 df.head()
 
 trace1 = go.Scatter(
-                    x=df['_Frame'], y=df['EyePos/x'], # Data
-                    mode='lines', name='EyeXVariation' # Additional options
+                    x=df['timestamp'], y=df['eyeY'], # Data
+                    mode='lines', name='EyeYVariation' # Additional options
                    )
-trace2 = go.Scatter(x=df['_Frame'], y=df['EyePos/y'], mode='lines', name='EyeYVariation' )
+trace2 = go.Scatter(x=df['timestamp'], y=df['eyeX'], mode='lines', name='EyeXVariation' )
 
 layout = go.Layout(title='Eye position Analysis',
                    plot_bgcolor='rgb(230, 230,230)')
@@ -24,4 +25,4 @@ layout = go.Layout(title='Eye position Analysis',
 fig = go.Figure(data=[trace1, trace2], layout=layout)
 
 # Plot data in the notebook
-py.iplot(fig, filename='commandLine')
+py.iplot(fig, filename=filOutName)

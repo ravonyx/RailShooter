@@ -59,7 +59,7 @@ public class TargetMove : MonoBehaviour {
 
         }
         else
-            ; Debug.Log("training Over " + posOk + "Goodpress / " + posTotal);
+            ;// Debug.Log("training Over " + posOk + "Goodpress / " + posTotal);
     }
 
     IEnumerator targetPositionUpdate()

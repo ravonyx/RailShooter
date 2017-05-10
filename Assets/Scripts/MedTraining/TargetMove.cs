@@ -22,41 +22,56 @@ public class TargetMove : MonoBehaviour {
     Eyemanager eyemanagerScript;
     bool m_targetable = false;
 
+    [SerializeField]
+    private Mesh m_Mesh1;
+    [SerializeField]
+    private Mesh m_Mesh2;
+
     bool pressed = true;
     int posTotal = 0;
     int posOk = 0;
     private float m_Z;
     public bool trainingRunning = false;
-	// Use this for initialization
-	void Start () {
+
+    private MeshFilter m_mesh;
+    private Renderer m_renderer;
+
+    void Start ()
+    {
         m_Z = transform.localPosition.z + 5;
         transform.localPosition = new Vector3(XMin, YMin, m_Z);
         trainingRunning = true;
         StartCoroutine(targetPositionUpdate());
         eyemanagerScript.startEyeRecord(true);
-	}
+
+        m_mesh = GetComponent<MeshFilter>();
+        m_renderer = GetComponent<Renderer>();
+    }
 
     private void FixedUpdate()
     {
 
     }
-    // Update is called once per frame
-    void Update () {
 
+    void Update ()
+    {
         if (trainingRunning)
         {
             if (m_targetable)
             {
-                this.GetComponent<Renderer>().material.color = new Color(0, 0, 255);
+                m_renderer.material.color = new Color(0, 0, 255);
+                m_mesh.mesh = m_Mesh1;
             }
             else
-                this.GetComponent<Renderer>().material.color = new Color(255, 0, 0);
+            {
+                m_renderer.material.color = new Color(255, 0, 0);
+                m_mesh.mesh = m_Mesh2;
+            }
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 pressed = true;
             }
-
         }
         else
             ;// Debug.Log("training Over " + posOk + "Goodpress / " + posTotal);
@@ -67,7 +82,7 @@ public class TargetMove : MonoBehaviour {
         if (pressed && m_targetable)
         {
             Debug.Log("Good Job");
-           // posOk++;
+            posOk++;
         }
         else if (pressed && !m_targetable)
         {
@@ -115,6 +130,4 @@ public class TargetMove : MonoBehaviour {
             Debug.Log("training Over " + posOk + "Goodpress / " + posTotal);
         }
     }
-
-    
 }

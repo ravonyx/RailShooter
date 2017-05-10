@@ -39,15 +39,17 @@ public class Eyemanager : MonoBehaviour {
     FrameContainer framelistRight;
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         framelistLeft = new FrameContainer();
         framelistRight = new FrameContainer();
 
-       // createPlotlyCurve();
+        //createPlotlyCurve();
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         if (acquireEyeDatas)
         {
             LeftEye = FoveInterface.GetLeftEyeVector();

@@ -209,6 +209,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 613120498}
+  - component: {fileID: 613120499}
   m_Layer: 0
   m_Name: HeadLinkContainer
   m_TagString: Untagged
@@ -230,6 +231,19 @@ Transform:
   m_Father: {fileID: 379909017}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &613120499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 613120497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd95d7bde6217624e92e277b7ef2a38f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetMoveScript: {fileID: 1924503832}
+  path: ./
 --- !u!1 &884943426
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,6 +546,8 @@ MonoBehaviour:
   XIncrement: 0.5
   YIncrement: 1
   tick: 0.5
+  eyemanagerScript: {fileID: 613120499}
+  trainingRunning: 0
 --- !u!23 &1924503833
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -18,20 +18,22 @@ public class TargetMove : MonoBehaviour {
     float YIncrement;
     [SerializeField]
     float tick;
-
+    [SerializeField]
+    Eyemanager eyemanagerScript;
     bool m_targetable = false;
 
     bool pressed = true;
     int posTotal = 0;
     int posOk = 0;
     private float m_Z;
-    bool trainingRunning = false;
+    public bool trainingRunning = false;
 	// Use this for initialization
 	void Start () {
         m_Z = transform.localPosition.z + 5;
         transform.localPosition = new Vector3(XMin, YMin, m_Z);
         trainingRunning = true;
         StartCoroutine(targetPositionUpdate());
+        eyemanagerScript.startEyeRecord(true);
 	}
 
     private void FixedUpdate()
@@ -107,7 +109,10 @@ public class TargetMove : MonoBehaviour {
         if (Y > Ymax)
             StartCoroutine(targetPositionUpdate());
         else
+        {
             trainingRunning = false;
+            eyemanagerScript.startEyeRecord(false);
+        }
     }
 
     

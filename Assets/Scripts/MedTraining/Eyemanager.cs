@@ -4,13 +4,13 @@ using UnityEngine;
 using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
-
+using System;
 public class Frame
 {
     [XmlAttribute("Frame")]
     public float timeStamp;
     public Vector3 EyePos;
-
+    
 }
 
 [XmlRoot("FrameCollection")]
@@ -124,7 +124,7 @@ public class Eyemanager : MonoBehaviour {
         string strCmdText = "/C " + PythonPath;
         strCmdText += " Med\\plotCurve";
         strCmdText += " " +path + "\\leftDatas.csv";
-        strCmdText += " leftEyeCurve";
+        strCmdText += " leftEyeCurve_" + DateTime.Now.ToString().Replace(" ", "_").Replace("/", "-");
        // Debug.Log(strCmdText);
         System.Diagnostics.Process.Start("CMD.exe", strCmdText);
 
@@ -132,7 +132,7 @@ public class Eyemanager : MonoBehaviour {
         strCmdText = "/C " + PythonPath;
         strCmdText += " Med\\plotCurve";
         strCmdText += " " + path + "\\rightDatas.csv";
-        strCmdText += " rightEyeCurve";
+        strCmdText += " rightEyeCurve_" + DateTime.Now.ToString().Replace(" ","_").Replace("/","-");
         // Debug.Log(strCmdText);
         System.Diagnostics.Process.Start("CMD.exe", strCmdText);
     }

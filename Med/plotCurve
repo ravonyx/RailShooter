@@ -26,3 +26,5 @@ fig = go.Figure(data=[trace1, trace2], layout=layout)
 
 # Plot data in the notebook
 py.iplot(fig, filename=filOutName)
+
+

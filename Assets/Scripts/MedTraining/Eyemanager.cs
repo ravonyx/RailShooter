@@ -55,8 +55,10 @@ public class Eyemanager : MonoBehaviour {
             FrameLeft.EyePos = LeftEye;
 
             Frame FrameRight = new Frame();
-            FrameLeft.timeStamp = Time.time;
-            FrameLeft.EyePos = RightEye;
+            FrameRight.timeStamp = Time.time;
+            FrameRight.EyePos = RightEye;
+
+            FrameLeft.EyePos = targetMoveScript.gameObject.transform.position; // :!!!!!!!
 
             framelistLeft.FrameList.Add(FrameLeft);
             framelistRight.FrameList.Add(FrameRight);

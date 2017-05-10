@@ -42,7 +42,7 @@ public class TargetMove : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-       
+
         if (trainingRunning)
         {
             if (m_targetable)
@@ -56,10 +56,10 @@ public class TargetMove : MonoBehaviour {
             {
                 pressed = true;
             }
-                      
+
         }
         else
-            Debug.Log("training Over " + posOk + "Goodpress / " + posTotal);
+            ; Debug.Log("training Over " + posOk + "Goodpress / " + posTotal);
     }
 
     IEnumerator targetPositionUpdate()
@@ -112,6 +112,7 @@ public class TargetMove : MonoBehaviour {
         {
             trainingRunning = false;
             eyemanagerScript.startEyeRecord(false);
+            Debug.Log("training Over " + posOk + "Goodpress / " + posTotal);
         }
     }
 

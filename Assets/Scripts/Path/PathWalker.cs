@@ -59,6 +59,7 @@ public class PathWalker : MonoBehaviour
     {
         if (!m_walking || m_indexStopPoint >= m_path.stopPoints.Count)
             return;
+
         Vector3 position = m_path.GetPathPoint(m_progress).point;
         Vector3 transformedPos = m_pathTransform.TransformPoint(position);
         transform.position = new Vector3(transformedPos.x, transformedPos.y + 1.5f, transformedPos.z);
@@ -72,8 +73,12 @@ public class PathWalker : MonoBehaviour
         while (m_dist > 0.5f && m_progress < m_path.totalDistance)
         {
             yield return null;
-            m_progress += Time.deltaTime * m_speed / m_path.totalDistance;
-            m_progress = Mathf.Clamp(m_progress, 0, m_path.totalDistance);
+
+            if (m_walking)
+            {
+                m_progress += Time.deltaTime * m_speed / m_path.totalDistance;
+                m_progress = Mathf.Clamp(m_progress, 0, m_path.totalDistance);
+            }
 
             Vector3 position = m_path.GetPathPoint(m_progress).point;
             m_dist = Vector3.Distance(position, m_path.GetPathPoint(m_path.stopPoints[m_indexStopPoint]).point);

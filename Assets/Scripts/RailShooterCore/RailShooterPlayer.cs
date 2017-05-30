@@ -29,6 +29,7 @@ public class RailShooterPlayer : MonoBehaviour
     public IEnumerator EvolveLife(bool increase)
     {
         float timer = 0f;
+        m_FXHealth.StartEffect();
         while (timer <= m_timeRegen)
         {
             if(increase)

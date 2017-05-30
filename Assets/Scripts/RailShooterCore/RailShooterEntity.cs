@@ -32,6 +32,8 @@ namespace Assets.RailShooter
         private bool m_isEnding;
 
         public PKFxFX m_particleExplosion;
+        [SerializeField]
+        private RailShooterController m_shootingGalleryController;
 
         private void Awake()
         {
@@ -62,7 +64,7 @@ namespace Assets.RailShooter
 
         private void HandleDown()
         {
-            if (m_isEnding)
+            if (m_isEnding || !m_shootingGalleryController.IsPlaying)
                 return;
 
             m_isEnding = true;

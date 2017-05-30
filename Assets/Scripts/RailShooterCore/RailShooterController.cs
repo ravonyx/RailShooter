@@ -10,41 +10,45 @@ namespace Assets.RailShooter
 {
     public class RailShooterController : MonoBehaviour
     {
-        [SerializeField] private SessionData.GameType m_GameType;      
+        [SerializeField] private SessionData.GameType m_gameType;      
 
-        [SerializeField] private Transform m_Start;              
-        [SerializeField] private SelectionSlider m_SelectionSlider;     
+        [SerializeField] private Transform m_start;              
+        [SerializeField] private SelectionSlider m_selectionSlider;     
 
         //camera variables
-        private Transform m_Camera;                    
-        private SelectionRadial m_SelectionRadial;     
-        private Reticle m_Reticle;                     
-
-        [SerializeField] private UIController m_UIController;           // Used to encapsulate the UI.
-        [SerializeField] private InputWarnings m_InputWarnings;         // Tap warnings need to be on for the intro and outro but off for the game itself.
+        private Transform m_camera;                    
+        private SelectionRadial m_selectionRadial;     
+        private Reticle m_reticle;
 
         [SerializeField]
-        private CameraFade m_CameraFade;           // Reference to the script that fades the scene to black.
+        private bool m_tutorial;
+        [SerializeField]
+        private UIController m_UIController;           // Used to encapsulate the UI.
+        [SerializeField]
+        private InputWarnings m_inputWarnings;         // Tap warnings need to be on for the intro and outro but off for the game itself.
+
+        [SerializeField]
+        private CameraFade m_cameraFade;           // Reference to the script that fades the scene to black.
 
         //control movement of player
-        [SerializeField] private PathWalker m_PathWalker;         
+        [SerializeField] private PathWalker m_pathWalker;         
 
                              
         public bool IsPlaying { get; private set; }
 
         private IEnumerator Start()
         {
-            m_CameraFade = Camera.main.GetComponent<CameraFade>();
+            m_cameraFade = Camera.main.GetComponent<CameraFade>();
 
-            SessionData.SetGameType(m_GameType);
+            SessionData.SetGameType(m_gameType);
 
-            m_Camera = Camera.main.transform;
-            m_SelectionRadial = m_Camera.GetComponent<SelectionRadial>();
-            m_Reticle = m_Camera.GetComponent<Reticle>();
-            m_PathWalker = m_Camera.GetComponent<PathWalker>();
+            m_camera = Camera.main.transform;
+            m_selectionRadial = m_camera.GetComponent<SelectionRadial>();
+            m_reticle = m_camera.GetComponent<Reticle>();
+            m_pathWalker = m_camera.GetComponent<PathWalker>();
 
-            m_Camera.GetComponent<CameraController>().enabled = true;
-            m_Camera.GetComponent<HideLockMouse>().enabled = true;
+            m_camera.GetComponent<CameraController>().enabled = true;
+            m_camera.GetComponent<HideLockMouse>().enabled = true;
 
             //loop to all phases
             while (true)
@@ -59,15 +63,15 @@ namespace Assets.RailShooter
         {
             yield return StartCoroutine (m_UIController.ShowIntroUI ());
 
-            m_Reticle.Show ();
-            m_SelectionRadial.Hide ();
+            m_reticle.Show ();
+            m_selectionRadial.Hide ();
 
-            m_InputWarnings.TurnOnDoubleTapWarnings ();
-            m_InputWarnings.TurnOnSingleTapWarnings ();
-            yield return StartCoroutine (m_SelectionSlider.WaitForBarToFill ());
+            m_inputWarnings.TurnOnDoubleTapWarnings ();
+            m_inputWarnings.TurnOnSingleTapWarnings ();
+            yield return StartCoroutine (m_selectionSlider.WaitForBarToFill ());
 
-            m_InputWarnings.TurnOffDoubleTapWarnings ();
-            m_InputWarnings.TurnOffSingleTapWarnings ();
+            m_inputWarnings.TurnOffDoubleTapWarnings ();
+            m_inputWarnings.TurnOffSingleTapWarnings ();
             yield return StartCoroutine (m_UIController.HideIntroUI ());
         }
 
@@ -78,16 +82,39 @@ namespace Assets.RailShooter
             yield return StartCoroutine(m_UIController.ShowPlayerUI());
 
             IsPlaying = true;
-            m_Reticle.Show ();
+            m_reticle.Show ();
 
             // Reset the score.
             SessionData.Restart ();
 
-            for (int i = 0; i < m_PathWalker.StopPoints.Count; i++)
+            if(m_tutorial)
             {
-                yield return StartCoroutine(m_PathWalker.PlayUpdate());
-                Debug.Log("wait seconds 120");
-                yield return new WaitForSeconds(120.0f);
+                for (int i = 0; i < m_pathWalker.StopPoints.Count; i++)
+                {
+                    yield return StartCoroutine(m_pathWalker.PlayUpdate());
+                    if(i == 0)
+                    {
+                        IsPlaying = false;
+                        yield return StartCoroutine(m_UIController.ShowEnemiesUI());
+                        yield return StartCoroutine(m_selectionRadial.WaitForSelectionRadialToFill());
+                        yield return StartCoroutine(m_UIController.HideEnemiesUI());
+                        IsPlaying = true;
+                    }
+                    else if(i == 1)
+                    {
+                        IsPlaying = false;
+                        yield return StartCoroutine(m_UIController.ShowHealthUI());
+                        yield return StartCoroutine(m_selectionRadial.WaitForSelectionRadialToFill());
+                        yield return StartCoroutine(m_UIController.HideHealthUI());
+                        IsPlaying = true;
+                    }
+                }
+
+            }
+            else
+            {
+                for (int i = 0; i < m_pathWalker.StopPoints.Count; i++)
+                    yield return StartCoroutine(m_pathWalker.PlayUpdate());
             }
 
             //gun UI fade out
@@ -98,25 +125,25 @@ namespace Assets.RailShooter
 
         private IEnumerator EndPhase ()
         {
-            m_Reticle.Hide ();
+            m_reticle.Hide ();
             yield return StartCoroutine (m_UIController.ShowOutroUI ());
             
-            m_InputWarnings.TurnOnDoubleTapWarnings();
-            m_InputWarnings.TurnOnSingleTapWarnings();
-            yield return StartCoroutine(m_SelectionRadial.WaitForSelectionRadialToFill());
+            m_inputWarnings.TurnOnDoubleTapWarnings();
+            m_inputWarnings.TurnOnSingleTapWarnings();
+            yield return StartCoroutine(m_selectionRadial.WaitForSelectionRadialToFill());
            
-            m_InputWarnings.TurnOffDoubleTapWarnings();
-            m_InputWarnings.TurnOffSingleTapWarnings();
+            m_inputWarnings.TurnOffDoubleTapWarnings();
+            m_inputWarnings.TurnOffSingleTapWarnings();
             yield return StartCoroutine(m_UIController.HideOutroUI());
 
-            m_PathWalker.Reset();
+            m_pathWalker.Reset();
 
             //reset transform of camera
-            yield return StartCoroutine(m_CameraFade.BeginFadeOut(true));
-            Camera.main.transform.position = m_Start.position;
-            Camera.main.transform.rotation = m_Start.rotation;
-            m_Camera = Camera.main.transform;
-            yield return StartCoroutine(m_CameraFade.BeginFadeIn(true));
+            yield return StartCoroutine(m_cameraFade.BeginFadeOut(true));
+            Camera.main.transform.position = m_start.position;
+            Camera.main.transform.rotation = m_start.rotation;
+            m_camera = Camera.main.transform;
+            yield return StartCoroutine(m_cameraFade.BeginFadeIn(true));
         }
     }
 }

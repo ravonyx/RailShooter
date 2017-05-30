@@ -12,49 +12,60 @@ namespace Assets.RailShooter
     // control the UI during the games.
     public class UIController : MonoBehaviour
     {
-        [SerializeField] private UIFader m_IntroUI;     // This controls fading the UI shown during the intro.
-        [SerializeField] private UIFader m_OutroUI;     // This controls fading the UI shown during the outro.
-        [SerializeField] private UIFader m_PlayerUI;    // This controls fading the UI that shows around the gun that moves with the player.
-        [SerializeField] private Text m_TotalScore;     // Reference to the Text component that displays the player's score at the end.
-        [SerializeField] private Text m_HighScore;      // Reference to the Text component that displays the high score at the end.
+        [SerializeField] private UIFader m_introUI;    
+        [SerializeField] private UIFader m_enemiesUI;    
+        [SerializeField] private UIFader m_healthUI;     
+        [SerializeField] private UIFader m_outroUI;     
+        [SerializeField] private UIFader m_playerUI;    
+        [SerializeField] private Text m_totalScore;    
+        [SerializeField] private Text m_highScore;      
 
 
         public IEnumerator ShowIntroUI()
         {
-            yield return StartCoroutine(m_IntroUI.InteruptAndFadeIn());
+            yield return StartCoroutine(m_introUI.InteruptAndFadeIn());
         }
-
-
         public IEnumerator HideIntroUI()
         {
-            yield return StartCoroutine(m_IntroUI.InteruptAndFadeOut());
+            yield return StartCoroutine(m_introUI.InteruptAndFadeOut());
         }
 
+        public IEnumerator ShowEnemiesUI()
+        {
+            yield return StartCoroutine(m_enemiesUI.InteruptAndFadeIn());
+        }
+        public IEnumerator HideEnemiesUI()
+        {
+            yield return StartCoroutine(m_enemiesUI.InteruptAndFadeOut());
+        }
 
+        public IEnumerator ShowHealthUI()
+        {
+            yield return StartCoroutine(m_healthUI.InteruptAndFadeIn());
+        }
+        public IEnumerator HideHealthUI()
+        {
+            yield return StartCoroutine(m_healthUI.InteruptAndFadeOut());
+        }
         public IEnumerator ShowOutroUI()
         {
-            m_TotalScore.text = SessionData.Score.ToString();
-            m_HighScore.text = SessionData.HighScore.ToString();
+            m_totalScore.text = SessionData.Score.ToString();
+            m_highScore.text = SessionData.HighScore.ToString();
 
-            yield return StartCoroutine(m_OutroUI.InteruptAndFadeIn());
+            yield return StartCoroutine(m_outroUI.InteruptAndFadeIn());
         }
-
-
         public IEnumerator HideOutroUI()
         {
-            yield return StartCoroutine(m_OutroUI.InteruptAndFadeOut());
+            yield return StartCoroutine(m_outroUI.InteruptAndFadeOut());
         }
-
 
         public IEnumerator ShowPlayerUI ()
         {
-            yield return StartCoroutine (m_PlayerUI.InteruptAndFadeIn ());
+            yield return StartCoroutine (m_playerUI.InteruptAndFadeIn ());
         }
-
-
         public IEnumerator HidePlayerUI ()
         {
-            yield return StartCoroutine (m_PlayerUI.InteruptAndFadeOut ());
+            yield return StartCoroutine (m_playerUI.InteruptAndFadeOut ());
         }
     }
 }

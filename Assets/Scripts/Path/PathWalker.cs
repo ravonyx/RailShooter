@@ -23,8 +23,6 @@ public class PathWalker : MonoBehaviour
     }
     private List<float> m_stopPoints;
     
-    private CameraController m_camera;
-    private Vector3 m_epsilonVector;
     private int m_indexStopPoint = 0;
     private float m_progress = 1.0f;
     private float m_dist = 1.0f;
@@ -43,8 +41,6 @@ public class PathWalker : MonoBehaviour
 
     void Start()
     {
-        m_camera = GetComponent<CameraController>();
-        m_epsilonVector = new Vector3(Single.Epsilon, Single.Epsilon, Single.Epsilon);
         if (m_path != null)
             m_stopPoints = m_path.stopPoints;
     }

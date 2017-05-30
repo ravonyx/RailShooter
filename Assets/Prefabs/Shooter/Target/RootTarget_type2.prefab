@@ -25,7 +25,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1256838806838740
 GameObject:
@@ -40,7 +40,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1699263243859406
 GameObject:
@@ -58,12 +58,13 @@ GameObject:
   - component: {fileID: 114716071198636424}
   - component: {fileID: 114825347464162410}
   - component: {fileID: 82696839137770158}
+  - component: {fileID: 114350106251766224}
   m_Layer: 10
   m_Name: Target_type2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 127
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4264754288072410
 Transform:
@@ -85,7 +86,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1256838806838740}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.61, y: -4.61, z: 40}
+  m_LocalPosition: {x: -18, y: -4.61, z: 23.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4921980971398180}
@@ -119,7 +120,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+  - {fileID: 2100000, guid: 299c06199e3720348a8e420ba6b94f4a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4098,6 +4099,21 @@ MonoBehaviour:
   m_PlayOnStart: 0
   m_BoundFx: {fileID: 102900000, guid: 3f34b37cfa56f7d4681ad0a7bbf49046, type: 3}
   m_FxName: Particles/Explosion.pkfx
+--- !u!114 &114350106251766224
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1699263243859406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45fceba9e9bf67a458a88f2d4ecf48e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
+  originalLayer: 0
+  originalMaterials: []
 --- !u!114 &114635149713729686
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4132,9 +4148,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92ac02b8408a9fe4190b334e8066e085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Score: 1
-  m_DestroyTimeOutDuration: 2
-  m_DestroyPrefab: {fileID: 0}
-  m_DestroyClip: {fileID: 8300000, guid: fd01d3e429819774181394d1ad09e6f2, type: 3}
-  m_HasVoronoi: 0
-  m_ParticleExplosion: {fileID: 114269976226512798}
+  m_gainPoints: 1
+  m_score: 1
+  m_destroyTimeOutDuration: 2
+  m_destroyPrefab: {fileID: 0}
+  m_hasVoronoi: 0
+  m_particleExplosion: {fileID: 114269976226512798}
+  m_shootingGalleryController: {fileID: 0}

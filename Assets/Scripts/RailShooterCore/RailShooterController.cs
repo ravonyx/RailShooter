@@ -136,14 +136,28 @@ namespace Assets.RailShooter
             m_inputWarnings.TurnOffSingleTapWarnings();
             yield return StartCoroutine(m_UIController.HideOutroUI());
 
-            m_pathWalker.Reset();
 
             //reset transform of camera
             yield return StartCoroutine(m_cameraFade.BeginFadeOut(true));
-            Camera.main.transform.position = m_start.position;
-            Camera.main.transform.rotation = m_start.rotation;
-            m_camera = Camera.main.transform;
+
+            m_pathWalker.Reset();
+
+            Debug.Log(m_start.position);
+            Debug.Log(m_start.localPosition);
+
+            m_camera.transform.localPosition = m_start.position;
+            m_camera.transform.localRotation = m_start.rotation;
             yield return StartCoroutine(m_cameraFade.BeginFadeIn(true));
+        }
+
+        public IEnumerator GameOver()
+        {
+            IsPlaying = false;
+            StopCoroutine(PlayPhase());
+
+            m_pathWalker.Walking = false;
+
+            yield return StartCoroutine(EndPhase());
         }
     }
 }

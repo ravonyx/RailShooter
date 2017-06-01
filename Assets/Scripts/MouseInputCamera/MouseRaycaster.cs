@@ -59,7 +59,7 @@ namespace VRStandardAssets.Utils
             Ray ray = new Ray();
             RaycastHit hit;
 
-            if (SessionData.GetGameType() == SessionData.GameType.SERIOUSSHOOTER)
+         /*   if (SessionData.GetGameType() == SessionData.GameType.SERIOUSSHOOTER)
             {
                 var mousePos = Input.mousePosition;
                 mousePos.z = 5.0f;
@@ -70,11 +70,11 @@ namespace VRStandardAssets.Utils
                     Debug.DrawRay(mousePos, ray.direction * 5.0f, Color.green, 1.0f);
             }
             else
-            {
+            {*/
                 if (m_ShowDebugRay)
                     Debug.DrawRay(m_Camera.position, m_Camera.forward * 5.0f, Color.blue, 1.0f);
                 ray = new Ray(m_Camera.position, m_Camera.forward);
-            }
+            //}
 
             if (Physics.Raycast(ray, out hit, m_RayLength, ~m_ExclusionLayers))
             {
@@ -98,12 +98,7 @@ namespace VRStandardAssets.Utils
                 m_CurrentInteractible = null;
 
                 if (m_Reticle)
-                {
-                    if (SessionData.GetGameType() == SessionData.GameType.SERIOUSSHOOTER)
-                        m_Reticle.SetPosition2D();
-                    else
-                        m_Reticle.SetPosition();
-                }
+                    m_Reticle.SetPosition();
             }
         }
         private void DeactiveLastInteractible()

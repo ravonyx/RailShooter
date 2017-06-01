@@ -43,11 +43,14 @@ namespace VRStandardAssets.Utils
 
         public void SetPosition ()
         {
-            m_ReticleTransform.position = m_Camera.position + m_Camera.forward * m_DefaultDistance;
-            m_ReticleTransform.localScale = m_OriginalScale * m_DefaultDistance;
+            float distance = Camera.main.farClipPlane * 0.95f;
+
+            m_ReticleTransform.position = m_Camera.position + (m_Camera.forward * distance);
+            m_ReticleTransform.localScale = m_OriginalScale * distance;
             m_ReticleTransform.localRotation = m_OriginalRotation;
         }
-        public void SetPosition2D()
+
+        /*public void SetPosition2D()
         {
             var mousePos = Input.mousePosition;
             mousePos.z = m_DefaultDistance;
@@ -57,17 +60,19 @@ namespace VRStandardAssets.Utils
             m_ReticleTransform.position = mousePos + ray.direction * m_DefaultDistance;
             m_ReticleTransform.localScale = m_OriginalScale * m_DefaultDistance * 2;
             m_ReticleTransform.localRotation = m_OriginalRotation;
-        }
+        }*/
 
         public void SetPosition (RaycastHit hit)
         {
-            m_ReticleTransform.position = hit.point;
+            float distance = hit.distance;
             m_ReticleTransform.localScale = m_OriginalScale * hit.distance;
 
             if (m_UseNormal)
                 m_ReticleTransform.rotation = Quaternion.FromToRotation (Vector3.forward, hit.normal);
             else
                 m_ReticleTransform.localRotation = m_OriginalRotation;
+
+            m_ReticleTransform.position = m_Camera.position + (m_Camera.forward * distance);
         }
     }
 }

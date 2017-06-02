@@ -102,7 +102,7 @@ Material:
       second: 0
     - first:
         name: _Emission
-      second: 38
+      second: 1.2
     - first:
         name: _EmissionLM
       second: 16.6

@@ -45,10 +45,11 @@ namespace Assets.RailShooter
             m_camera = Camera.main.transform;
             m_selectionRadial = m_camera.GetComponent<SelectionRadial>();
             m_reticle = m_camera.GetComponent<Reticle>();
-            m_pathWalker = m_camera.GetComponent<PathWalker>();
 
-            m_camera.GetComponent<CameraController>().enabled = true;
-            m_camera.GetComponent<HideLockMouse>().enabled = true;
+            if (VRSettings.enabled)
+                m_pathWalker = m_camera.GetComponentInParent<PathWalker>();
+            else
+                m_pathWalker = m_camera.GetComponent<PathWalker>();
 
             //loop to all phases
             while (true)

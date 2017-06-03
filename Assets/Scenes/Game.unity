@@ -230,6 +230,11 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114600968195436124, guid: a2b4f4bac0371d744be364f90eedfac2,
+        type: 2}
+      propertyPath: m_camInputManager
+      value: 
+      objectReference: {fileID: 2038639020}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a2b4f4bac0371d744be364f90eedfac2, type: 2}
   m_IsPrefabParent: 0
@@ -1354,7 +1359,7 @@ Prefab:
       objectReference: {fileID: 163866253}
     - target: {fileID: 1493762158268266, guid: 0ff0154a9fa771b4788bab1d41a01740, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1950441984043382, guid: 0ff0154a9fa771b4788bab1d41a01740, type: 2}
       propertyPath: m_IsActive
@@ -2325,6 +2330,25 @@ Transform:
   m_PrefabParentObject: {fileID: 4423024300825364, guid: 837e196e4c1a3634686cf9c6e11a3b9d,
     type: 2}
   m_PrefabInternal: {fileID: 2137810658}
+--- !u!1 &795765503 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1468783278926190, guid: 4b5b63aeaf3bce947a92b743f7a4db3c,
+    type: 2}
+  m_PrefabInternal: {fileID: 2055839325}
+--- !u!114 &795765505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 795765503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75429beddbc6d604cb0a92a45afa681d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_path: {fileID: 2106962922}
+  m_speed: 3000
+  m_pathTransform: {fileID: 2106962925}
 --- !u!1 &802374911 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1972596003245812, guid: b0a86754c5ad272458c1c0ce939e0e40,
@@ -10409,7 +10433,8 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114135277594711918, guid: 4b5b63aeaf3bce947a92b743f7a4db3c, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4b5b63aeaf3bce947a92b743f7a4db3c, type: 2}
   m_IsPrefabParent: 0
 --- !u!20 &2055839326 stripped

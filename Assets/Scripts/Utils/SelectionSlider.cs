@@ -2,8 +2,6 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using UnityEngine.VR;
-using RailShooter.Utils;
 using VRStandardAssets.Utils;
 
 namespace RailShooter.Utils
@@ -17,12 +15,13 @@ namespace RailShooter.Utils
         //audios feedback                 
         [SerializeField] private AudioSource m_Audio;                      
         [SerializeField] private AudioClip m_OnOverClip;                  
-        [SerializeField] private AudioClip m_OnFilledClip;                 
+        [SerializeField] private AudioClip m_OnFilledClip;
 
+        [SerializeField]
+        private CamerasAndInputsManager m_camInputManager;
         [SerializeField] private Slider m_Slider;                           
         [SerializeField] private InteractiveItem m_InteractiveItem;    
            
-        [SerializeField] private Inputs m_inputs;
         [SerializeField] private GameObject m_BarCanvas;                    // Optional reference to the GameObject that holds the slider (only necessary if DisappearOnBarFill is true).
         [SerializeField] private Renderer m_Renderer;                       // Optional reference to a renderer (unnecessary if using a UI slider).
         [SerializeField] private SelectionRadial m_SelectionRadial;         // Optional reference to the SelectionRadial, if non-null the duration of the SelectionRadial will be used instead.
@@ -38,11 +37,13 @@ namespace RailShooter.Utils
         private Coroutine m_FillBarRoutine;                                 // Reference to the coroutine that controls the bar filling up, used to stop it if required.
         private CanvasGroup m_CanvasGroup;                                 // Reference to the coroutine that controls the bar filling up, used to stop it if required.
 
-
+        private Inputs m_inputs;
         private const string k_SliderMaterialPropertyName = "_SliderValue"; // The name of the property on the SlidingUV shader that needs to be changed in order for it to fill.
         
         private void OnEnable ()
         {
+            m_inputs = m_camInputManager.GetCurrentInputs();
+
             m_inputs.OnDown += HandleDown;
             m_inputs.OnUp += HandleUp;
 

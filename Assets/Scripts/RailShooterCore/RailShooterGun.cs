@@ -83,7 +83,6 @@ namespace Assets.RailShooter
               m_Damping * (1 - Mathf.Exp(k_DampingCoef * Time.deltaTime)));
 
                 transform.position = m_cameraTransform.position;
-                Debug.Log(transform.position);
 
                 Quaternion lookAtRotation = Quaternion.LookRotation(m_VRReticle.ReticleTransform.position - m_GunContainer.position);
                 m_GunContainer.rotation = Quaternion.Slerp(m_GunContainer.rotation, lookAtRotation,

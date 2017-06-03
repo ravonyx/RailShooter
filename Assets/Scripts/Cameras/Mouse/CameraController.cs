@@ -29,6 +29,7 @@ public class CameraController : MonoBehaviour
         float y = -Input.GetAxis("Mouse Y") * Time.deltaTime * m_sensitivity;
         float x = Input.GetAxis("Mouse X") * Time.deltaTime * m_sensitivity;
 
+        Debug.Log("x " + x + "y " + y);
         m_lookDirection += new Vector3(y, x, 0.0f);
         m_lookDirection.x = Clamp(m_lookDirection.x, _yMinLimit, _yMaxLimit);
         transform.localRotation = Quaternion.Euler(m_lookDirection.x, m_lookDirection.y, 0.0f);

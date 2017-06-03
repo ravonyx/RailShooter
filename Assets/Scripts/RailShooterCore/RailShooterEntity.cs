@@ -67,6 +67,8 @@ namespace Assets.RailShooter
             if (m_isEnding || !m_shootingGalleryController.IsPlaying)
                 return;
 
+            Debug.Log("handle down");
+
             m_isEnding = true;
             m_renderer.enabled = false;
 

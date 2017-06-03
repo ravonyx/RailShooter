@@ -16,47 +16,45 @@ namespace VRStandardAssets.Utils
         [SerializeField] private Transform m_Camera;
         [SerializeField] private LayerMask m_ExclusionLayers;           // Layers to exclude from the raycast.
         [SerializeField] private Reticle m_Reticle;                     // The reticle, if applicable.
-        [SerializeField] private VRInput m_VrInput;                     // Used to call input based events on the current InteractiveItem.
         [SerializeField] private bool m_ShowDebugRay;                   // Optionally show the debug ray.
         [SerializeField] private float m_DebugRayLength = 5f;           // Debug ray length.
         [SerializeField] private float m_DebugRayDuration = 1f;         // How long the Debug ray will remain visible.
         [SerializeField] private float m_RayLength = 500f;              // How far into the scene the ray is cast.
 
-        
+        private Inputs m_inputs;                     
+
         private InteractiveItem m_CurrentInteractible;                //The current interactive item
         private InteractiveItem m_LastInteractible;                   //The last interactive item
-
 
         // Utility for other classes to get the current interactive item
         public InteractiveItem CurrentInteractible
         {
             get { return m_CurrentInteractible; }
         }
-
         
         private void OnEnable()
         {
-            m_VrInput.OnClick += HandleClick;
-            m_VrInput.OnDoubleClick += HandleDoubleClick;
-            m_VrInput.OnUp += HandleUp;
-            m_VrInput.OnDown += HandleDown;
+            m_inputs = GetComponent<Inputs>();
+
+            m_inputs.OnClick += HandleClick;
+            m_inputs.OnDoubleClick += HandleDoubleClick;
+            m_inputs.OnUp += HandleUp;
+            m_inputs.OnDown += HandleDown;
         }
 
 
         private void OnDisable ()
         {
-            m_VrInput.OnClick -= HandleClick;
-            m_VrInput.OnDoubleClick -= HandleDoubleClick;
-            m_VrInput.OnUp -= HandleUp;
-            m_VrInput.OnDown -= HandleDown;
+            m_inputs.OnClick -= HandleClick;
+            m_inputs.OnDoubleClick -= HandleDoubleClick;
+            m_inputs.OnUp -= HandleUp;
+            m_inputs.OnDown -= HandleDown;
         }
-
 
         private void Update()
         {
             EyeRaycast();
         }
-
       
         private void EyeRaycast()
         {

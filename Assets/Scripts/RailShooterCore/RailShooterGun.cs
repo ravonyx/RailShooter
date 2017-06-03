@@ -17,7 +17,10 @@ namespace Assets.RailShooter
         // How fast the gun arm follows the reticle.
         [SerializeField] private float m_GunContainerSmoothing = 10f;
         // This is the coefficient used to ensure smooth damping of this gameobject.
-        private const float k_DampingCoef = -20f;                                       
+        private const float k_DampingCoef = -20f;
+
+        [SerializeField]
+        private CamerasAndInputsManager m_camInputManager;
 
         [SerializeField] private AudioSource m_GunAudio;                                
         //ref to controller => to know if game is playing
@@ -25,20 +28,10 @@ namespace Assets.RailShooter
 
         [SerializeField] private VREyeRaycaster m_EyeRaycaster;                         
         [SerializeField] private MouseRaycaster m_MouseRayCaster;
-        [SerializeField] private VRInput m_VRInput;                                     
-        [SerializeField] private MouseInput m_MouseInput;
-
-        [SerializeField] private Transform m_VRCameraTransform;                           
-        [SerializeField] private Transform m_MouseCameraTransform;                          
 
         [SerializeField] private Transform m_GunContainer;                             
         [SerializeField] private Transform m_GunEnd;         
         
-        //reticle to know where firing                         
-        [SerializeField] private Reticle m_VRReticle;                                    
-        [SerializeField] private Reticle m_MouseReticle;                                   
-
-        [SerializeField] private ObjectPool m_ProjectilesPool;
         [SerializeField] private float m_Speed;
 
         [SerializeField]
@@ -54,35 +47,42 @@ namespace Assets.RailShooter
         [SerializeField]
         private RailShooterPlayer m_playerHealth;
 
+        private Inputs m_inputs;
+        private Transform m_cameraTransform;
+        //reticle to know where firing                         
+        private Reticle m_VRReticle;
+
         private void OnEnable ()
         {
-            if (VRSettings.enabled == false)
-                m_MouseInput.OnDown += HandleDown;
-            else
-                m_VRInput.OnDown += HandleDown;
+            m_inputs = m_camInputManager.GetCurrentInputs();
+            m_inputs.OnDown += HandleDown;
         }
 
         private void OnDisable ()
         {
-            if (VRSettings.enabled == false)
-                m_MouseInput.OnDown -= HandleDown;
-            else
-                m_VRInput.OnDown -= HandleDown;
+            m_inputs.OnDown -= HandleDown;
+        }
+
+        void Start()
+        {
+            Camera cam = m_camInputManager.CurrentCamera;
+            m_cameraTransform = cam.transform;
+            m_VRReticle = cam.GetComponent<Reticle>();
         }
 
         private void Update()
         {
             if (!VRSettings.enabled)
             {
-                transform.rotation = m_MouseCameraTransform.rotation;
-                transform.position = m_MouseCameraTransform.position;
+                transform.rotation = m_cameraTransform.rotation;
+                transform.position = m_cameraTransform.position;
             }
             else
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, InputTracking.GetLocalRotation(VRNode.Head),
               m_Damping * (1 - Mathf.Exp(k_DampingCoef * Time.deltaTime)));
 
-                transform.position = m_VRCameraTransform.position;
+                transform.position = m_cameraTransform.position;
                 Debug.Log(transform.position);
 
                 Quaternion lookAtRotation = Quaternion.LookRotation(m_VRReticle.ReticleTransform.position - m_GunContainer.position);

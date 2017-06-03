@@ -4,6 +4,8 @@ using System.Collections;
 using System;
 using UnityEngine.VR;
 
+using RailShooter.Utils;
+
 namespace VRStandardAssets.Utils
 {
     public class SelectionRadial : MonoBehaviour
@@ -13,47 +15,27 @@ namespace VRStandardAssets.Utils
         [SerializeField] private float m_SelectionDuration = 2f;                                
         [SerializeField] private bool m_HideOnStart = true;                                     // Whether or not the bar should be visible at the start.
         [SerializeField] private Image m_Selection;                                             // Reference to the image who's fill amount is adjusted to display the bar.
-        [SerializeField] private VRInput m_VRInput;                                             // Reference to the VRInput so that input events can be subscribed to.
-        [SerializeField] private MouseInput m_MouseInput;                                             // Reference to the VRInput so that input events can be subscribed to.
 
-
+        private Inputs m_inputs;
         private Coroutine m_SelectionFillRoutine;                                               // Used to start and stop the filling coroutine based on input.
         private bool m_IsSelectionRadialActive;                                                    // Whether or not the bar is currently useable.
         private bool m_RadialFilled;                                                               // Used to allow the coroutine to wait for the bar to fill.
 
-
         public float SelectionDuration { get { return m_SelectionDuration; } }
-
 
         private void OnEnable()
         {
-            if (VRSettings.enabled == false)
-            {
-                m_MouseInput.OnDown += HandleDown;
-                m_MouseInput.OnUp += HandleUp;
-            }
-            else
-            {
-                m_VRInput.OnDown += HandleDown;
-                m_VRInput.OnUp += HandleUp;
-            }
-        }
+            m_inputs = GetComponent<Inputs>();
 
+            m_inputs.OnDown += HandleDown;
+            m_inputs.OnUp += HandleUp;
+        }
 
         private void OnDisable()
         {
-            if (VRSettings.enabled == false)
-            {
-                m_MouseInput.OnDown -= HandleDown;
-                m_MouseInput.OnUp -= HandleUp;
-            }
-            else
-            {
-                m_VRInput.OnDown -= HandleDown;
-                m_VRInput.OnUp -= HandleUp;
-            }
+            m_inputs.OnDown -= HandleDown;
+            m_inputs.OnUp -= HandleUp;
         }
-
 
         private void Start()
         {
@@ -63,13 +45,11 @@ namespace VRStandardAssets.Utils
                 Hide();
         }
 
-
         public void Show()
         {
             m_Selection.gameObject.SetActive(true);
             m_IsSelectionRadialActive = true;
         }
-
 
         public void Hide()
         {
@@ -78,7 +58,6 @@ namespace VRStandardAssets.Utils
 
             m_Selection.fillAmount = 0f;            
         }
-
 
         private IEnumerator FillSelectionRadial()
         {
@@ -114,13 +93,11 @@ namespace VRStandardAssets.Utils
             Hide ();
         }
 
-
         private void HandleDown()
         {
             if (m_IsSelectionRadialActive)
                 m_SelectionFillRoutine = StartCoroutine(FillSelectionRadial());
         }
-
 
         private void HandleUp()
         {

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace VRStandardAssets.Utils
+namespace RailShooter.Utils
 {
     // This script is used to show messages when the user
     // seems to be using the wrong type of input.
@@ -16,49 +16,56 @@ namespace VRStandardAssets.Utils
         [SerializeField] private Text m_WarningText;                                    // Reference to the Text component that will hold the messages.
         [SerializeField] private Image m_BackgroundImage;                               // Reference to the image that makes the background for the warning.
         [SerializeField] private Transform m_TextTransform;                             // Reference to the transform of the Text component, used to move the warning to the location of the click.
-        [SerializeField] private Transform m_Camera;                                    // Reference to the camera's transform so the text knows which way to face.
-        [SerializeField] private Reticle m_Reticle;                                     // Reference to the reticle in order to set the position of the warning.
-        [SerializeField] private VRInput m_VRInput;                                     // Reference to the VRInput to detect input.
-
+     
+        [SerializeField]
+        private CamerasAndInputsManager m_camInputManager;
 
         private Coroutine m_WarningCoroutine;                                           // Reference to the coroutine that displays the warning message so it can be stopped prematurely.
         private Coroutine m_SingleClickDelayCoroutine;                                  // It isn't clear whether a click will be a double for a short time, this delays the check.
         private bool m_DisplayingWarning;                                               // Whether the warning is currently being displayed.
-        private VRInput.SwipeDirection m_CurrentSwipe;                                  // The swipe being used this frame, this is used to determine whether a click is a swipe.
+        private Inputs.SwipeDirection m_CurrentSwipe;                                  // The swipe being used this frame, this is used to determine whether a click is a swipe.
         private float m_DownTime;                                                       // This is used to determine whether a click is actually a hold.
         private Vector3 m_WarningPosition;                                              // The position that the warning should stick to.
         private float m_ScaleMultiplier;                                                // The warning needs to have an appropriate size based on the Reticle's scale.
 
 
         private const float k_ClickIsHoldTime = 0.5f;                                   // How long Fire1 has to be down to be considered a hold.
+        private Transform m_camera;                              
+        private Reticle m_reticle;                                 
+        private Inputs m_inputs;
 
-
-        private void Awake()
+        private void Start()
         {
+
+            Camera cam = m_camInputManager.CurrentCamera;
+            m_camera = cam.transform;
+            m_reticle = cam.GetComponent<Reticle>();
+
             // Approximate the difference in scale of the reticle and text to be the same across all axes.
-            m_ScaleMultiplier = m_TextTransform.localScale.x / m_Reticle.ReticleTransform.localScale.x;
+            m_ScaleMultiplier = m_TextTransform.localScale.x / m_reticle.ReticleTransform.localScale.x;
 
             // Display nothing on the start of the scene.
             m_WarningText.text = string.Empty;
             m_BackgroundImage.enabled = false;
         }
 
-
         private void OnEnable ()
         {
-            m_VRInput.OnDoubleClick += HandleDoubleClick;
-            m_VRInput.OnClick += HandleClick;
-            m_VRInput.OnSwipe += HandleSwipe;
-            m_VRInput.OnDown += HandleDown;
+            m_inputs = m_camInputManager.GetCurrentInputs();
+
+            m_inputs.OnDoubleClick += HandleDoubleClick;
+            m_inputs.OnClick += HandleClick;
+            m_inputs.OnSwipe += HandleSwipe;
+            m_inputs.OnDown += HandleDown;
         }
 
 
         private void OnDisable ()
         {
-            m_VRInput.OnDoubleClick -= HandleDoubleClick;
-            m_VRInput.OnClick -= HandleClick;
-            m_VRInput.OnSwipe -= HandleSwipe;
-            m_VRInput.OnDown -= HandleDown;
+            m_inputs.OnDoubleClick -= HandleDoubleClick;
+            m_inputs.OnClick -= HandleClick;
+            m_inputs.OnSwipe -= HandleSwipe;
+            m_inputs.OnDown -= HandleDown;
         }
 
 
@@ -81,12 +88,12 @@ namespace VRStandardAssets.Utils
                 return;
 
             // If warning should be shown for single clicks and there is no current swipe direction, start a coroutine to check it's not a double click.
-            if (m_ShowSingleTapWarnings && m_CurrentSwipe == VRInput.SwipeDirection.NONE)
+            if (m_ShowSingleTapWarnings && m_CurrentSwipe == Inputs.SwipeDirection.NONE)
                 m_SingleClickDelayCoroutine = StartCoroutine(SingleClickCheckDelay ());
         }
 
 
-        private void HandleSwipe (VRInput.SwipeDirection swipe)
+        private void HandleSwipe (Inputs.SwipeDirection swipe)
         {
             // Store the swipe this frame.
             m_CurrentSwipe = swipe;
@@ -103,7 +110,7 @@ namespace VRStandardAssets.Utils
         private IEnumerator SingleClickCheckDelay ()
         {
             // Wait for the time before it can be a double click.
-            yield return new WaitForSeconds (m_VRInput.DoubleClickTime);
+            yield return new WaitForSeconds (m_inputs.DoubleClickTime);
 
             // If this coroutine hasn't been stopped by another HandleClick function then display the single tap warning message.
             m_WarningCoroutine = StartCoroutine (DisplayWarning (m_SingleTapWarningMessage));
@@ -124,13 +131,13 @@ namespace VRStandardAssets.Utils
             m_BackgroundImage.enabled = true;
 
             // Set the position of the warning to that of the Reticle.
-            m_TextTransform.position = m_Reticle.ReticleTransform.position;
+            m_TextTransform.position = m_reticle.ReticleTransform.position;
 
             // Set the rotation of the warning to facing the camera but oriented so it's up is along the global y axis.
-            m_TextTransform.rotation = Quaternion.LookRotation (m_Camera.forward);
+            m_TextTransform.rotation = Quaternion.LookRotation (m_camera.forward);
             
             // Set the scale of the warning based on the scale of the Reticle but taking the difference in scale into account.
-            m_TextTransform.localScale = m_Reticle.ReticleTransform.localScale * m_ScaleMultiplier;
+            m_TextTransform.localScale = m_reticle.ReticleTransform.localScale * m_ScaleMultiplier;
             
             // Wait until the time is up.
             yield return new WaitForSeconds (m_WarningDisplayTime);

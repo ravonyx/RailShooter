@@ -22,8 +22,7 @@ namespace RailShooter.Utils
         [SerializeField] private Slider m_Slider;                           
         [SerializeField] private InteractiveItem m_InteractiveItem;    
            
-        [SerializeField] private VRInput m_VRInput;
-        [SerializeField] private MouseInput m_MouseInput;
+        [SerializeField] private Inputs m_inputs;
         [SerializeField] private GameObject m_BarCanvas;                    // Optional reference to the GameObject that holds the slider (only necessary if DisappearOnBarFill is true).
         [SerializeField] private Renderer m_Renderer;                       // Optional reference to a renderer (unnecessary if using a UI slider).
         [SerializeField] private SelectionRadial m_SelectionRadial;         // Optional reference to the SelectionRadial, if non-null the duration of the SelectionRadial will be used instead.
@@ -44,16 +43,8 @@ namespace RailShooter.Utils
         
         private void OnEnable ()
         {
-            if (VRSettings.enabled == false)
-            {
-                m_MouseInput.OnDown += HandleDown;
-                m_MouseInput.OnUp += HandleUp;
-            }
-            else
-            {
-                m_VRInput.OnDown += HandleDown;
-                m_VRInput.OnUp += HandleUp;
-            }
+            m_inputs.OnDown += HandleDown;
+            m_inputs.OnUp += HandleUp;
 
             m_InteractiveItem.OnOver += HandleOver;
             m_InteractiveItem.OnOut += HandleOut;
@@ -62,16 +53,8 @@ namespace RailShooter.Utils
         }
         private void OnDisable ()
         {
-            if (VRSettings.enabled == false)
-            {
-                m_MouseInput.OnDown -= HandleDown;
-                m_MouseInput.OnUp -= HandleUp;
-            }
-            else
-            {
-                m_VRInput.OnDown -= HandleDown;
-                m_VRInput.OnUp -= HandleUp;
-            }
+            m_inputs.OnDown -= HandleDown;
+            m_inputs.OnUp -= HandleUp;
 
             m_InteractiveItem.OnOver -= HandleOver;
             m_InteractiveItem.OnOut -= HandleOut;

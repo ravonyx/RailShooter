@@ -6,10 +6,13 @@ namespace RailShooter.Utils
     public class UIMovement : MonoBehaviour
     {
         [SerializeField] private bool m_LookatCamera = true;    
-        [SerializeField] private Transform m_UIElement;         
+        [SerializeField] private Transform m_UIElement;
+        [SerializeField]
+        private CamerasAndInputsManager m_camInputManager;
 
         //transform of camera
-        private Transform m_Camera;            
+        private Transform m_Camera;       
+             
         [SerializeField] private bool m_RotateWithCamera;       
         [SerializeField] private float m_FollowSpeed = 10f;     
 
@@ -17,7 +20,7 @@ namespace RailShooter.Utils
 
         private void Start ()
         {
-            m_Camera = Camera.main.transform;
+            m_Camera = m_camInputManager.CurrentCamera.transform;
             m_DistanceFromCamera = Vector3.Distance (m_UIElement.position, m_Camera.position);
         }
 

@@ -8,7 +8,6 @@ namespace RailShooter.Utils
 {
     public class CamerasAndInputsManager : MonoBehaviour
     {
-
         [SerializeField]
         private Camera m_VRCam;
         [SerializeField]
@@ -26,11 +25,21 @@ namespace RailShooter.Utils
 
         void Awake()
         {
+            //TODO : add fove camera
             if (VRSettings.enabled)
+            {
                 m_currentCamera = m_VRCam;
+                m_mouseCam.transform.parent.gameObject.SetActive(false);
+                m_foveCam.transform.parent.gameObject.SetActive(false);
+            }
             else
+            {
                 m_currentCamera = m_mouseCam;
+                m_VRCam.transform.parent.gameObject.SetActive(false);
+                m_foveCam.transform.parent.gameObject.SetActive(false);
+            }
 
+            m_currentCamera.transform.parent.gameObject.SetActive(true);
             Debug.Log("Selected Camera = "  + m_currentCamera.name);
         }
 

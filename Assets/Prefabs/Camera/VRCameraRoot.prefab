@@ -108,7 +108,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1614569414119682
 GameObject:
   m_ObjectHideFlags: 1
@@ -139,18 +139,17 @@ GameObject:
   - component: {fileID: 81573280281990802}
   - component: {fileID: 114509032398911008}
   - component: {fileID: 114987309626078552}
-  - component: {fileID: 114407674522666742}
   - component: {fileID: 114198905134110360}
   - component: {fileID: 114448722816829642}
   - component: {fileID: 114502361916795636}
   - component: {fileID: 114878918651139100}
   - component: {fileID: 114696119228084704}
-  - component: {fileID: 114882936515552430}
   - component: {fileID: 114135277594711918}
   - component: {fileID: 114077101300879394}
   - component: {fileID: 114885682440832990}
   - component: {fileID: 114714049243790124}
   - component: {fileID: 114278745952888886}
+  - component: {fileID: 114480509017121606}
   m_Layer: 0
   m_Name: VRCamera
   m_TagString: MainCamera
@@ -354,7 +353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_path: {fileID: 0}
-  m_speed: 0
+  m_speed: 3000
   m_pathTransform: {fileID: 0}
 --- !u!114 &114198905134110360
 MonoBehaviour:
@@ -439,19 +438,6 @@ MonoBehaviour:
   m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114407674522666742
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1791393714402504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8902ef04f323e444b98d2e4fd80a56ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_DoubleClickTime: 0.3
-  m_SwipeWidth: 0.3
 --- !u!114 &114419348085749460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -490,6 +476,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87a023bf4efda4145860192b9d3df5c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114480509017121606
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1791393714402504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f5219f2a2c09be469b42928f6eec470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DoubleClickTime: 0.3
+  m_SwipeWidth: 0.3
 --- !u!114 &114495870843814860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -540,11 +539,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff17147c9606014f8e8f74f255d466a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DefaultDistance: 200
-  m_UseNormal: 0
   m_Image: {fileID: 114419348085749460}
   m_ReticleTransform: {fileID: 224512957000447176}
-  m_Camera: {fileID: 4429662639521100}
 --- !u!114 &114639882477514448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -562,6 +558,7 @@ MonoBehaviour:
   m_timeRegen: 2
   m_timeLose: 0
   m_FXHealth: {fileID: 114662732998635772}
+  m_railShooterController: {fileID: 0}
 --- !u!114 &114662732998635772
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -803,8 +800,6 @@ MonoBehaviour:
   m_SelectionDuration: 1
   m_HideOnStart: 0
   m_Selection: {fileID: 114360931439000716}
-  m_VRInput: {fileID: 114407674522666742}
-  m_MouseInput: {fileID: 0}
 --- !u!114 &114714049243790124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -868,21 +863,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efc21d660b6557940a0cce1888e22fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MenuSceneName: MainMenu
-  m_VRInput: {fileID: 114407674522666742}
-  m_mouseInput: {fileID: 0}
-  m_CameraFade: {fileID: 0}
---- !u!114 &114882936515552430
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1791393714402504}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_menuSceneName: MainMenu
+  m_cameraFade: {fileID: 0}
 --- !u!114 &114885682440832990
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -913,7 +895,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4
   m_Reticle: {fileID: 114509032398911008}
-  m_VrInput: {fileID: 114407674522666742}
   m_ShowDebugRay: 0
   m_DebugRayLength: 5
   m_DebugRayDuration: 1

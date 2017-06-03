@@ -735,11 +735,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff17147c9606014f8e8f74f255d466a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DefaultDistance: 200
-  m_UseNormal: 0
   m_Image: {fileID: 114431340622673700}
   m_ReticleTransform: {fileID: 224537748156948278}
-  m_Camera: {fileID: 4234726336715332}
 --- !u!114 &114580463171392468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -766,7 +763,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_menuSceneName: MainMenu
-  m_inputs: {fileID: 114744901885970628}
   m_cameraFade: {fileID: 114783201104287712}
 --- !u!114 &114688250424497190
 MonoBehaviour:
@@ -907,12 +903,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ccd2b9d4967ec4c829c477ce2843f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Camera: {fileID: 4234726336715332}
   m_ExclusionLayers:
     serializedVersion: 2
     m_Bits: 4
-  m_Reticle: {fileID: 114519193086666186}
-  m_inputs: {fileID: 114744901885970628}
   m_ShowDebugRay: 1
   m_RayLength: 500
 --- !u!114 &114882024221354974
@@ -929,7 +922,6 @@ MonoBehaviour:
   m_SelectionDuration: 1
   m_HideOnStart: 0
   m_Selection: {fileID: 114011794901104586}
-  m_inputs: {fileID: 114744901885970628}
 --- !u!114 &114891105318851322
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -102,6 +102,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4651063800089206}
+  - component: {fileID: 114819871183657062}
   m_Layer: 0
   m_Name: VRCameraRoot
   m_TagString: Untagged
@@ -144,7 +145,6 @@ GameObject:
   - component: {fileID: 114502361916795636}
   - component: {fileID: 114878918651139100}
   - component: {fileID: 114696119228084704}
-  - component: {fileID: 114135277594711918}
   - component: {fileID: 114077101300879394}
   - component: {fileID: 114885682440832990}
   - component: {fileID: 114714049243790124}
@@ -341,20 +341,6 @@ MonoBehaviour:
   edgesOnly: 0
   edgesOnlyBgColor: {r: 1, g: 1, b: 1, a: 1}
   edgeDetectShader: {fileID: 4800000, guid: 0d1644bdf064147baa97f235fc5b4903, type: 3}
---- !u!114 &114135277594711918
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1791393714402504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75429beddbc6d604cb0a92a45afa681d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_path: {fileID: 0}
-  m_speed: 3000
-  m_pathTransform: {fileID: 0}
 --- !u!114 &114198905134110360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -852,6 +838,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114819871183657062
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1468783278926190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75429beddbc6d604cb0a92a45afa681d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_path: {fileID: 0}
+  m_speed: 3000
+  m_pathTransform: {fileID: 0}
 --- !u!114 &114878918651139100
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -43,6 +43,7 @@ public class BehaviourPattern : MonoBehaviour
 
     void Start ()
     {
+        m_originPoint = transform.position;
         m_currentScale = m_initScale;
         m_dx = (m_targetScale - m_initScale) / 100;
         if (m_behaviourType == BehaviourType.SCALE)
@@ -102,7 +103,11 @@ public class BehaviourPattern : MonoBehaviour
     {
         while (true)
         {
+            Debug.Log(m_originPoint);
+            Debug.Log(m_dstPoint);
+
             var i = Mathf.PingPong(Time.deltaTime * m_speedTranslate, 1);
+            Debug.Log(i);
             transform.position = Vector3.Lerp(m_originPoint, m_dstPoint, i);
             yield return new WaitForSeconds(m_deltaTime);
         }

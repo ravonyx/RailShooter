@@ -1,0 +1,370 @@
+fileFormatVersion: 2
+guid: 6a7054cf88c1c194d977c9326cb23d37
+timeCreated: 1497131145
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: body
+    100002: center
+    100004: //RootNode
+    100006: JAW L
+    100008: JAW L_end
+    100010: JAW R
+    100012: JAW R_end
+    100014: Rwing
+    100016: Rwing.001
+    100018: Rwing.001_end
+    100020: Rwing.002
+    100022: Rwing.003
+    100024: Rwing.003_end
+    100026: Rwing.004
+    100028: Rwing.005
+    100030: Rwing.005_end
+    100032: Rwing.006
+    100034: Rwing.007
+    100036: Rwing.007_end
+    100038: Rwing.008
+    100040: Rwing.009
+    100042: Rwing.009_end
+    100044: Rwing.010
+    100046: Rwing.011
+    100048: Rwing.011_end
+    100050: Rwing.012
+    100052: Rwing.013
+    100054: Rwing.013_end
+    100056: Rwing.014
+    100058: Rwing.015
+    100060: Rwing.015_end
+    100062: Rwing.016
+    100064: Rwing.017
+    100066: Rwing.017_end
+    100068: Rwing.018
+    100070: Rwing.019
+    100072: Rwing.019_end
+    100074: SMALL BUG BONES
+    100076: SMALLBUGBODY
+    400000: body
+    400002: center
+    400004: //RootNode
+    400006: JAW L
+    400008: JAW L_end
+    400010: JAW R
+    400012: JAW R_end
+    400014: Rwing
+    400016: Rwing.001
+    400018: Rwing.001_end
+    400020: Rwing.002
+    400022: Rwing.003
+    400024: Rwing.003_end
+    400026: Rwing.004
+    400028: Rwing.005
+    400030: Rwing.005_end
+    400032: Rwing.006
+    400034: Rwing.007
+    400036: Rwing.007_end
+    400038: Rwing.008
+    400040: Rwing.009
+    400042: Rwing.009_end
+    400044: Rwing.010
+    400046: Rwing.011
+    400048: Rwing.011_end
+    400050: Rwing.012
+    400052: Rwing.013
+    400054: Rwing.013_end
+    400056: Rwing.014
+    400058: Rwing.015
+    400060: Rwing.015_end
+    400062: Rwing.016
+    400064: Rwing.017
+    400066: Rwing.017_end
+    400068: Rwing.018
+    400070: Rwing.019
+    400072: Rwing.019_end
+    400074: SMALL BUG BONES
+    400076: SMALLBUGBODY
+    4300000: SMALLBUGBODY
+    7400000: SMALL BUG BONES|SMALL BUG BONESAction
+    7400002: SMALL BUG BONES|SMALL BUGG IDLE
+    9500000: //RootNode
+    13700000: SMALLBUGBODY
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: SMALL BUG BONES|SMALL BUG BONESAction
+      takeName: SMALL BUG BONES|SMALL BUG BONESAction
+      firstFrame: 0
+      lastFrame: 25
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: SMALL BUG BONES
+        weight: 1
+      - path: SMALL BUG BONES/center
+        weight: 1
+      - path: SMALL BUG BONES/center/body
+        weight: 1
+      - path: SMALL BUG BONES/center/body/JAW L
+        weight: 1
+      - path: SMALL BUG BONES/center/body/JAW L/JAW L_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/JAW R
+        weight: 1
+      - path: SMALL BUG BONES/center/body/JAW R/JAW R_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing/Rwing.001
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing/Rwing.001/Rwing.001_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.002
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.002/Rwing.003
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.002/Rwing.003/Rwing.003_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.004
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.004/Rwing.005
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.004/Rwing.005/Rwing.005_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.006
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.006/Rwing.007
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.006/Rwing.007/Rwing.007_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.008
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.008/Rwing.009
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.008/Rwing.009/Rwing.009_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.010
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.010/Rwing.011
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.010/Rwing.011/Rwing.011_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.012
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.012/Rwing.013
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.012/Rwing.013/Rwing.013_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.014
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.014/Rwing.015
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.014/Rwing.015/Rwing.015_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.016
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.016/Rwing.017
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.016/Rwing.017/Rwing.017_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.018
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.018/Rwing.019
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.018/Rwing.019/Rwing.019_end
+        weight: 1
+      - path: SMALLBUGBODY
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SMALL BUG BONES|SMALL BUGG IDLE
+      takeName: SMALL BUG BONES|SMALL BUGG IDLE
+      firstFrame: 0
+      lastFrame: 58
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: SMALL BUG BONES
+        weight: 1
+      - path: SMALL BUG BONES/center
+        weight: 1
+      - path: SMALL BUG BONES/center/body
+        weight: 1
+      - path: SMALL BUG BONES/center/body/JAW L
+        weight: 1
+      - path: SMALL BUG BONES/center/body/JAW L/JAW L_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/JAW R
+        weight: 1
+      - path: SMALL BUG BONES/center/body/JAW R/JAW R_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing/Rwing.001
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing/Rwing.001/Rwing.001_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.002
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.002/Rwing.003
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.002/Rwing.003/Rwing.003_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.004
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.004/Rwing.005
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.004/Rwing.005/Rwing.005_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.006
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.006/Rwing.007
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.006/Rwing.007/Rwing.007_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.008
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.008/Rwing.009
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.008/Rwing.009/Rwing.009_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.010
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.010/Rwing.011
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.010/Rwing.011/Rwing.011_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.012
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.012/Rwing.013
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.012/Rwing.013/Rwing.013_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.014
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.014/Rwing.015
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.014/Rwing.015/Rwing.015_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.016
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.016/Rwing.017
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.016/Rwing.017/Rwing.017_end
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.018
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.018/Rwing.019
+        weight: 1
+      - path: SMALL BUG BONES/center/body/Rwing.018/Rwing.019/Rwing.019_end
+        weight: 1
+      - path: SMALLBUGBODY
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

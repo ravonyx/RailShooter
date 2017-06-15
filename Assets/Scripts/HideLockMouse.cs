@@ -10,10 +10,12 @@ namespace RailShooter.Utils
         private PathWalker m_pathWalker;
         [SerializeField]
         private RailShooterController m_railShooterController;
+        private CameraController m_cameraController;
 
         void Start()
         {
             m_pathWalker = GetComponent<PathWalker>();
+            m_cameraController = GetComponentInChildren<CameraController>();
         }
 
         void Update()
@@ -23,7 +25,7 @@ namespace RailShooter.Utils
                 m_lockCursor = !m_lockCursor;
 
             Cursor.lockState = m_lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
-            GetComponent<CameraController>().enabled = m_lockCursor;
+            m_cameraController.enabled = m_lockCursor;
 
             if (m_lockCursor == false)
                 m_pathWalker.Walking = false;

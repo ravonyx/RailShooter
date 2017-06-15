@@ -12,7 +12,7 @@ public class PathWalker : MonoBehaviour
     [SerializeField]
     private float m_speed;
     [SerializeField]
-    private Transform m_pathTransform;
+    private float m_deltaY;
 
     [HideInInspector]
     public List<float> StopPoints
@@ -22,10 +22,12 @@ public class PathWalker : MonoBehaviour
         }
     }
     private List<float> m_stopPoints;
-    
+
+    private Transform m_pathTransform;
     private int m_indexStopPoint = 0;
     private float m_progress = 1.0f;
     private float m_dist = 1.0f;
+    private bool m_enemy;
     private bool m_walking;
     public bool Walking
     {
@@ -41,6 +43,7 @@ public class PathWalker : MonoBehaviour
 
     void Start()
     {
+        m_pathTransform = m_path.GetComponent<Transform>();
         if (m_path != null)
             m_stopPoints = m_path.stopPoints;
     }
@@ -58,7 +61,10 @@ public class PathWalker : MonoBehaviour
 
         Vector3 position = m_path.GetPathPoint(m_progress).point;
         Vector3 transformedPos = m_pathTransform.TransformPoint(position);
-        transform.position = new Vector3(transformedPos.x, transformedPos.y + 1.5f, transformedPos.z);
+        transform.position = new Vector3(transformedPos.x, transformedPos.y + m_deltaY, transformedPos.z);
+
+        if (m_enemy)
+            transform.rotation = Quaternion.LookRotation(m_path.GetPathPoint(m_progress).forward);
     }
 
     public IEnumerator PlayUpdate()
@@ -82,5 +88,26 @@ public class PathWalker : MonoBehaviour
 
         m_walking = false;
         m_indexStopPoint++;
+    }
+
+    public IEnumerator PlayUpdateBackward()
+    {
+        m_progress = m_path.totalDistance;
+        m_walking = true;
+        m_enemy = true;
+        m_dist = 1.0f;
+
+        while (m_progress > 1.0)
+        {
+            yield return null;
+
+            if (m_walking)
+            {
+                m_progress -= Time.deltaTime * m_speed / m_path.totalDistance;
+                m_progress = Mathf.Clamp(m_progress, 0, m_path.totalDistance);
+            }
+        }
+
+        m_walking = false;
     }
 }

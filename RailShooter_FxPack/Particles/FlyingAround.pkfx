@@ -1,0 +1,316 @@
+Version = 1.11.4.36481;
+CParticleEffect	$LOCAL$/Resource
+{
+	EditorInfosPosition = int2(73, 52);
+	OnSpawn = "$LOCAL$/Spawner";
+	CustomAttributes = "$LOCAL$/_GlobalAttributes";
+}
+CNEdEditorParticle_Data	$LOCAL$/EDITOR
+{
+	EditorInfosPosition = int2(413, -144);
+	Position = float3(1.1353873e+000, 3.3644979e+000, 5.1912289e+000);
+	EulerOrientation = float3(-5.6209950e+000, 8.2389765e+000, 0.0000000e+000);
+	Backdrops = "$LOCAL$/_BackdropList";
+}
+CActionFactoryParticleSpawnerBase	$LOCAL$/Layer_1
+{
+	EditorInfosPosition = int2(-288, -61);
+	Descriptor = "$LOCAL$/CParticleDescriptor_AE135B2A";
+	Infinite = true;
+	DurationInSeconds = 2.0000000e+000;
+	FluxFactorExpression = "Count";
+}
+CParticleDescriptor	$LOCAL$/CParticleDescriptor_AE135B2A
+{
+	EditorInfosPosition = int2(-392, -44);
+	Renderer = "$LOCAL$/CParticleRenderer_Billboard_9136D2F4";
+	CustomFields = 
+	{
+		"$LOCAL$/CParticleFieldDeclaration_503F0FB4",
+		"$LOCAL$/CParticleFieldDeclaration_FEDAFC8F",
+		"$LOCAL$/CParticleFieldDeclaration_FDAAFEFE",
+		"$LOCAL$/CParticleFieldDeclaration_9E0FE7D3",
+		"$LOCAL$/CParticleFieldDeclaration_B3B4E992",
+		"$LOCAL$/CParticleFieldDeclaration_0E8C1EBD",
+		"$LOCAL$/CParticleFieldDeclaration_005C1A0C",
+	};
+	Samplers = 
+	{
+		"$LOCAL$/CParticleSamplerProceduralTurbulence_1ECBF4ED",
+		"$LOCAL$/CParticleSamplerProceduralTurbulence_59FB3C56",
+	};
+	SpawnEvaluator = "$LOCAL$/CCompilerSyntaxNodeExpression_5566F5E7";
+	States = 
+	{
+		"$LOCAL$/CParticleState_3AF8190E",
+	};
+}
+CActionFactoryWithChilds	$LOCAL$/Spawner
+{
+	EditorInfosPosition = int2(-162, -81);
+	ChildList = 
+	{
+		"$LOCAL$/Layer_1",
+	};
+}
+CParticleRenderer_Billboard	$LOCAL$/CParticleRenderer_Billboard_9136D2F4
+{
+	EditorInfosPosition = int2(-508, -63);
+	CustomName = "Billboard";
+	BillboardingMaterial = AlphaBlend_Soft;
+	Diffuse = "Textures/Fly_01.dds";
+	AtlasDefinition = "Textures/Fly_01.pkat";
+	BillboardMode = VelocitySpheroidalAlign;
+	AxisField = "Stretch";
+	AxisScale = 1.0000000e+000;
+}
+CCompilerSyntaxNodeExpression	$LOCAL$/CCompilerSyntaxNodeExpression_5566F5E7
+{
+	EditorInfosPosition = int2(-508, 22);
+	Expression = "function void	Eval()
+{
+	Life = 3;
+	SizeCoeff = select(0.25,0.125,BirdOrBatOrInsect>1) * GlobalScale;
+	Position = vrand() * EmitZone * GlobalScale;
+	Accel = select(float3(0,6,0),float3(0),BirdOrBatOrInsect>1) * GlobalScale;
+	Rcolor = rand(-pi,pi) * Hue;
+	
+	float sprite = select(0,5,BirdSprites>0.5);
+	
+	float birdOrBat = select(rand(0,3), sprite+rand(3,6),BirdOrBatOrInsect<0.5);	
+	TextureID = select(birdOrBat,rand(6,8),BirdOrBatOrInsect>1);
+	
+	Time = scene.Time;
+}
+";
+}
+CParticleState	$LOCAL$/CParticleState_3AF8190E
+{
+	EditorInfosPosition = int2(-508, 65);
+	StateName = "State_0";
+	Evolvers = 
+	{
+		"$LOCAL$/LocalSpace_1",
+		"$LOCAL$/CParticleEvolver_Physics_36D6D4BD",
+		"$LOCAL$/Script_1",
+	};
+}
+CParticleEvolver_Physics	$LOCAL$/CParticleEvolver_Physics_36D6D4BD
+{
+	EditorInfosPosition = int2(-590, 86);
+	CustomName = "Physics";
+	Drag = 1.0000000e+000;
+}
+CParticleAttributeList	$LOCAL$/_GlobalAttributes
+{
+	EditorInfosPosition = int2(-599, -20);
+	AttributeList = 
+	{
+		"$LOCAL$/CParticleAttributeDeclaration_469C1678",
+		"$LOCAL$/CParticleAttributeDeclaration_9C83EA99",
+		"$LOCAL$/CParticleAttributeDeclaration_EDE47BBF",
+		"$LOCAL$/CParticleAttributeDeclaration_0EBAE8D7",
+		"$LOCAL$/CParticleAttributeDeclaration_BD7220D0",
+		"$LOCAL$/CParticleAttributeDeclaration_3D1A95C4",
+		"$LOCAL$/CParticleAttributeDeclaration_4CB3DDE6",
+		"$LOCAL$/CParticleAttributeDeclaration_BA5A45D7",
+		"$LOCAL$/CParticleAttributeDeclaration_73853FA1",
+	};
+}
+CNEdEditorBackdrop_List	$LOCAL$/_BackdropList
+{
+	EditorInfosPosition = int2(125, -433);
+	BackgroundLayers2D = 
+	{
+		"$LOCAL$/CNEdEditorBackdrop_Brush_9A913525",
+	};
+	SceneLayers3D = 
+	{
+		"$LOCAL$/CNEdEditorBackdrop_Model3D_578F322E",
+		"$LOCAL$/_Backdrop_Light",
+	};
+}
+CNEdEditorBackdrop_Brush	$LOCAL$/CNEdEditorBackdrop_Brush_9A913525
+{
+	EditorInfosPosition = int2(-27, -485);
+	LayerName = "Layer_Brush";
+}
+CNEdEditorBackdrop_Model3D	$LOCAL$/CNEdEditorBackdrop_Model3D_578F322E
+{
+	EditorInfosPosition = int2(-17, -380);
+	LayerName = "Model";
+	ResourceModel = "Meshes/TestAreaPlane.fbx";
+	IsActive = false;
+}
+CNEdEditorBackdrop_Light	$LOCAL$/_Backdrop_Light
+{
+	LayerName = "GlobalLight";
+	Position = float3(1.1233553e+002, 2.8270447e+002, 2.2297581e+002);
+	EulerOrientation = float3(-4.8550171e+001, 2.6739031e+001, -9.5600376e-007);
+	LightFactory = "$LOCAL$/_Backdrop_Light_Factory";
+	LightDistance = 3.7717276e+002;
+}
+CNEdEditorLightFactory	$LOCAL$/_Backdrop_Light_Factory
+{
+	NearClipPlane = 1.0000000e+002;
+	LightSize = 9.9999998e-003;
+	SpotFalloff = 8.8541701e-002;
+	Magnitude = 1.0000000e+005;
+}
+CParticleEvolver_Script	$LOCAL$/Script_1
+{
+	CustomName = "Script";
+	Expression = "$LOCAL$/CCompilerSyntaxNodeExpression_46AC9B02";
+}
+CCompilerSyntaxNodeExpression	$LOCAL$/CCompilerSyntaxNodeExpression_46AC9B02
+{
+	Expression = "function void	Eval()
+{
+	VelocityField = select(Turb_1.sample(Position / GlobalScale),Turb_0.sample(Position / GlobalScale),BirdOrBatOrInsect>1) * GlobalScale;
+	
+	float3 nm = normalize(Velocity) * GlobalScale;
+	Stretch = select(nm * 0.25, nm * 0.01,BirdOrBatOrInsect>1);
+	
+	float sprite = select(0,5,BirdSprites>0.5);	
+	float birdOrBat = select(rand(0,3), sprite+rand(3,6),BirdOrBatOrInsect<0.5);		
+	float insectOrBird = select(birdOrBat,rand(6,8),BirdOrBatOrInsect>1);
+	
+	TextureID = select(TextureID,insectOrBird,scene.Time>=Time+FlappingSpeed);
+	Time = select(Time,scene.Time,scene.Time>=Time+FlappingSpeed);
+	
+	Size = SizeCoeff * min(LifeRatio * 10, 1);
+	
+	Color = float4(abs(rotate(CustomColor * Power,float3(0,0,1),Rcolor)) , clamp(10-LifeRatio*10,0,1));
+}
+";
+}
+CParticleSamplerProceduralTurbulence	$LOCAL$/CParticleSamplerProceduralTurbulence_1ECBF4ED
+{
+	SamplerName = "Turb_0";
+	Wavelength = 2.5000000e-001;
+	Strength = 7.0710677e-001;
+	Gain = 1.0000000e+000;
+	TimeScale = 2.5000000e-001;
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_503F0FB4
+{
+	FieldName = "VelocityField";
+	FieldType = float3;
+}
+CParticleSamplerProceduralTurbulence	$LOCAL$/CParticleSamplerProceduralTurbulence_59FB3C56
+{
+	SamplerName = "Turb_1";
+	Wavelength = 2.0000000e+000;
+	Strength = 3.5355338e-001;
+	Gain = 1.0000000e+000;
+	TimeScale = 1.2500000e-001;
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_FEDAFC8F
+{
+	FieldName = "Accel";
+	FieldType = float3;
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_FDAAFEFE
+{
+	FieldName = "Stretch";
+	FieldType = float3;
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_9C83EA99
+{
+	AttributeName = "BirdOrBatOrInsect";
+	AttributeType = int;
+	HasMin = true;
+	HasMax = true;
+	MaxValueF4 = float4(1.0000000e+000, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(2, 10, 10, 10);
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_BD7220D0
+{
+	AttributeName = "CustomColor";
+	AttributeType = float3;
+	DefaultValueF4 = float4(1.0000000e-001, 1.0000000e+000, 1.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	HasMax = true;
+	MaxValueF4 = float4(1.0000000e+000, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_9E0FE7D3
+{
+	FieldName = "SizeCoeff";
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_B3B4E992
+{
+	FieldName = "Color";
+	FieldType = float4;
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_0E8C1EBD
+{
+	FieldName = "Rcolor";
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_3D1A95C4
+{
+	AttributeName = "Hue";
+	DefaultValueF4 = float4(1.5000001e-001, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	MaxValueF4 = float4(2.0000000e+000, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_BA5A45D7
+{
+	AttributeName = "Count";
+	DefaultValueF4 = float4(1.0000000e+001, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	MaxValueF4 = float4(1.0000000e+002, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_4CB3DDE6
+{
+	AttributeName = "Power";
+	DefaultValueF4 = float4(1.0000000e+000, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	MaxValueF4 = float4(2.0000000e+001, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_73853FA1
+{
+	AttributeName = "EmitZone";
+	DefaultValueF4 = float4(1.0000000e+000, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	MaxValueF4 = float4(1.0000000e+001, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_469C1678
+{
+	AttributeName = "GlobalScale";
+	DefaultValueF4 = float4(1.0000000e+000, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	MaxValueF4 = float4(1.0000000e+001, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_005C1A0C
+{
+	FieldName = "Time";
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_EDE47BBF
+{
+	AttributeName = "FlappingSpeed";
+	DefaultValueF4 = float4(5.0000001e-002, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	HasMax = true;
+	MinValueF4 = float4(9.9999998e-003, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	MaxValueF4 = float4(1.0000000e+000, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_0EBAE8D7
+{
+	AttributeName = "BirdSprites";
+	AttributeType = int;
+	HasMin = true;
+	HasMax = true;
+	MaxValueF4 = float4(1.0000000e+000, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(1, 10, 10, 10);
+}
+CParticleEvolver_Localspace	$LOCAL$/LocalSpace_1
+{
+	CustomName = "Localspace";
+}

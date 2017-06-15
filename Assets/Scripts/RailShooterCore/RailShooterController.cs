@@ -46,10 +46,7 @@ namespace Assets.RailShooter
             m_selectionRadial = m_camera.GetComponent<SelectionRadial>();
             m_reticle = m_camera.GetComponent<Reticle>();
 
-            if (VRSettings.enabled)
-                m_pathWalker = m_camera.GetComponentInParent<PathWalker>();
-            else
-                m_pathWalker = m_camera.GetComponent<PathWalker>();
+            m_pathWalker = m_camera.GetComponentInParent<PathWalker>();
 
             //loop to all phases
             while (true)

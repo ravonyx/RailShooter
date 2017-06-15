@@ -85,6 +85,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4328745540233350}
+  - component: {fileID: 114794846637621146}
   m_Layer: 11
   m_Name: MouseCameraRoot
   m_TagString: Untagged
@@ -144,7 +145,6 @@ GameObject:
   - component: {fileID: 114677889145201150}
   - component: {fileID: 114882024221354974}
   - component: {fileID: 114781457856757002}
-  - component: {fileID: 114580463171392468}
   - component: {fileID: 114688250424497190}
   - component: {fileID: 114974429529974974}
   - component: {fileID: 114388860751926172}
@@ -209,7 +209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4234726336715332
 Transform:
   m_ObjectHideFlags: 1
@@ -737,20 +737,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Image: {fileID: 114431340622673700}
   m_ReticleTransform: {fileID: 224537748156948278}
---- !u!114 &114580463171392468
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1792359553306174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75429beddbc6d604cb0a92a45afa681d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_path: {fileID: 0}
-  m_speed: 3000
-  m_pathTransform: {fileID: 0}
 --- !u!114 &114677889145201150
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -854,6 +840,20 @@ MonoBehaviour:
   m_FadeDuration: 2
   m_FadeInOnSceneLoad: 1
   m_FadeInOnStart: 1
+--- !u!114 &114794846637621146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1493762158268266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75429beddbc6d604cb0a92a45afa681d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_path: {fileID: 0}
+  m_speed: 3000
+  m_deltaY: 1.5
 --- !u!114 &114803040629736012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -908,6 +908,7 @@ MonoBehaviour:
     m_Bits: 4
   m_ShowDebugRay: 1
   m_RayLength: 500
+  m_impactParticles: {fileID: 0}
 --- !u!114 &114882024221354974
 MonoBehaviour:
   m_ObjectHideFlags: 1

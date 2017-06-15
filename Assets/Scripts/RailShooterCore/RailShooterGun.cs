@@ -36,6 +36,8 @@ namespace Assets.RailShooter
 
         [SerializeField]
         private PKFxFX m_ShootParticles;
+        [SerializeField]
+        private PKFxFX m_impactParticles;
 
         [SerializeField]
         private float m_DefaultLineLength = 70f;
@@ -110,6 +112,7 @@ namespace Assets.RailShooter
             if (target != null && target.name == "Health")
                 m_playerHealth.StartCoroutine("EvolveLife", true);
 
+
             m_GunAudio.Play();
             float lineLength = m_DefaultLineLength;
             if (target)
@@ -117,6 +120,7 @@ namespace Assets.RailShooter
 
             yield return new WaitForEndOfFrame();
 
+            m_impactParticles.StartEffect();
             //shoot line + muzzle flash
             m_ShootParticles.StartEffect();
 

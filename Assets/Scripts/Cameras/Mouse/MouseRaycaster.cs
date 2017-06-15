@@ -19,6 +19,17 @@ namespace VRStandardAssets.Utils
         private InteractiveItem m_currentInteractible;                
         private InteractiveItem m_lastInteractible;
         private Reticle m_Reticle;
+        [SerializeField]
+        private PKFxFX m_impactParticles;
+
+        public Vector3 m_LastHitPoint
+        {
+            get
+            {
+                return m_lastHitPoint;
+            }
+        }
+        private Vector3 m_lastHitPoint;
 
         // Utility for other classes to get the current interactive item
         public InteractiveItem CurrentInteractible
@@ -77,6 +88,11 @@ namespace VRStandardAssets.Utils
             {
                 InteractiveItem interactible = hit.collider.GetComponent<InteractiveItem>(); //attempt to get the InteractiveItem on the hit object
                 m_currentInteractible = interactible;
+
+                m_lastHitPoint = hit.point;
+                m_impactParticles.transform.position = m_LastHitPoint;
+               // m_impactParticles.StartEffect();
+
                 if (interactible && interactible != m_lastInteractible)
                     interactible.Over();
             

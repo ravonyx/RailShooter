@@ -25,7 +25,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1265461361329134
 GameObject:
@@ -37,7 +37,6 @@ GameObject:
   - component: {fileID: 4423024300825364}
   - component: {fileID: 33694529090571788}
   - component: {fileID: 23369052279387732}
-  - component: {fileID: 114651134931854144}
   - component: {fileID: 65707565399072162}
   - component: {fileID: 114304163675680434}
   - component: {fileID: 114905987295863686}
@@ -46,7 +45,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4423024300825364
 Transform:
@@ -55,8 +54,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1265461361329134}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -53.74, y: -6.6, z: -76.6}
-  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_LocalPosition: {x: 38.5, y: 21.2, z: -76.6}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 4958414512948800}
   m_Father: {fileID: 0}
@@ -112,7 +111,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1265461361329134}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 4300000, guid: ab1ffd0619cc8074399118a165c05e67, type: 3}
 --- !u!65 &65707565399072162
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -136,18 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fea6f8eea666334aaf9869ad8f7bcda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114651134931854144
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1265461361329134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d25bfc1413b79b4ba85414f5c3ea5ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 1
 --- !u!114 &114703882450669268
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -287,3 +274,4 @@ MonoBehaviour:
   m_destroyPrefab: {fileID: 0}
   m_hasVoronoi: 0
   m_particleExplosion: {fileID: 114703882450669268}
+  m_shootingGalleryController: {fileID: 0}

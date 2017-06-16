@@ -50,7 +50,7 @@ public class OVRGearVrController : MonoBehaviour
         Debug.Log(controllerConnected);
         if ((controllerConnected != m_prevControllerConnected) || !m_prevControllerConnectedCached)
         {
-            m_model.SetActive(controllerConnected);
+          //  m_model.SetActive(controllerConnected);
             m_prevControllerConnected = controllerConnected;
             m_prevControllerConnectedCached = true;
         }

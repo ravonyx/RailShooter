@@ -14,6 +14,13 @@ namespace RailShooter.Utils
         private Camera m_mouseCam;
         [SerializeField]
         private Camera m_foveCam;
+
+
+        [SerializeField]
+        private GameObject m_OneArmWeapon;
+        [SerializeField]
+        private GameObject[] m_TwoArmsWeapon;
+
         private Camera m_currentCamera;
         public Camera CurrentCamera
         {
@@ -23,9 +30,28 @@ namespace RailShooter.Utils
             }
         }
 
+        private GameObject[] m_currentInputs;
+        public GameObject[] CurrentInputs
+        {
+            get
+            {
+                return m_currentInputs;
+            }
+        }
+
+        private string m_currentInputName;
+        public string CurrentInputName
+        {
+            get
+            {
+                return m_currentInputName;
+            }
+        }
+
         void Awake()
         {
             //TODO : add fove camera
+            //set the current camera
             if (VRSettings.enabled)
             {
                 m_currentCamera = m_VRCam;
@@ -50,6 +76,29 @@ namespace RailShooter.Utils
         public Inputs GetCurrentInputs()
         {
             return m_currentCamera.GetComponent<Inputs>();
+        }
+
+        void Update()
+        {
+            //set the current input
+            OVRInput.Controller controller = OVRInput.GetConnectedControllers();
+            m_currentInputName = controller.ToString();
+
+            if (controller == OVRInput.Controller.Touch)
+            {
+                m_currentInputs = m_TwoArmsWeapon;
+                for(int i = 0; i < m_TwoArmsWeapon.Length; i++)
+                    m_TwoArmsWeapon[i].SetActive(true);
+                m_OneArmWeapon.SetActive(false);
+            }
+
+            else
+            {
+                //m_currentInputs[0] = m_OneArmWeapon;
+                for (int i = 0; i < m_TwoArmsWeapon.Length; i++)
+                    m_TwoArmsWeapon[i].SetActive(false);
+                m_OneArmWeapon.SetActive(true);
+            }
         }
     }
 }

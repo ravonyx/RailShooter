@@ -79,17 +79,17 @@ namespace Assets.RailShooter
                 transform.rotation = m_cameraTransform.rotation;
                 transform.position = m_cameraTransform.position;
             }
-            else
-            {
-                transform.rotation = Quaternion.Slerp(transform.rotation, InputTracking.GetLocalRotation(VRNode.Head),
-              m_Damping * (1 - Mathf.Exp(k_DampingCoef * Time.deltaTime)));
-
-                transform.position = m_cameraTransform.position;
-
-                Quaternion lookAtRotation = Quaternion.LookRotation(m_VRReticle.ReticleTransform.position - m_GunContainer.position);
-                m_GunContainer.rotation = Quaternion.Slerp(m_GunContainer.rotation, lookAtRotation,
-                    m_GunContainerSmoothing * Time.deltaTime);
-            }
+            //else
+            //{
+            //    transform.rotation = Quaternion.Slerp(transform.rotation, InputTracking.GetLocalRotation(VRNode.Head),
+            //  m_Damping * (1 - Mathf.Exp(k_DampingCoef * Time.deltaTime)));
+            //
+            //    transform.position = m_cameraTransform.position;
+            //
+            //    Quaternion lookAtRotation = Quaternion.LookRotation(m_VRReticle.ReticleTransform.position - m_GunContainer.position);
+            //    m_GunContainer.rotation = Quaternion.Slerp(m_GunContainer.rotation, lookAtRotation,
+            //        m_GunContainerSmoothing * Time.deltaTime);
+            //}
         }
 
         private void HandleDown ()

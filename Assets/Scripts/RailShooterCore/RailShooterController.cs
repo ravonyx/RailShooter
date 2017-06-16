@@ -13,12 +13,13 @@ namespace Assets.RailShooter
         [SerializeField] private SessionData.GameType m_gameType;      
 
         [SerializeField] private Transform m_start;              
-        [SerializeField] private SelectionSlider m_selectionSlider;     
+        [SerializeField] private SelectionSlider m_selectionSlider;
+        [SerializeField]
+        private Reticle m_reticle;
 
         //camera variables
         private Transform m_camera;                    
-        private SelectionRadial m_selectionRadial;     
-        private Reticle m_reticle;
+        private SelectionRadial m_selectionRadial;    
 
         [SerializeField]
         private bool m_tutorial;
@@ -44,7 +45,6 @@ namespace Assets.RailShooter
 
             m_camera = Camera.main.transform;
             m_selectionRadial = m_camera.GetComponent<SelectionRadial>();
-            m_reticle = m_camera.GetComponent<Reticle>();
 
             m_pathWalker = m_camera.GetComponentInParent<PathWalker>();
 

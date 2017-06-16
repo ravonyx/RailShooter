@@ -10,10 +10,6 @@
 // See the Persistant Studios Code License for further details.
 //----------------------------------------------------------------------------
 
-#if UNITY_5_2 || UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_5_7
-#define UNITY_5_2_UP
-#endif
-
 using UnityEngine;
 using System;
 using System.Collections;
@@ -240,9 +236,19 @@ public class PKFxFX : PKFxPackDependent
 
 	#region /!\ Attributes /!\
 
-	public void OnFxHotReloaded()
+	public void OnFxHotReloaded(int newGuid)
 	{
-		m_ForceUpdateAttributes = true;
+		if (newGuid != -1)
+		{
+			if (newGuid != m_FXGUID)
+			{
+				m_ListEffects.Remove(this.m_FXGUID);
+				m_FXGUID = newGuid;
+				m_ListEffects.Add(this.m_FXGUID, this);
+			}
+			m_ForceUpdateAttributes = true;
+			m_IsPlaying = true;
+		}
 	}
 
 	//----------------------------------------------------------------------------
@@ -806,7 +812,6 @@ public class PKFxFX : PKFxPackDependent
 			}
 			else if (m_SamplersCache[i].m_Type1 == (int)PKFxManager.ESamplerType.SamplerImage)
 			{
-#if UNITY_5_1 || UNITY_5_2_UP
 				wasChanged = srcAttr.m_TextureChanged ||
 							 (int)srcAttr.m_TextureTexcoordMode != (int)m_SamplersCache[i].m_PosX;
 				if (wasChanged || forceUpdate || m_ForceUpdateAttributes)
@@ -885,11 +890,6 @@ public class PKFxFX : PKFxPackDependent
 					srcAttr.m_TextureChanged = false;
 					smpCount = i;
 				}
-#else
-					// TODO: see with Texture2D.EncodeToPNG if we can make this work for Unity < 5.1
-					Debug.LogWarning("[PKFX] Sampler " + srcAttr.m_Descriptor.Name + " : texture attribute samplers aren't supported until Unity 5.1.");
-					continue;
-#endif
 			}
 			else if (m_SamplersCache[i].m_Type1 == (int)PKFxManager.ESamplerType.SamplerCurve)
 			{

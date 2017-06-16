@@ -10,9 +10,6 @@
 // See the Persistant Studios Code License for further details.
 //----------------------------------------------------------------------------
 
-#if UNITY_5_2 || UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_5_7
-#define UNITY_5_2_UP
-#endif
 using UnityEngine;
 using System.Collections;
 using UnityEditor;
@@ -431,11 +428,7 @@ public class PKFxCustomShaderEditor : Editor
 		if (customShader.m_Api == PkFxCustomShader.EShaderApi.GL && !m_InShaderConstantsLoading)
 		{
 			PKFxManager.ShaderConstantsCount(customShader.m_ShaderName, (int)customShader.m_Api);
-#if UNITY_5_2_UP
 			GL.IssuePluginEvent(PKFxManager.GetGLConstantsCountEvent(), (int)(PKFxManager.POPCORN_MAGIC_NUMBER | 0x00004000));
-#else
-			PKFxManager.GLConstantsCountEvent((int)(PKFxManager.POPCORN_MAGIC_NUMBER | 0x00004000));
-#endif
 			m_InShaderConstantsLoading = true;
 		}
 		else

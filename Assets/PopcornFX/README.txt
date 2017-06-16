@@ -59,6 +59,8 @@ Popcorn Unity Plugin v2.9
 
 CHANGELOG
 
+	v2.9p4
+		- Fixed VR rendering.
 	v2.9p3
 		- Build scene mesh at runtime on all platforms.
 		- Can register multiple camera.

@@ -10,9 +10,10 @@
 // See the Persistant Studios Code License for further details.
 //----------------------------------------------------------------------------
 
-#if UNITY_5_2 || UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_5_7
-#define UNITY_5_2_UP
+#if !UNITY_5_2 && !UNITY_5_3
+#define UNITY_STEREOSCOPIC_EYE
 #endif
+
 using UnityEngine;
 using System.Collections;
 using System.Runtime.InteropServices;
@@ -38,7 +39,6 @@ public class PKFxCamera : PKFxPackDependent
 	protected uint					m_LastUpdateFrameID = 0;
 	private static int						m_LastFrameCount = -1;
 
-#if UNITY_5
 	public RenderTexture m_DepthRT = null;
 	private CommandBuffer m_CmdBufDepthGrabber = null;
 	private static RenderTextureFormat g_DepthFormat = RenderTextureFormat.Depth;
@@ -73,10 +73,7 @@ public class PKFxCamera : PKFxPackDependent
 	[HideInInspector]
 	public float m_BlurFactor = 0.2f;
 
-#endif
-#if UNITY_5_2_UP
 	private CommandBuffer	m_CmdBuf;
-#endif
 
 	//----------------------------------------------------------------------------
 
@@ -100,23 +97,17 @@ public class PKFxCamera : PKFxPackDependent
 	{
 		this.m_CameraID = GetUniqueID();
 		m_CurrentCameraID = m_CameraID;
-#if UNITY_5_1 || UNITY_5_2_UP
 		if (Application.platform != RuntimePlatform.IPhonePlayer && UnityEngine.VR.VRSettings.enabled && UnityEngine.VR.VRDevice.isPresent)
 			m_VRReservedID = GetUniqueID();
-#endif
 		this.m_Camera = this.GetComponent<Camera>();
-#if UNITY_5_2_UP
 		m_CmdBuf = new CommandBuffer();
 		m_CmdBuf.name = "PopcornFX Rendering";
 		m_Camera.AddCommandBuffer((CameraEvent)PKFxManager.m_GlobalConf.globalEventSetting, m_CmdBuf);
-#endif
 	}
 
 	//----------------------------------------------------------------------------
 
 	#region Rendering/Command buffer setup methods
-
-#if UNITY_5
 
 	private static bool ResolveDepthShaderAndTextureFormat()
 	{
@@ -213,11 +204,9 @@ public class PKFxCamera : PKFxPackDependent
 		DepthRT = IntPtr.Zero;
 		m_IsDepthCopyEnabled = false;
     }
-#endif
 
 	//----------------------------------------------------------------------------
 
-#if UNITY_5
 	protected bool SetupDistortionPass()
 	{
 		if (SystemInfo.SupportsRenderTextureFormat(RenderTextureFormat.ARGBFloat))
@@ -291,13 +280,11 @@ public class PKFxCamera : PKFxPackDependent
 		}
 		m_EnableDistortion = false;
 	}
-#endif
 
 	//----------------------------------------------------------------------------
 
 	void SetupRendering()
 	{
-#if UNITY_5
 		// Depth pass
 		if (m_CmdBufDepthGrabber != null)
 			m_CmdBufDepthGrabber.Clear();
@@ -355,8 +342,6 @@ public class PKFxCamera : PKFxPackDependent
 			else
 				m_CmdBufDisto.Blit(tmpRTID, BuiltinRenderTextureType.CameraTarget);
 		}
-#endif
-#if UNITY_5_2_UP
 		m_CmdBuf.Clear();
 
 		// Regular rendering
@@ -371,7 +356,9 @@ public class PKFxCamera : PKFxPackDependent
 			m_CmdBuf.ClearRenderTarget(false, true, Color.black);
 			m_CmdBuf.IssuePluginEvent(PKFxManager.GetRenderEventFunc(), (int)((UInt32)m_CurrentCameraID | PKFxManager.POPCORN_MAGIC_NUMBER | 0x00002000));
 		}
-#endif
+
+		m_PrevScreenWidth = this.m_Camera.pixelWidth;
+		m_PrevScreenHeight = this.m_Camera.pixelHeight;
 	}
 
 	#endregion
@@ -380,9 +367,6 @@ public class PKFxCamera : PKFxPackDependent
 
 	void UpdateFrame()
 	{
-		UpdateViewMatrix();
-		UpdateProjectionMatrix();
-
 		m_CameraDescription.DT = Time.smoothDeltaTime;
 		m_TimeMultiplier = Mathf.Max(m_TimeMultiplier, 0.0f);
 		m_TimeMultiplier = Mathf.Min(m_TimeMultiplier, 8.0f);
@@ -390,13 +374,10 @@ public class PKFxCamera : PKFxPackDependent
 		m_CameraDescription.NearClip = this.m_Camera.nearClipPlane;
 		m_CameraDescription.FarClip = this.m_Camera.farClipPlane;
 		m_CameraDescription.LODBias = m_TextureLODBias;
-#if UNITY_5
 		m_CameraDescription.DepthBpp = (int)m_DepthGrabFormat;
-#endif
 
 		// Set the camera flags
 		m_CameraDescription.Flags = 0;
-#if UNITY_5_2_UP
 		m_CameraDescription.Flags |= m_UseDepthGrabToZTest ? (int)PKFxManager.CamFlags.UseDepthGrabberTexture : 0;
 		// We need to recreate the depth texture on the native side when "Use Depth Grab To Z Test" is enabled
 		if (this.m_Camera.pixelWidth != m_PrevScreenWidth || this.m_Camera.pixelHeight != m_PrevScreenHeight)
@@ -414,6 +395,7 @@ public class PKFxCamera : PKFxPackDependent
 			}
 			if (m_DepthRT != null)
 			{
+				DepthRT = IntPtr.Zero;
 				m_DepthRT.Release();
 				m_DepthRT = null;
 			}
@@ -443,53 +425,92 @@ public class PKFxCamera : PKFxPackDependent
 			m_PrevScreenWidth = this.m_Camera.pixelWidth;
 			m_PrevScreenHeight = this.m_Camera.pixelHeight;
 		}
-#endif
 
-		if (m_CurrentFrameID != m_LastUpdateFrameID) // stereo-cam's first eye
+#if UNITY_STEREOSCOPIC_EYE
+		PKFxManager.LogicalUpdate(m_CameraDescription.DT);
+		if (!m_Camera.stereoEnabled)
 		{
+			UpdateViewMatrix();
+			UpdateProjectionMatrix();
 			m_CurrentCameraID = m_CameraID;
-			SetupRendering();
-			PKFxManager.LogicalUpdate(m_CameraDescription.DT);
-			bool update = false;
-#if !UNITY_5_2_UP
-			update = m_LastFrameCount != Time.frameCount;
-			m_LastFrameCount = Time.frameCount;
-#endif
-			PKFxManager.UpdateCamDesc(m_CurrentCameraID, m_CameraDescription, update);
-			m_LastUpdateFrameID = m_CurrentFrameID;
-		}
-		else // second eye, don't update again.
-		{
-			m_CurrentCameraID = m_VRReservedID;
-			SetupRendering();
 			PKFxManager.UpdateCamDesc(m_CurrentCameraID, m_CameraDescription, false);
 		}
+		else
+		{
+			// stereo-cam's first eye.
+			UpdateViewMatrix(true, Camera.StereoscopicEye.Left);
+			UpdateProjectionMatrix(true, Camera.StereoscopicEye.Left);
+			m_CurrentCameraID = m_CameraID;
+			PKFxManager.UpdateCamDesc(m_CurrentCameraID, m_CameraDescription, false);
+			// second eye.
+			UpdateViewMatrix(true, Camera.StereoscopicEye.Right);
+			UpdateProjectionMatrix(true, Camera.StereoscopicEye.Right);
+			m_CurrentCameraID = m_VRReservedID;
+			PKFxManager.UpdateCamDesc(m_CurrentCameraID, m_CameraDescription, false);
+		}
+#else
+		if (m_Camera.stereoEnabled)
+		{
+			Debug.LogError("[PKFX] VR is not supported on Unity 5.2 and 5.3");
+			return;
+		}
+		UpdateViewMatrix();
+		UpdateProjectionMatrix();
+		if (m_CurrentFrameID != m_LastUpdateFrameID)
+		{
+			m_CurrentCameraID = m_CameraID;
+			PKFxManager.LogicalUpdate(m_CameraDescription.DT);
+			PKFxManager.UpdateCamDesc(m_CurrentCameraID, m_CameraDescription, false);
+			m_LastUpdateFrameID = m_CurrentFrameID;
+		}
+#endif
 	}
 
 	//----------------------------------------------------------------------------
 
+#if UNITY_STEREOSCOPIC_EYE
+	void UpdateViewMatrix(bool isVR = false, Camera.StereoscopicEye eye = Camera.StereoscopicEye.Left)
+	{
+		if (!isVR)
+			m_CameraDescription.ViewMatrix = this.m_Camera.worldToCameraMatrix;
+		else
+			m_CameraDescription.ViewMatrix = this.m_Camera.GetStereoViewMatrix(eye);
+	}
+#else
 	void UpdateViewMatrix()
 	{
 		m_CameraDescription.ViewMatrix = this.m_Camera.worldToCameraMatrix;
 	}
+#endif
 
 	//----------------------------------------------------------------------------
 
-	void UpdateProjectionMatrix()
+#if UNITY_STEREOSCOPIC_EYE
+	void UpdateProjectionMatrix(bool isVR = false, Camera.StereoscopicEye eye = Camera.StereoscopicEye.Left)
 	{
-#if UNITY_5
 		bool isRenderingToTexture = m_HasPostFx
 			|| this.m_Camera.actualRenderingPath == RenderingPath.DeferredLighting
 			|| this.m_Camera.actualRenderingPath == RenderingPath.DeferredShading;
+		Matrix4x4 projectionMatrix;
+		if (!isVR)
+			projectionMatrix = this.m_Camera.projectionMatrix;
+		else
+			projectionMatrix = this.m_Camera.GetStereoProjectionMatrix(eye);
+
+		m_CameraDescription.ProjectionMatrix = GL.GetGPUProjectionMatrix(projectionMatrix, isRenderingToTexture);
+	}
 #else
-		bool isRenderingToTexture = m_HasPostFx || this.m_Camera.actualRenderingPath == RenderingPath.DeferredLighting;
-#endif
+	void UpdateProjectionMatrix()
+	{
+		bool isRenderingToTexture = m_HasPostFx
+			|| this.m_Camera.actualRenderingPath == RenderingPath.DeferredLighting
+			|| this.m_Camera.actualRenderingPath == RenderingPath.DeferredShading;
+
 		m_CameraDescription.ProjectionMatrix = GL.GetGPUProjectionMatrix(this.m_Camera.projectionMatrix, isRenderingToTexture);
 	}
-
+#endif
 	//----------------------------------------------------------------------------
 
-#if UNITY_5_2_UP
 	void OnPreCull()
 	{
 		UpdateFrame();
@@ -497,21 +518,25 @@ public class PKFxCamera : PKFxPackDependent
 
 	void OnPreRender()
 	{
-#else
-	void OnPostRender()
-	{
-#endif
 		if (!PKFxManager.m_PackLoaded)
 			return;
-#if !UNITY_5_2_UP
-		UpdateFrame();
-#else
+		if (m_CurrentFrameID != m_LastUpdateFrameID)
+		{
+			m_CurrentCameraID = m_CameraID;
+			SetupRendering();
+			m_LastUpdateFrameID = m_CurrentFrameID;
+		}
+		else
+		{
+			m_CurrentCameraID = m_VRReservedID;
+			SetupRendering();
+		}
+
 		if (m_LastFrameCount != Time.frameCount)
 		{
 			PKFxManager.UpdateParticles(m_CameraDescription);
 			m_LastFrameCount = Time.frameCount;
 		}
-#endif
 		PKFxManager.Render(m_CurrentCameraID);
 	}
 	//----------------------------------------------------------------------------
@@ -526,9 +551,7 @@ public class PKFxCamera : PKFxPackDependent
 
 	protected void OnDestroy()
 	{
-#if UNITY_5
 		ReleaseDepthGrabResources();
 		ReleaseDistortionResources();
-#endif
 	}
 }

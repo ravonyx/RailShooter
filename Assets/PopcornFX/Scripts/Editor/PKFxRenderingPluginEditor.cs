@@ -10,10 +10,6 @@
 // See the Persistant Studios Code License for further details.
 //----------------------------------------------------------------------------
 
-#if UNITY_5_2 || UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_5_7
-#define UNITY_5_2_UP
-#endif
-
 using UnityEditor;
 using UnityEngine;
 using System.Collections;
@@ -73,7 +69,6 @@ public class PKFxRenderingPluginEditor : Editor
 
 			EditorGUILayout.Slider(m_TimeMultiplier, 0.0f, 8.0f);
 			EditorGUILayout.PropertyField(this.m_EnableSoftParticles);
-#if UNITY_5_1 || UNITY_5_2_UP
 			if (this.m_EnableSoftParticles.boolValue)
 			{
 				if (SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Direct3D11)
@@ -84,7 +79,6 @@ public class PKFxRenderingPluginEditor : Editor
 					EditorGUI.indentLevel--;
 				}
 			}
-#endif
 			EditorGUILayout.PropertyField(this.m_EnableDistortion);
 			if (m_EnableDistortion.boolValue)
 			{

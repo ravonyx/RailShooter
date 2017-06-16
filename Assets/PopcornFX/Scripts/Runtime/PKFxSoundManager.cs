@@ -83,11 +83,7 @@ public class PKFxSoundManager : MonoBehaviour
 					soundSource.Play();
 					soundSource.volume = sound.Volume;
 					soundSource.time = sound.StartTimeOffsetInSeconds;
-	#if UNITY_5
 					soundSource.spatialBlend = 1.0f;
-#else
-					soundSource.panLevel = 1.0f;
-#endif
                     if (sound.PlayTimeInSeconds != 0.0f)
                         Destroy(soundSource, sound.PlayTimeInSeconds);
                     else

@@ -10,10 +10,6 @@
 // See the Persistant Studios Code License for further details.
 //----------------------------------------------------------------------------
 
-#if UNITY_5_2 || UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_5_7
-#define UNITY_5_2_UP
-#endif
-
 using UnityEditor;
 using UnityEngine;
 using System.IO;
@@ -289,7 +285,6 @@ public class PKFxFXEditor : Editor
 		else if (m_Type.intValue == (int)PKFxManager.ESamplerType.SamplerImage)
 		{
 			EditorGUI.DrawRect(new Rect(0,0,10,10), new Color(0,1,0,1));
-#if UNITY_5_1 || UNITY_5_2_UP
 			SerializedProperty m_Tex = sampler.FindPropertyRelative("m_Texture");
 			SerializedProperty m_TexChanged = sampler.FindPropertyRelative("m_TextureChanged");
 			SerializedProperty m_TextureTexcoordMode = sampler.FindPropertyRelative("m_TextureTexcoordMode");
@@ -305,9 +300,6 @@ public class PKFxFXEditor : Editor
 			PKFxManager.ETexcoordMode newType = (PKFxManager.ETexcoordMode)EditorGUILayout.EnumPopup((PKFxManager.ETexcoordMode)m_TextureTexcoordMode.intValue);
 			m_TextureTexcoordMode.intValue = (int)newType;
 			EditorGUI.indentLevel--;
-#else
-			EditorGUILayout.HelpBox(m_Name.stringValue + " : texture attribute samplers aren't supported before Unity 5.1.", MessageType.Warning, true);
-#endif
 		}
 		else if (m_Type.intValue == (int)PKFxManager.ESamplerType.SamplerText)
 		{

@@ -10,9 +10,6 @@
 // See the Persistant Studios Code License for further details.
 //----------------------------------------------------------------------------
 
-#if UNITY_5_2 || UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_5_7
-#define UNITY_5_2_UP
-#endif
 using UnityEngine;
 using UnityEditor;
 using System.Collections;
@@ -23,9 +20,7 @@ public class PKFxSettingsWindow : EditorWindow
 	private static bool								m_EnableLogging;
 	private static bool								m_EnablePersistentDataPath;
 	private static bool								m_UseOrthographicProjection;
-#if UNITY_5_2_UP
 	private static PKFxManager.E_AvailableCamEvents	m_CamEventHook;
-#endif
 
 	//----------------------------------------------------------------------------
 
@@ -37,9 +32,7 @@ public class PKFxSettingsWindow : EditorWindow
 		m_EnableLogging = PKFxManager.m_GlobalConf.enableFileLog;
 		m_EnablePersistentDataPath = PKFxManager.m_GlobalConf.enablePackFxInPersistentDataPath;
 		m_UseOrthographicProjection = PKFxManager.m_GlobalConf.useOrthographicProjection;
-#if UNITY_5_2_UP
 		m_CamEventHook = PKFxManager.m_GlobalConf.globalEventSetting;
-#endif
 	}
 
 	//----------------------------------------------------------------------------
@@ -68,11 +61,9 @@ public class PKFxSettingsWindow : EditorWindow
 
 		EditorGUILayout.BeginHorizontal();
 
-#if UNITY_5_2_UP
 		EditorGUILayout.LabelField("Insert Native Redering");
 		m_CamEventHook = (PKFxManager.E_AvailableCamEvents)EditorGUILayout.EnumPopup(m_CamEventHook);
 		EditorGUILayout.EndHorizontal();
-#endif
 
 		if ((PKFxManager.m_IsStarted && m_EnableKilling != PKFxManager.KillIndividualEffectEnabled())
 			|| m_EnableLogging != PKFxManager.FileLoggingEnabled()
@@ -94,9 +85,7 @@ public class PKFxSettingsWindow : EditorWindow
 			PKFxManager.m_GlobalConf.enableFileLog = m_EnableLogging;
 			PKFxManager.m_GlobalConf.enablePackFxInPersistentDataPath = m_EnablePersistentDataPath;
 			PKFxManager.m_GlobalConf.useOrthographicProjection = m_UseOrthographicProjection;
-#if UNITY_5_2_UP
 			PKFxManager.m_GlobalConf.globalEventSetting = m_CamEventHook;
-#endif
 			if (m_EnablePersistentDataPath)
 				PKFxManager.m_PackPath = Application.persistentDataPath;
 			else

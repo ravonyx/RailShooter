@@ -43,11 +43,13 @@ public class OVRGearVrController : MonoBehaviour
     void Update()
     {
         bool controllerConnected = OVRInput.IsControllerConnected(m_controller);
-
-        Debug.Log(OVRInput.GetLocalControllerPosition(m_controller));
-
-        Debug.Log(OVRInput.Get(OVRInput.Button.One));
         Debug.Log(controllerConnected);
+
+        OVRInput.Controller controller = OVRInput.GetConnectedControllers();
+        Debug.Log(controller);
+
+
+
         if ((controllerConnected != m_prevControllerConnected) || !m_prevControllerConnectedCached)
         {
           //  m_model.SetActive(controllerConnected);

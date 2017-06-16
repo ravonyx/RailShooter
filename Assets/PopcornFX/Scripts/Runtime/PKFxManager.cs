@@ -10,11 +10,7 @@
 // See the Persistant Studios Code License for further details.
 //----------------------------------------------------------------------------
 
-#if UNITY_5_2 || UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_5_7
-#define UNITY_5_2_UP
-#endif
-
-#if UNITY_5_5 || UNITY_5_6 || UNITY_5_7
+#if UNITY_5_5 || UNITY_5_6 || UNITY_2017
 #define UNITY_REVERSE_DEPTH
 #endif
 
@@ -29,13 +25,11 @@ using AOT;
 
 public static partial class PKFxManager : object
 {
-#if UNITY_5_2_UP
 	public enum E_AvailableCamEvents
 	{
 		BeforeImageEffectsOpaque = UnityEngine.Rendering.CameraEvent.BeforeImageEffectsOpaque,
 		BeforeImageEffects = UnityEngine.Rendering.CameraEvent.BeforeImageEffects,
 	}
-#endif
 
 #region Global conf
 	[XmlRoot ("PKFxGlobalConf")]
@@ -46,9 +40,8 @@ public static partial class PKFxManager : object
 		public bool					enablePackFxInPersistentDataPath = false;
 		public bool					useOrthographicProjection = false;
 
-#if UNITY_5_2_UP
 		public E_AvailableCamEvents	globalEventSetting = E_AvailableCamEvents.BeforeImageEffectsOpaque;
-#endif
+
 		public void Save()
 		{
 			string confPath = m_PackPath + "/PKconfig.cfg";
@@ -1194,20 +1187,8 @@ public static partial class PKFxManager : object
 
 	//----------------------------------------------------------------------------
 
-#if UNITY_4_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4
-	private const string m_UnityVersion = "Unity 4.X";
-#elif UNITY_5_0
-	private const string m_UnityVersion = "Unity 5.0";
-#elif UNITY_5_1
-	private const string m_UnityVersion = "Unity 5.1";
-#elif UNITY_5_2_UP
 	private const string m_UnityVersion = "Unity 5.2 and up";
-#elif UNITY_5
-	private const string m_UnityVersion = "Unknown 5.X";
-#else
-	private const string m_UnityVersion = "Unknown error";
-#endif
-	public const string m_PluginVersion = "2.9p3 for " + m_UnityVersion;
+	public const string m_PluginVersion = "2.9p4 for " + m_UnityVersion;
 	public static string				m_PackPath = Application.streamingAssetsPath;
 	public static string				m_CurrentVersionString = "";
 	public static bool					m_PackCopied = false;
@@ -1264,25 +1245,8 @@ public static partial class PKFxManager : object
 	{
 		if (cameraID >= 0)
 		{
-
-#if UNITY_5_2_UP
 			//Do NOTHING, all is handled by the command buffer.
 			//GL.IssuePluginEvent(GetRenderEventFunc(),(int)eventID);
-#else
-			UInt32 eventID = ((UInt32)cameraID | POPCORN_MAGIC_NUMBER);
-			if (Application.platform == RuntimePlatform.OSXEditor ||
-			    Application.platform == RuntimePlatform.WindowsEditor ||
-			    Application.platform == RuntimePlatform.OSXPlayer ||
-			    Application.platform == RuntimePlatform.WindowsPlayer) // Dammit!
-			{
-				GL.IssuePluginEvent((int)eventID);
-			}
-			else
-			{
-				UnityRenderEvent((int)eventID);
-				GL.InvalidateState();
-			}
-#endif
 		}
 		else
 			Debug.LogError("[PKFX] PKFxManager: invalid cameraID for rendering " + cameraID);
@@ -1339,12 +1303,6 @@ public static partial class PKFxManager : object
 
 	public static void Startup()
 	{
-#if !UNITY_5_2_UP
-		if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-			UnitySetGraphicsDevice(IntPtr.Zero, (int)GfxDeviceRenderer.kGfxRendererOpenGLES20Mobile, (int)GfxDeviceEventType.kGfxDeviceEventInitialize);
-		else if (Application.platform == RuntimePlatform.LinuxPlayer)
-			UnitySetGraphicsDevice(IntPtr.Zero, (int)GfxDeviceRenderer.kGfxRendererOpenGL, (int)GfxDeviceEventType.kGfxDeviceEventInitialize);
-#endif
 		if (Application.platform == RuntimePlatform.IPhonePlayer)
 			UnitySetGraphicsDevice(IntPtr.Zero, (int)GfxDeviceRenderer.kGfxRendererOpenGLES20Mobile, (int)GfxDeviceEventType.kGfxDeviceEventInitialize);
 		// Enable Gamma-correction only if in linear color space
@@ -1361,7 +1319,7 @@ public static partial class PKFxManager : object
 		SetDelegateOnAudioWaveformData(Marshal.GetFunctionPointerForDelegate(new Func<IntPtr, IntPtr, IntPtr>(OnAudioWaveformData)));
 #if !PK_COMPILED // mutual dependency issue with class PKFxFX
 		SetDelegateOnFxStopped(Marshal.GetFunctionPointerForDelegate(new Action<int>(OnFxStopped)));
-		SetDelegateOnFxHotReloaded(Marshal.GetFunctionPointerForDelegate(new Action<int>(OnFxHotReloaded)));
+		SetDelegateOnFxHotReloaded(Marshal.GetFunctionPointerForDelegate(new Action<int, int>(OnFxHotReloaded)));
 #endif
 		SetDelegateOnStartSound(Marshal.GetFunctionPointerForDelegate(new Action<IntPtr>(PKFxSoundManager.OnStartSound)));
 		m_Samples = new float[1024];
@@ -1402,6 +1360,7 @@ public static partial class PKFxManager : object
 
 #if !PK_COMPILED // mutual dependency issue with class PKFxFX
 	private delegate void FxCallback(int guid);
+	private delegate void FxHotReloadCallback(int guid, int newGuid);
 
 	[MonoPInvokeCallback(typeof(FxCallback))]
 	public static void OnFxStopped(int guid)
@@ -1418,14 +1377,14 @@ public static partial class PKFxManager : object
 
 	//----------------------------------------------------------------------------
 
-	[MonoPInvokeCallback(typeof(FxCallback))]
-	public static void OnFxHotReloaded(int guid)
+	[MonoPInvokeCallback(typeof(FxHotReloadCallback))]
+	public static void OnFxHotReloaded(int guid, int newGuid)
 	{
 		PKFxFX component;
 
 		if (PKFxFX.m_ListEffects.TryGetValue(guid, out component) == true)
 		{
-			component.OnFxHotReloaded();
+			component.OnFxHotReloaded(newGuid);
 		}
 	}
 #endif
@@ -1694,23 +1653,4 @@ public static partial class PKFxManager : object
 	}
 
 	//----------------------------------------------------------------------------
-
-	// Because Debug.Assert is not implemented before Unity 5.1
-#if UNITY_5_0 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4
-	private static class Debug
-	{
-		public static void Assert(bool cond, string message)
-		{
-			if (!cond)
-				throw new Exception(message);
-		}
-		public static void Log(string s)
-		{ UnityEngine.Debug.Log(s); }
-		public static void LogError(string s)
-		{ UnityEngine.Debug.LogError(s); }
-		public static void LogWarning(string s)
-		{ UnityEngine.Debug.LogWarning(s); }
-	}
-
-#endif
 }

@@ -27,7 +27,6 @@ namespace RailShooter.Utils
         [SerializeField] private SelectionRadial m_SelectionRadial;         // Optional reference to the SelectionRadial, if non-null the duration of the SelectionRadial will be used instead.
         [SerializeField] private UIFader m_UIFader;                         // Optional reference to a UIFader, used if the SelectionSlider needs to fade out.
         [SerializeField] private Collider m_Collider;                       // Optional reference to the Collider used to detect the user's gaze, turned off when the UIFader is not visible.
-        [SerializeField] private bool m_DisableOnBarFill;                   // Whether the bar should stop reacting once it's been filled (for single use bars).
         [SerializeField] private bool m_DisappearOnBarFill;                 // Whether the bar should disappear instantly once it's been filled.
 
 
@@ -136,10 +135,6 @@ namespace RailShooter.Utils
             // Play the clip for when the bar is filled.
             m_Audio.clip = m_OnFilledClip;
             m_Audio.Play();
-
-            // If the bar should be disabled once it is filled, do so now.
-            if (m_DisableOnBarFill)
-                enabled = false;
         }
 
 

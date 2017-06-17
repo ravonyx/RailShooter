@@ -21,11 +21,14 @@ public class RailShooterPlayer : MonoBehaviour
     private PKFxFX m_FXHealth;
     private float m_currentLife;
 
+    private bool m_ending;
+
     [SerializeField]
     private RailShooterController m_railShooterController;
 
     void Start()
     {
+        m_ending = false;
         m_currentLife = m_lifeMax;
     }
 
@@ -50,8 +53,11 @@ public class RailShooterPlayer : MonoBehaviour
 
     void Update()
     {
-        if (m_currentLife <= 0)
+        if (m_currentLife <= 0 && m_ending == false)
+        {
+            m_ending = true;
             StartCoroutine(m_railShooterController.GameOver());
+        }
     }
 
     void OnTriggerEnter(Collider other)

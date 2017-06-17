@@ -43,6 +43,11 @@ public class PathWalker : MonoBehaviour
 
     void Start()
     {
+        if(m_enemy)
+            m_walking = true;
+        else
+            m_walking = false;
+
         m_pathTransform = m_path.GetComponent<Transform>();
         if (m_path != null)
             m_stopPoints = m_path.stopPoints;
@@ -61,8 +66,8 @@ public class PathWalker : MonoBehaviour
 
         Vector3 position = m_path.GetPathPoint(m_progress).point;
         Vector3 transformedPos = m_pathTransform.TransformPoint(position);
-        transform.position = new Vector3(transformedPos.x, transformedPos.y + m_deltaY, transformedPos.z);
 
+        transform.position = new Vector3(transformedPos.x, transformedPos.y + m_deltaY, transformedPos.z);
         if (m_enemy)
             transform.rotation = Quaternion.LookRotation(m_path.GetPathPoint(m_progress).forward);
     }

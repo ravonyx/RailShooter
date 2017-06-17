@@ -36,6 +36,9 @@ namespace Assets.RailShooter
 
                              
         public bool IsPlaying { get; private set; }
+        private int m_stepTutorial;
+
+        Coroutine m_lastRoutine = null;
 
         private IEnumerator Start()
         {
@@ -89,9 +92,12 @@ namespace Assets.RailShooter
             {
                 for (int i = 0; i < m_pathWalker.StopPoints.Count; i++)
                 {
+                    m_stepTutorial = -1;
+                    Debug.Log("walking");
                     yield return StartCoroutine(m_pathWalker.PlayUpdate());
-                    if(i == 0)
+                    if (i == 0)
                     {
+                        m_stepTutorial = 0;
                         IsPlaying = false;
                         yield return StartCoroutine(m_UIController.ShowEnemiesUI());
                         yield return StartCoroutine(m_selectionRadial.WaitForSelectionRadialToFill());
@@ -100,6 +106,7 @@ namespace Assets.RailShooter
                     }
                     else if(i == 1)
                     {
+                        m_stepTutorial = 1;
                         IsPlaying = false;
                         yield return StartCoroutine(m_UIController.ShowHealthUI());
                         yield return StartCoroutine(m_selectionRadial.WaitForSelectionRadialToFill());
@@ -117,44 +124,49 @@ namespace Assets.RailShooter
 
             //gun UI fade out
             yield return StartCoroutine(m_UIController.HidePlayerUI());
-            IsPlaying = false;
         }
 
 
         private IEnumerator EndPhase ()
         {
+            //hide the explanations UI if game over before end
             m_reticle.Hide ();
             yield return StartCoroutine (m_UIController.ShowOutroUI ());
             
             m_inputWarnings.TurnOnDoubleTapWarnings();
             m_inputWarnings.TurnOnSingleTapWarnings();
             yield return StartCoroutine(m_selectionRadial.WaitForSelectionRadialToFill());
-           
+
             m_inputWarnings.TurnOffDoubleTapWarnings();
             m_inputWarnings.TurnOffSingleTapWarnings();
             yield return StartCoroutine(m_UIController.HideOutroUI());
 
-
-            //reset transform of camera
             yield return StartCoroutine(m_cameraFade.BeginFadeOut(true));
-
             m_pathWalker.Reset();
 
-            Debug.Log(m_start.position);
-            Debug.Log(m_start.localPosition);
+            m_camera.transform.parent.localPosition = m_start.position;
+            m_camera.transform.parent.localPosition = m_start.position;
 
-            m_camera.transform.localPosition = m_start.position;
             m_camera.transform.localRotation = m_start.rotation;
             yield return StartCoroutine(m_cameraFade.BeginFadeIn(true));
+
+            StartCoroutine(Start());
         }
 
         public IEnumerator GameOver()
         {
             IsPlaying = false;
-            StopCoroutine(PlayPhase());
-
+            StopAllCoroutines();
             m_pathWalker.Walking = false;
 
+            if (m_tutorial)
+            {
+                if (m_stepTutorial == 0)
+                    yield return StartCoroutine(m_UIController.HideEnemiesUI());
+                if (m_stepTutorial == 1)
+                    yield return StartCoroutine(m_UIController.HideHealthUI());
+            }
+            m_selectionRadial.Hide();
             yield return StartCoroutine(EndPhase());
         }
     }

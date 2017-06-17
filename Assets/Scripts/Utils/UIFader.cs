@@ -59,8 +59,21 @@ namespace VRStandardAssets.Utils
             // Fading has now started.
             m_Fading = true;
 
-            // Fading needs to continue until all the groups have finishing fading in so we need to base that on the lowest alpha.
-            float lowestAlpha;
+            float allAlphas = 0;
+            for (int i = 0; i < m_GroupsToFade.Length; i++)
+                allAlphas += m_GroupsToFade[i].alpha;
+            while (allAlphas < m_GroupsToFade.Length)
+            {
+                allAlphas = 0.0f;
+                for (int i = 0; i < m_GroupsToFade.Length; i++)
+                {
+                    m_GroupsToFade[i].alpha += m_FadeSpeed * Time.deltaTime;
+                    allAlphas += m_GroupsToFade[i].alpha;
+                }
+                yield return null;
+            }
+
+           /* float lowestAlpha;
 
             do
             {
@@ -82,7 +95,7 @@ namespace VRStandardAssets.Utils
                 yield return null;
             }
             // Continue doing this until the lowest alpha is one or greater.
-            while (lowestAlpha < 1f);
+            while (lowestAlpha < 1f);*/
 
             // If there is anything subscribed to OnFadeInComplete, call it.
             if (OnFadeInComplete != null)
@@ -126,12 +139,29 @@ namespace VRStandardAssets.Utils
         {
             m_Fading = true;
 
-            float highestAlpha;
-
-            do
+            float allAlphas = 0;
+            for (int i = 0; i < m_GroupsToFade.Length; i++)
+                allAlphas += m_GroupsToFade[i].alpha;
+            while (allAlphas > 0.0f)
             {
-                highestAlpha = 0f;
+                allAlphas = 0.0f;
+                for (int i = 0; i < m_GroupsToFade.Length; i++)
+                {
+                    m_GroupsToFade[i].alpha -= m_FadeSpeed * Time.deltaTime;
+                    allAlphas += m_GroupsToFade[i].alpha;
+                }
+                yield return null;
+            }
+            /*
+            float highestAlpha = 0f;
 
+            for (int i = 0; i < m_GroupsToFade.Length; i++)
+            {
+                highestAlpha += m_GroupsToFade[i].alpha;
+            }
+
+            while (highestAlpha > 0f)
+            {
                 for (int i = 0; i < m_GroupsToFade.Length; i++)
                 {
                     m_GroupsToFade[i].alpha -= m_FadeSpeed * Time.deltaTime;
@@ -139,16 +169,14 @@ namespace VRStandardAssets.Utils
                     if (m_GroupsToFade[i].alpha > highestAlpha)
                         highestAlpha = m_GroupsToFade[i].alpha;
                 }
-
-                yield return null;
             }
-            while (highestAlpha > 0f);
+
+            yield return null;*/
 
             if (OnFadeOutComplete != null)
                 OnFadeOutComplete();
 
             m_Fading = false;
-
             Visible = false;
         }
 

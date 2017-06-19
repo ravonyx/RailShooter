@@ -4,18 +4,19 @@ using UnityEngine;
 using RailShooter.Utils;
 using VRStandardAssets.Common;
 
-namespace VRStandardAssets.Utils
+namespace Assets.RailShooter
 {
-    public class MouseRaycaster : MonoBehaviour
+    class Raycaster : MonoBehaviour
     {
+
         [SerializeField]
-        private LayerMask m_exclusionLayers;           
+        private LayerMask m_exclusionLayers;
         [SerializeField]
-        private bool m_showDebugRay;                   
+        private bool m_showDebugRay;
         private float m_rayLength = 500f;              // How far into the scene the ray is cast.
 
         private Inputs m_inputs;
-        private InteractiveItem m_currentInteractible;                
+        private InteractiveItem m_currentInteractible;
         private InteractiveItem m_lastInteractible;
         private Reticle m_reticle;
 
@@ -81,12 +82,12 @@ namespace VRStandardAssets.Utils
 
                 if (interactible && interactible != m_lastInteractible)
                     interactible.Over();
-            
+
                 if (interactible != m_lastInteractible)
                     DeactiveLastInteractible();
 
                 m_lastInteractible = interactible;
-            
+
                 if (m_reticle)
                     m_reticle.SetPosition(hit);
 
@@ -138,5 +139,4 @@ namespace VRStandardAssets.Utils
 
         }
     }
-
 }

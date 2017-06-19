@@ -13,26 +13,26 @@ namespace Assets.RailShooter
         //VR Parameters
 
         // The damping with which this gameobject follows the camera.
-        [SerializeField] private float m_Damping = 0.5f;                                
+        [SerializeField]
+        private float m_Damping = 0.5f;                                
         // How fast the gun arm follows the reticle.
-        [SerializeField] private float m_GunContainerSmoothing = 10f;
+        [SerializeField]
+        private float m_GunContainerSmoothing = 10f;
         // This is the coefficient used to ensure smooth damping of this gameobject.
         private const float k_DampingCoef = -20f;
 
         [SerializeField]
         private CamerasAndInputsManager m_camInputManager;
 
-        [SerializeField] private AudioSource m_GunAudio;                                
+        [SerializeField]
+        private AudioSource m_GunAudio;                                
         //ref to controller => to know if game is playing
-        [SerializeField] private RailShooterController m_ShootingGalleryController; 
+        [SerializeField]
+        private RailShooterController m_ShootingGalleryController; 
 
-        [SerializeField] private VREyeRaycaster m_EyeRaycaster;                         
-        [SerializeField] private MouseRaycaster m_MouseRayCaster;
 
-        [SerializeField] private Transform m_GunContainer;                             
-        [SerializeField] private Transform m_GunEnd;         
-        
-        [SerializeField] private float m_Speed;
+        [SerializeField]
+        private float m_Speed;
 
         [SerializeField]
         private PKFxFX m_ShootParticles;
@@ -50,9 +50,14 @@ namespace Assets.RailShooter
         private RailShooterPlayer m_playerHealth;
 
         private Inputs m_inputs;
+        private Raycaster m_raycaster;
         private Transform m_cameraTransform;
-        //reticle to know where firing                         
         private Reticle m_VRReticle;
+
+        private Transform m_gunContainer;
+        private Transform m_gunEnd;
+
+        private bool m_init;
 
         private void OnEnable ()
         {
@@ -67,29 +72,80 @@ namespace Assets.RailShooter
 
         void Start()
         {
-            Camera cam = m_camInputManager.CurrentCamera;
-            m_cameraTransform = cam.transform;
-            m_VRReticle = cam.GetComponent<Reticle>();
+            m_init = false;
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Transform child = transform.GetChild(i);
+                if (child.tag == "GunContainer")
+                {
+                    m_gunContainer = child;
+                    for (int j = 0; j < m_gunContainer.childCount; j++)
+                    {
+                        child = m_gunContainer.GetChild(i);
+                        if (child.tag == "GunEnd")
+                        {
+                            m_gunEnd = child;
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
         private void Update()
         {
-            if (!VRSettings.enabled)
+            if(!m_init)
             {
-                transform.rotation = m_cameraTransform.rotation;
-                transform.position = m_cameraTransform.position;
+                if (m_camInputManager.CurrentInputName == "Mouse" || m_camInputManager.CurrentInputName == "Gamepad")
+                {
+                    Camera cam = m_camInputManager.CurrentCamera;
+                    m_raycaster = cam.GetComponent<Raycaster>();
+                    m_cameraTransform = cam.transform;
+                    if (m_camInputManager.CurrentInputName == "Gamepad")
+                        m_VRReticle = cam.GetComponent<Reticle>();
+                    m_init = true;
+                }
+
+                else if (m_camInputManager.CurrentInputName == "Touch")
+                {
+                    m_raycaster = GetComponent<Raycaster>();
+                    m_init = true;
+                }
             }
-            //else
-            //{
-            //    transform.rotation = Quaternion.Slerp(transform.rotation, InputTracking.GetLocalRotation(VRNode.Head),
-            //  m_Damping * (1 - Mathf.Exp(k_DampingCoef * Time.deltaTime)));
-            //
-            //    transform.position = m_cameraTransform.position;
-            //
-            //    Quaternion lookAtRotation = Quaternion.LookRotation(m_VRReticle.ReticleTransform.position - m_GunContainer.position);
-            //    m_GunContainer.rotation = Quaternion.Slerp(m_GunContainer.rotation, lookAtRotation,
-            //        m_GunContainerSmoothing * Time.deltaTime);
-            //}
+            else
+            {
+                //move the weapon in function of Type of Inputs
+                if (m_camInputManager.CurrentInputName == "Mouse")
+                {
+                    transform.rotation = m_cameraTransform.rotation;
+                    transform.position = m_cameraTransform.position;
+                }
+                else if (m_camInputManager.CurrentInputName == "Gamepad")
+                {
+                    transform.rotation = Quaternion.Slerp(transform.rotation, InputTracking.GetLocalRotation(VRNode.Head),
+                  m_Damping * (1 - Mathf.Exp(k_DampingCoef * Time.deltaTime)));
+
+                    transform.position = m_cameraTransform.position;
+
+                    Quaternion lookAtRotation = Quaternion.LookRotation(m_VRReticle.ReticleTransform.position - m_gunContainer.position);
+                    m_gunContainer.rotation = Quaternion.Slerp(m_gunContainer.rotation, lookAtRotation, m_GunContainerSmoothing * Time.deltaTime);
+                }
+                else if (m_camInputManager.CurrentInputName == "Touch")
+                {
+                    //Update anchors of touch weapon
+                    OVRInput.Update();
+                    if (tag == "LTouch")
+                    {
+                        transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.LTouch);
+                        transform.localPosition = OVRInput.GetLocalControllerPosition(OVRInput.Controller.LTouch);
+                    }
+                    else if (tag == "RTouch")
+                    {
+                        transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTouch);
+                        transform.localPosition = OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch);
+                    }
+                }
+            }
         }
 
         private void HandleDown ()
@@ -97,12 +153,7 @@ namespace Assets.RailShooter
            if (!m_ShootingGalleryController.IsPlaying)
                 return;
 
-            RailShooterEntity shootingTarget;
-            if (VRSettings.enabled)
-                shootingTarget = m_EyeRaycaster.CurrentInteractible ? m_EyeRaycaster.CurrentInteractible.GetComponent<RailShooterEntity>() : null;
-            else
-                shootingTarget = m_MouseRayCaster.CurrentInteractible ? m_MouseRayCaster.CurrentInteractible.GetComponent<RailShooterEntity>() : null;
-
+            RailShooterEntity shootingTarget = m_raycaster.CurrentInteractible ? m_raycaster.CurrentInteractible.GetComponent<RailShooterEntity>() : null;
             Transform target = shootingTarget ? shootingTarget.transform : null;
             StartCoroutine(Fire(target));
         }
@@ -116,7 +167,7 @@ namespace Assets.RailShooter
             m_GunAudio.Play();
             float lineLength = m_DefaultLineLength;
             if (target)
-                lineLength = Vector3.Distance(m_GunEnd.position, target.position);
+                lineLength = Vector3.Distance(m_gunEnd.position, target.position);
 
             yield return new WaitForEndOfFrame();
 
@@ -134,8 +185,8 @@ namespace Assets.RailShooter
             float timer = 0f;
             while (timer < m_GunFlareVisibleSeconds)
             {
-                m_GunFlare.SetPosition(0, m_GunEnd.position);
-                m_GunFlare.SetPosition(1, m_GunEnd.position + m_GunEnd.forward * lineLength);
+                m_GunFlare.SetPosition(0, m_gunEnd.position);
+                m_GunFlare.SetPosition(1, m_gunEnd.position + m_gunEnd.forward * lineLength);
 
                 yield return null;
                 timer += Time.deltaTime;

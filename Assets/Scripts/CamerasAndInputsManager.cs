@@ -81,7 +81,9 @@ namespace RailShooter.Utils
         void Update()
         {
             //set the current input
+            OVRInput.Update();
             OVRInput.Controller controller = OVRInput.GetConnectedControllers();
+            Debug.Log(controller);
             m_currentInputName = controller.ToString();
             if (m_currentInputName == "None")
                 m_currentInputName = "Mouse";

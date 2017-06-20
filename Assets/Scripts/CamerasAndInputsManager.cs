@@ -67,6 +67,32 @@ namespace RailShooter.Utils
 
             m_currentCamera.transform.parent.gameObject.SetActive(true);
             Debug.Log("Selected Camera = "  + m_currentCamera.name);
+
+			//test in awake
+
+			//set the current input
+			OVRInput.Update();
+			OVRInput.Controller controller = OVRInput.GetConnectedControllers();
+			Debug.Log("Controller selected = " + controller);
+
+			m_currentInputName = controller.ToString();
+			if (m_currentInputName == "None")
+				m_currentInputName = "Mouse";
+			if (controller == OVRInput.Controller.Touch)
+			{
+				m_currentInputs = m_TwoArmsWeapon;
+				for(int i = 0; i < m_TwoArmsWeapon.Length; i++)
+					m_TwoArmsWeapon[i].SetActive(true);
+				m_OneArmWeapon.SetActive(false);
+			}
+
+			else
+			{
+				//m_currentInputs[0] = m_OneArmWeapon;
+				for (int i = 0; i < m_TwoArmsWeapon.Length; i++)
+					m_TwoArmsWeapon[i].SetActive(false);
+				m_OneArmWeapon.SetActive(true);
+			}
         }
 
         public Transform GetCurrentCameraRoot()
@@ -78,7 +104,7 @@ namespace RailShooter.Utils
             return m_currentCamera.GetComponent<Inputs>();
         }
 
-        void Update()
+        /*void Update()
         {
             //set the current input
             OVRInput.Update();
@@ -102,6 +128,6 @@ namespace RailShooter.Utils
                     m_TwoArmsWeapon[i].SetActive(false);
                 m_OneArmWeapon.SetActive(true);
             }
-        }
+        }*/
     }
 }

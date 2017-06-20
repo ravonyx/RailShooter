@@ -72,8 +72,11 @@ namespace Assets.RailShooter
 
             if(m_audio)
                 m_audio.Play();
-            if(m_particleExplosion)
-                m_particleExplosion.StartEffect();
+			if (m_particleExplosion) 
+			{
+				m_particleExplosion.transform.parent = null;
+				m_particleExplosion.StartEffect ();
+			}
             if (m_light)
                 m_light.enabled = false;
             if (m_gainPoints)

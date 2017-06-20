@@ -38,16 +38,16 @@ namespace Assets.RailShooter
         private PKFxFX m_ShootParticles;
         [SerializeField]
         private PKFxFX m_impactParticles;
-
         [SerializeField]
         private float m_DefaultLineLength = 70f;
         [SerializeField]
-        private LineRenderer m_GunFlare;   
-        [SerializeField]
         private float m_GunFlareVisibleSeconds = 0.1f;
-
         [SerializeField]
         private RailShooterPlayer m_playerHealth;
+
+		//Line renderer native does not work with VR
+		private LineRenderer m_gunFlare;   
+		private VRLineRenderer m_vrGunFlare;   
 
         private Inputs m_inputs;
         private Raycaster m_raycaster;
@@ -90,6 +90,11 @@ namespace Assets.RailShooter
                     }
                 }
             }
+
+			if (VRSettings.enabled)
+				m_vrGunFlare = GetComponent<VRLineRenderer> ();
+			else
+				m_gunFlare = GetComponent<LineRenderer> ();
         }
 
         private void Update()
@@ -103,6 +108,7 @@ namespace Assets.RailShooter
                     m_cameraTransform = cam.transform;
                     if (m_camInputManager.CurrentInputName == "Gamepad")
                         m_VRReticle = cam.GetComponent<Reticle>();
+
                     m_init = true;
                 }
 
@@ -175,9 +181,17 @@ namespace Assets.RailShooter
             //shoot line + muzzle flash
             m_ShootParticles.StartEffect();
 
-            m_GunFlare.enabled = true;
+			if(VRSettings.enabled)
+				m_vrGunFlare.enabled = true;
+			else
+				m_gunFlare.enabled = true;
+
             yield return StartCoroutine(MoveLineRenderer(lineLength));
-            m_GunFlare.enabled = false;
+
+			if(VRSettings.enabled)
+				m_vrGunFlare.enabled = false;
+			else
+				m_gunFlare.enabled = false;
         }
 
         private IEnumerator MoveLineRenderer(float lineLength)
@@ -185,9 +199,19 @@ namespace Assets.RailShooter
             float timer = 0f;
             while (timer < m_GunFlareVisibleSeconds)
             {
-                m_GunFlare.SetPosition(0, m_gunEnd.position);
-                m_GunFlare.SetPosition(1, m_gunEnd.position + m_gunEnd.forward * lineLength);
 
+				if (VRSettings.enabled) 
+				{
+					m_vrGunFlare.SetPosition (0, m_gunEnd.position);
+					m_vrGunFlare.SetPosition (1, m_gunEnd.position + m_gunEnd.forward * lineLength);
+				}
+				else
+				{
+					m_gunFlare.SetPosition(0, m_gunEnd.position);
+					m_gunFlare.SetPosition(1, m_gunEnd.position + m_gunEnd.forward * lineLength);
+
+				}
+             
                 yield return null;
                 timer += Time.deltaTime;
             }

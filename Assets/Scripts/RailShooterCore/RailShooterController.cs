@@ -12,9 +12,15 @@ namespace Assets.RailShooter
     {
         [SerializeField] private SessionData.GameType m_gameType;      
 
-        [SerializeField] private Transform m_start;              
-        [SerializeField] private SelectionSlider m_selectionSlider;
+        [SerializeField] 
+		private Transform m_start;              
+        [SerializeField] 
+		private SelectionSlider m_selectionSlider;
         [SerializeField]
+		private CamerasAndInputsManager m_camInputsManager;
+		[SerializeField]
+		private Reticle m_reticleTouch;
+
         private Reticle m_reticle;
 
         //camera variables
@@ -32,9 +38,7 @@ namespace Assets.RailShooter
         private CameraFade m_cameraFade;           // Reference to the script that fades the scene to black.
 
         //control movement of player
-        [SerializeField] private PathWalker m_pathWalker;         
-
-                             
+        private PathWalker m_pathWalker;         
         public bool IsPlaying { get; private set; }
         private int m_stepTutorial;
 
@@ -42,15 +46,18 @@ namespace Assets.RailShooter
 
         private IEnumerator Start()
         {
-            m_cameraFade = Camera.main.GetComponent<CameraFade>();
+			Camera camera = m_camInputsManager.CurrentCamera;
+			m_cameraFade = camera.GetComponent<CameraFade>();
+			m_camera = camera.transform;
+			m_selectionRadial = camera.GetComponent<SelectionRadial>();
+			m_pathWalker = camera.GetComponentInParent<PathWalker>();
+
+			if (m_camInputsManager.CurrentInputName == "Touch") 
+				m_reticle = m_reticleTouch;
+			else 
+				m_reticle = camera.GetComponent<Reticle> ();
 
             SessionData.SetGameType(m_gameType);
-
-            m_camera = Camera.main.transform;
-            m_selectionRadial = m_camera.GetComponent<SelectionRadial>();
-
-            m_pathWalker = m_camera.GetComponentInParent<PathWalker>();
-
             //loop to all phases
             while (true)
             {

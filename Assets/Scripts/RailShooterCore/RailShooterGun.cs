@@ -61,7 +61,7 @@ namespace Assets.RailShooter
 
         private void OnEnable ()
         {
-            m_inputs = m_camInputManager.GetCurrentInputs();
+            m_inputs = m_camInputManager.CurrentInputs;
             m_inputs.OnDown += HandleDown;
         }
 
@@ -72,7 +72,8 @@ namespace Assets.RailShooter
 
         void Start()
         {
-            m_init = false;
+            m_gunEnd = null;
+            m_gunContainer = null;
             for (int i = 0; i < transform.childCount; i++)
             {
                 Transform child = transform.GetChild(i);
@@ -81,17 +82,30 @@ namespace Assets.RailShooter
                     m_gunContainer = child;
                     for (int j = 0; j < m_gunContainer.childCount; j++)
                     {
-                        child = m_gunContainer.GetChild(i);
+                        child = m_gunContainer.GetChild(j);
                         if (child.tag == "GunEnd")
                         {
                             m_gunEnd = child;
                             break;
                         }
                     }
+
                 }
             }
 
-			if (VRSettings.enabled)
+            if (m_camInputManager.CurrentInputName == "Mouse" || m_camInputManager.CurrentInputName == "Gamepad")
+            {
+                Camera cam = m_camInputManager.CurrentCamera;
+                m_raycaster = cam.GetComponent<Raycaster>();
+                m_cameraTransform = cam.transform;
+                if (m_camInputManager.CurrentInputName == "Gamepad")
+                    m_VRReticle = cam.GetComponent<Reticle>();
+            }
+
+            else if (m_camInputManager.CurrentInputName == "Touch")
+                m_raycaster = GetComponent<Raycaster>();
+
+            if (VRSettings.enabled)
 				m_vrGunFlare = GetComponent<VRLineRenderer> ();
 			else
 				m_gunFlare = GetComponent<LineRenderer> ();
@@ -99,57 +113,35 @@ namespace Assets.RailShooter
 
         private void Update()
         {
-            if(!m_init)
+            //move the weapon in function of Type of Inputs
+            if (m_camInputManager.CurrentInputName == "Mouse")
             {
-                if (m_camInputManager.CurrentInputName == "Mouse" || m_camInputManager.CurrentInputName == "Gamepad")
-                {
-                    Camera cam = m_camInputManager.CurrentCamera;
-                    m_raycaster = cam.GetComponent<Raycaster>();
-                    m_cameraTransform = cam.transform;
-                    if (m_camInputManager.CurrentInputName == "Gamepad")
-                        m_VRReticle = cam.GetComponent<Reticle>();
-
-                    m_init = true;
-                }
-
-                else if (m_camInputManager.CurrentInputName == "Touch")
-                {
-                    m_raycaster = GetComponent<Raycaster>();
-                    m_init = true;
-                }
+                transform.rotation = m_cameraTransform.rotation;
+                transform.position = m_cameraTransform.position;
             }
-            else
+            else if (m_camInputManager.CurrentInputName == "Gamepad")
             {
-                //move the weapon in function of Type of Inputs
-                if (m_camInputManager.CurrentInputName == "Mouse")
-                {
-                    transform.rotation = m_cameraTransform.rotation;
-                    transform.position = m_cameraTransform.position;
-                }
-                else if (m_camInputManager.CurrentInputName == "Gamepad")
-                {
-                    transform.rotation = Quaternion.Slerp(transform.rotation, InputTracking.GetLocalRotation(VRNode.Head),
-                  m_Damping * (1 - Mathf.Exp(k_DampingCoef * Time.deltaTime)));
+                transform.rotation = Quaternion.Slerp(transform.rotation, InputTracking.GetLocalRotation(VRNode.Head),
+                m_Damping * (1 - Mathf.Exp(k_DampingCoef * Time.deltaTime)));
 
-                    transform.position = m_cameraTransform.position;
+                transform.position = m_cameraTransform.position;
 
-                    Quaternion lookAtRotation = Quaternion.LookRotation(m_VRReticle.ReticleTransform.position - m_gunContainer.position);
-                    m_gunContainer.rotation = Quaternion.Slerp(m_gunContainer.rotation, lookAtRotation, m_GunContainerSmoothing * Time.deltaTime);
-                }
-                else if (m_camInputManager.CurrentInputName == "Touch")
+                Quaternion lookAtRotation = Quaternion.LookRotation(m_VRReticle.ReticleTransform.position - m_gunContainer.position);
+                m_gunContainer.rotation = Quaternion.Slerp(m_gunContainer.rotation, lookAtRotation, m_GunContainerSmoothing * Time.deltaTime);
+            }
+            else if (m_camInputManager.CurrentInputName == "Touch")
+            {
+                //Update anchors of touch weapon
+                OVRInput.Update();
+                if (tag == "LTouch")
                 {
-                    //Update anchors of touch weapon
-                    OVRInput.Update();
-                    if (tag == "LTouch")
-                    {
-                        transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.LTouch);
-                        transform.localPosition = OVRInput.GetLocalControllerPosition(OVRInput.Controller.LTouch);
-                    }
-                    else if (tag == "RTouch")
-                    {
-                        transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTouch);
-                        transform.localPosition = OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch);
-                    }
+                    transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.LTouch);
+                    transform.localPosition = OVRInput.GetLocalControllerPosition(OVRInput.Controller.LTouch);
+                }
+                else if (tag == "RTouch")
+                {
+                    transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTouch);
+                    transform.localPosition = OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch);
                 }
             }
         }
@@ -200,13 +192,13 @@ namespace Assets.RailShooter
             while (timer < m_GunFlareVisibleSeconds)
             {
 
-				if (VRSettings.enabled) 
-				{
-					m_vrGunFlare.SetPosition (0, m_gunEnd.position);
-					m_vrGunFlare.SetPosition (1, m_gunEnd.position + m_gunEnd.forward * lineLength);
-				}
-				else
-				{
+				//if (VRSettings.enabled) 
+				//{
+				//	m_vrGunFlare.SetPosition (0, m_gunEnd.position);
+				//	m_vrGunFlare.SetPosition (1, m_gunEnd.position + m_gunEnd.forward * lineLength);
+				//}
+                if (!VRSettings.enabled)
+                {
 					m_gunFlare.SetPosition(0, m_gunEnd.position);
 					m_gunFlare.SetPosition(1, m_gunEnd.position + m_gunEnd.forward * lineLength);
 

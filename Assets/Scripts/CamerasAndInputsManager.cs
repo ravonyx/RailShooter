@@ -30,15 +30,6 @@ namespace RailShooter.Utils
             }
         }
 
-        private GameObject[] m_currentInputs;
-        public GameObject[] CurrentInputs
-        {
-            get
-            {
-                return m_currentInputs;
-            }
-        }
-
         private string m_currentInputName;
         public string CurrentInputName
         {
@@ -48,8 +39,18 @@ namespace RailShooter.Utils
             }
         }
 
-        void Awake()
+        private Inputs m_currentInputs;
+        public Inputs CurrentInputs
         {
+            get
+            {
+                return m_currentInputs;
+            }
+        }
+
+        void OnEnable()
+        {
+            m_currentInputs = GetComponent<Inputs>();
             //TODO : add fove camera
             //set the current camera
             if (VRSettings.enabled)
@@ -80,7 +81,6 @@ namespace RailShooter.Utils
 				m_currentInputName = "Mouse";
 			if (controller == OVRInput.Controller.Touch)
 			{
-				m_currentInputs = m_TwoArmsWeapon;
 				for(int i = 0; i < m_TwoArmsWeapon.Length; i++)
 					m_TwoArmsWeapon[i].SetActive(true);
 				m_OneArmWeapon.SetActive(false);
@@ -88,7 +88,6 @@ namespace RailShooter.Utils
 
 			else
 			{
-				//m_currentInputs[0] = m_OneArmWeapon;
 				for (int i = 0; i < m_TwoArmsWeapon.Length; i++)
 					m_TwoArmsWeapon[i].SetActive(false);
 				m_OneArmWeapon.SetActive(true);
@@ -98,10 +97,6 @@ namespace RailShooter.Utils
         public Transform GetCurrentCameraRoot()
         {
             return m_currentCamera.transform.parent;
-        }
-        public Inputs GetCurrentInputs()
-        {
-            return m_currentCamera.GetComponent<Inputs>();
         }
 
         /*void Update()

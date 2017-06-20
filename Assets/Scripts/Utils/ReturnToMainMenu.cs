@@ -10,11 +10,13 @@ namespace RailShooter.Utils
     {
         [SerializeField] private string m_menuSceneName = "MainMenu";   
         [SerializeField] private CameraFade m_cameraFade;
+        [SerializeField] private CamerasAndInputsManager m_camInputManager;
 
         private Inputs m_inputs;
         private void OnEnable ()
         {
-            m_inputs = GetComponent<Inputs>();
+            m_inputs = m_camInputManager.CurrentInputs;
+
             m_inputs.OnCancel += HandleCancel;
             m_cameraFade = GetComponent<CameraFade>();
         }

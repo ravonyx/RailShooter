@@ -51,7 +51,7 @@ namespace RailShooter.Utils
 
         private void OnEnable ()
         {
-            m_inputs = m_camInputManager.GetCurrentInputs();
+            m_inputs = m_camInputManager.CurrentInputs;
 
             m_inputs.OnDoubleClick += HandleDoubleClick;
             m_inputs.OnClick += HandleClick;

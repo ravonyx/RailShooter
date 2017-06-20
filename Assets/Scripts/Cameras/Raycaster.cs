@@ -22,6 +22,8 @@ namespace Assets.RailShooter
 
         [SerializeField]
         private PKFxFX m_impactParticles;
+        [SerializeField]
+        private CamerasAndInputsManager m_camInputManager;
 
         public Vector3 m_LastHitPoint
         {
@@ -40,7 +42,7 @@ namespace Assets.RailShooter
 
         private void OnEnable()
         {
-            m_inputs = GetComponent<Inputs>();
+            m_inputs = m_camInputManager.CurrentInputs;
 
             m_inputs.OnClick += HandleClick;
             m_inputs.OnDoubleClick += HandleDoubleClick;

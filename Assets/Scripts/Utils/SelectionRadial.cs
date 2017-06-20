@@ -15,6 +15,8 @@ namespace VRStandardAssets.Utils
         [SerializeField] private float m_SelectionDuration = 2f;                                
         [SerializeField] private bool m_HideOnStart = true;                                     // Whether or not the bar should be visible at the start.
         [SerializeField] private Image m_Selection;                                             // Reference to the image who's fill amount is adjusted to display the bar.
+        [SerializeField]
+        private CamerasAndInputsManager m_camInputManager;
 
         private Inputs m_inputs;
         private Coroutine m_SelectionFillRoutine;                                               // Used to start and stop the filling coroutine based on input.
@@ -25,7 +27,7 @@ namespace VRStandardAssets.Utils
 
         private void OnEnable()
         {
-            m_inputs = GetComponent<Inputs>();
+            m_inputs = m_camInputManager.CurrentInputs;
 
             m_inputs.OnDown += HandleDown;
             m_inputs.OnUp += HandleUp;

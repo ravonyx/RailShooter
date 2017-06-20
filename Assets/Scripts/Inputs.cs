@@ -46,6 +46,15 @@ namespace RailShooter.Utils
             if (Input.GetButtonDown("Fire1"))
             {
                 m_MouseDownPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                Debug.Log("Fire1");
+                if (OnDown != null)
+                    OnDown();
+            }
+
+            if (Input.GetButtonDown("Fire2"))
+            {
+                Debug.Log("Fire2");
+                m_MouseDownPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                 if (OnDown != null)
                     OnDown();
             }

@@ -41,7 +41,7 @@ namespace RailShooter.Utils
         
         private void OnEnable ()
         {
-            m_inputs = m_camInputManager.GetCurrentInputs();
+            m_inputs = m_camInputManager.CurrentInputs;
 
             m_inputs.OnDown += HandleDown;
             m_inputs.OnUp += HandleUp;

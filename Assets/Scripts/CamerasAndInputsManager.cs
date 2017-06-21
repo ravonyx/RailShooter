@@ -21,6 +21,9 @@ namespace RailShooter.Utils
         [SerializeField]
         private GameObject[] m_TwoArmsWeapon;
 
+        [SerializeField]
+        private bool m_menu;
+
         private Camera m_currentCamera;
         public Camera CurrentCamera
         {
@@ -69,7 +72,10 @@ namespace RailShooter.Utils
             m_currentCamera.transform.parent.gameObject.SetActive(true);
             Debug.Log("Selected Camera = "  + m_currentCamera.name);
 
-			//test in awake
+            //test in awake
+
+            if (m_menu)
+                return;
 
 			//set the current input
 			OVRInput.Update();
@@ -98,31 +104,5 @@ namespace RailShooter.Utils
         {
             return m_currentCamera.transform.parent;
         }
-
-        /*void Update()
-        {
-            //set the current input
-            OVRInput.Update();
-            OVRInput.Controller controller = OVRInput.GetConnectedControllers();
-            Debug.Log(controller);
-            m_currentInputName = controller.ToString();
-            if (m_currentInputName == "None")
-                m_currentInputName = "Mouse";
-            if (controller == OVRInput.Controller.Touch)
-            {
-                m_currentInputs = m_TwoArmsWeapon;
-                for(int i = 0; i < m_TwoArmsWeapon.Length; i++)
-                    m_TwoArmsWeapon[i].SetActive(true);
-                m_OneArmWeapon.SetActive(false);
-            }
-
-            else
-            {
-                //m_currentInputs[0] = m_OneArmWeapon;
-                for (int i = 0; i < m_TwoArmsWeapon.Length; i++)
-                    m_TwoArmsWeapon[i].SetActive(false);
-                m_OneArmWeapon.SetActive(true);
-            }
-        }*/
     }
 }

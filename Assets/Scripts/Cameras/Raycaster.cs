@@ -25,15 +25,6 @@ namespace Assets.RailShooter
         [SerializeField]
         private CamerasAndInputsManager m_camInputManager;
 
-        public Vector3 m_LastHitPoint
-        {
-            get
-            {
-                return m_lastHitPoint;
-            }
-        }
-        private Vector3 m_lastHitPoint;
-
         // Utility for other classes to get the current interactive item
         public InteractiveItem CurrentInteractible
         {
@@ -74,13 +65,14 @@ namespace Assets.RailShooter
                 Debug.DrawRay(transform.position, transform.forward * 5.0f, Color.blue, 1.0f);
             ray = new Ray(transform.position, transform.forward);
 
+
             if (Physics.Raycast(ray, out hit, m_rayLength, ~m_exclusionLayers))
             {
                 InteractiveItem interactible = hit.collider.GetComponent<InteractiveItem>(); //attempt to get the InteractiveItem on the hit object
                 m_currentInteractible = interactible;
 
-                m_lastHitPoint = hit.point;
-                m_impactParticles.transform.position = m_LastHitPoint;
+                if(m_impactParticles)
+                    m_impactParticles.transform.position = hit.point;
 
                 if (interactible && interactible != m_lastInteractible)
                     interactible.Over();
@@ -98,6 +90,10 @@ namespace Assets.RailShooter
             {
                 DeactiveLastInteractible();
                 m_currentInteractible = null;
+
+                Vector3 point = transform.position + transform.forward * 20f;
+                if (m_impactParticles)
+                    m_impactParticles.transform.position = point;
 
                 if (m_reticle)
                     m_reticle.SetPosition();

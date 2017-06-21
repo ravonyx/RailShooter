@@ -148,7 +148,7 @@ namespace Assets.RailShooter
 
         private void HandleDown ()
         {
-           if (!m_ShootingGalleryController.IsPlaying)
+           if (!m_ShootingGalleryController.IsPlaying || tag == "LTouch")
                 return;
 
             RailShooterEntity shootingTarget = m_raycaster.CurrentInteractible ? m_raycaster.CurrentInteractible.GetComponent<RailShooterEntity>() : null;
@@ -156,6 +156,16 @@ namespace Assets.RailShooter
             StartCoroutine(Fire(target));
         }
 
+        private void HandleDownLeft()
+        {
+            if (!m_ShootingGalleryController.IsPlaying || tag == "RTouch")
+                return;
+
+            RailShooterEntity shootingTarget = m_raycaster.CurrentInteractible ? m_raycaster.CurrentInteractible.GetComponent<RailShooterEntity>() : null;
+            Transform target = shootingTarget ? shootingTarget.transform : null;
+            StartCoroutine(Fire(target));
+
+        }
         private IEnumerator Fire(Transform target)
         {
             if (target != null && target.name == "Health")

@@ -17,4 +17,9 @@ public class RailShooterEnemy : MonoBehaviour
 	void Update () {
 		
 	}
+
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other);
+    }
 }

@@ -42,8 +42,6 @@ namespace Assets.RailShooter
         public bool IsPlaying { get; private set; }
         private int m_stepTutorial;
 
-        Coroutine m_lastRoutine = null;
-
         private IEnumerator Start()
         {
 			Camera camera = m_camInputsManager.CurrentCamera;
@@ -52,10 +50,13 @@ namespace Assets.RailShooter
 			m_selectionRadial = camera.GetComponent<SelectionRadial>();
 			m_pathWalker = camera.GetComponentInParent<PathWalker>();
 
+
 			if (m_camInputsManager.CurrentInputName == "Touch") 
 				m_reticle = m_reticleTouch;
 			else 
 				m_reticle = camera.GetComponent<Reticle> ();
+
+            Debug.Log("Reticle " + m_reticle);
 
             SessionData.SetGameType(m_gameType);
             //loop to all phases

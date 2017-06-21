@@ -23,7 +23,6 @@ namespace RailShooter.Utils
         private Coroutine m_WarningCoroutine;                                           // Reference to the coroutine that displays the warning message so it can be stopped prematurely.
         private Coroutine m_SingleClickDelayCoroutine;                                  // It isn't clear whether a click will be a double for a short time, this delays the check.
         private bool m_DisplayingWarning;                                               // Whether the warning is currently being displayed.
-        private Inputs.SwipeDirection m_CurrentSwipe;                                  // The swipe being used this frame, this is used to determine whether a click is a swipe.
         private float m_DownTime;                                                       // This is used to determine whether a click is actually a hold.
         private Vector3 m_WarningPosition;                                              // The position that the warning should stick to.
         private float m_ScaleMultiplier;                                                // The warning needs to have an appropriate size based on the Reticle's scale.
@@ -55,19 +54,15 @@ namespace RailShooter.Utils
 
             m_inputs.OnDoubleClick += HandleDoubleClick;
             m_inputs.OnClick += HandleClick;
-            m_inputs.OnSwipe += HandleSwipe;
             m_inputs.OnDown += HandleDown;
         }
-
 
         private void OnDisable ()
         {
             m_inputs.OnDoubleClick -= HandleDoubleClick;
             m_inputs.OnClick -= HandleClick;
-            m_inputs.OnSwipe -= HandleSwipe;
             m_inputs.OnDown -= HandleDown;
         }
-
 
         private void HandleDoubleClick ()
         {
@@ -88,24 +83,15 @@ namespace RailShooter.Utils
                 return;
 
             // If warning should be shown for single clicks and there is no current swipe direction, start a coroutine to check it's not a double click.
-            if (m_ShowSingleTapWarnings && m_CurrentSwipe == Inputs.SwipeDirection.NONE)
+            if (m_ShowSingleTapWarnings)
                 m_SingleClickDelayCoroutine = StartCoroutine(SingleClickCheckDelay ());
         }
-
-
-        private void HandleSwipe (Inputs.SwipeDirection swipe)
-        {
-            // Store the swipe this frame.
-            m_CurrentSwipe = swipe;
-        }
-
 
         private void HandleDown ()
         {
             // Store the time when the button is pressed.
             m_DownTime = Time.time;
         }
-
 
         private IEnumerator SingleClickCheckDelay ()
         {
@@ -115,7 +101,6 @@ namespace RailShooter.Utils
             // If this coroutine hasn't been stopped by another HandleClick function then display the single tap warning message.
             m_WarningCoroutine = StartCoroutine (DisplayWarning (m_SingleTapWarningMessage));
         }
-
 
         private IEnumerator DisplayWarning (string message)
         {
@@ -150,7 +135,6 @@ namespace RailShooter.Utils
             m_DisplayingWarning = false;
         }
 
-
         public void TurnOnDoubleTapWarnings ()
         {
             // If double tap warnings are already being shown nothing needs to be done so return.
@@ -168,13 +152,11 @@ namespace RailShooter.Utils
             m_WarningText.text = string.Empty;
         }
 
-
         public void TurnOffDoubleTapWarnings ()
         {
             // No longer show double tap warnings.
             m_ShowDoubleTapWarnings = false;
         }
-
 
         public void TurnOnSingleTapWarnings ()
         {
@@ -192,7 +174,6 @@ namespace RailShooter.Utils
             // Set the component to display nothing.
             m_WarningText.text = string.Empty;
         }
-
 
         public void TurnOffSingleTapWarnings ()
         {

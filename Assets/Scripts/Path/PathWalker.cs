@@ -4,9 +4,12 @@ using System;
 using System.Collections;
 using UnityEngine.VR;
 using VRStandardAssets.Common;
+using Assets.RailShooter;
 
 public class PathWalker : MonoBehaviour
 {
+    [SerializeField]
+    private RailShooterController m_railShooterController;
     [SerializeField]
     private Path m_path;
     [SerializeField]
@@ -61,11 +64,12 @@ public class PathWalker : MonoBehaviour
 
     void Update()
     {
-        if (!m_walking || m_indexStopPoint >= m_path.stopPoints.Count)
+        if (!m_walking || m_indexStopPoint >= m_path.stopPoints.Count || !m_railShooterController.IsPlaying)
             return;
 
         Vector3 position = m_path.GetPathPoint(m_progress).point;
         Vector3 transformedPos = m_pathTransform.TransformPoint(position);
+        transform.rotation = Quaternion.LookRotation(m_path.GetPathPoint(m_progress).forward);
 
         transform.position = new Vector3(transformedPos.x, transformedPos.y + m_deltaY, transformedPos.z);
         if (m_enemy)

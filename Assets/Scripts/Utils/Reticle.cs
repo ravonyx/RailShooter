@@ -46,7 +46,6 @@ namespace RailShooter.Utils
             Camera camera = m_camInputManager.CurrentCamera;
             float distance = camera.farClipPlane * 0.95f;
 
-            Debug.Log("distance = " + distance);
             m_ReticleTransform.position = transform.position + (transform.forward * distance);
             m_ReticleTransform.localScale = m_OriginalScale * distance;
             m_ReticleTransform.localRotation = m_OriginalRotation;

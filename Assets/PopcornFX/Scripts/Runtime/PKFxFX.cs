@@ -87,7 +87,9 @@ public class PKFxFX : PKFxPackDependent
 			this.m_FxAttributesList = new List<PKFxManager.Attribute>();
 		if (this.m_FxSamplersList == null)
 			this.m_FxSamplersList = new List<PKFxManager.Sampler>();
-	}
+        m_IsPlaying = false;
+        m_IsStopped = false;
+    }
 
 	//----------------------------------------------------------------------------
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Assets.RailShooter;
 using UnityEngine.UI;
+using RailShooter.Utils;
 
 public class RailShooterPlayer : MonoBehaviour
 {
@@ -10,8 +11,7 @@ public class RailShooterPlayer : MonoBehaviour
     private float m_lifeMax;
     [SerializeField]
     private float m_lifeToRemove;
-    [SerializeField]
-    private Image m_lifeBar;
+
     [SerializeField]
     private float m_timeRegen;
     [SerializeField]
@@ -21,15 +21,27 @@ public class RailShooterPlayer : MonoBehaviour
     private PKFxFX m_FXHealth;
     private float m_currentLife;
 
+    private Image m_lifeBar;
     private bool m_ending;
 
     [SerializeField]
+    private Image m_lifeBarContainer;
+    [SerializeField]
+    private Image m_lifeBarContainerVR;
+
+    [SerializeField]
     private RailShooterController m_railShooterController;
+    [SerializeField]
+    private CamerasAndInputsManager m_camInputManager;
 
     void Start()
     {
         m_ending = false;
         m_currentLife = m_lifeMax;
+        if (m_camInputManager.CurrentInputName == "Touch")
+            m_lifeBar = m_lifeBarContainerVR;
+        else
+            m_lifeBar = m_lifeBarContainer;
     }
 
     public IEnumerator EvolveLife(bool increase)

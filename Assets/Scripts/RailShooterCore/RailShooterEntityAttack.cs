@@ -8,7 +8,7 @@ namespace Assets.RailShooter
     public class RailShooterEntityAttack : MonoBehaviour
     {
         [SerializeField]
-        private Transform m_player;
+        private CamerasAndInputsManager m_camInputManager;
         [SerializeField]
         private float m_distanceToAttack;
         [SerializeField]
@@ -19,18 +19,29 @@ namespace Assets.RailShooter
 
         private float m_nextFire = 0.0F;
         private Renderer m_renderer;
+        private Transform m_player;
 
         void Start()
         {
             m_renderer = GetComponent<Renderer>();
+            Camera camera = m_camInputManager.CurrentCamera;
+
+            for (int i = 0; i < camera.transform.childCount; i++)
+            {
+                Transform child = camera.transform.GetChild(i);
+                if (child.tag == "Player")
+                    m_player = child;
+            }
+        
         }
         void Update()
         {
             if (!m_renderer.enabled)
                 return;
             float distance = Vector3.Distance(m_renderer.bounds.center, m_player.position);
-            if(Time.time > m_nextFire && distance <= m_distanceToAttack)
+            if (Time.time > m_nextFire && distance <= m_distanceToAttack)
             {
+                Debug.Log("Fire");
                 m_nextFire = Time.time + m_fireRate;
                 Fire();
             }

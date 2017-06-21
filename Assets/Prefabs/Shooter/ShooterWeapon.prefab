@@ -169,19 +169,6 @@ Transform:
   m_Father: {fileID: 433588}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &462456
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1537334494677724}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.061628435, w: -0.70441604}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4221597353296534}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 5, y: 270, z: 5}
 --- !u!23 &2396508
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -368,8 +355,8 @@ MonoBehaviour:
   m_GunAudio: {fileID: 8212896}
   m_ShootingGalleryController: {fileID: 0}
   m_Speed: 150
-  m_ShootParticles: {fileID: 114752727901693710}
-  m_impactParticles: {fileID: 114760308965898046}
+  m_ShootParticles: {fileID: 114478885339378538}
+  m_impactParticles: {fileID: 114818285973496546}
   m_DefaultLineLength: 150
   m_GunFlareVisibleSeconds: 0.1
   m_playerHealth: {fileID: 0}
@@ -460,7 +447,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 00af2a1673a7f2f45bb430ba3cb6b6f4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ab41c0a2ca954c64797bfdece0e06c1c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -515,7 +502,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 00af2a1673a7f2f45bb430ba3cb6b6f4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ab41c0a2ca954c64797bfdece0e06c1c, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -682,31 +669,31 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 103798}
   m_IsPrefabParent: 1
---- !u!1 &1537334494677724
+--- !u!1 &1393908297191766
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 462456}
-  - component: {fileID: 114752727901693710}
+  - component: {fileID: 4102049059661450}
+  - component: {fileID: 114478885339378538}
   m_Layer: 0
-  m_Name: Particle
+  m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!1 &1881671576599436
+--- !u!1 &1524645690615488
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4308060070844496}
-  - component: {fileID: 114760308965898046}
+  - component: {fileID: 4337531209000604}
+  - component: {fileID: 114818285973496546}
   m_Layer: 0
   m_Name: Impact
   m_TagString: Untagged
@@ -714,6 +701,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4102049059661450
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1393908297191766}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.061628435, w: -0.70441604}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4221597353296534}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 5, y: 270, z: 5}
 --- !u!4 &4221597353296534
 Transform:
   m_ObjectHideFlags: 1
@@ -724,17 +724,17 @@ Transform:
   m_LocalPosition: {x: -0.0131, y: 0.0193, z: 0.2398}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 462456}
-  - {fileID: 4308060070844496}
+  - {fileID: 4102049059661450}
+  - {fileID: 4337531209000604}
   m_Father: {fileID: 445504}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4308060070844496
+--- !u!4 &4337531209000604
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1881671576599436}
+  m_GameObject: {fileID: 1524645690615488}
   m_LocalRotation: {x: -0, y: -0.01079599, z: -0, w: 0.99994177}
   m_LocalPosition: {x: -2.7077725, y: -1.3292999, z: 5.7411203}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -742,12 +742,12 @@ Transform:
   m_Father: {fileID: 4221597353296534}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114752727901693710
+--- !u!114 &114478885339378538
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1537334494677724}
+  m_GameObject: {fileID: 1393908297191766}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a5c02dd42880460b914f6e0206b8c28, type: 3}
@@ -885,12 +885,12 @@ MonoBehaviour:
   m_PlayOnStart: 0
   m_BoundFx: {fileID: 102900000, guid: c1baf6ae7a6217f4887a6b1777d42fb0, type: 3}
   m_FxName: Particles/MuzzleFlash.pkfx
---- !u!114 &114760308965898046
+--- !u!114 &114818285973496546
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1881671576599436}
+  m_GameObject: {fileID: 1524645690615488}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a5c02dd42880460b914f6e0206b8c28, type: 3}
@@ -936,9 +936,9 @@ MonoBehaviour:
       MaxValue1: 1
       MaxValue2: 1
       MaxValue3: 0
-    m_Value0: 1
-    m_Value1: 0.5
-    m_Value2: 0.25
+    m_Value0: 0
+    m_Value1: 1
+    m_Value2: 0
     m_Value3: 0
   - m_Descriptor:
       Type: 28
@@ -957,7 +957,7 @@ MonoBehaviour:
       MaxValue1: 0
       MaxValue2: 0
       MaxValue3: 0
-    m_Value0: 3
+    m_Value0: 5
     m_Value1: 0
     m_Value2: 0
     m_Value3: 0
@@ -999,7 +999,7 @@ MonoBehaviour:
       MaxValue1: 0
       MaxValue2: 0
       MaxValue3: 0
-    m_Value0: 6
+    m_Value0: 4
     m_Value1: 0
     m_Value2: 0
     m_Value3: 0

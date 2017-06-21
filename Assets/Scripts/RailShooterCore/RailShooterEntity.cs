@@ -46,10 +46,12 @@ namespace Assets.RailShooter
         private void OnEnable ()
         {
             m_interactiveItem.OnDown += HandleDown;
+            m_interactiveItem.OnDownLeft += HandleDown;
         }
         private void OnDisable ()
         {
             m_interactiveItem.OnDown -= HandleDown;
+            m_interactiveItem.OnDownLeft -= HandleDown;
         }
 
         private void OnDestroy()

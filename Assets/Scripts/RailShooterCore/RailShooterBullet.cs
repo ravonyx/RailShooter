@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RailShooter.Utils;
 
 namespace Assets.RailShooter
 {
     public class RailShooterBullet : MonoBehaviour
     {
+        [SerializeField]
+        private CamerasAndInputsManager m_camInputManager;
+
         public float life = 5f;
         [SerializeField]
         private Transform m_pool;
@@ -19,9 +23,7 @@ namespace Assets.RailShooter
         [SerializeField]
         private float m_speed;
 
-        [SerializeField]
         private Transform m_player;
-
         private Rigidbody m_rigidbody;
         public Rigidbody Rigidbody
         {
@@ -51,6 +53,17 @@ namespace Assets.RailShooter
         void Awake()
         {
             m_rigidbody = GetComponent<Rigidbody>();
+        }
+
+        private void Start()
+        {
+            Camera camera = m_camInputManager.CurrentCamera;
+            for (int i = 0; i < camera.transform.childCount; i++)
+            {
+                Transform child = camera.transform.GetChild(i);
+                if (child.tag == "Player")
+                    m_player = child;
+            }
         }
 
         private void OnEnable()

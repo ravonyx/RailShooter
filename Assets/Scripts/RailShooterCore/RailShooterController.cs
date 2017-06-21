@@ -56,8 +56,6 @@ namespace Assets.RailShooter
 			else 
 				m_reticle = camera.GetComponent<Reticle> ();
 
-            Debug.Log("Reticle " + m_reticle);
-
             SessionData.SetGameType(m_gameType);
             //loop to all phases
             while (true)
@@ -101,7 +99,6 @@ namespace Assets.RailShooter
                 for (int i = 0; i < m_pathWalker.StopPoints.Count; i++)
                 {
                     m_stepTutorial = -1;
-                    Debug.Log("walking");
                     yield return StartCoroutine(m_pathWalker.PlayUpdate());
                     if (i == 0)
                     {

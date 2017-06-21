@@ -63,11 +63,13 @@ namespace Assets.RailShooter
         {
             m_inputs = m_camInputManager.CurrentInputs;
             m_inputs.OnDown += HandleDown;
+            m_inputs.OnDownLeft += HandleDownLeft;
         }
 
         private void OnDisable ()
         {
             m_inputs.OnDown -= HandleDown;
+            m_inputs.OnDownLeft -= HandleDownLeft;
         }
 
         void Start()
@@ -202,11 +204,11 @@ namespace Assets.RailShooter
             while (timer < m_GunFlareVisibleSeconds)
             {
 
-				//if (VRSettings.enabled) 
-				//{
-				//	m_vrGunFlare.SetPosition (0, m_gunEnd.position);
-				//	m_vrGunFlare.SetPosition (1, m_gunEnd.position + m_gunEnd.forward * lineLength);
-				//}
+				if (VRSettings.enabled) 
+				{
+					m_vrGunFlare.SetPosition (0, m_gunEnd.position);
+					m_vrGunFlare.SetPosition (1, m_gunEnd.position + m_gunEnd.forward * 5000.0f);
+				}
                 if (!VRSettings.enabled)
                 {
 					m_gunFlare.SetPosition(0, m_gunEnd.position);

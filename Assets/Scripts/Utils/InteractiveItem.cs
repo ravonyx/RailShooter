@@ -16,6 +16,7 @@ namespace RailShooter.Utils
         public event Action OnDoubleClick;      // Called when double click input is detected whilst the gaze is over this object.
         public event Action OnUp;               // Called when Fire1 is released whilst the gaze is over this object.
         public event Action OnDown;             // Called when Fire1 is pressed whilst the gaze is over this object.
+        public event Action OnDownLeft;             // Called when Fire1 is pressed whilst the gaze is over this object.
 
         protected bool m_IsOver;
 
@@ -67,6 +68,12 @@ namespace RailShooter.Utils
         {
             if (OnDown != null)
                 OnDown();
+        }
+
+        public void DownLeft()
+        {
+            if (OnDownLeft != null)
+                OnDownLeft();
         }
     }
 }

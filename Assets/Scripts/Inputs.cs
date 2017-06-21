@@ -28,14 +28,12 @@ namespace RailShooter.Utils
         {
             if (Input.GetButtonDown("Fire1"))
             {
-                Debug.Log("Fire1");
                 if (OnDown != null)
                     OnDown();
             }
 
             if (Input.GetButtonDown("Fire2"))
             {
-                Debug.Log("Fire2");
                 if (OnDownLeft != null)
                     OnDownLeft();
             }

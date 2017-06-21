@@ -39,6 +39,7 @@ namespace Assets.RailShooter
             m_inputs.OnDoubleClick += HandleDoubleClick;
             m_inputs.OnUp += HandleUp;
             m_inputs.OnDown += HandleDown;
+            m_inputs.OnDownLeft += HandleDownLeft;
         }
 
 
@@ -48,6 +49,7 @@ namespace Assets.RailShooter
             m_inputs.OnDoubleClick -= HandleDoubleClick;
             m_inputs.OnUp -= HandleUp;
             m_inputs.OnDown -= HandleDown;
+            m_inputs.OnDownLeft -= HandleDownLeft;
         }
 
         void Start()
@@ -91,7 +93,7 @@ namespace Assets.RailShooter
                 DeactiveLastInteractible();
                 m_currentInteractible = null;
 
-                Vector3 point = transform.position + transform.forward * 20f;
+                Vector3 point = transform.position + transform.forward * 40f;
                 if (m_impactParticles)
                     m_impactParticles.transform.position = point;
 
@@ -122,6 +124,11 @@ namespace Assets.RailShooter
                 m_currentInteractible.Down();
         }
 
+        private void HandleDownLeft()
+        {
+            if (m_currentInteractible != null)
+                m_currentInteractible.DownLeft();
+        }
 
         private void HandleClick()
         {

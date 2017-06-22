@@ -24,7 +24,7 @@ Material:
     - first:
         name: _MoonTex
       second:
-        m_Texture: {fileID: 2800000, guid: 9e1c8edab15aa844082fcd05ad8b5d9f, type: 3}
+        m_Texture: {fileID: 2800000, guid: e894cff36344f5242801ae5fee4eda46, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -88,7 +88,7 @@ Material:
       second: {r: 0.1703071, g: 0.19616541, b: 0.36764705, a: 1}
     - first:
         name: _MoonTint
-      second: {r: 0.34439877, g: 0.47794116, b: 0.47794116, a: 1}
+      second: {r: 0.34439877, g: 0.47794116, b: 0.47794116, a: 0.559}
     - first:
         name: _SkyBottomColor
       second: {r: 0.016868481, g: 0, b: 0.47794116, a: 0}

@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.9117647, g: 0.9117647, b: 0.9117647, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 1
-  m_SkyboxMaterial: {fileID: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 4d0e0ffc7a6c1bf44b435e0b23260f8c, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -775,7 +775,7 @@ Prefab:
       objectReference: {fileID: 171981196}
     - target: {fileID: 11417264, guid: 904806be95c6f7644bf0c8303943662e, type: 2}
       propertyPath: m_SceneToLoad
-      value: Game
+      value: Tutorial
       objectReference: {fileID: 0}
     - target: {fileID: 11417264, guid: 904806be95c6f7644bf0c8303943662e, type: 2}
       propertyPath: m_SelectionRadialVR
@@ -2178,7 +2178,7 @@ Prefab:
       objectReference: {fileID: 1947940831}
     - target: {fileID: 11419562, guid: 19eafe53a7aadc644bc46200d92edfcb, type: 2}
       propertyPath: m_SceneToLoad
-      value: Game
+      value: SceneTest
       objectReference: {fileID: 0}
     - target: {fileID: 11419562, guid: 19eafe53a7aadc644bc46200d92edfcb, type: 2}
       propertyPath: m_SelectionRadialVR

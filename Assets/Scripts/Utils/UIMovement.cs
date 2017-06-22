@@ -28,18 +28,28 @@ namespace RailShooter.Utils
 
         private void Update()
         {
-			m_UIElement.transform.parent.position = new Vector3(m_UIElement.transform.parent.position.x, m_camera.position.y, m_UIElement.transform.parent.position.z);
             if(m_LookatCamera)
-				m_UIElement.rotation = Quaternion.LookRotation(m_UIElement.position - m_camera.position);
-
-            if (m_RotateWithCamera)
             {
-				Vector3 targetDirection = Vector3.ProjectOnPlane (m_camera.forward, Vector3.up).normalized;
-				Vector3 targetPosition = m_camera.position + targetDirection * m_DistanceFromCamera;
-                targetPosition = Vector3.Lerp(m_UIElement.position, targetPosition, m_FollowSpeed * Time.deltaTime);
-                targetPosition.y = m_UIElement.position.y;
-                m_UIElement.position = targetPosition;
+                m_UIElement.transform.position = new Vector3(m_camera.position.x, m_camera.position.y + 1.0f, m_camera.position.z) + m_camera.transform.parent.forward * m_DistanceFromCamera;
+                m_UIElement.transform.rotation = m_camera.transform.parent.rotation;
             }
-        }
+       
+
+            //	m_UIElement.transform.parent.position = new Vector3(m_UIElement.transform.parent.position.x, m_camera.position.y, m_UIElement.transform.parent.position.z);
+            //
+            //    if (m_LookatCamera)
+            //    {
+            //        m_UIElement.rotation = Quaternion.LookRotation(m_UIElement.position - m_camera.position);
+            //        m_UIElement.rotation = Quaternion.LookRotation(m_UIElement.position - m_camera.position);
+            //    }
+            //  if (m_RotateWithCamera)
+            //  {
+            //	Vector3 targetDirection = Vector3.ProjectOnPlane (m_camera.forward,m_camera.transform.parent.up).normalized;
+            //	Vector3 targetPosition = m_camera.position + targetDirection * m_DistanceFromCamera;
+            //      targetPosition = Vector3.Lerp(m_UIElement.position, targetPosition, m_FollowSpeed * Time.deltaTime);
+            //      targetPosition.y = m_UIElement.position.y;
+            //      m_UIElement.position = targetPosition;
+            //  }
+        }   
     }
 }

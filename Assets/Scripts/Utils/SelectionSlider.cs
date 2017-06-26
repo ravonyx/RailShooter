@@ -88,10 +88,6 @@ namespace RailShooter.Utils
             {
                 yield return null;
             }
-
-            // If the bar should disappear once it's filled, turn it off.
-            if (m_BarCanvas && m_DisappearOnBarFill)
-                m_BarCanvas.SetActive(false);
         }
 
 

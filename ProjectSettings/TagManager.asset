@@ -8,6 +8,8 @@ TagManager:
   - RTouch
   - GunEnd
   - GunContainer
+  - Projectile
+  - FlyEnemy
   layers:
   - Default
   - TransparentFX

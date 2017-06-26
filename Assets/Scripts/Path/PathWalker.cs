@@ -30,6 +30,8 @@ public class PathWalker : MonoBehaviour
     private int m_indexStopPoint = 0;
     private float m_progress = 1.0f;
     private float m_dist = 1.0f;
+
+    [SerializeField]
     private bool m_enemy;
     private bool m_walking;
     public bool Walking
@@ -110,7 +112,7 @@ public class PathWalker : MonoBehaviour
         {
             yield return null;
 
-            if (m_walking)
+            if (m_walking && m_railShooterController.IsPlaying)
             {
                 m_progress -= Time.deltaTime * m_speed / m_path.totalDistance;
                 m_progress = Mathf.Clamp(m_progress, 0, m_path.totalDistance);

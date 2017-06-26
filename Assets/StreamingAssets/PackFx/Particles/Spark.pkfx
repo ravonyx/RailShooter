@@ -1,4 +1,4 @@
-Version = 1.11.3.33940;
+Version = 1.11.4.36481;
 CParticleEffect	$LOCAL$/Resource
 {
 	EditorInfosPosition = int2(73, 52);
@@ -28,7 +28,7 @@ CParticleDescriptor	$LOCAL$/CParticleDescriptor_AE135B2A
 	};
 	CompileCache = 
 	{
-		"$LOCAL$/CCompilerBlobCache_2AABB80E",
+		"$LOCAL$/CCompilerBlobCache_DBA6BC09",
 	};
 }
 CActionFactoryWithChilds	$LOCAL$/Spawner
@@ -139,13 +139,13 @@ CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_30F7F916
 	MaxValueF4 = float4(1.0000000e+000, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
 	MaxValueI4 = int4(10, 10, 10, 10);
 }
-CCompilerBlobCache	$LOCAL$/CCompilerBlobCache_2AABB80E
+CCompilerBlobCache	$LOCAL$/CCompilerBlobCache_DBA6BC09
 {
 	Identifier = "IR";
 	Blob = 
 	{
-		295,
-		-67466099,
+		287,
+		1210642769,
 		320,
 		280,
 		36,
@@ -307,27 +307,27 @@ CCompilerBlobCache	$LOCAL$/CCompilerBlobCache_2AABB80E
 	};
 	Externals = 
 	{
-		"$LOCAL$/CCompilerBlobCacheExternal_3E9790E9",
-		"$LOCAL$/CCompilerBlobCacheExternal_ABB09D60",
-		"$LOCAL$/CCompilerBlobCacheExternal_450AD7A3",
-		"$LOCAL$/CCompilerBlobCacheExternal_C55FADA2",
-		"$LOCAL$/CCompilerBlobCacheExternal_4D3D2C0D",
-		"$LOCAL$/CCompilerBlobCacheExternal_C6FF0554",
-		"$LOCAL$/CCompilerBlobCacheExternal_0928A4A7",
-		"$LOCAL$/CCompilerBlobCacheExternal_12EF3CF6",
-		"$LOCAL$/CCompilerBlobCacheExternal_227583F1",
-		"$LOCAL$/CCompilerBlobCacheExternal_A4848908",
+		"$LOCAL$/CCompilerBlobCacheExternal_29AB9700",
+		"$LOCAL$/CCompilerBlobCacheExternal_F9DE81C3",
+		"$LOCAL$/CCompilerBlobCacheExternal_0F299242",
+		"$LOCAL$/CCompilerBlobCacheExternal_B0449D2D",
+		"$LOCAL$/CCompilerBlobCacheExternal_9894BCF4",
+		"$LOCAL$/CCompilerBlobCacheExternal_1E2EE4C7",
+		"$LOCAL$/CCompilerBlobCacheExternal_EEF46F96",
+		"$LOCAL$/CCompilerBlobCacheExternal_11935B11",
+		"$LOCAL$/CCompilerBlobCacheExternal_7D1D9EA8",
+		"$LOCAL$/CCompilerBlobCacheExternal_9D37CE8B",
 	};
 	ExternalCalls = 
 	{
-		"$LOCAL$/CCompilerBlobCacheFunctionDef_7AB9D86B",
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_43CAFAAA",
 	};
 	EntryPoints = 
 	{
-		"$LOCAL$/CCompilerBlobCacheFunctionDef_CCF41C95",
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_588C101C",
 	};
 }
-CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_3E9790E9
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_29AB9700
 {
 	NameGUID = "Spread";
 	TypeName = "float";
@@ -337,7 +337,7 @@ CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_3E9790E9
 	Attributes = 2;
 	AccessMask = 1;
 }
-CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_ABB09D60
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_F9DE81C3
 {
 	NameGUID = "InvLife";
 	TypeName = "float";
@@ -346,7 +346,7 @@ CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_ABB09D60
 	MetaType = 4;
 	AccessMask = 2;
 }
-CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_450AD7A3
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_0F299242
 {
 	NameGUID = "GlobalScale";
 	TypeName = "float";
@@ -356,7 +356,7 @@ CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_450AD7A3
 	Attributes = 2;
 	AccessMask = 1;
 }
-CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_C55FADA2
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_B0449D2D
 {
 	NameGUID = "Size";
 	TypeName = "float";
@@ -365,7 +365,7 @@ CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_C55FADA2
 	MetaType = 4;
 	AccessMask = 2;
 }
-CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_4D3D2C0D
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_9894BCF4
 {
 	NameGUID = "ParticleContextS";
 	TypeName = "pCtxS";
@@ -375,7 +375,7 @@ CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_4D3D2C0D
 	Attributes = 2;
 	AccessMask = 1;
 }
-CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_C6FF0554
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_1E2EE4C7
 {
 	NameGUID = "Velocity";
 	TypeName = "float3";
@@ -384,7 +384,7 @@ CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_C6FF0554
 	MetaType = 4;
 	AccessMask = 2;
 }
-CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_0928A4A7
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_EEF46F96
 {
 	NameGUID = "Accel";
 	TypeName = "float3";
@@ -393,7 +393,7 @@ CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_0928A4A7
 	MetaType = 4;
 	AccessMask = 2;
 }
-CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_12EF3CF6
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_11935B11
 {
 	NameGUID = "SparkColor";
 	TypeName = "float3";
@@ -403,7 +403,7 @@ CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_12EF3CF6
 	Attributes = 2;
 	AccessMask = 1;
 }
-CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_227583F1
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_7D1D9EA8
 {
 	NameGUID = "SparkIntensity";
 	TypeName = "float";
@@ -413,7 +413,7 @@ CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_227583F1
 	Attributes = 2;
 	AccessMask = 1;
 }
-CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_A4848908
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_9D37CE8B
 {
 	NameGUID = "Color";
 	TypeName = "float4";
@@ -422,24 +422,24 @@ CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_A4848908
 	MetaType = 4;
 	AccessMask = 2;
 }
-CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_7AB9D86B
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_43CAFAAA
 {
 	SymbolName = "vrand";
 	SymbolSlot = -1;
 	FunctionTraits = 32;
 	Args = 
 	{
-		"$LOCAL$/CCompilerBlobCacheFunctionArg_4F6EDA0A",
+		"$LOCAL$/CCompilerBlobCacheFunctionArg_149C79B5",
 	};
 }
-CCompilerBlobCacheFunctionArg	$LOCAL$/CCompilerBlobCacheFunctionArg_4F6EDA0A
+CCompilerBlobCacheFunctionArg	$LOCAL$/CCompilerBlobCacheFunctionArg_149C79B5
 {
 	Type = -1;
 	TypeName = "pCtxS";
 	MetaType = 4;
 	Attributes = 4;
 }
-CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_CCF41C95
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_588C101C
 {
 	SymbolName = "Eval";
 }

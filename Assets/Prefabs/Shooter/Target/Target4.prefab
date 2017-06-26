@@ -25,14 +25,13 @@ GameObject:
   - component: {fileID: 82633464049557244}
   - component: {fileID: 114206693636365874}
   - component: {fileID: 114567192504130666}
-  - component: {fileID: 114867623871832606}
   - component: {fileID: 114473420085682498}
   m_Layer: 10
   m_Name: Target4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1999804061326772
 GameObject:
@@ -48,7 +47,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4390279212123096
 Transform:
@@ -70,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1075307927570736}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.650005, y: 0, z: 27.4}
+  m_LocalPosition: {x: 21.1, y: -10.96, z: 27.2}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 4390279212123096}
@@ -421,8 +420,8 @@ MonoBehaviour:
   m_rotateX: 0
   m_rotateY: 0
   m_rotateZ: 0
-  m_dstPoint: {x: 20, y: 0, z: 27.4}
-  m_speedTranslate: 10
+  m_dstPoint: {x: 21.1, y: -10.96, z: 56}
+  m_speedTranslate: 2
   m_speedRotate: 0
   m_initScale: 0
   m_targetScale: 0
@@ -444,18 +443,3 @@ MonoBehaviour:
   m_hasVoronoi: 0
   m_particleExplosion: {fileID: 114278509160191888}
   m_shootingGalleryController: {fileID: 0}
---- !u!114 &114867623871832606
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1075307927570736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c3859d22185cb243b38dc8613b4ab15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_player: {fileID: 0}
-  m_distanceToAttack: 30
-  m_projectilesPool: {fileID: 0}
-  m_fireRate: 1.2

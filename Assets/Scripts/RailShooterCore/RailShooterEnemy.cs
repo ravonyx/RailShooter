@@ -1,25 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RailShooter.Utils;
 
-public class RailShooterEnemy : MonoBehaviour
+namespace Assets.RailShooter
 {
-    [SerializeField]
-    private PathWalker m_pathWalker;
-
-    // Use this for initialization
-    void Start ()
+    public class RailShooterEnemy : MonoBehaviour
     {
-        StartCoroutine(m_pathWalker.PlayUpdateBackward());
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        [SerializeField]
+        private PathWalker m_pathWalker;
 
-    void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other);
+        private InteractiveItem m_interactiveItem;
+
+        void Start()
+        {
+            StartCoroutine(m_pathWalker.PlayUpdateBackward());
+        }
     }
 }

@@ -2386,6 +2386,21 @@ Prefab:
       propertyPath: m_camInputManager
       value: 
       objectReference: {fileID: 1476827991}
+    - target: {fileID: 224615898285931718, guid: 0d8195bb7566e1e4a95d69b0a17d88d9,
+        type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 224615898285931718, guid: 0d8195bb7566e1e4a95d69b0a17d88d9,
+        type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 224615898285931718, guid: 0d8195bb7566e1e4a95d69b0a17d88d9,
+        type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.02
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114640588924155064, guid: 0d8195bb7566e1e4a95d69b0a17d88d9, type: 2}
     - {fileID: 114480140506732966, guid: 0d8195bb7566e1e4a95d69b0a17d88d9, type: 2}

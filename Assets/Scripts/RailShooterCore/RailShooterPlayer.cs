@@ -10,7 +10,9 @@ public class RailShooterPlayer : MonoBehaviour
     [SerializeField]
     private float m_lifeMax;
     [SerializeField]
-    private float m_lifeToRemove;
+    private float m_lifeToRemoveProjectile;
+    [SerializeField]
+    private float m_lifeToRemoveFlyEnemy;
 
     [SerializeField]
     private float m_timeRegen;
@@ -74,11 +76,16 @@ public class RailShooterPlayer : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        float m_lifeToRemove = 0;
+        if (other.tag == "Projectile")
+            m_lifeToRemove = m_lifeToRemoveProjectile;
+        else if(other.tag == "FlyEnemy")
+            m_lifeToRemove = m_lifeToRemoveFlyEnemy;
+
         m_currentLife -= m_lifeToRemove;
         m_currentLife = m_currentLife > 0 ? m_currentLife : 0;
         float lifeValue = m_currentLife / m_lifeMax;
 
         m_lifeBar.fillAmount = lifeValue;
-        other.GetComponent<RailShooterBullet>().Remove();
     }
 }

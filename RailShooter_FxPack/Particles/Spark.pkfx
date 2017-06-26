@@ -1,10 +1,9 @@
-Version = 1.10.3.31086;
+Version = 1.11.4.36481;
 CParticleEffect	$LOCAL$/Resource
 {
 	EditorInfosPosition = int2(73, 52);
 	OnSpawn = "$LOCAL$/Spawner";
 	CustomAttributes = "$LOCAL$/_GlobalAttributes";
-	Autostart = true;
 }
 CNEdEditorParticle_Data	$LOCAL$/EDITOR
 {
@@ -84,6 +83,7 @@ CParticleEvolver_Physics	$LOCAL$/CParticleEvolver_Physics_36D6D4BD
 CNEdEditorLightFactory	$LOCAL$/_Backdrop_Light_Factory
 {
 	NearClipPlane = 1.0000000e+002;
+	LightSize = 9.9999998e-003;
 	SpotFalloff = 8.8541701e-002;
 	Magnitude = 1.0000000e+005;
 }

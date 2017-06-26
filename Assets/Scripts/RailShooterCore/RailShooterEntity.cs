@@ -41,6 +41,8 @@ namespace Assets.RailShooter
             m_audio = GetComponent<AudioSource>();
             m_interactiveItem = GetComponent<InteractiveItem>();
             m_renderer = GetComponent<Renderer>();
+            if (m_renderer == null)
+                m_renderer = GetComponentInChildren<SkinnedMeshRenderer>();
         }
 
         private void OnEnable ()
@@ -61,7 +63,7 @@ namespace Assets.RailShooter
 
         void OnTriggerEnter(Collider other)
         {
-            Debug.Log("trigger enter " + gameObject.name);
+            m_particleExplosion.StartEffect();
         }
 
         private void HandleDown()

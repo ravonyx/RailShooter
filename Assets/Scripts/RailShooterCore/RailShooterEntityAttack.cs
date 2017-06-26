@@ -41,7 +41,6 @@ namespace Assets.RailShooter
             float distance = Vector3.Distance(m_renderer.bounds.center, m_player.position);
             if (Time.time > m_nextFire && distance <= m_distanceToAttack)
             {
-                Debug.Log("Fire");
                 m_nextFire = Time.time + m_fireRate;
                 Fire();
             }

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using VRStandardAssets.Utils;
 using UnityEngine.VR;
 
 namespace RailShooter.Utils
@@ -90,6 +89,8 @@ namespace RailShooter.Utils
 				for(int i = 0; i < m_TwoArmsWeapon.Length; i++)
 					m_TwoArmsWeapon[i].SetActive(true);
 				m_OneArmWeapon.SetActive(false);
+
+                m_currentCamera.GetComponent<Raycaster>().enabled = false;
 			}
 
 			else

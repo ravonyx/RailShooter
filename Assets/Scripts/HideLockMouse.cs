@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Assets.RailShooter;
+using RailShooter.Assets;
 
 namespace RailShooter.Utils
 {

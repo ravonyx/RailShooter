@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
-using VRStandardAssets.Common;
+using RailShooter.Utils;
 
-namespace Assets.RailShooter
+namespace RailShooter.Assets
 {
     // This script displays the player's score during the
     // shooter scenes.

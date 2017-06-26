@@ -2,11 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System;
-using UnityEngine.VR;
 
-using RailShooter.Utils;
-
-namespace VRStandardAssets.Utils
+namespace RailShooter.Utils
 {
     public class SelectionRadial : MonoBehaviour
     {

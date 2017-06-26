@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RailShooter.Utils;
 
-namespace Assets.RailShooter
+namespace RailShooter.Assets
 {
     public class RailShooterBullet : MonoBehaviour
     {

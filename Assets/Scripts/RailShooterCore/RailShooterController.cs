@@ -1,12 +1,11 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using VRStandardAssets.Common;
 using VRStandardAssets.Utils;
 using UnityEngine.VR;
 using RailShooter.Utils;
 
-namespace Assets.RailShooter
+namespace RailShooter.Assets
 {
     public class RailShooterController : MonoBehaviour
     {

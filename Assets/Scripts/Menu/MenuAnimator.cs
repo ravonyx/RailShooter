@@ -3,7 +3,7 @@ using UnityEngine;
 using VRStandardAssets.Utils;
 using RailShooter.Utils;
 
-namespace VRStandardAssets.Menu
+namespace RailShooter.Menu
 {
     // This script flips through a series of textures
     // whilst the user is looking at it.

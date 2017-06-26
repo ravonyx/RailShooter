@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.VR;
-using VRStandardAssets.Utils;
 using RailShooter.Utils;
 
-namespace Assets.RailShooter
+namespace RailShooter.Assets
 {
     // This script controls the gun for the shooter
     // scenes, including it's movement and shooting.

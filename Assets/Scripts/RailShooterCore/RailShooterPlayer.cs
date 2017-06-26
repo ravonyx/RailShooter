@@ -1,9 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Assets.RailShooter;
 using UnityEngine.UI;
 using RailShooter.Utils;
+using RailShooter.Assets;
 
 public class RailShooterPlayer : MonoBehaviour
 {
@@ -86,6 +85,15 @@ public class RailShooterPlayer : MonoBehaviour
         m_currentLife = m_currentLife > 0 ? m_currentLife : 0;
         float lifeValue = m_currentLife / m_lifeMax;
 
+        Color color = Color.white;
+        if (m_currentLife <= m_lifeMax && m_currentLife >= ((m_lifeMax / 3) * 2))
+            ColorUtility.TryParseHtmlString("#00FF17FF", out color);
+        else if (m_currentLife < ((m_lifeMax / 3) * 2) && m_currentLife >= ((m_lifeMax / 3)))
+            ColorUtility.TryParseHtmlString("#FF8E36FF", out color);
+        else
+            color = Color.red;
+
+        m_lifeBar.color = color;
         m_lifeBar.fillAmount = lifeValue;
     }
 }

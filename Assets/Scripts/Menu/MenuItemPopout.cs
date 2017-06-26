@@ -2,7 +2,7 @@
 using VRStandardAssets.Utils;
 using RailShooter.Utils;
 
-namespace VRStandardAssets.Menu
+namespace RailShooter.Menu
 {
     // This class 'pops' each of the menu items out
     // when the user looks at them.

@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
-using System;
 using System.Collections;
-using UnityEngine.VR;
-using VRStandardAssets.Common;
-using Assets.RailShooter;
+using System.Collections.Generic;
+using RailShooter.Assets;
 
 public class PathWalker : MonoBehaviour
 {

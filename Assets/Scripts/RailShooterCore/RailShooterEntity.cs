@@ -1,11 +1,10 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using VRStandardAssets.Common;
 using VRStandardAssets.Utils;
 using RailShooter.Utils;
 
-namespace Assets.RailShooter
+namespace RailShooter.Assets
 {
     public class RailShooterEntity : MonoBehaviour
     {
@@ -31,7 +30,8 @@ namespace Assets.RailShooter
         private Renderer m_renderer;                                   
         private bool m_isEnding;
 
-        public PKFxFX m_particleExplosion;
+        [SerializeField]
+        private PKFxFX m_particleExplosion;
         [SerializeField]
         private RailShooterController m_shootingGalleryController;
 
@@ -64,6 +64,7 @@ namespace Assets.RailShooter
         void OnTriggerEnter(Collider other)
         {
             m_particleExplosion.StartEffect();
+            m_renderer.enabled = false;
         }
 
         private void HandleDown()

@@ -2,7 +2,7 @@
 using VRStandardAssets.Utils;
 using RailShooter.Utils;
 
-namespace VRStandardAssets.Menu
+namespace RailShooter.Menu
 {
     // In the main menu, a thin bar is shown below each
     // of the scene options.  The bar moves to below

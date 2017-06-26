@@ -1,10 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RailShooter.Utils;
-using VRStandardAssets.Common;
 
-namespace Assets.RailShooter
+namespace RailShooter.Utils
 {
     class Raycaster : MonoBehaviour
     {

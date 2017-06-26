@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace VRStandardAssets.Common
+namespace RailShooter.Utils
 {
     //keep score during a game and save to PlayerPrefs
     public static class SessionData

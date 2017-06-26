@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace VRStandardAssets.Utils
+namespace RailShooter.Utils
 {
     // This class ensures that the UI (such as the reticle and selection bar)
     // are set up correctly.

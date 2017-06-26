@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace VRStandardAssets.Utils
+namespace RailShooter.Utils
 {
     // This class is used to fade in and out groups of UI
     // elements.  It contains a variety of functions for

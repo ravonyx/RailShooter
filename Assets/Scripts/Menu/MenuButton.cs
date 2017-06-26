@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using VRStandardAssets.Utils;
 using RailShooter.Utils;
 
-namespace VRStandardAssets.Menu
+namespace RailShooter.Menu
 {
     // This script is for loading scenes from the main menu.
     // Each 'button' will be a rendering showing the scene

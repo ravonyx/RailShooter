@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using RailShooter.Utils;
 
-namespace VRStandardAssets.Utils
+namespace RailShooter.Utils
 {
     // This is a simple script to tint UI Images a colour when
     // a InteractiveItem is looked at.  Note that the Images

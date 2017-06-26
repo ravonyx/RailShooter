@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using VRStandardAssets.Common;
-using VRStandardAssets.Utils;
+using RailShooter.Utils;
 
-namespace Assets.RailShooter
+namespace RailShooter.Assets
 {
     // This simple class encapsulates the UI for
     // the shooter scenes so that the game

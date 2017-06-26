@@ -35,6 +35,8 @@ public class RailShooterPlayer : MonoBehaviour
     [SerializeField]
     private CamerasAndInputsManager m_camInputManager;
 
+    private AudioSource m_audio;
+
     void Start()
     {
         m_ending = false;
@@ -43,6 +45,8 @@ public class RailShooterPlayer : MonoBehaviour
             m_lifeBar = m_lifeBarContainerVR;
         else
             m_lifeBar = m_lifeBarContainer;
+
+        m_audio = GetComponent<AudioSource>();
     }
 
     public IEnumerator EvolveLife(bool increase)
@@ -92,6 +96,9 @@ public class RailShooterPlayer : MonoBehaviour
             ColorUtility.TryParseHtmlString("#FF8E36FF", out color);
         else
             color = Color.red;
+
+        if (m_audio)
+            m_audio.Play();
 
         m_lifeBar.color = color;
         m_lifeBar.fillAmount = lifeValue;

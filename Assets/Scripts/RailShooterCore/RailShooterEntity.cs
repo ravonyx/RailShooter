@@ -29,6 +29,7 @@ namespace RailShooter.Assets
         private Light m_light;
         private Renderer m_renderer;                                   
         private bool m_isEnding;
+        private BoxCollider m_collider;
 
         [SerializeField]
         private PKFxFX m_particleExplosion;
@@ -41,6 +42,7 @@ namespace RailShooter.Assets
             m_audio = GetComponent<AudioSource>();
             m_interactiveItem = GetComponent<InteractiveItem>();
             m_renderer = GetComponent<Renderer>();
+            m_collider = GetComponent<BoxCollider>();
             if (m_renderer == null)
                 m_renderer = GetComponentInChildren<SkinnedMeshRenderer>();
         }
@@ -74,8 +76,10 @@ namespace RailShooter.Assets
 
             m_isEnding = true;
             m_renderer.enabled = false;
+            if (m_collider)
+                m_collider.enabled = false;
 
-            if(m_audio)
+            if (m_audio)
                 m_audio.Play();
 			if (m_particleExplosion) 
 			{

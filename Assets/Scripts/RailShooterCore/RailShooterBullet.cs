@@ -16,12 +16,16 @@ namespace RailShooter.Assets
         [SerializeField]
         private PKFxFX m_FX;
         [SerializeField]
+        private PKFxFX m_explosionFX;
+
+        [SerializeField]
         private bool m_autoGuided;
         [SerializeField]
         private bool m_directionStatus;
 
         [SerializeField]
         private float m_speed;
+        private InteractiveItem m_interactiveItem;
 
         private Transform m_player;
         private Rigidbody m_rigidbody;
@@ -52,6 +56,7 @@ namespace RailShooter.Assets
 
         void Awake()
         {
+            m_interactiveItem = GetComponent<InteractiveItem>();
             m_rigidbody = GetComponent<Rigidbody>();
         }
 
@@ -68,6 +73,9 @@ namespace RailShooter.Assets
 
         private void OnEnable()
         {
+            m_interactiveItem.OnDown += HandleDown;
+            m_interactiveItem.OnDownLeft += HandleDown;
+
             m_rigidbody.velocity = Vector3.zero;
             if (!m_autoGuided)
                 Invoke("Remove", life);
@@ -75,6 +83,8 @@ namespace RailShooter.Assets
 
         private void OnDisable()
         {
+            m_interactiveItem.OnDown -= HandleDown;
+            m_interactiveItem.OnDownLeft -= HandleDown;
             CancelInvoke();
         }
 
@@ -89,6 +99,12 @@ namespace RailShooter.Assets
 
             m_FX.StopEffect();
             gameObject.SetActive(false);
+        }
+
+        private void HandleDown()
+        {
+            m_explosionFX.StartEffect();
+            Remove();
         }
 
         void Update()

@@ -79,6 +79,10 @@ public class RailShooterPlayer : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        RailShooterBullet bullet = other.GetComponent<RailShooterBullet>();
+        if(bullet)
+            bullet.Remove();
+
         float m_lifeToRemove = 0;
         if (other.tag == "Projectile")
             m_lifeToRemove = m_lifeToRemoveProjectile;

@@ -1,0 +1,3334 @@
+Version = 1.11.4.36481;
+CParticleEffect	$LOCAL$/Resource
+{
+	EditorInfosPosition = int2(73, 52);
+	OnSpawn = "$LOCAL$/Spawner";
+	LayerGroups = 
+	{
+		"$LOCAL$/DecalConfeti",
+	};
+	CustomAttributes = "$LOCAL$/_GlobalAttributes";
+}
+CActionFactoryParticleSpawnerBase	$LOCAL$/confetti
+{
+	EditorInfosPosition = int2(-288, -61);
+	Descriptor = "$LOCAL$/CParticleDescriptor_AE135B2A";
+	FluxFactorExpression = "ConfettiCount";
+}
+CParticleDescriptor	$LOCAL$/CParticleDescriptor_AE135B2A
+{
+	EditorInfosPosition = int2(-392, -44);
+	Renderer = "$LOCAL$/CParticleRenderer_Billboard_9136D2F4";
+	CustomFields = 
+	{
+		"$LOCAL$/CParticleFieldDeclaration_914EBA0E",
+		"$LOCAL$/CParticleFieldDeclaration_C4733800",
+		"$LOCAL$/CParticleFieldDeclaration_203F80C1",
+		"$LOCAL$/CParticleFieldDeclaration_DD6DE9ED",
+		"$LOCAL$/CParticleFieldDeclaration_B3AA7804",
+	};
+	CustomEvents = 
+	{
+		"$LOCAL$/CParticleEventDeclaration_3EDD7C02",
+	};
+	SpawnEvaluator = "$LOCAL$/CCompilerSyntaxNodeExpression_5566F5E7";
+	States = 
+	{
+		"$LOCAL$/CParticleState_3AF8190E",
+	};
+	CompileCache = 
+	{
+		"$LOCAL$/CCompilerBlobCache_BB1B8604",
+	};
+}
+CActionFactoryWithChilds	$LOCAL$/Spawner
+{
+	EditorInfosPosition = int2(-162, -81);
+	ChildList = 
+	{
+		"$LOCAL$/confetti",
+		"$LOCAL$/serpentin",
+		"$LOCAL$/Ruban",
+	};
+}
+CParticleRenderer_Billboard	$LOCAL$/CParticleRenderer_Billboard_9136D2F4
+{
+	EditorInfosPosition = int2(-508, -63);
+	CustomName = "Billboard";
+	BillboardingMaterial = AlphaBlend;
+	Diffuse = "Textures/pattern_buff.dds";
+	AtlasDefinition = "Textures/AtlasX4.pkat";
+	BillboardMode = PlanarAlignedQuad;
+	Axis2Field = "AxisUp";
+	AxisScale = 1.0000000e+000;
+}
+CCompilerSyntaxNodeExpression	$LOCAL$/CCompilerSyntaxNodeExpression_5566F5E7
+{
+	EditorInfosPosition = int2(-508, 22);
+	Expression = "function void	Eval()
+{
+	Life = 5;
+	Size = (0.05*ConfettiSize)*GlobalScale;
+	Velocity = ((vrand().x0z*Spread + float3(rand(0.2,1)).0y0)*rand(5,8))*GlobalScale;
+	Rand = float3( rand(-1,1) , rand(-1,1) , rand(-1,1) ) ;
+	Accel = float3(0,-5,0)*GlobalScale;
+	
+	float3 ColorVariation = vrand()*ColorRandom;
+	Color = float4(ConfettiColor + ColorVariation*rand(0,1),1);
+	
+	Position = float3(0,0.01,0);
+	TextureID = ConfettiPattern + 2;
+}
+";
+}
+CParticleState	$LOCAL$/CParticleState_3AF8190E
+{
+	EditorInfosPosition = int2(-508, 65);
+	StateName = "State_0";
+	Evolvers = 
+	{
+		"$LOCAL$/CParticleEvolver_Physics_36D6D4BD",
+		"$LOCAL$/Script_1",
+	};
+}
+CParticleEvolver_Physics	$LOCAL$/CParticleEvolver_Physics_36D6D4BD
+{
+	EditorInfosPosition = int2(-590, 86);
+	CustomName = "Physics";
+	Drag = 1.0000000e+000;
+	WorldInteractionMode = OneWay;
+	DieOnContact = true;
+}
+CParticleAttributeList	$LOCAL$/_GlobalAttributes
+{
+	EditorInfosPosition = int2(-599, -20);
+	AttributeList = 
+	{
+		"$LOCAL$/CParticleAttributeDeclaration_B4884A3A",
+		"$LOCAL$/CParticleAttributeDeclaration_D4C53885",
+		"$LOCAL$/CParticleAttributeDeclaration_0774DE18",
+		"$LOCAL$/CParticleAttributeDeclaration_7483CD56",
+		"$LOCAL$/CParticleAttributeDeclaration_ECD95B75",
+		"$LOCAL$/CParticleAttributeDeclaration_2872E56A",
+		"$LOCAL$/CParticleAttributeDeclaration_ED2EFF68",
+		"$LOCAL$/CParticleAttributeDeclaration_3BF5B4DC",
+		"$LOCAL$/CParticleAttributeDeclaration_7AEDC6CF",
+		"$LOCAL$/CParticleAttributeDeclaration_93B4763E",
+	};
+	SamplerList = 
+	{
+		"$LOCAL$/CParticleSamplerProceduralTurbulence_D42F3FF7",
+	};
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_B4884A3A
+{
+	AttributeName = "GlobalScale";
+	DefaultValueF4 = float4(1.0000000e+000, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	MaxValueF4 = float4(5.0000000e+000, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_D4C53885
+{
+	AttributeName = "Spread";
+	DefaultValueF4 = float4(2.0000000e-001, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	HasMax = true;
+	MaxValueF4 = float4(1.0000000e+000, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_3FB77D47
+{
+	FieldName = "Color";
+	FieldType = float4;
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_914EBA0E
+{
+	FieldName = "AxisUp";
+	FieldType = float3;
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_C4733800
+{
+	FieldName = "Rand";
+	FieldType = float3;
+}
+CParticleEvolver_Script	$LOCAL$/Script_1
+{
+	CustomName = "Script";
+	Expression = "$LOCAL$/CCompilerSyntaxNodeExpression_E5150F60";
+	CompileCache = 
+	{
+		"$LOCAL$/CCompilerBlobCache_3A5FDDF1",
+		"$LOCAL$/CCompilerBlobCache_C567DA1D",
+	};
+}
+CCompilerSyntaxNodeExpression	$LOCAL$/CCompilerSyntaxNodeExpression_E5150F60
+{
+	Expression = "function void	Eval()
+{
+	AxisUp = normalize(float3(WindInfluence.sample(Position/ GlobalScale)*Rand));
+	VelocityField = WindInfluence.sample(Position / GlobalScale) * GlobalScale;
+}
+";
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_52F66025
+{
+	FieldName = "LifeRand";
+}
+CParticleDescriptor	$LOCAL$/CParticleDescriptor_DCA16B5A
+{
+	EditorInfosPosition = int2(-392, -44);
+	CustomFields = 
+	{
+		"$LOCAL$/CParticleFieldDeclaration_52F66025",
+		"$LOCAL$/CParticleFieldDeclaration_9B0FBF4C",
+		"$LOCAL$/CParticleFieldDeclaration_E36269FF",
+		"$LOCAL$/CParticleFieldDeclaration_78291285",
+	};
+	SpawnEvaluator = "$LOCAL$/CCompilerSyntaxNodeExpression_7E97412E";
+	States = 
+	{
+		"$LOCAL$/CParticleState_DA574089",
+	};
+	CompileCache = 
+	{
+		"$LOCAL$/CCompilerBlobCache_E37E0909",
+	};
+}
+CParticleRenderer_Ribbon	$LOCAL$/CParticleRenderer_Ribbon_33F2B9AD
+{
+	CustomName = "Ribbon";
+	BillboardingMaterial = AlphaBlend;
+	Diffuse = "Textures/pattern_buff.dds";
+	AtlasDefinition = "Textures/AtlasX4.pkat";
+	TextureID = 2;
+	TextureUField = "LifeRatio";
+	BillboardMode = NormalAxisAligned;
+	AxisField = "Axis";
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_E316D374
+{
+	FieldName = "Axis";
+	FieldType = float3;
+}
+CParticleSamplerProceduralTurbulence	$LOCAL$/CParticleSamplerProceduralTurbulence_D42F3FF7
+{
+	SamplerName = "WindInfluence";
+	Wavelength = 2.0000000e+000;
+	Strength = 5.6568545e-001;
+	Octaves = 1;
+	Gain = 1.0000000e+000;
+	Interpolator = Linear;
+	TimeScale = 1.0000000e+000;
+}
+CParticleState	$LOCAL$/CParticleState_DA574089
+{
+	EditorInfosPosition = int2(-508, 65);
+	StateName = "State_0";
+	Evolvers = 
+	{
+		"$LOCAL$/CParticleEvolver_Physics_78AC3580",
+		"$LOCAL$/CParticleEvolver_Script_8E4E3C3A",
+		"$LOCAL$/Trail",
+	};
+}
+CParticleEvolver_Physics	$LOCAL$/CParticleEvolver_Physics_78AC3580
+{
+	EditorInfosPosition = int2(-590, 86);
+	CustomName = "Physics";
+	Drag = 1.0000000e+000;
+	WorldInteractionMode = OneWay;
+	DieOnContact = true;
+	BouncesBeforeDeath = 0;
+}
+CParticleEvolver_Spawner	$LOCAL$/Trail
+{
+	CustomName = "Spawner";
+	SpawnMetric = Time;
+	SpawnInterval = 3.9999999e-002;
+	UseOrientedSpawnMatrix = true;
+	Descriptor = "$LOCAL$/CParticleDescriptor_06EA1CC2";
+}
+CParticleState	$LOCAL$/CParticleState_10CF8F91
+{
+	StateName = "State_0";
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_9B0FBF4C
+{
+	FieldName = "Accel";
+	FieldType = float3;
+}
+CParticleDescriptor	$LOCAL$/CParticleDescriptor_06EA1CC2
+{
+	Renderer = "$LOCAL$/CParticleRenderer_Ribbon_33F2B9AD";
+	CustomFields = 
+	{
+		"$LOCAL$/CParticleFieldDeclaration_E316D374",
+		"$LOCAL$/CParticleFieldDeclaration_3FB77D47",
+	};
+	SpawnEvaluator = "$LOCAL$/CCompilerSyntaxNodeExpression_32E4B216";
+	States = 
+	{
+		"$LOCAL$/CParticleState_10CF8F91",
+	};
+	CompileCache = 
+	{
+		"$LOCAL$/CCompilerBlobCache_F03D007E",
+	};
+}
+CActionFactoryParticleSpawnerBase	$LOCAL$/Ruban
+{
+	EditorInfosPosition = int2(-288, -61);
+	Descriptor = "$LOCAL$/CParticleDescriptor_DCA16B5A";
+	FluxFactorExpression = "RibbonCount";
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_E36269FF
+{
+	FieldName = "Color";
+	FieldType = float4;
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_203F80C1
+{
+	FieldName = "Accel";
+	FieldType = float3;
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_0774DE18
+{
+	AttributeName = "ConfettiColor";
+	AttributeType = float3;
+	DefaultValueF4 = float4(5.0000000e-001, 5.0000000e-001, 5.0000000e-001, 0.0000000e+000);
+	HasMin = true;
+	MaxValueF4 = float4(1.0000000e+000, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CActionFactoryParticleSpawnerBase	$LOCAL$/DecalConfeti
+{
+	Descriptor = "$LOCAL$/CParticleDescriptor_77674ABB";
+}
+CParticleDescriptor	$LOCAL$/CParticleDescriptor_77674ABB
+{
+	Renderer = "$LOCAL$/CParticleRenderer_Billboard_6BA37865";
+	CustomFields = 
+	{
+		"$LOCAL$/CParticleFieldDeclaration_9920246E",
+		"$LOCAL$/CParticleFieldDeclaration_DB9444C9",
+		"$LOCAL$/CParticleFieldDeclaration_FBAF6EC0",
+		"$LOCAL$/CParticleFieldDeclaration_29305B87",
+	};
+	VirtualParentFields = 
+	{
+		"$LOCAL$/CParticleFieldDeclaration_647F5483",
+		"$LOCAL$/CParticleFieldDeclaration_CFDC0FA2",
+		"$LOCAL$/CParticleFieldDeclaration_C5C05E4B",
+	};
+	SpawnEvaluator = "$LOCAL$/CCompilerSyntaxNodeExpression_5825129A";
+	States = 
+	{
+		"$LOCAL$/CParticleState_577A9C8C",
+	};
+	CompileCache = 
+	{
+		"$LOCAL$/CCompilerBlobCache_C4D80E1B",
+	};
+}
+CCompilerSyntaxNodeExpression	$LOCAL$/CCompilerSyntaxNodeExpression_5825129A
+{
+	Expression = "function void	Eval()
+{
+	Life = 1;
+	Size = parent.Size;
+	AxisUp = float3(0,1,0);
+	Position = float3(0,0.01,0) * GlobalScale;
+	Axis = vrand().x0z;
+	ColorInit = abs(parent.Color).xyz;
+	TextureID = parent.TextureID;
+}
+";
+}
+CParticleRenderer_Billboard	$LOCAL$/CParticleRenderer_Billboard_6BA37865
+{
+	CustomName = "Billboard";
+	BillboardingMaterial = AlphaBlend;
+	Diffuse = "Textures/pattern_buff.dds";
+	AtlasDefinition = "Textures/AtlasX4.pkat";
+	BillboardMode = PlanarAlignedQuad;
+	AxisField = "Axis";
+	Axis2Field = "AxisUp";
+	AxisScale = 1.0000000e+000;
+}
+CParticleState	$LOCAL$/CParticleState_577A9C8C
+{
+	StateName = "State_0";
+	Evolvers = 
+	{
+		"$LOCAL$/Script_2",
+	};
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_DB9444C9
+{
+	FieldName = "Axis";
+	FieldType = float3;
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_9920246E
+{
+	FieldName = "AxisUp";
+	FieldType = float3;
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_FBAF6EC0
+{
+	FieldName = "Color";
+	FieldType = float4;
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_647F5483
+{
+	FieldName = "Color";
+	FieldType = float4;
+}
+CParticleEventDeclaration	$LOCAL$/CParticleEventDeclaration_3EDD7C02
+{
+	EventName = "OnCollide";
+	EventAction = "$LOCAL$/DecalConfeti";
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_DD6DE9ED
+{
+	FieldName = "Color";
+	FieldType = float4;
+}
+CParticleEvolver_Script	$LOCAL$/Script_2
+{
+	CustomName = "Script";
+	Expression = "$LOCAL$/CCompilerSyntaxNodeExpression_32DDA8B4";
+	CompileCache = 
+	{
+		"$LOCAL$/CCompilerBlobCache_654274AB",
+		"$LOCAL$/CCompilerBlobCache_9B8F861E",
+	};
+}
+CCompilerSyntaxNodeExpression	$LOCAL$/CCompilerSyntaxNodeExpression_32DDA8B4
+{
+	Expression = "function void	Eval()
+{
+	Color = float4(ColorInit,1-LifeRatio);
+}
+";
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_29305B87
+{
+	FieldName = "ColorInit";
+	FieldType = float3;
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_7483CD56
+{
+	AttributeName = "ColorRandom";
+	AttributeDescription = "Color Variation, if ConfettiColor is grey then it will make multicolor variation";
+	DefaultValueF4 = float4(1.0000000e+000, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	HasMax = true;
+	MaxValueF4 = float4(1.0000000e+000, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CCompilerSyntaxNodeExpression	$LOCAL$/CCompilerSyntaxNodeExpression_32E4B216
+{
+	Expression = "function void	Eval()
+{
+	Life = 0.2*parent.LifeRand;
+	Size = (0.02*StreamerThickness) * GlobalScale;
+	Axis = parent.Velocity.x0z;
+	Color = parent.Color;
+}
+";
+}
+CCompilerSyntaxNodeExpression	$LOCAL$/CCompilerSyntaxNodeExpression_7E97412E
+{
+	EditorInfosPosition = int2(-508, 22);
+	Expression = "function void	Eval()
+{
+	Life = rand(1,2);
+	Velocity = ((vrand().x0z*Spread + float3(rand(0.2,1)).0y0)*rand(5,8))*GlobalScale;
+	
+	LifeRand = rand(0.5,1);
+	Accel = float3(0,-9,0)*GlobalScale;
+	
+	float3 ColorVariation = vrand()*ColorRandom;
+	Color = float4(ConfettiColor + ColorVariation*rand(0,1),1);
+	Position = float3(0,0.01,0);
+}
+";
+}
+CParticleDescriptor	$LOCAL$/CParticleDescriptor_81014618
+{
+	EditorInfosPosition = int2(-392, -44);
+	CustomFields = 
+	{
+		"$LOCAL$/CParticleFieldDeclaration_B837D2BB",
+		"$LOCAL$/CParticleFieldDeclaration_317C3A9A",
+		"$LOCAL$/CParticleFieldDeclaration_0EB5C065",
+		"$LOCAL$/CParticleFieldDeclaration_AE2B08BF",
+		"$LOCAL$/CParticleFieldDeclaration_345CE7FD",
+	};
+	SpawnEvaluator = "$LOCAL$/CCompilerSyntaxNodeExpression_FB56848C";
+	States = 
+	{
+		"$LOCAL$/CParticleState_1661F83F",
+	};
+	CompileCache = 
+	{
+		"$LOCAL$/CCompilerBlobCache_9E50A25D",
+	};
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_B837D2BB
+{
+	FieldName = "LifeRand";
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_317C3A9A
+{
+	FieldName = "Accel";
+	FieldType = float3;
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_0EB5C065
+{
+	FieldName = "Color";
+	FieldType = float4;
+}
+CCompilerSyntaxNodeExpression	$LOCAL$/CCompilerSyntaxNodeExpression_FB56848C
+{
+	EditorInfosPosition = int2(-508, 22);
+	EditorInfosIsBlockMinimized = 0;
+	Expression = "function void	Eval()
+{
+	Life = rand(1,2);
+	Velocity = ((vrand().x0z*Spread + float3(rand(0.7,1)).0y0)*rand(5,8))*GlobalScale;
+	
+	LifeRand = rand(0.5,1);
+	Accel = float3(0,-9,0)*GlobalScale;
+	Direction = rand(-1,1);
+	float3 ColorVariation = vrand()*ColorRandom;
+	Color = float4(ConfettiColor + ColorVariation*rand(0,1),1);
+}
+";
+}
+CParticleState	$LOCAL$/CParticleState_1661F83F
+{
+	EditorInfosPosition = int2(-508, 65);
+	StateName = "State_0";
+	Evolvers = 
+	{
+		"$LOCAL$/CParticleEvolver_Physics_5FEACC6E",
+		"$LOCAL$/Script_3",
+		"$LOCAL$/Serpent",
+	};
+}
+CParticleEvolver_Physics	$LOCAL$/CParticleEvolver_Physics_5FEACC6E
+{
+	EditorInfosPosition = int2(-590, 86);
+	CustomName = "Physics";
+	Drag = 1.0000000e+000;
+	WorldInteractionMode = OneWay;
+	DieOnContact = true;
+}
+CParticleEvolver_Spawner	$LOCAL$/Serpent
+{
+	CustomName = "Spawner";
+	SpawnMetric = Time;
+	SpawnInterval = 2.0000000e-002;
+	UseOrientedSpawnMatrix = true;
+	Descriptor = "$LOCAL$/CParticleDescriptor_4202D6C0";
+}
+CParticleDescriptor	$LOCAL$/CParticleDescriptor_4202D6C0
+{
+	Renderer = "$LOCAL$/CParticleRenderer_Ribbon_7E22DC83";
+	CustomFields = 
+	{
+		"$LOCAL$/CParticleFieldDeclaration_A803A402",
+		"$LOCAL$/CParticleFieldDeclaration_54FB31ED",
+	};
+	SpawnEvaluator = "$LOCAL$/CCompilerSyntaxNodeExpression_B75090B4";
+	States = 
+	{
+		"$LOCAL$/CParticleState_C3A96387",
+	};
+	CompileCache = 
+	{
+		"$LOCAL$/CCompilerBlobCache_BBCBA282",
+	};
+}
+CParticleRenderer_Ribbon	$LOCAL$/CParticleRenderer_Ribbon_7E22DC83
+{
+	CustomName = "Ribbon";
+	BillboardingMaterial = AlphaBlend;
+	Diffuse = "Textures/pattern_buff.dds";
+	AtlasDefinition = "Textures/AtlasX4.pkat";
+	TextureID = 2;
+	TextureUField = "LifeRatio";
+	BillboardMode = NormalAxisAligned;
+	AxisField = "Axis";
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_A803A402
+{
+	FieldName = "Axis";
+	FieldType = float3;
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_54FB31ED
+{
+	FieldName = "Color";
+	FieldType = float4;
+}
+CCompilerSyntaxNodeExpression	$LOCAL$/CCompilerSyntaxNodeExpression_B75090B4
+{
+	Expression = "function void	Eval()
+{
+	float3 Rotative = float3(sin(spawner.LifeRatio*50)*0.1 * parent.LifeRand,0,cos(spawner.LifeRatio*50)*0.1 * parent.LifeRand)*sin(spawner.LifeRatio*3);
+	
+	Life = 0.2*parent.LifeRand;
+	Size =( 0.02 * StreamerThickness)* GlobalScale;
+	Axis = Rotative;
+	
+	Position = Rotative * parent.Direction * GlobalScale;
+	
+	Color = parent.Color;
+}
+";
+}
+CParticleState	$LOCAL$/CParticleState_C3A96387
+{
+	StateName = "State_0";
+}
+CActionFactoryParticleSpawnerBase	$LOCAL$/serpentin
+{
+	EditorInfosPosition = int2(-288, -61);
+	Descriptor = "$LOCAL$/CParticleDescriptor_81014618";
+	FluxFactorExpression = "StreamerCount";
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_CFDC0FA2
+{
+	FieldName = "Size";
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_AE2B08BF
+{
+	FieldName = "Direction";
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_93B4763E
+{
+	AttributeName = "StreamerCount";
+	DefaultValueF4 = float4(5.0000000e+000, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	MaxValueF4 = float4(2.0000000e+001, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_ED2EFF68
+{
+	AttributeName = "ConfettiPattern";
+	HasMin = true;
+	HasMax = true;
+	MaxValueF4 = float4(4.0000000e+000, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(4, 10, 10, 10);
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_C5C05E4B
+{
+	FieldName = "TextureID";
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_2872E56A
+{
+	AttributeName = "ConfettiSize";
+	DefaultValueF4 = float4(1.0000000e+000, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	MaxValueF4 = float4(5.0000000e+000, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_ECD95B75
+{
+	AttributeName = "StreamerThickness";
+	DefaultValueF4 = float4(1.0000000e+000, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	MaxValueF4 = float4(5.0000000e+000, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_3BF5B4DC
+{
+	AttributeName = "ConfettiCount";
+	DefaultValueF4 = float4(2.0000000e+001, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	MaxValueF4 = float4(5.0000000e+001, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_7AEDC6CF
+{
+	AttributeName = "RibbonCount";
+	DefaultValueF4 = float4(1.0000000e+001, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	MaxValueF4 = float4(2.0000000e+001, 1.0000000e+000, 1.0000000e+000, 1.0000000e+000);
+	MaxValueI4 = int4(10, 10, 10, 10);
+}
+CParticleEvolver_Script	$LOCAL$/Script_3
+{
+	CustomName = "Script";
+	Expression = "$LOCAL$/CCompilerSyntaxNodeExpression_8B653DD2";
+	CompileCache = 
+	{
+		"$LOCAL$/CCompilerBlobCache_8B5BC659",
+		"$LOCAL$/CCompilerBlobCache_F2A3B05B",
+	};
+}
+CCompilerSyntaxNodeExpression	$LOCAL$/CCompilerSyntaxNodeExpression_8B653DD2
+{
+	Expression = "function void	Eval()
+{
+	VelocityField = WindInfluence.sample(Position / GlobalScale) * GlobalScale;
+}
+";
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_345CE7FD
+{
+	FieldName = "VelocityField";
+	FieldType = float3;
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_B3AA7804
+{
+	FieldName = "VelocityField";
+	FieldType = float3;
+}
+CCompilerSyntaxNodeExpression	$LOCAL$/CCompilerSyntaxNodeExpression_ED1FE5DB
+{
+	Expression = "function void	Eval()
+{
+	VelocityField = WindInfluence.sample(Position / GlobalScale) * GlobalScale;
+}
+";
+}
+CParticleEvolver_Script	$LOCAL$/CParticleEvolver_Script_8E4E3C3A
+{
+	CustomName = "Script";
+	Expression = "$LOCAL$/CCompilerSyntaxNodeExpression_ED1FE5DB";
+	CompileCache = 
+	{
+		"$LOCAL$/CCompilerBlobCache_75B5968D",
+		"$LOCAL$/CCompilerBlobCache_90EA3D6F",
+	};
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_78291285
+{
+	FieldName = "VelocityField";
+	FieldType = float3;
+}
+CCompilerBlobCache	$LOCAL$/CCompilerBlobCache_BB1B8604
+{
+	Identifier = "IR";
+	Blob = 
+	{
+		444,
+		1729561681,
+		320,
+		356,
+		45,
+		0,
+		10,
+		0,
+		16,
+		24,
+		1045220557,
+		1045220557,
+		1045220557,
+		1045220557,
+		1045220557,
+		1045220557,
+		1045220557,
+		1045220557,
+		1028443341,
+		1028443341,
+		1028443341,
+		1028443341,
+		1028443341,
+		1028443341,
+		1028443341,
+		1028443341,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1090519040,
+		1090519040,
+		1090519040,
+		1090519040,
+		1090519040,
+		1090519040,
+		1090519040,
+		1090519040,
+		-1082130432,
+		-1082130432,
+		-1082130432,
+		-1082130432,
+		-1082130432,
+		-1082130432,
+		-1082130432,
+		-1082130432,
+		0,
+		-1063256064,
+		0,
+		0,
+		-1063256064,
+		0,
+		0,
+		-1063256064,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		1008981770,
+		0,
+		0,
+		1008981770,
+		0,
+		0,
+		1008981770,
+		1073741824,
+		1073741824,
+		1073741824,
+		1073741824,
+		1073741824,
+		1073741824,
+		1073741824,
+		1073741824,
+		65621,
+		524868,
+		54722560,
+		134283292,
+		25690956,
+		-2147483384,
+		35390275,
+		55314434,
+		17302408,
+		54822914,
+		134415112,
+		33488963,
+		72813572,
+		449773823,
+		16776962,
+		270008576,
+		1208745985,
+		-1601525244,
+		-872414720,
+		68944963,
+		71829509,
+		10890,
+		1283982341,
+		201566724,
+		1334576386,
+		76030724,
+		131084,
+		-1098251192,
+		67440644,
+		-1442559284,
+		84085766,
+		-1979430708,
+		117440554,
+		72321026,
+		201820195,
+		1207960579,
+		2787844,
+		-871954432,
+		162137164,
+		-938998004,
+		178914380,
+		-871823860,
+		168428612,
+		89066502,
+		202082339,
+		1325400581,
+		210248453,
+		132364,
+		-2010970801,
+		33885197,
+		503662336,
+		184683534,
+		202230796,
+		168117248,
+		1275856654,
+		134916614,
+		1149241094,
+		134875654,
+		-16230648,
+		35311375,
+		65535,
+		17831937,
+		138611712,
+		134810396,
+		713689160,
+		185335808,
+		-1442296696,
+		202312721,
+		503923596,
+		1325926925,
+		327688969,
+		132876,
+		713689416,
+		320077824,
+		-1442231092,
+		336661525,
+		-1442231604,
+		353176598,
+		-1425454904,
+		396724360,
+		155503638,
+		202053387,
+		134875972,
+		205717516,
+		135073308,
+		260574282,
+		134811144,
+		252185668,
+		223741966,
+	};
+	Externals = 
+	{
+		"$LOCAL$/CCompilerBlobCacheExternal_5239DB17",
+		"$LOCAL$/CCompilerBlobCacheExternal_5FD47C26",
+		"$LOCAL$/CCompilerBlobCacheExternal_88071AE1",
+		"$LOCAL$/CCompilerBlobCacheExternal_F44972B8",
+		"$LOCAL$/CCompilerBlobCacheExternal_4FF72BDB",
+		"$LOCAL$/CCompilerBlobCacheExternal_40B3FA3A",
+		"$LOCAL$/CCompilerBlobCacheExternal_E982A885",
+		"$LOCAL$/CCompilerBlobCacheExternal_1FD37F2C",
+		"$LOCAL$/CCompilerBlobCacheExternal_5FEF375F",
+		"$LOCAL$/CCompilerBlobCacheExternal_AA736A0E",
+		"$LOCAL$/CCompilerBlobCacheExternal_5B402AE9",
+		"$LOCAL$/CCompilerBlobCacheExternal_0CD83F60",
+		"$LOCAL$/CCompilerBlobCacheExternal_5D9A21A3",
+		"$LOCAL$/CCompilerBlobCacheExternal_381BBFA2",
+		"$LOCAL$/CCompilerBlobCacheExternal_03C1A60D",
+	};
+	ExternalCalls = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_F7400754",
+	};
+	EntryPoints = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_E781AEF6",
+	};
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_5239DB17
+{
+	NameGUID = "InvLife";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_5FD47C26
+{
+	NameGUID = "ConfettiSize";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_88071AE1
+{
+	NameGUID = "GlobalScale";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_F44972B8
+{
+	NameGUID = "Size";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_4FF72BDB
+{
+	NameGUID = "ParticleContextS";
+	TypeName = "pCtxS";
+	NativeType = -1;
+	StorageSize = 8;
+	MetaType = 4;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_40B3FA3A
+{
+	NameGUID = "Spread";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_E982A885
+{
+	NameGUID = "Velocity";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_1FD37F2C
+{
+	NameGUID = "Rand";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_5FEF375F
+{
+	NameGUID = "Accel";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_AA736A0E
+{
+	NameGUID = "ColorRandom";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_5B402AE9
+{
+	NameGUID = "ConfettiColor";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 12;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_0CD83F60
+{
+	NameGUID = "Color";
+	TypeName = "float4";
+	NativeType = 31;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_5D9A21A3
+{
+	NameGUID = "Position";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_381BBFA2
+{
+	NameGUID = "ConfettiPattern";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_03C1A60D
+{
+	NameGUID = "TextureID";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_F7400754
+{
+	SymbolName = "vrand";
+	SymbolSlot = -1;
+	FunctionTraits = 32;
+	Args = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionArg_081CCEA7",
+	};
+}
+CCompilerBlobCacheFunctionArg	$LOCAL$/CCompilerBlobCacheFunctionArg_081CCEA7
+{
+	Type = -1;
+	TypeName = "pCtxS";
+	MetaType = 4;
+	Attributes = 4;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_E781AEF6
+{
+	SymbolName = "Eval";
+}
+CCompilerBlobCache	$LOCAL$/CCompilerBlobCache_3A5FDDF1
+{
+	Identifier = "IR-S";
+	Blob = 
+	{
+		186,
+		-638533635,
+		0,
+		104,
+		14,
+		0,
+		0,
+		0,
+		8,
+		10,
+		65621,
+		18743875,
+		37948417,
+		134348828,
+		713687624,
+		65536,
+		-1442689656,
+		16845826,
+		-16759924,
+		1460142850,
+		-822018302,
+		538,
+		402784256,
+		202113562,
+		135192,
+		503464712,
+		1275855875,
+		201632258,
+		1321992960,
+		95028226,
+		38063108,
+		201655562,
+		162136908,
+		-1946091508,
+		151651140,
+		72748038,
+	};
+	Externals = 
+	{
+		"$LOCAL$/CCompilerBlobCacheExternal_DD30EB08",
+		"$LOCAL$/CCompilerBlobCacheExternal_8ACCE26B",
+		"$LOCAL$/CCompilerBlobCacheExternal_4A19AC0A",
+		"$LOCAL$/CCompilerBlobCacheExternal_5EAE5695",
+		"$LOCAL$/CCompilerBlobCacheExternal_B842BE7C",
+		"$LOCAL$/CCompilerBlobCacheExternal_D474C0EF",
+		"$LOCAL$/CCompilerBlobCacheExternal_4B8BEADE",
+	};
+	ExternalCalls = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_189F53F9",
+	};
+	EntryPoints = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_42085F72",
+	};
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_DD30EB08
+{
+	NameGUID = "WindInfluence";
+	TypeName = "samplerTurbulenceC";
+	NativeType = -1;
+	StorageSize = 8;
+	MetaType = 2;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_8ACCE26B
+{
+	NameGUID = "Position";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_4A19AC0A
+{
+	NameGUID = "GlobalScale";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_5EAE5695
+{
+	NameGUID = "ParticleContextI";
+	TypeName = "pCtxI";
+	NativeType = -1;
+	StorageSize = 8;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_B842BE7C
+{
+	NameGUID = "Rand";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_D474C0EF
+{
+	NameGUID = "AxisUp";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_4B8BEADE
+{
+	NameGUID = "VelocityField";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_189F53F9
+{
+	SymbolName = "sample";
+	FunctionTraits = 44;
+	Args = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionArg_EE7315B0",
+		"$LOCAL$/CCompilerBlobCacheFunctionArg_A1578E33",
+	};
+}
+CCompilerBlobCacheFunctionArg	$LOCAL$/CCompilerBlobCacheFunctionArg_EE7315B0
+{
+	Type = 30;
+	TypeName = "float3";
+	MetaType = 4;
+	Attributes = 4;
+}
+CCompilerBlobCacheFunctionArg	$LOCAL$/CCompilerBlobCacheFunctionArg_A1578E33
+{
+	Type = -1;
+	TypeName = "pCtxI";
+	MetaType = 4;
+	Attributes = 4;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_42085F72
+{
+	SymbolName = "Eval";
+}
+CCompilerBlobCache	$LOCAL$/CCompilerBlobCache_C567DA1D
+{
+	Identifier = "IR-C";
+	Blob = 
+	{
+		186,
+		-638533635,
+		0,
+		104,
+		14,
+		0,
+		0,
+		0,
+		8,
+		10,
+		65621,
+		18743875,
+		37948417,
+		134348828,
+		713687624,
+		65536,
+		-1442689656,
+		16845826,
+		-16759924,
+		1460142850,
+		-822018302,
+		538,
+		402784256,
+		202113562,
+		135192,
+		503464712,
+		1275855875,
+		201632258,
+		1321992960,
+		95028226,
+		38063108,
+		201655562,
+		162136908,
+		-1946091508,
+		151651140,
+		72748038,
+	};
+	Externals = 
+	{
+		"$LOCAL$/CCompilerBlobCacheExternal_0ED944A4",
+		"$LOCAL$/CCompilerBlobCacheExternal_DBF52E37",
+		"$LOCAL$/CCompilerBlobCacheExternal_BC5ABDC6",
+		"$LOCAL$/CCompilerBlobCacheExternal_9523AD01",
+		"$LOCAL$/CCompilerBlobCacheExternal_AE1A5F58",
+		"$LOCAL$/CCompilerBlobCacheExternal_B88E44FB",
+		"$LOCAL$/CCompilerBlobCacheExternal_41BE79DA",
+	};
+	ExternalCalls = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_9D3950A5",
+	};
+	EntryPoints = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_F772C7AE",
+	};
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_0ED944A4
+{
+	NameGUID = "WindInfluence";
+	TypeName = "samplerTurbulenceC";
+	NativeType = -1;
+	StorageSize = 8;
+	MetaType = 2;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_DBF52E37
+{
+	NameGUID = "Position";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_BC5ABDC6
+{
+	NameGUID = "GlobalScale";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_9523AD01
+{
+	NameGUID = "ParticleContextI";
+	TypeName = "pCtxI";
+	NativeType = -1;
+	StorageSize = 8;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_AE1A5F58
+{
+	NameGUID = "Rand";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_B88E44FB
+{
+	NameGUID = "AxisUp";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_41BE79DA
+{
+	NameGUID = "VelocityField";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_9D3950A5
+{
+	SymbolName = "sample";
+	FunctionTraits = 44;
+	Args = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionArg_F69D39CC",
+		"$LOCAL$/CCompilerBlobCacheFunctionArg_AF68367F",
+	};
+}
+CCompilerBlobCacheFunctionArg	$LOCAL$/CCompilerBlobCacheFunctionArg_F69D39CC
+{
+	Type = 30;
+	TypeName = "float3";
+	MetaType = 4;
+	Attributes = 4;
+}
+CCompilerBlobCacheFunctionArg	$LOCAL$/CCompilerBlobCacheFunctionArg_AF68367F
+{
+	Type = -1;
+	TypeName = "pCtxI";
+	MetaType = 4;
+	Attributes = 4;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_F772C7AE
+{
+	SymbolName = "Eval";
+}
+CCompilerBlobCache	$LOCAL$/CCompilerBlobCache_E37E0909
+{
+	Identifier = "IR";
+	Blob = 
+	{
+		343,
+		1731028412,
+		288,
+		294,
+		37,
+		0,
+		9,
+		0,
+		10,
+		23,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1073741824,
+		1073741824,
+		1073741824,
+		1073741824,
+		1073741824,
+		1073741824,
+		1073741824,
+		1073741824,
+		1045220557,
+		1045220557,
+		1045220557,
+		1045220557,
+		1045220557,
+		1045220557,
+		1045220557,
+		1045220557,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1090519040,
+		1090519040,
+		1090519040,
+		1090519040,
+		1090519040,
+		1090519040,
+		1090519040,
+		1090519040,
+		1056964608,
+		1056964608,
+		1056964608,
+		1056964608,
+		1056964608,
+		1056964608,
+		1056964608,
+		1056964608,
+		0,
+		-1055916032,
+		0,
+		0,
+		-1055916032,
+		0,
+		0,
+		-1055916032,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		1008981770,
+		0,
+		0,
+		1008981770,
+		0,
+		0,
+		1008981770,
+		65621,
+		-2010971569,
+		16780288,
+		285363712,
+		-872414840,
+		17302084,
+		4393984,
+		201393151,
+		50266967,
+		-16639281,
+		16777471,
+		200728,
+		-1442625524,
+		67149962,
+		54774786,
+		134348828,
+		713687880,
+		65536,
+		-1442624376,
+		17042437,
+		587419532,
+		34342536,
+		55050240,
+		268746378,
+		1254884871,
+		201894403,
+		1137444613,
+		50469891,
+		-1979496440,
+		50331690,
+		55543810,
+		201951267,
+		1207960579,
+		2787843,
+		-871822848,
+		195691340,
+		-938867956,
+		212468556,
+		-871692276,
+		201982788,
+		89066500,
+		202213411,
+		1140850693,
+		84740101,
+		-1442427892,
+		50726918,
+		168182912,
+		1460143622,
+		-821100792,
+		-64998,
+		402718720,
+		201327376,
+		119277635,
+		138938375,
+		10890,
+		1283983112,
+		202418696,
+		1133250574,
+		134815241,
+		587812616,
+		118231688,
+		155713536,
+		10890,
+		1288442387,
+		202680841,
+		1254888208,
+		202746377,
+		1221071881,
+		-2004309239,
+		-871033179,
+		369822020,
+		172231689,
+		657418,
+		942672726,
+	};
+	Externals = 
+	{
+		"$LOCAL$/CCompilerBlobCacheExternal_407E6800",
+		"$LOCAL$/CCompilerBlobCacheExternal_39D126C3",
+		"$LOCAL$/CCompilerBlobCacheExternal_E00E9B42",
+		"$LOCAL$/CCompilerBlobCacheExternal_2619DA2D",
+		"$LOCAL$/CCompilerBlobCacheExternal_C5443DF4",
+		"$LOCAL$/CCompilerBlobCacheExternal_F5E3F9C7",
+		"$LOCAL$/CCompilerBlobCacheExternal_2894A896",
+		"$LOCAL$/CCompilerBlobCacheExternal_E42B8811",
+		"$LOCAL$/CCompilerBlobCacheExternal_4352CFA8",
+		"$LOCAL$/CCompilerBlobCacheExternal_950C538B",
+		"$LOCAL$/CCompilerBlobCacheExternal_B74763AA",
+	};
+	ExternalCalls = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_EB2C96B5",
+	};
+	EntryPoints = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_B94A980F",
+	};
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_407E6800
+{
+	NameGUID = "InvLife";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_39D126C3
+{
+	NameGUID = "ParticleContextS";
+	TypeName = "pCtxS";
+	NativeType = -1;
+	StorageSize = 8;
+	MetaType = 4;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_E00E9B42
+{
+	NameGUID = "Spread";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_2619DA2D
+{
+	NameGUID = "GlobalScale";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_C5443DF4
+{
+	NameGUID = "Velocity";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_F5E3F9C7
+{
+	NameGUID = "LifeRand";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_2894A896
+{
+	NameGUID = "Accel";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_E42B8811
+{
+	NameGUID = "ColorRandom";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_4352CFA8
+{
+	NameGUID = "ConfettiColor";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 12;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_950C538B
+{
+	NameGUID = "Color";
+	TypeName = "float4";
+	NativeType = 31;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_B74763AA
+{
+	NameGUID = "Position";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_EB2C96B5
+{
+	SymbolName = "vrand";
+	SymbolSlot = -1;
+	FunctionTraits = 32;
+	Args = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionArg_251FF11C",
+	};
+}
+CCompilerBlobCacheFunctionArg	$LOCAL$/CCompilerBlobCacheFunctionArg_251FF11C
+{
+	Type = -1;
+	TypeName = "pCtxS";
+	MetaType = 4;
+	Attributes = 4;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_B94A980F
+{
+	SymbolName = "Eval";
+}
+CCompilerBlobCache	$LOCAL$/CCompilerBlobCache_F03D007E
+{
+	Identifier = "IR";
+	Blob = 
+	{
+		161,
+		561903360,
+		64,
+		93,
+		15,
+		0,
+		2,
+		0,
+		4,
+		5,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1017370378,
+		1017370378,
+		1017370378,
+		1017370378,
+		1017370378,
+		1017370378,
+		1017370378,
+		1017370378,
+		65621,
+		1835587,
+		38603776,
+		786824,
+		38060032,
+		201392392,
+		1835843,
+		55314434,
+		17301896,
+		54755328,
+		134414876,
+		59245388,
+		-2013134584,
+		50856772,
+		71501828,
+		201654814,
+		-1968569272,
+		33751200,
+		168051916,
+		1124861443,
+		117710597,
+		184894476,
+		1443629060,
+		6,
+	};
+	Externals = 
+	{
+		"$LOCAL$/CCompilerBlobCacheExternal_6D154A19",
+		"$LOCAL$/CCompilerBlobCacheExternal_80273650",
+		"$LOCAL$/CCompilerBlobCacheExternal_A537EB53",
+		"$LOCAL$/CCompilerBlobCacheExternal_63B37312",
+		"$LOCAL$/CCompilerBlobCacheExternal_6340A63D",
+		"$LOCAL$/CCompilerBlobCacheExternal_FF9DF344",
+		"$LOCAL$/CCompilerBlobCacheExternal_62CA3157",
+		"$LOCAL$/CCompilerBlobCacheExternal_DA246F66",
+		"$LOCAL$/CCompilerBlobCacheExternal_C2106F21",
+	};
+	EntryPoints = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_8EE73BF8",
+	};
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_6D154A19
+{
+	NameGUID = "parent.LifeRand";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_80273650
+{
+	NameGUID = "InvLife";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_A537EB53
+{
+	NameGUID = "StreamerThickness";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_63B37312
+{
+	NameGUID = "GlobalScale";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_6340A63D
+{
+	NameGUID = "Size";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_FF9DF344
+{
+	NameGUID = "parent.Velocity";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_62CA3157
+{
+	NameGUID = "Axis";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_DA246F66
+{
+	NameGUID = "parent.Color";
+	TypeName = "float4";
+	NativeType = 31;
+	StorageSize = 16;
+	MetaType = 4;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_C2106F21
+{
+	NameGUID = "Color";
+	TypeName = "float4";
+	NativeType = 31;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_8EE73BF8
+{
+	SymbolName = "Eval";
+}
+CCompilerBlobCache	$LOCAL$/CCompilerBlobCache_C4D80E1B
+{
+	Identifier = "IR";
+	Blob = 
+	{
+		224,
+		1823305982,
+		96,
+		137,
+		20,
+		0,
+		3,
+		0,
+		3,
+		8,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		0,
+		1065353216,
+		0,
+		0,
+		1065353216,
+		0,
+		0,
+		1065353216,
+		0,
+		1008981770,
+		0,
+		0,
+		1008981770,
+		0,
+		0,
+		1008981770,
+		65621,
+		524868,
+		54722560,
+		201392156,
+		525124,
+		71568386,
+		196874,
+		1836355,
+		88606724,
+		10890,
+		1283981313,
+		134392325,
+		1149239554,
+		84019717,
+		-16760056,
+		1460405762,
+		-821952762,
+		-64998,
+		402718720,
+		201327120,
+		-1968568760,
+		16973984,
+		168182988,
+		1124861699,
+		134487815,
+		302468620,
+		-872151621,
+		2025457480,
+		84279432,
+		168248524,
+		1124862214,
+		168238088,
+		134759436,
+		1443629831,
+		9,
+	};
+	Externals = 
+	{
+		"$LOCAL$/CCompilerBlobCacheExternal_F219697A",
+		"$LOCAL$/CCompilerBlobCacheExternal_C15128C5",
+		"$LOCAL$/CCompilerBlobCacheExternal_57C7E46C",
+		"$LOCAL$/CCompilerBlobCacheExternal_675CE59F",
+		"$LOCAL$/CCompilerBlobCacheExternal_43BF954E",
+		"$LOCAL$/CCompilerBlobCacheExternal_3D5E1729",
+		"$LOCAL$/CCompilerBlobCacheExternal_685A80A0",
+		"$LOCAL$/CCompilerBlobCacheExternal_927CDBE3",
+		"$LOCAL$/CCompilerBlobCacheExternal_BE3BE6E2",
+		"$LOCAL$/CCompilerBlobCacheExternal_F5053E4D",
+		"$LOCAL$/CCompilerBlobCacheExternal_14C36494",
+		"$LOCAL$/CCompilerBlobCacheExternal_A448D4E7",
+	};
+	ExternalCalls = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_B2BF1236",
+	};
+	EntryPoints = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_E8A4A448",
+	};
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_F219697A
+{
+	NameGUID = "InvLife";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_C15128C5
+{
+	NameGUID = "parent.Size";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_57C7E46C
+{
+	NameGUID = "Size";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_675CE59F
+{
+	NameGUID = "AxisUp";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_43BF954E
+{
+	NameGUID = "GlobalScale";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_3D5E1729
+{
+	NameGUID = "Position";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_685A80A0
+{
+	NameGUID = "ParticleContextS";
+	TypeName = "pCtxS";
+	NativeType = -1;
+	StorageSize = 8;
+	MetaType = 4;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_927CDBE3
+{
+	NameGUID = "Axis";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_BE3BE6E2
+{
+	NameGUID = "parent.Color";
+	TypeName = "float4";
+	NativeType = 31;
+	StorageSize = 16;
+	MetaType = 4;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_F5053E4D
+{
+	NameGUID = "ColorInit";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_14C36494
+{
+	NameGUID = "parent.TextureID";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_A448D4E7
+{
+	NameGUID = "TextureID";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_B2BF1236
+{
+	SymbolName = "vrand";
+	SymbolSlot = -1;
+	FunctionTraits = 32;
+	Args = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionArg_282B6231",
+	};
+}
+CCompilerBlobCacheFunctionArg	$LOCAL$/CCompilerBlobCacheFunctionArg_282B6231
+{
+	Type = -1;
+	TypeName = "pCtxS";
+	MetaType = 4;
+	Attributes = 4;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_E8A4A448
+{
+	SymbolName = "Eval";
+}
+CCompilerBlobCache	$LOCAL$/CCompilerBlobCache_654274AB
+{
+	Identifier = "IR-S";
+	Blob = 
+	{
+		69,
+		-439932974,
+		32,
+		42,
+		7,
+		0,
+		1,
+		0,
+		0,
+		4,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		65621,
+		1966659,
+		37948416,
+		201392412,
+		42467915,
+		-1073676276,
+		52363847,
+		33554700,
+		38011596,
+		201458443,
+		854,
+	};
+	Externals = 
+	{
+		"$LOCAL$/CCompilerBlobCacheExternal_C1598B4A",
+		"$LOCAL$/CCompilerBlobCacheExternal_DB3006D5",
+		"$LOCAL$/CCompilerBlobCacheExternal_BC5213BC",
+	};
+	EntryPoints = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_6BA01F2F",
+	};
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_C1598B4A
+{
+	NameGUID = "ColorInit";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_DB3006D5
+{
+	NameGUID = "LifeRatio";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_BC5213BC
+{
+	NameGUID = "Color";
+	TypeName = "float4";
+	NativeType = 31;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_6BA01F2F
+{
+	SymbolName = "Eval";
+}
+CCompilerBlobCache	$LOCAL$/CCompilerBlobCache_9B8F861E
+{
+	Identifier = "IR-C";
+	Blob = 
+	{
+		69,
+		-439932974,
+		32,
+		42,
+		7,
+		0,
+		1,
+		0,
+		0,
+		4,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		65621,
+		1966659,
+		37948416,
+		201392412,
+		42467915,
+		-1073676276,
+		52363847,
+		33554700,
+		38011596,
+		201458443,
+		854,
+	};
+	Externals = 
+	{
+		"$LOCAL$/CCompilerBlobCacheExternal_C3117039",
+		"$LOCAL$/CCompilerBlobCacheExternal_41C546F0",
+		"$LOCAL$/CCompilerBlobCacheExternal_7150F873",
+	};
+	EntryPoints = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_50ACF6B2",
+	};
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_C3117039
+{
+	NameGUID = "ColorInit";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_41C546F0
+{
+	NameGUID = "LifeRatio";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_7150F873
+{
+	NameGUID = "Color";
+	TypeName = "float4";
+	NativeType = 31;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_50ACF6B2
+{
+	SymbolName = "Eval";
+}
+CCompilerBlobCache	$LOCAL$/CCompilerBlobCache_9E50A25D
+{
+	Identifier = "IR";
+	Blob = 
+	{
+		335,
+		1341951192,
+		288,
+		303,
+		38,
+		0,
+		9,
+		0,
+		10,
+		24,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1065353216,
+		1073741824,
+		1073741824,
+		1073741824,
+		1073741824,
+		1073741824,
+		1073741824,
+		1073741824,
+		1073741824,
+		1060320051,
+		1060320051,
+		1060320051,
+		1060320051,
+		1060320051,
+		1060320051,
+		1060320051,
+		1060320051,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1090519040,
+		1090519040,
+		1090519040,
+		1090519040,
+		1090519040,
+		1090519040,
+		1090519040,
+		1090519040,
+		1056964608,
+		1056964608,
+		1056964608,
+		1056964608,
+		1056964608,
+		1056964608,
+		1056964608,
+		1056964608,
+		0,
+		-1055916032,
+		0,
+		0,
+		-1055916032,
+		0,
+		0,
+		-1055916032,
+		-1082130432,
+		-1082130432,
+		-1082130432,
+		-1082130432,
+		-1082130432,
+		-1082130432,
+		-1082130432,
+		-1082130432,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		65621,
+		-2010971569,
+		16780288,
+		285363712,
+		-872414840,
+		17302084,
+		4393984,
+		201393151,
+		50266967,
+		-16639281,
+		16777471,
+		200728,
+		-1442625524,
+		67149962,
+		54774786,
+		134348828,
+		713687880,
+		65536,
+		-1442624376,
+		17042437,
+		587419532,
+		34342536,
+		55050240,
+		268746378,
+		1254884871,
+		201894403,
+		1137444613,
+		50469891,
+		-1979496440,
+		50331690,
+		55543810,
+		201951267,
+		1207960579,
+		2787843,
+		-871822848,
+		195691340,
+		-938867956,
+		212468556,
+		-871692276,
+		201982788,
+		89066500,
+		202213411,
+		1140850693,
+		84740101,
+		-1442427892,
+		50726918,
+		168182912,
+		1325925894,
+		243802887,
+		1804,
+		235407172,
+		139922439,
+		449777663,
+		16776962,
+		270008576,
+		1124859907,
+		134683656,
+		-1979168760,
+		134217770,
+		139233287,
+		252449194,
+		155421704,
+		134809886,
+		-2010969777,
+		527379,
+		-1979103232,
+		335544362,
+		156027923,
+		286004650,
+		155896852,
+		151787178,
+		155764757,
+		-1517778773,
+		1154225687,
+		169282313,
+		677388,
+	};
+	Externals = 
+	{
+		"$LOCAL$/CCompilerBlobCacheExternal_1D5191E4",
+		"$LOCAL$/CCompilerBlobCacheExternal_40C0E477",
+		"$LOCAL$/CCompilerBlobCacheExternal_97D99106",
+		"$LOCAL$/CCompilerBlobCacheExternal_7E956141",
+		"$LOCAL$/CCompilerBlobCacheExternal_5E180898",
+		"$LOCAL$/CCompilerBlobCacheExternal_9C5C873B",
+		"$LOCAL$/CCompilerBlobCacheExternal_4BECC91A",
+		"$LOCAL$/CCompilerBlobCacheExternal_471230E5",
+		"$LOCAL$/CCompilerBlobCacheExternal_EA3B7F0C",
+		"$LOCAL$/CCompilerBlobCacheExternal_44D544BF",
+		"$LOCAL$/CCompilerBlobCacheExternal_0D01D2EE",
+	};
+	ExternalCalls = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_63A85549",
+	};
+	EntryPoints = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_02254103",
+	};
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_1D5191E4
+{
+	NameGUID = "InvLife";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_40C0E477
+{
+	NameGUID = "ParticleContextS";
+	TypeName = "pCtxS";
+	NativeType = -1;
+	StorageSize = 8;
+	MetaType = 4;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_97D99106
+{
+	NameGUID = "Spread";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_7E956141
+{
+	NameGUID = "GlobalScale";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_5E180898
+{
+	NameGUID = "Velocity";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_9C5C873B
+{
+	NameGUID = "LifeRand";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_4BECC91A
+{
+	NameGUID = "Accel";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_471230E5
+{
+	NameGUID = "Direction";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_EA3B7F0C
+{
+	NameGUID = "ColorRandom";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_44D544BF
+{
+	NameGUID = "ConfettiColor";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 12;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_0D01D2EE
+{
+	NameGUID = "Color";
+	TypeName = "float4";
+	NativeType = 31;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_63A85549
+{
+	SymbolName = "vrand";
+	SymbolSlot = -1;
+	FunctionTraits = 32;
+	Args = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionArg_32D48940",
+	};
+}
+CCompilerBlobCacheFunctionArg	$LOCAL$/CCompilerBlobCacheFunctionArg_32D48940
+{
+	Type = -1;
+	TypeName = "pCtxS";
+	MetaType = 4;
+	Attributes = 4;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_02254103
+{
+	SymbolName = "Eval";
+}
+CCompilerBlobCache	$LOCAL$/CCompilerBlobCache_BBCBA282
+{
+	Identifier = "IR";
+	Blob = 
+	{
+		368,
+		30023134,
+		192,
+		228,
+		32,
+		0,
+		6,
+		0,
+		6,
+		27,
+		1112014848,
+		1112014848,
+		1112014848,
+		1112014848,
+		1112014848,
+		1112014848,
+		1112014848,
+		1112014848,
+		1036831949,
+		1036831949,
+		1036831949,
+		1036831949,
+		1036831949,
+		1036831949,
+		1036831949,
+		1036831949,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		1077936128,
+		1077936128,
+		1077936128,
+		1077936128,
+		1077936128,
+		1077936128,
+		1077936128,
+		1077936128,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1084227584,
+		1017370378,
+		1017370378,
+		1017370378,
+		1017370378,
+		1017370378,
+		1017370378,
+		1017370378,
+		1017370378,
+		65621,
+		1835587,
+		38538240,
+		786824,
+		38669312,
+		16943109,
+		-2013115188,
+		16911363,
+		469910284,
+		1275855108,
+		201689090,
+		1321993219,
+		143132162,
+		38587393,
+		135006600,
+		38538241,
+		151784328,
+		38259716,
+		34343966,
+		185336325,
+		38535180,
+		790152,
+		38669315,
+		235898885,
+		-1979561780,
+		268435498,
+		38587407,
+		202117546,
+		72207376,
+		67900552,
+		71614468,
+		201462792,
+		1836355,
+		88868867,
+		84410760,
+		88309760,
+		134480412,
+		59245900,
+		-2013134584,
+		50857284,
+		105121797,
+		201724170,
+		713689160,
+		33882112,
+		470303624,
+		1208747798,
+		2787848,
+		-870967552,
+		413796428,
+		-938015476,
+		430573644,
+		-870838004,
+		420087876,
+		172166152,
+		201923103,
+		436931140,
+		190188554,
+	};
+	Externals = 
+	{
+		"$LOCAL$/CCompilerBlobCacheExternal_7CCBD26D",
+		"$LOCAL$/CCompilerBlobCacheExternal_43A57B34",
+		"$LOCAL$/CCompilerBlobCacheExternal_53536007",
+		"$LOCAL$/CCompilerBlobCacheExternal_42A8EBD6",
+		"$LOCAL$/CCompilerBlobCacheExternal_AC276C51",
+		"$LOCAL$/CCompilerBlobCacheExternal_028E68E8",
+		"$LOCAL$/CCompilerBlobCacheExternal_28F745CB",
+		"$LOCAL$/CCompilerBlobCacheExternal_E07822EA",
+		"$LOCAL$/CCompilerBlobCacheExternal_7600A6F5",
+		"$LOCAL$/CCompilerBlobCacheExternal_32C1265C",
+		"$LOCAL$/CCompilerBlobCacheExternal_CE7D564F",
+	};
+	EntryPoints = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_E92B7BBE",
+	};
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_7CCBD26D
+{
+	NameGUID = "spawner.LifeRatio";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_43A57B34
+{
+	NameGUID = "parent.LifeRand";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_53536007
+{
+	NameGUID = "InvLife";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_42A8EBD6
+{
+	NameGUID = "StreamerThickness";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_AC276C51
+{
+	NameGUID = "GlobalScale";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_028E68E8
+{
+	NameGUID = "Size";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_28F745CB
+{
+	NameGUID = "Axis";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_E07822EA
+{
+	NameGUID = "parent.Direction";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 4;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_7600A6F5
+{
+	NameGUID = "Position";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_32C1265C
+{
+	NameGUID = "parent.Color";
+	TypeName = "float4";
+	NativeType = 31;
+	StorageSize = 16;
+	MetaType = 4;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_CE7D564F
+{
+	NameGUID = "Color";
+	TypeName = "float4";
+	NativeType = 31;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_E92B7BBE
+{
+	SymbolName = "Eval";
+}
+CCompilerBlobCache	$LOCAL$/CCompilerBlobCache_8B5BC659
+{
+	Identifier = "IR-S";
+	Blob = 
+	{
+		106,
+		-284172966,
+		0,
+		77,
+		10,
+		0,
+		0,
+		0,
+		5,
+		4,
+		65621,
+		18743875,
+		37948417,
+		134348828,
+		713687624,
+		65536,
+		-1442689656,
+		16845826,
+		-16759924,
+		1460142850,
+		-822018302,
+		538,
+		402784256,
+		202113562,
+		135192,
+		-1442690040,
+		16780291,
+		167920780,
+		1443628035,
+		875834627,
+	};
+	Externals = 
+	{
+		"$LOCAL$/CCompilerBlobCacheExternal_8FB54790",
+		"$LOCAL$/CCompilerBlobCacheExternal_E62AB593",
+		"$LOCAL$/CCompilerBlobCacheExternal_B01CEA52",
+		"$LOCAL$/CCompilerBlobCacheExternal_18DFCE7D",
+		"$LOCAL$/CCompilerBlobCacheExternal_13DC2084",
+	};
+	ExternalCalls = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_1BE14797",
+	};
+	EntryPoints = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_3F14C538",
+	};
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_8FB54790
+{
+	NameGUID = "WindInfluence";
+	TypeName = "samplerTurbulenceC";
+	NativeType = -1;
+	StorageSize = 8;
+	MetaType = 2;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_E62AB593
+{
+	NameGUID = "Position";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_B01CEA52
+{
+	NameGUID = "GlobalScale";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_18DFCE7D
+{
+	NameGUID = "ParticleContextI";
+	TypeName = "pCtxI";
+	NativeType = -1;
+	StorageSize = 8;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_13DC2084
+{
+	NameGUID = "VelocityField";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_1BE14797
+{
+	SymbolName = "sample";
+	FunctionTraits = 44;
+	Args = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionArg_102222A6",
+		"$LOCAL$/CCompilerBlobCacheFunctionArg_267A8361",
+	};
+}
+CCompilerBlobCacheFunctionArg	$LOCAL$/CCompilerBlobCacheFunctionArg_102222A6
+{
+	Type = 30;
+	TypeName = "float3";
+	MetaType = 4;
+	Attributes = 4;
+}
+CCompilerBlobCacheFunctionArg	$LOCAL$/CCompilerBlobCacheFunctionArg_267A8361
+{
+	Type = -1;
+	TypeName = "pCtxI";
+	MetaType = 4;
+	Attributes = 4;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_3F14C538
+{
+	SymbolName = "Eval";
+}
+CCompilerBlobCache	$LOCAL$/CCompilerBlobCache_F2A3B05B
+{
+	Identifier = "IR-C";
+	Blob = 
+	{
+		106,
+		-284172966,
+		0,
+		77,
+		10,
+		0,
+		0,
+		0,
+		5,
+		4,
+		65621,
+		18743875,
+		37948417,
+		134348828,
+		713687624,
+		65536,
+		-1442689656,
+		16845826,
+		-16759924,
+		1460142850,
+		-822018302,
+		538,
+		402784256,
+		202113562,
+		135192,
+		-1442690040,
+		16780291,
+		167920780,
+		1443628035,
+		3,
+	};
+	Externals = 
+	{
+		"$LOCAL$/CCompilerBlobCacheExternal_C56098BA",
+		"$LOCAL$/CCompilerBlobCacheExternal_4BC46905",
+		"$LOCAL$/CCompilerBlobCacheExternal_F0E009AC",
+		"$LOCAL$/CCompilerBlobCacheExternal_D0D953DF",
+		"$LOCAL$/CCompilerBlobCacheExternal_8CE1808E",
+	};
+	ExternalCalls = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_BD24C369",
+	};
+	EntryPoints = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_BDE5CE22",
+	};
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_C56098BA
+{
+	NameGUID = "WindInfluence";
+	TypeName = "samplerTurbulenceC";
+	NativeType = -1;
+	StorageSize = 8;
+	MetaType = 2;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_4BC46905
+{
+	NameGUID = "Position";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_F0E009AC
+{
+	NameGUID = "GlobalScale";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_D0D953DF
+{
+	NameGUID = "ParticleContextI";
+	TypeName = "pCtxI";
+	NativeType = -1;
+	StorageSize = 8;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_8CE1808E
+{
+	NameGUID = "VelocityField";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_BD24C369
+{
+	SymbolName = "sample";
+	FunctionTraits = 44;
+	Args = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionArg_2A5481E0",
+		"$LOCAL$/CCompilerBlobCacheFunctionArg_2F525623",
+	};
+}
+CCompilerBlobCacheFunctionArg	$LOCAL$/CCompilerBlobCacheFunctionArg_2A5481E0
+{
+	Type = 30;
+	TypeName = "float3";
+	MetaType = 4;
+	Attributes = 4;
+}
+CCompilerBlobCacheFunctionArg	$LOCAL$/CCompilerBlobCacheFunctionArg_2F525623
+{
+	Type = -1;
+	TypeName = "pCtxI";
+	MetaType = 4;
+	Attributes = 4;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_BDE5CE22
+{
+	SymbolName = "Eval";
+}
+CCompilerBlobCache	$LOCAL$/CCompilerBlobCache_75B5968D
+{
+	Identifier = "IR-S";
+	Blob = 
+	{
+		106,
+		-284172966,
+		0,
+		77,
+		10,
+		0,
+		0,
+		0,
+		5,
+		4,
+		65621,
+		18743875,
+		37948417,
+		134348828,
+		713687624,
+		65536,
+		-1442689656,
+		16845826,
+		-16759924,
+		1460142850,
+		-822018302,
+		538,
+		402784256,
+		202113562,
+		135192,
+		-1442690040,
+		16780291,
+		167920780,
+		1443628035,
+		2035550467,
+	};
+	Externals = 
+	{
+		"$LOCAL$/CCompilerBlobCacheExternal_CBD281D4",
+		"$LOCAL$/CCompilerBlobCacheExternal_8F0B9B27",
+		"$LOCAL$/CCompilerBlobCacheExternal_D0FA3576",
+		"$LOCAL$/CCompilerBlobCacheExternal_01E7A671",
+		"$LOCAL$/CCompilerBlobCacheExternal_22781D88",
+	};
+	ExternalCalls = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_99B2C6EB",
+	};
+	EntryPoints = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_D95528FC",
+	};
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_CBD281D4
+{
+	NameGUID = "WindInfluence";
+	TypeName = "samplerTurbulenceC";
+	NativeType = -1;
+	StorageSize = 8;
+	MetaType = 2;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_8F0B9B27
+{
+	NameGUID = "Position";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_D0FA3576
+{
+	NameGUID = "GlobalScale";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_01E7A671
+{
+	NameGUID = "ParticleContextI";
+	TypeName = "pCtxI";
+	NativeType = -1;
+	StorageSize = 8;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_22781D88
+{
+	NameGUID = "VelocityField";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_99B2C6EB
+{
+	SymbolName = "sample";
+	FunctionTraits = 44;
+	Args = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionArg_08CB2A8A",
+		"$LOCAL$/CCompilerBlobCacheFunctionArg_2EE67715",
+	};
+}
+CCompilerBlobCacheFunctionArg	$LOCAL$/CCompilerBlobCacheFunctionArg_08CB2A8A
+{
+	Type = 30;
+	TypeName = "float3";
+	MetaType = 4;
+	Attributes = 4;
+}
+CCompilerBlobCacheFunctionArg	$LOCAL$/CCompilerBlobCacheFunctionArg_2EE67715
+{
+	Type = -1;
+	TypeName = "pCtxI";
+	MetaType = 4;
+	Attributes = 4;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_D95528FC
+{
+	SymbolName = "Eval";
+}
+CCompilerBlobCache	$LOCAL$/CCompilerBlobCache_90EA3D6F
+{
+	Identifier = "IR-C";
+	Blob = 
+	{
+		106,
+		-284172966,
+		0,
+		77,
+		10,
+		0,
+		0,
+		0,
+		5,
+		4,
+		65621,
+		18743875,
+		37948417,
+		134348828,
+		713687624,
+		65536,
+		-1442689656,
+		16845826,
+		-16759924,
+		1460142850,
+		-822018302,
+		538,
+		402784256,
+		202113562,
+		135192,
+		-1442690040,
+		16780291,
+		167920780,
+		1443628035,
+		3,
+	};
+	Externals = 
+	{
+		"$LOCAL$/CCompilerBlobCacheExternal_30B8E15E",
+		"$LOCAL$/CCompilerBlobCacheExternal_A2BC4C79",
+		"$LOCAL$/CCompilerBlobCacheExternal_A25F3830",
+		"$LOCAL$/CCompilerBlobCacheExternal_F04D22B3",
+		"$LOCAL$/CCompilerBlobCacheExternal_252B4DF2",
+	};
+	ExternalCalls = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_21362A9D",
+	};
+	EntryPoints = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionDef_99A62446",
+	};
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_30B8E15E
+{
+	NameGUID = "WindInfluence";
+	TypeName = "samplerTurbulenceC";
+	NativeType = -1;
+	StorageSize = 8;
+	MetaType = 2;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_A2BC4C79
+{
+	NameGUID = "Position";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_A25F3830
+{
+	NameGUID = "GlobalScale";
+	TypeName = "float";
+	NativeType = 28;
+	StorageSize = 4;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_F04D22B3
+{
+	NameGUID = "ParticleContextI";
+	TypeName = "pCtxI";
+	NativeType = -1;
+	StorageSize = 8;
+	MetaType = 3;
+	Attributes = 2;
+	AccessMask = 1;
+}
+CCompilerBlobCacheExternal	$LOCAL$/CCompilerBlobCacheExternal_252B4DF2
+{
+	NameGUID = "VelocityField";
+	TypeName = "float3";
+	NativeType = 30;
+	StorageSize = 16;
+	MetaType = 4;
+	AccessMask = 2;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_21362A9D
+{
+	SymbolName = "sample";
+	FunctionTraits = 44;
+	Args = 
+	{
+		"$LOCAL$/CCompilerBlobCacheFunctionArg_AB259F24",
+		"$LOCAL$/CCompilerBlobCacheFunctionArg_E6335AB7",
+	};
+}
+CCompilerBlobCacheFunctionArg	$LOCAL$/CCompilerBlobCacheFunctionArg_AB259F24
+{
+	Type = 30;
+	TypeName = "float3";
+	MetaType = 4;
+	Attributes = 4;
+}
+CCompilerBlobCacheFunctionArg	$LOCAL$/CCompilerBlobCacheFunctionArg_E6335AB7
+{
+	Type = -1;
+	TypeName = "pCtxI";
+	MetaType = 4;
+	Attributes = 4;
+}
+CCompilerBlobCacheFunctionDef	$LOCAL$/CCompilerBlobCacheFunctionDef_99A62446
+{
+	SymbolName = "Eval";
+}

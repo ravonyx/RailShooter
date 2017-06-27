@@ -73,7 +73,7 @@ public class RailShooterPlayer : MonoBehaviour
         if (m_currentLife <= 0 && m_ending == false)
         {
             m_ending = true;
-            StartCoroutine(m_railShooterController.GameOver());
+            StartCoroutine(m_railShooterController.GameOverPhase());
         }
     }
 

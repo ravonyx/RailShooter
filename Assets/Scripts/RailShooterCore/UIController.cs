@@ -15,10 +15,10 @@ namespace RailShooter.Assets
         [SerializeField] private UIFader m_enemiesUI;    
         [SerializeField] private UIFader m_healthUI;     
         [SerializeField] private UIFader m_outroUI;     
+        [SerializeField] private UIFader m_gameOverUI;
         [SerializeField] private UIFader m_playerUI;    
         [SerializeField] private Text m_totalScore;    
         [SerializeField] private Text m_highScore;      
-
 
         public IEnumerator ShowIntroUI()
         {
@@ -56,6 +56,15 @@ namespace RailShooter.Assets
         public IEnumerator HideOutroUI()
         {
             yield return StartCoroutine(m_outroUI.InteruptAndFadeOut());
+        }
+
+        public IEnumerator ShowGameOverUI()
+        {
+            yield return StartCoroutine(m_gameOverUI.InteruptAndFadeIn());
+        }
+        public IEnumerator HideGameOverUI()
+        {
+            yield return StartCoroutine(m_gameOverUI.InteruptAndFadeOut());
         }
 
         public IEnumerator ShowPlayerUI ()

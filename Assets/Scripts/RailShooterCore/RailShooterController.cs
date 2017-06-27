@@ -36,6 +36,18 @@ namespace RailShooter.Assets
         [SerializeField]
         private CameraFade m_cameraFade;           // Reference to the script that fades the scene to black.
 
+        [SerializeField]
+        private AudioClip m_gameOverClip;
+        [SerializeField]
+        private AudioClip m_levelDoneClip;
+        [SerializeField]
+        private AudioSource m_audioSourceMusic;
+        [SerializeField]
+        private AudioSource m_audioSourceSFX;
+
+        [SerializeField]
+        PKFxFX []m_endFX;
+
         //control movement of player
         private PathWalker m_pathWalker;         
         public bool IsPlaying { get; private set; }
@@ -133,6 +145,16 @@ namespace RailShooter.Assets
 
         private IEnumerator EndPhase ()
         {
+            m_audioSourceMusic.Stop();
+
+            m_audioSourceSFX.enabled = true;
+            m_audioSourceSFX.clip = m_levelDoneClip;
+            m_audioSourceSFX.PlayOneShot(m_levelDoneClip, 1.0f);
+
+
+            for (int i = 0; i < m_endFX.Length; i++)
+                m_endFX[i].StartEffect();
+
             //hide the explanations UI if game over before end
             m_reticle.Hide ();
             yield return StartCoroutine (m_UIController.ShowOutroUI ());
@@ -159,7 +181,11 @@ namespace RailShooter.Assets
 
         public IEnumerator GameOverPhase()
         {
-            Debug.Log("Game Over");
+            m_audioSourceMusic.Stop();
+            m_audioSourceSFX.enabled = true;
+            m_audioSourceSFX.clip = m_gameOverClip;
+            m_audioSourceSFX.PlayOneShot(m_gameOverClip, 1.0f);
+
             IsPlaying = false;
             StopAllCoroutines();
             m_pathWalker.Walking = false;

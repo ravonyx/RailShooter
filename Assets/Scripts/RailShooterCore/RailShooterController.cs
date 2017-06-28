@@ -147,7 +147,6 @@ namespace RailShooter.Assets
         {
             m_audioSourceMusic.Stop();
 
-            m_audioSourceSFX.enabled = true;
             m_audioSourceSFX.clip = m_levelDoneClip;
             m_audioSourceSFX.PlayOneShot(m_levelDoneClip, 1.0f);
 
@@ -182,7 +181,6 @@ namespace RailShooter.Assets
         public IEnumerator GameOverPhase()
         {
             m_audioSourceMusic.Stop();
-            m_audioSourceSFX.enabled = true;
             m_audioSourceSFX.clip = m_gameOverClip;
             m_audioSourceSFX.PlayOneShot(m_gameOverClip, 1.0f);
 

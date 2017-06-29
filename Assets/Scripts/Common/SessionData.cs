@@ -17,6 +17,7 @@ namespace RailShooter.Utils
         private const string k_TutorialData = "tutorialData";
         private const string k_Shooter360Data = "shooter360Data";
 
+        private static int s_multiplicateur;
         private static int s_HighScore;       
         //current score                      
         private static int s_Score;       
@@ -67,6 +68,7 @@ namespace RailShooter.Utils
         public static void Restart()
         {
             // Reset the current score and get the highscore from player prefs.
+            s_multiplicateur = 1;
             s_Score = 0;
             s_HighScore = GetHighScore();
         }
@@ -74,8 +76,14 @@ namespace RailShooter.Utils
         public static void AddScore(int score)
         {
             // Add to the current score and check if the high score needs to be set.
-            s_Score += score;
+            s_Score += score * s_multiplicateur;
+            s_multiplicateur += 1;
             CheckHighScore();
+        }
+
+        public static void ResetMultiplicateur()
+        {
+            s_multiplicateur = 0;
         }
 
         public static int GetHighScore()

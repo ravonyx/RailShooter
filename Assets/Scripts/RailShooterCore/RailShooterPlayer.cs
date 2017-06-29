@@ -93,6 +93,8 @@ public class RailShooterPlayer : MonoBehaviour
         m_currentLife = m_currentLife > 0 ? m_currentLife : 0;
         float lifeValue = m_currentLife / m_lifeMax;
 
+        SessionData.ResetMultiplicateur();
+
         Color color = Color.white;
         if (m_currentLife <= m_lifeMax && m_currentLife >= ((m_lifeMax / 3) * 2))
             ColorUtility.TryParseHtmlString("#00FF17FF", out color);

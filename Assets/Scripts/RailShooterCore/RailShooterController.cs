@@ -18,12 +18,10 @@ namespace RailShooter.Assets
         [SerializeField]
 		private CamerasAndInputsManager m_camInputsManager;
 		[SerializeField]
-		private Reticle m_reticleTouch;
+		private GameObject m_touch;
 
+        private Transform m_camera;      
         private Reticle m_reticle;
-
-        //camera variables
-        private Transform m_camera;                    
         private SelectionRadial m_selectionRadial;    
 
         [SerializeField]
@@ -58,15 +56,21 @@ namespace RailShooter.Assets
 			Camera camera = m_camInputsManager.CurrentCamera;
 			m_cameraFade = camera.GetComponent<CameraFade>();
 			m_camera = camera.transform;
-			m_selectionRadial = camera.GetComponent<SelectionRadial>();
+			
 			m_pathWalker = camera.GetComponentInParent<PathWalker>();
 
 
-			if (m_camInputsManager.CurrentInputName == "Touch") 
-				m_reticle = m_reticleTouch;
-			else 
-				m_reticle = camera.GetComponent<Reticle> ();
+            if (m_camInputsManager.CurrentInputName == "Touch")
+            {
 
+                m_selectionRadial = m_touch.GetComponent<SelectionRadial>();
+                m_reticle = m_touch.GetComponent<Reticle>();
+            }
+            else
+            {
+                m_selectionRadial = camera.GetComponent<SelectionRadial>();
+                m_reticle = camera.GetComponent<Reticle>();
+            }
             SessionData.SetGameType(m_gameType);
             //loop to all phases
             while (true)

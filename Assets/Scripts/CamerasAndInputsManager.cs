@@ -91,7 +91,9 @@ namespace RailShooter.Utils
 				m_OneArmWeapon.SetActive(false);
 
                 m_currentCamera.GetComponent<Raycaster>().enabled = false;
-			}
+                m_currentCamera.GetComponent<Reticle>().enabled = false;
+                m_currentCamera.GetComponent<SelectionRadial>().enabled = false;
+            }
 
 			else
 			{

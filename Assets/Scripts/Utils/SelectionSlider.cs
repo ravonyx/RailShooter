@@ -62,13 +62,11 @@ namespace RailShooter.Utils
 
         private void Update ()
         {
-            if(!m_UIFader)
-                return;
-
-            // If this bar is using a UIFader turn off the collider when it's invisible.
-            m_Collider.enabled = m_UIFader.Visible;
+            if(m_CanvasGroup.alpha == 0)
+                m_Collider.enabled = false;
+            if (m_CanvasGroup.alpha == 1)
+                m_Collider.enabled = true;
         }
-
 
         public IEnumerator WaitForBarToFill ()
         {

@@ -87,13 +87,7 @@ namespace RailShooter.Assets
 
             m_reticle.Show ();
             m_selectionRadial.Hide ();
-
-            m_inputWarnings.TurnOnDoubleTapWarnings ();
-            m_inputWarnings.TurnOnSingleTapWarnings ();
             yield return StartCoroutine (m_selectionSlider.WaitForBarToFill ());
-
-            m_inputWarnings.TurnOffDoubleTapWarnings ();
-            m_inputWarnings.TurnOffSingleTapWarnings ();
             yield return StartCoroutine (m_UIController.HideIntroUI ());
         }
 

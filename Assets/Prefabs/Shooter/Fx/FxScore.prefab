@@ -9,157 +9,43 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1265461361329134}
+  m_RootGameObject: {fileID: 1910881914374720}
   m_IsPrefabParent: 1
---- !u!1 &1072820887517232
+--- !u!1 &1910881914374720
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4958414512948800}
-  - component: {fileID: 114703882450669268}
-  m_Layer: 0
-  m_Name: FxFeedBack
+  - component: {fileID: 4656406461554588}
+  - component: {fileID: 114289502475942016}
+  m_Layer: 10
+  m_Name: FxScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1265461361329134
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4423024300825364}
-  - component: {fileID: 33694529090571788}
-  - component: {fileID: 23369052279387732}
-  - component: {fileID: 65707565399072162}
-  - component: {fileID: 114304163675680434}
-  - component: {fileID: 114905987295863686}
-  m_Layer: 0
-  m_Name: Health
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
---- !u!1 &1388599874400400
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4928193851001350}
-  - component: {fileID: 114063821964401670}
-  m_Layer: 0
-  m_Name: Fx
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
---- !u!4 &4423024300825364
+--- !u!4 &4656406461554588
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1265461361329134}
+  m_GameObject: {fileID: 1910881914374720}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 38.5, y: 21.2, z: -76.6}
-  m_LocalScale: {x: 5, y: 5, z: 5}
-  m_Children:
-  - {fileID: 4928193851001350}
-  - {fileID: 4958414512948800}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4928193851001350
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1388599874400400}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4423024300825364}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4958414512948800
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1072820887517232}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.240002, y: 1.9000002, z: 2.8400009}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4423024300825364}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23369052279387732
-MeshRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1265461361329134}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 2100000, guid: f789d97e4050cfa449b19dc008b430f3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!33 &33694529090571788
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1265461361329134}
-  m_Mesh: {fileID: 4300000, guid: ab1ffd0619cc8074399118a165c05e67, type: 3}
---- !u!65 &65707565399072162
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1265461361329134}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114063821964401670
+--- !u!114 &114289502475942016
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1388599874400400}
+  m_GameObject: {fileID: 1910881914374720}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a5c02dd42880460b914f6e0206b8c28, type: 3}
@@ -173,69 +59,6 @@ MonoBehaviour:
       Name: GlobalScale
       Description: 
       DefaultValue0: 1
-      DefaultValue1: 0
-      DefaultValue2: 0
-      DefaultValue3: 0
-      MinValue0: 0
-      MinValue1: 0
-      MinValue2: 0
-      MinValue3: 0
-      MaxValue0: 0
-      MaxValue1: 0
-      MaxValue2: 0
-      MaxValue3: 0
-    m_Value0: 10
-    m_Value1: 0
-    m_Value2: 0
-    m_Value3: 0
-  - m_Descriptor:
-      Type: 28
-      MinMaxFlag: 1
-      Name: Spread
-      Description: 
-      DefaultValue0: 1
-      DefaultValue1: 0
-      DefaultValue2: 0
-      DefaultValue3: 0
-      MinValue0: 0
-      MinValue1: 0
-      MinValue2: 0
-      MinValue3: 0
-      MaxValue0: 0
-      MaxValue1: 0
-      MaxValue2: 0
-      MaxValue3: 0
-    m_Value0: 5
-    m_Value1: 0
-    m_Value2: 0
-    m_Value3: 0
-  - m_Descriptor:
-      Type: 30
-      MinMaxFlag: 1
-      Name: SparkColor
-      Description: 
-      DefaultValue0: 1
-      DefaultValue1: 0.5
-      DefaultValue2: 0
-      DefaultValue3: 0
-      MinValue0: 0
-      MinValue1: 0
-      MinValue2: 0
-      MinValue3: 0
-      MaxValue0: 0
-      MaxValue1: 0
-      MaxValue2: 0
-      MaxValue3: 0
-    m_Value0: 0
-    m_Value1: 1
-    m_Value2: 0
-    m_Value3: 0
-  - m_Descriptor:
-      Type: 28
-      MinMaxFlag: 1
-      Name: SparkIntensity
-      Description: 
-      DefaultValue0: 2
       DefaultValue1: 0
       DefaultValue2: 0
       DefaultValue3: 0
@@ -248,76 +71,6 @@ MonoBehaviour:
       MaxValue2: 0
       MaxValue3: 0
     m_Value0: 2
-    m_Value1: 0
-    m_Value2: 0
-    m_Value3: 0
-  - m_Descriptor:
-      Type: 28
-      MinMaxFlag: 1
-      Name: SparkCount
-      Description: 
-      DefaultValue0: 5
-      DefaultValue1: 0
-      DefaultValue2: 0
-      DefaultValue3: 0
-      MinValue0: 0
-      MinValue1: 0
-      MinValue2: 0
-      MinValue3: 0
-      MaxValue0: 0
-      MaxValue1: 0
-      MaxValue2: 0
-      MaxValue3: 0
-    m_Value0: 30
-    m_Value1: 0
-    m_Value2: 0
-    m_Value3: 0
-  m_FxSamplersList: []
-  m_PlayOnStart: 0
-  m_BoundFx: {fileID: 102900000, guid: 20fd856c2f06bda4f998d90ae65d1f1b, type: 3}
-  m_FxName: Particles/Spark.pkfx
---- !u!114 &114304163675680434
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1265461361329134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fea6f8eea666334aaf9869ad8f7bcda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114703882450669268
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1072820887517232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a5c02dd42880460b914f6e0206b8c28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IsPlaying: 0
-  m_FxAttributesList:
-  - m_Descriptor:
-      Type: 28
-      MinMaxFlag: 1
-      Name: GlobalScale
-      Description: 
-      DefaultValue0: 1
-      DefaultValue1: 0
-      DefaultValue2: 0
-      DefaultValue3: 0
-      MinValue0: 0
-      MinValue1: 0
-      MinValue2: 0
-      MinValue3: 0
-      MaxValue0: 0
-      MaxValue1: 0
-      MaxValue2: 0
-      MaxValue3: 0
-    m_Value0: 1
     m_Value1: 0
     m_Value2: 0
     m_Value3: 0
@@ -381,7 +134,7 @@ MonoBehaviour:
       MaxValue2: 1
       MaxValue3: 0
     m_Value0: 1
-    m_Value1: 0
+    m_Value1: 1
     m_Value2: 0
     m_Value3: 0
   - m_Descriptor:
@@ -464,7 +217,7 @@ MonoBehaviour:
       MaxValue1: 0
       MaxValue2: 0
       MaxValue3: 0
-    m_Value0: 8e-45
+    m_Value0: 1e-45
     m_Value1: 0
     m_Value2: 0
     m_Value3: 0
@@ -486,8 +239,8 @@ MonoBehaviour:
       MaxValue2: 1
       MaxValue3: 0
     m_Value0: 1
-    m_Value1: 1
-    m_Value2: 1
+    m_Value1: 0
+    m_Value2: 0
     m_Value3: 0
   - m_Descriptor:
       Type: 28
@@ -548,7 +301,7 @@ MonoBehaviour:
       MaxValue1: 0
       MaxValue2: 0
       MaxValue3: 0
-    m_Value0: 3.6e-44
+    m_Value0: 3.8e-44
     m_Value1: 0
     m_Value2: 0
     m_Value3: 0
@@ -590,7 +343,7 @@ MonoBehaviour:
       MaxValue1: 0
       MaxValue2: 0
       MaxValue3: 0
-    m_Value0: 0
+    m_Value0: 1
     m_Value1: 0
     m_Value2: 0
     m_Value3: 0
@@ -803,28 +556,8 @@ MonoBehaviour:
     m_TextureTexcoordMode: 0
     m_CurvesArray: []
     m_CurvesTimeKeys: []
-    m_Text: 
+    m_Text: aaaaah
     m_InSkinning: 0
   m_PlayOnStart: 0
   m_BoundFx: {fileID: 102900000, guid: 4f10fa51b5617444d9ce4bd406b55fa1, type: 3}
   m_FxName: Particles/Text.pkfx
---- !u!114 &114905987295863686
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1265461361329134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92ac02b8408a9fe4190b334e8066e085, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_camInputManager: {fileID: 0}
-  m_gainPoints: 0
-  m_score: 1
-  m_destroyTimeOutDuration: 2
-  m_destroyPrefab: {fileID: 0}
-  m_hasVoronoi: 0
-  m_particleExplosion: {fileID: 114063821964401670}
-  m_particleScore: {fileID: 114703882450669268}
-  m_shootingGalleryController: {fileID: 0}

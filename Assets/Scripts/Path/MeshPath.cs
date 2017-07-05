@@ -39,9 +39,9 @@ public class MeshPath : MonoBehaviour
 		ScanSourceMesh();
 		Craft(); // make segments
 		Apply(); // apply values
-
+        
 		transform.rotation = oldRotation;
-
+        
 		DestroyImmediate(_helpTransform1.gameObject);
 		DestroyImmediate(_helpTransform2.gameObject);
 	}
@@ -52,6 +52,8 @@ public class MeshPath : MonoBehaviour
 		PointPath pointA = path.GetPathPoint(0.0f);
         PointPath pointB = pointA;
 
+
+        Debug.Log(path.totalDistance);
 		for(float dist=0.0f; dist< path.totalDistance; dist+=_segment_length)
         {
 			pointB = path.GetPathPoint(Mathf.Clamp(dist + _segment_length,0, path.totalDistance));

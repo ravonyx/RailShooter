@@ -11,6 +11,9 @@ namespace RailShooter.Assets
         public event Action<RailShooterEntity> OnRemove;
 
         [SerializeField]
+        private CamerasAndInputsManager m_camInputManager;
+
+        [SerializeField]
         private bool m_gainPoints;
 
         [SerializeField]
@@ -33,6 +36,9 @@ namespace RailShooter.Assets
 
         [SerializeField]
         private PKFxFX m_particleExplosion;
+        [SerializeField]
+        private PKFxFX m_particleScore;
+
         [SerializeField]
         private RailShooterController m_shootingGalleryController;
 
@@ -86,6 +92,27 @@ namespace RailShooter.Assets
 				m_particleExplosion.transform.parent = null;
 				m_particleExplosion.StartEffect ();
 			}
+            if (m_particleScore)
+            {
+                Vector3 parentPos = m_particleScore.transform.parent.position;
+                if (m_gainPoints)
+                    m_particleScore.transform.position = new Vector3(parentPos.x, parentPos.y + 12, parentPos.z);
+                else
+                    m_particleScore.transform.position = new Vector3(parentPos.x, parentPos.y, parentPos.z);
+
+                m_particleScore.transform.parent = null;
+                m_particleScore.transform.LookAt(m_camInputManager.CurrentCamera.transform);
+                m_particleScore.transform.Rotate(0, 180, 0);
+
+                if(m_gainPoints)
+                {
+                    PKFxManager.Sampler textAttr = m_particleScore.GetSampler("Text");
+                    int score = m_score * SessionData.Multiplicateur;
+                    textAttr.m_Text = score.ToString();
+                }
+                m_particleScore.StartEffect();
+            }
+
             if (m_light)
                 m_light.enabled = false;
             if (m_gainPoints)

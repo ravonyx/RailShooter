@@ -66,11 +66,9 @@ public class PathWalker : MonoBehaviour
         if (!m_walking || m_indexStopPoint >= m_path.stopPoints.Count || !m_railShooterController.IsPlaying)
             return;
 
-        Debug.Log(m_progress);
         Vector3 position = m_path.GetPathPoint(m_progress).point;
         Vector3 transformedPos = m_pathTransform.TransformPoint(position);
 
-        Debug.Log(transformedPos.y);
         transform.rotation = Quaternion.LookRotation(m_path.GetPathPoint(m_progress).forward);
 
         transform.position = new Vector3(transformedPos.x, transformedPos.y + m_deltaY, transformedPos.z);

@@ -22,8 +22,9 @@ namespace RailShooter.Utils
         //current score                      
         private static int s_Score;       
         //name of current game                          
-        private static string s_CurrentGame;                       
+        private static string s_CurrentGame;
 
+        public static int Multiplicateur { get { return s_multiplicateur; } }
         public static int HighScore { get { return s_HighScore; } }
         public static int Score { get { return s_Score; } }
 

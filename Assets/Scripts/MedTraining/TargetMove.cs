@@ -27,51 +27,90 @@ public class TargetMove : MonoBehaviour {
     [SerializeField]
     private Mesh m_Mesh2;
 
-    bool pressed = true;
+    bool pressed;
     int posTotal = 0;
     int posOk = 0;
     private float m_Z;
-    public bool trainingRunning = false;
+    public bool trainingRunning;
 
     private MeshFilter m_mesh;
     private Renderer m_renderer;
 
+    [SerializeField]
+    PKFxFX m_fx;
+    [SerializeField]
+    AudioClip m_failClip;
+    [SerializeField]
+    AudioClip m_goodClip;
+
+    [SerializeField]
+    PKFxFX m_fxCountDown;
+
+    private AudioSource m_audioSource;
+
     void Start ()
     {
+        m_audioSource = GetComponent<AudioSource>();
+        m_mesh = GetComponent<MeshFilter>();
+        m_renderer = GetComponent<Renderer>();
+
         m_Z = transform.localPosition.z + 5;
         transform.localPosition = new Vector3(XMin, YMin, m_Z);
         trainingRunning = true;
+        pressed = false;
+
+        StartCoroutine(Coundown());
+    }
+
+    IEnumerator Coundown()
+    {
+        PKFxManager.Sampler textAttr = m_fxCountDown.GetSampler("Text");
+        yield return new WaitForSeconds(2.0f);
+
+        StartCountDownEffect(5, textAttr);
+        yield return new WaitForSeconds(1.1f);
+
+        StartCountDownEffect(4, textAttr);
+        yield return new WaitForSeconds(1.1f);
+
+        StartCountDownEffect(3, textAttr);
+        yield return new WaitForSeconds(1.1f);
+
+        StartCountDownEffect(2, textAttr);
+        yield return new WaitForSeconds(1.1f);
+
+        StartCountDownEffect(1, textAttr);
+        yield return new WaitForSeconds(1.1f);
+
+        StartCountDownEffect(0, textAttr);
+        yield return new WaitForSeconds(2.0f);
+
         StartCoroutine(targetPositionUpdate());
         eyemanagerScript.startEyeRecord(true);
-
-        m_mesh = GetComponent<MeshFilter>();
-        m_renderer = GetComponent<Renderer>();
     }
 
-    private void FixedUpdate()
+    void StartCountDownEffect(int count, PKFxManager.Sampler textAttr)
     {
+        m_fxCountDown.StopEffect();
 
+        int nb = count;
+        if(count == 0)
+            textAttr.m_Text = "Start!";
+        else
+            textAttr.m_Text = count.ToString();
+        m_fxCountDown.StartEffect();
     }
-
     void Update ()
     {
         if (trainingRunning)
         {
             if (m_targetable)
-            {
-                m_renderer.material.color = new Color(0, 0, 255);
                 m_mesh.mesh = m_Mesh1;
-            }
             else
-            {
-                m_renderer.material.color = new Color(255, 0, 0);
                 m_mesh.mesh = m_Mesh2;
-            }
 
             if (Input.GetKeyDown(KeyCode.Space))
-            {
                 pressed = true;
-            }
         }
         else
             ;// Debug.Log("training Over " + posOk + "Goodpress / " + posTotal);
@@ -81,32 +120,36 @@ public class TargetMove : MonoBehaviour {
     {
         if (pressed && m_targetable)
         {
-            Debug.Log("Good Job");
+            m_fx.transform.position = transform.position;
+            m_fx.StartEffect();
+            m_audioSource.clip = m_goodClip;
+            m_audioSource.Play();
+
             posOk++;
         }
         else if (pressed && !m_targetable)
         {
-            ;// Debug.Log("fail");
+            m_audioSource.clip = m_failClip;
+            m_audioSource.Play();
         }
         else if(!pressed && m_targetable)
         {
-            ;// Debug.Log("fail");
+            m_audioSource.clip = m_failClip;
+            m_audioSource.Play();
         }
         else if(!pressed && !m_targetable)
         {
-           // Debug.Log("GoodJob");
+            m_audioSource.clip = m_goodClip;
+            m_audioSource.Play();
+
             posOk++;
         }
-
 
         float X = transform.localPosition.x;
         float Y = transform.localPosition.y;
 
         if (transform.localPosition.x < XMax)
-        {
             X += XIncrement;
-            //Debug.Log("Increment");
-        }
         else
         {
             X = XMin;
@@ -117,6 +160,7 @@ public class TargetMove : MonoBehaviour {
             m_targetable = false;
         else
             m_targetable = true;
+
         posTotal++;
         pressed = false;
         yield return new WaitForSeconds(tick);

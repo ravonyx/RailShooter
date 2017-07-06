@@ -110,7 +110,18 @@ public class TargetMove : MonoBehaviour {
                 m_mesh.mesh = m_Mesh2;
 
             if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (!pressed && m_targetable)
+                {
+                    m_fx.transform.position = transform.position;
+                    m_fx.StartEffect();
+                    m_audioSource.clip = m_goodClip;
+                    m_audioSource.Play();
+
+                    m_mesh.GetComponent<Renderer>().enabled = false;
+                }
                 pressed = true;
+            }
         }
         else
             ;// Debug.Log("training Over " + posOk + "Goodpress / " + posTotal);
@@ -118,13 +129,10 @@ public class TargetMove : MonoBehaviour {
 
     IEnumerator targetPositionUpdate()
     {
+        m_mesh.GetComponent<Renderer>().enabled = true;
+
         if (pressed && m_targetable)
         {
-            m_fx.transform.position = transform.position;
-            m_fx.StartEffect();
-            m_audioSource.clip = m_goodClip;
-            m_audioSource.Play();
-
             posOk++;
         }
         else if (pressed && !m_targetable)
@@ -141,7 +149,6 @@ public class TargetMove : MonoBehaviour {
         {
             m_audioSource.clip = m_goodClip;
             m_audioSource.Play();
-
             posOk++;
         }
 

@@ -167,7 +167,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 299c06199e3720348a8e420ba6b94f4a, type: 2}
+  - {fileID: 2100000, guid: 0e2184b75d658fa4780b327282b0ad90, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1669,6 +1669,11 @@ Prefab:
         type: 2}
       propertyPath: m_HasPostFx
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114634608352568394, guid: 49a08b55cf498374ba2eecfdd334459d,
+        type: 2}
+      propertyPath: sampleDist
+      value: 2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 49a08b55cf498374ba2eecfdd334459d, type: 2}

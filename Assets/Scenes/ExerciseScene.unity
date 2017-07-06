@@ -557,7 +557,7 @@ MonoBehaviour:
       MaxValue1: 0
       MaxValue2: 0
       MaxValue3: 0
-    m_Value0: 5
+    m_Value0: 4
     m_Value1: 0
     m_Value2: 0
     m_Value3: 0
@@ -620,7 +620,7 @@ MonoBehaviour:
       MaxValue1: 0
       MaxValue2: 0
       MaxValue3: 0
-    m_Value0: 25
+    m_Value0: 30
     m_Value1: 0
     m_Value2: 0
     m_Value3: 0

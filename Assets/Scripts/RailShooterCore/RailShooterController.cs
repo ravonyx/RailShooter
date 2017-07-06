@@ -156,12 +156,7 @@ namespace RailShooter.Assets
             m_reticle.Hide ();
             yield return StartCoroutine (m_UIController.ShowOutroUI ());
             
-            m_inputWarnings.TurnOnDoubleTapWarnings();
-            m_inputWarnings.TurnOnSingleTapWarnings();
             yield return StartCoroutine(m_selectionRadial.WaitForSelectionRadialToFill());
-
-            m_inputWarnings.TurnOffDoubleTapWarnings();
-            m_inputWarnings.TurnOffSingleTapWarnings();
             yield return StartCoroutine(m_UIController.HideOutroUI());
 
             yield return StartCoroutine(m_cameraFade.BeginFadeOut(true));

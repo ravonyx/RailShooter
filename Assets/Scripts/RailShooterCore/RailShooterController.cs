@@ -127,6 +127,15 @@ namespace RailShooter.Assets
                         yield return StartCoroutine(m_UIController.HideHealthUI());
                         IsPlaying = true;
                     }
+                    else if (i == 2)
+                    {
+                        m_stepTutorial = 2;
+                        IsPlaying = false;
+                        yield return StartCoroutine(m_UIController.ShowOtherEnemiesUI());
+                        yield return StartCoroutine(m_selectionRadial.WaitForSelectionRadialToFill());
+                        yield return StartCoroutine(m_UIController.HideOtherEnemiesUI());
+                        IsPlaying = true;
+                    }
                 }
 
             }
@@ -187,6 +196,8 @@ namespace RailShooter.Assets
                     yield return StartCoroutine(m_UIController.HideEnemiesUI());
                 if (m_stepTutorial == 1)
                     yield return StartCoroutine(m_UIController.HideHealthUI());
+                if (m_stepTutorial == 2)
+                    yield return StartCoroutine(m_UIController.HideOtherEnemiesUI());
             }
 
             m_selectionRadial.Hide();

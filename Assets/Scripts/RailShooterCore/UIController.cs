@@ -12,7 +12,8 @@ namespace RailShooter.Assets
     public class UIController : MonoBehaviour
     {
         [SerializeField] private UIFader m_introUI;    
-        [SerializeField] private UIFader m_enemiesUI;    
+        [SerializeField] private UIFader m_otherEnemiesUI;    
+        [SerializeField] private UIFader m_enemiesUI;
         [SerializeField] private UIFader m_healthUI;     
         [SerializeField] private UIFader m_outroUI;     
         [SerializeField] private UIFader m_gameOverUI;
@@ -74,6 +75,15 @@ namespace RailShooter.Assets
         public IEnumerator HidePlayerUI ()
         {
             yield return StartCoroutine (m_playerUI.InteruptAndFadeOut ());
+        }
+
+        public IEnumerator ShowOtherEnemiesUI()
+        {
+            yield return StartCoroutine(m_otherEnemiesUI.InteruptAndFadeIn());
+        }
+        public IEnumerator HideOtherEnemiesUI()
+        {
+            yield return StartCoroutine(m_otherEnemiesUI.InteruptAndFadeOut());
         }
     }
 }

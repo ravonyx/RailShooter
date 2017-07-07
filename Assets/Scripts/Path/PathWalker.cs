@@ -28,7 +28,6 @@ public class PathWalker : MonoBehaviour
     private float m_progress = 1.0f;
     private float m_dist = 1.0f;
 
-    [SerializeField]
     private bool m_enemy;
     private bool m_walking;
     public bool Walking

@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 225292531702655250}
   - component: {fileID: 114199761994613466}
   m_Layer: 5
-  m_Name: EnemiesCanvas
+  m_Name: OtherEnemiesCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -307,6 +307,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1673392489444740
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224747292635077960}
+  - component: {fileID: 222571547007529774}
+  - component: {fileID: 114017608821493980}
+  m_Layer: 5
+  m_Name: Body
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1683474496218288
 GameObject:
   m_ObjectHideFlags: 1
@@ -356,6 +373,7 @@ GameObject:
   - component: {fileID: 114748666684700210}
   - component: {fileID: 114878114957540656}
   - component: {fileID: 114620989730629946}
+  - component: {fileID: 114282903808081462}
   m_Layer: 0
   m_Name: GameGUI
   m_TagString: Untagged
@@ -418,6 +436,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1944671407732254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224687308811875786}
+  - component: {fileID: 223179788568242822}
+  - component: {fileID: 114604079591500686}
+  - component: {fileID: 225424453183916256}
+  - component: {fileID: 114605429006920788}
+  m_Layer: 5
+  m_Name: EnemiesCanvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1969896410088584
 GameObject:
   m_ObjectHideFlags: 1
@@ -449,8 +486,9 @@ Transform:
   - {fileID: 224891001939653564}
   - {fileID: 224694553657431908}
   - {fileID: 224504473834402390}
-  - {fileID: 224120363235656934}
+  - {fileID: 224687308811875786}
   - {fileID: 224947896599545048}
+  - {fileID: 224120363235656934}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -547,6 +585,46 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114017608821493980
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1673392489444740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.89705884, g: 0.89705884, b: 0.89705884, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 8c740fb154a0e534aa1c489395c538fb, type: 3}
+    m_FontSize: 6
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 6
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 'The enemies are in <b>RED</b>
+
+    Some can shoot at you, and make you lose life.
+
+    You have to shoot them to gain points.
+
+
+    Hold <b>FIRE</b> to continue!'
 --- !u!114 &114125299940161738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -670,6 +748,21 @@ MonoBehaviour:
   m_Text: 'Hold <b>FIRE</b> to play again!
 
     Press <b>BACK</b> to return to the menu.'
+--- !u!114 &114282903808081462
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1702014481856492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927e2929c2ab79e4d8c23db91acd05f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LookatCamera: 1
+  m_UIElement: {fileID: 224891001939653564}
+  m_camInputManager: {fileID: 0}
+  m_RotateWithCamera: 1
 --- !u!114 &114329441703120314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -856,14 +949,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'The enemies are in <b>RED</b>
-
-    Some can shoot at you, and make you lose life.
-
-    You have to shoot them to gain points.
-
-
-    Hold <b>FIRE</b> to continue!'
+  m_Text: "There are other kind of enemies \nThese bugs can explode at your contact\nand
+    make you lose many life\nYou have to shoot them before they get to you.\n\nHold
+    <b>FIRE</b> to continue!"
 --- !u!114 &114543604228175384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -936,7 +1024,7 @@ MonoBehaviour:
   m_Renderer: {fileID: 0}
   m_SelectionRadial: {fileID: 0}
   m_UIFader: {fileID: 0}
-  m_Collider: {fileID: 0}
+  m_Collider: {fileID: 65474700496069880}
   m_DisappearOnBarFill: 1
 --- !u!114 &114602020490034972
 MonoBehaviour:
@@ -959,6 +1047,41 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 7
+--- !u!114 &114604079591500686
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1944671407732254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 1
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 7
+--- !u!114 &114605429006920788
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1944671407732254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36ec501a8570e3f469a983e6ba4c11aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FadeSpeed: 1
+  m_GroupsToFade:
+  - {fileID: 225424453183916256}
 --- !u!114 &114620989730629946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1195,7 +1318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_LookatCamera: 1
-  m_UIElement: {fileID: 224120363235656934}
+  m_UIElement: {fileID: 224687308811875786}
   m_camInputManager: {fileID: 0}
   m_RotateWithCamera: 1
 --- !u!114 &114897498907855938
@@ -1473,6 +1596,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1683474496218288}
+--- !u!222 &222571547007529774
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1673392489444740}
 --- !u!222 &222580491564313918
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -1528,6 +1657,25 @@ Canvas:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1199778213635752}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!223 &223179788568242822
+Canvas:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1944671407732254}
   m_Enabled: 1
   serializedVersion: 2
   m_RenderMode: 2
@@ -1629,7 +1777,7 @@ RectTransform:
   m_Children:
   - {fileID: 224275274237155468}
   m_Father: {fileID: 4877074497938306}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0.42600003, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1895,6 +2043,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -22.5}
   m_SizeDelta: {x: 30, y: 6}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224687308811875786
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1944671407732254}
+  m_LocalRotation: {x: -0, y: 0.0037136965, z: -0, w: 0.99999315}
+  m_LocalPosition: {x: 0, y: 0, z: 5.34}
+  m_LocalScale: {x: 0.049999997, y: 0.049999997, z: 0.049999997}
+  m_Children:
+  - {fileID: 224747292635077960}
+  m_Father: {fileID: 4877074497938306}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0.42600003, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 1.1100006}
+  m_SizeDelta: {x: 200, y: 75}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224694553657431908
 RectTransform:
   m_ObjectHideFlags: 1
@@ -1916,7 +2083,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.04}
+  m_AnchoredPosition: {x: 0, y: 0.5}
   m_SizeDelta: {x: 106.5, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224703981312100986
@@ -1930,6 +2097,24 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224947896599545048}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -17.44}
+  m_SizeDelta: {x: 115.5, y: 10}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224747292635077960
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1673392489444740}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224687308811875786}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2066,7 +2251,7 @@ CanvasGroup:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1452419838870736}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -2076,6 +2261,17 @@ CanvasGroup:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1699460056544664}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!225 &225424453183916256
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1944671407732254}
   m_Enabled: 1
   m_Alpha: 0
   m_Interactable: 1

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using VRStandardAssets.Utils;
 using UnityEngine.VR;
 using RailShooter.Utils;
+using UnityEngine.SceneManagement;
 
 namespace RailShooter.Assets
 {
@@ -152,6 +153,8 @@ namespace RailShooter.Assets
 
         private IEnumerator EndPhase ()
         {
+            IsPlaying = false;
+
             m_audioSourceMusic.Stop();
 
             m_audioSourceSFX.clip = m_levelDoneClip;
@@ -169,15 +172,21 @@ namespace RailShooter.Assets
             yield return StartCoroutine(m_UIController.HideOutroUI());
 
             yield return StartCoroutine(m_cameraFade.BeginFadeOut(true));
-            m_pathWalker.Reset();
 
-            m_camera.transform.parent.localPosition = m_start.position;
-            m_camera.transform.parent.localPosition = m_start.position;
+            if (m_tutorial)
+                SceneManager.LoadScene("Level1Scene", LoadSceneMode.Single);
+            else
+                SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
 
-            m_camera.transform.localRotation = m_start.rotation;
-            yield return StartCoroutine(m_cameraFade.BeginFadeIn(true));
+            //m_pathWalker.Reset();
+            //
+            //m_camera.transform.parent.localPosition = m_start.position;
+            //m_camera.transform.parent.localPosition = m_start.position;
+            //
+            //m_camera.transform.localRotation = m_start.rotation;
+            //yield return StartCoroutine(m_cameraFade.BeginFadeIn(true));
 
-            StartCoroutine(Start());
+            //StartCoroutine(Start());
         }
 
         public IEnumerator GameOverPhase()

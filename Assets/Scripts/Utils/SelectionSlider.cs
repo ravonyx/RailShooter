@@ -62,10 +62,13 @@ namespace RailShooter.Utils
 
         private void Update ()
         {
-            if(m_CanvasGroup.alpha == 0)
-                m_Collider.enabled = false;
-            if (m_CanvasGroup.alpha == 1)
-                m_Collider.enabled = true;
+            if(m_CanvasGroup)
+            {
+                if (m_CanvasGroup.alpha == 0)
+                    m_Collider.enabled = false;
+                if (m_CanvasGroup.alpha == 1)
+                    m_Collider.enabled = true;
+            }
         }
 
         public IEnumerator WaitForBarToFill ()

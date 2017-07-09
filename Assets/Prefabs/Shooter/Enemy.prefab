@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4855312914765400}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.017_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +34,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4850770556163648}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SMALL BUG BONES
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4678412458403576}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4020502595473224}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4259657089864946}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: JAW R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4928171897221042}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4925973379091520}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4092187049620788}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.015
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4670779315463248}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.017
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4571722905676816}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4271142868740176}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.019_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,8 +184,24 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4733810040647182}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.007
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1270017388641576
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4271790843802488}
+  - component: {fileID: 114479582604204522}
+  m_Layer: 12
+  m_Name: Fx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,7 +215,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4371152029414042}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +230,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4661681412092070}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: JAW L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +245,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4676383836342690}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +260,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4576110188809452}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +275,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4697085071203746}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.019
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +290,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4084289959946760}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +305,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4717230349290686}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.005_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +320,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4422543713986732}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.018
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +335,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4760677983918078}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -334,7 +350,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4171369886348300}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: JAW L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +366,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000362515649952}
   - component: {fileID: 137143396265978000}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,7 +381,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4104989952877434}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.003_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -380,7 +396,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4707509409317280}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -395,7 +411,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4548428971922310}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +426,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4937702616406888}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,7 +441,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4372639792545914}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -440,24 +456,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4458326934972276}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.007_end
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1718410873453002
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4425459655600856}
-  - component: {fileID: 114393238569982452}
-  m_Layer: 0
-  m_Name: Fx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -471,7 +471,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4036558531914024}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.011_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -486,7 +486,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4147753953078096}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.009_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -501,7 +501,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4446294370218282}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -516,7 +516,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4530379867361776}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.016
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -531,7 +531,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4509245375954998}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -546,7 +546,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4297543931641576}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: JAW R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,9 +565,10 @@ GameObject:
   - component: {fileID: 114124501985276670}
   - component: {fileID: 65839711542521288}
   - component: {fileID: 114234503483255950}
-  - component: {fileID: 114669562861237098}
   - component: {fileID: 114273090656173740}
-  m_Layer: 0
+  - component: {fileID: 82865831341868166}
+  - component: {fileID: 114011763329592146}
+  m_Layer: 12
   m_Name: Enemy
   m_TagString: FlyEnemy
   m_Icon: {fileID: 0}
@@ -582,7 +583,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4908113571130764}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -597,7 +598,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4767498910674508}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.015_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,7 +613,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4651735181256838}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rwing.013_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -712,7 +713,7 @@ Transform:
   m_Children:
   - {fileID: 4850770556163648}
   - {fileID: 4000362515649952}
-  - {fileID: 4425459655600856}
+  - {fileID: 4271790843802488}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -769,6 +770,19 @@ Transform:
   m_Father: {fileID: 4697085071203746}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4271790843802488
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1270017388641576}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4114881432150726}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4297543931641576
 Transform:
   m_ObjectHideFlags: 1
@@ -823,19 +837,6 @@ Transform:
   - {fileID: 4697085071203746}
   m_Father: {fileID: 4678412458403576}
   m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4425459655600856
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1718410873453002}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4114881432150726}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4446294370218282
 Transform:
@@ -1190,6 +1191,86 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.5, y: 3.5, z: 1}
   m_Center: {x: 0, y: -1, z: 0}
+--- !u!82 &82865831341868166
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1847363724691968}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: fd01d3e429819774181394d1ad09e6f2, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95448539227689848
 Animator:
   serializedVersion: 3
@@ -1207,6 +1288,26 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114011763329592146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1847363724691968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ac02b8408a9fe4190b334e8066e085, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_camInputManager: {fileID: 0}
+  m_gainPoints: 1
+  m_score: 5
+  m_destroyTimeOutDuration: 0
+  m_destroyPrefab: {fileID: 0}
+  m_hasVoronoi: 0
+  m_particleExplosion: {fileID: 114479582604204522}
+  m_particleScore: {fileID: 0}
+  m_shootingGalleryController: {fileID: 0}
 --- !u!114 &114124501985276670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1220,9 +1321,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_railShooterController: {fileID: 0}
   m_path: {fileID: 0}
-  m_speed: 1500
+  m_speed: 2000
   m_deltaY: 2.5
-  m_enemy: 0
 --- !u!114 &114234503483255950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1246,12 +1346,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fea6f8eea666334aaf9869ad8f7bcda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114393238569982452
+--- !u!114 &114479582604204522
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1718410873453002}
+  m_GameObject: {fileID: 1270017388641576}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a5c02dd42880460b914f6e0206b8c28, type: 3}
@@ -1283,31 +1383,10 @@ MonoBehaviour:
   - m_Descriptor:
       Type: 28
       MinMaxFlag: 1
-      Name: Spread
+      Name: ExplosionDensity
       Description: 
       DefaultValue0: 1
       DefaultValue1: 0
-      DefaultValue2: 0
-      DefaultValue3: 0
-      MinValue0: 0
-      MinValue1: 0
-      MinValue2: 0
-      MinValue3: 0
-      MaxValue0: 0
-      MaxValue1: 0
-      MaxValue2: 0
-      MaxValue3: 0
-    m_Value0: 5
-    m_Value1: 0
-    m_Value2: 0
-    m_Value3: 0
-  - m_Descriptor:
-      Type: 30
-      MinMaxFlag: 1
-      Name: SparkColor
-      Description: 
-      DefaultValue0: 1
-      DefaultValue1: 0.5
       DefaultValue2: 0
       DefaultValue3: 0
       MinValue0: 0
@@ -1319,15 +1398,36 @@ MonoBehaviour:
       MaxValue2: 0
       MaxValue3: 0
     m_Value0: 1
-    m_Value1: 0.5
+    m_Value1: 0
+    m_Value2: 0
+    m_Value3: 0
+  - m_Descriptor:
+      Type: 30
+      MinMaxFlag: 1
+      Name: ExplosionColor
+      Description: 
+      DefaultValue0: 1
+      DefaultValue1: 0.45
+      DefaultValue2: 0
+      DefaultValue3: 0
+      MinValue0: 0
+      MinValue1: 0
+      MinValue2: 0
+      MinValue3: 0
+      MaxValue0: 0
+      MaxValue1: 0
+      MaxValue2: 0
+      MaxValue3: 0
+    m_Value0: 1
+    m_Value1: 0.45
     m_Value2: 0
     m_Value3: 0
   - m_Descriptor:
       Type: 28
       MinMaxFlag: 1
-      Name: SparkIntensity
+      Name: Power
       Description: 
-      DefaultValue0: 2
+      DefaultValue0: 1.5
       DefaultValue1: 0
       DefaultValue2: 0
       DefaultValue3: 0
@@ -1339,16 +1439,16 @@ MonoBehaviour:
       MaxValue1: 0
       MaxValue2: 0
       MaxValue3: 0
-    m_Value0: 8
+    m_Value0: 1.5
     m_Value1: 0
     m_Value2: 0
     m_Value3: 0
   - m_Descriptor:
       Type: 28
       MinMaxFlag: 1
-      Name: SparkCount
+      Name: SmokeDensity
       Description: 
-      DefaultValue0: 5
+      DefaultValue0: 1
       DefaultValue1: 0
       DefaultValue2: 0
       DefaultValue3: 0
@@ -1360,32 +1460,77 @@ MonoBehaviour:
       MaxValue1: 0
       MaxValue2: 0
       MaxValue3: 0
-    m_Value0: 100
+    m_Value0: 1
+    m_Value1: 0
+    m_Value2: 0
+    m_Value3: 0
+  - m_Descriptor:
+      Type: 30
+      MinMaxFlag: 1
+      Name: SmokeColor
+      Description: 
+      DefaultValue0: 1
+      DefaultValue1: 1
+      DefaultValue2: 1
+      DefaultValue3: 0
+      MinValue0: 0
+      MinValue1: 0
+      MinValue2: 0
+      MinValue3: 0
+      MaxValue0: 0
+      MaxValue1: 0
+      MaxValue2: 0
+      MaxValue3: 0
+    m_Value0: 1
+    m_Value1: 1
+    m_Value2: 1
+    m_Value3: 0
+  - m_Descriptor:
+      Type: 28
+      MinMaxFlag: 1
+      Name: TrailCount
+      Description: 
+      DefaultValue0: 3
+      DefaultValue1: 0
+      DefaultValue2: 0
+      DefaultValue3: 0
+      MinValue0: 0
+      MinValue1: 0
+      MinValue2: 0
+      MinValue3: 0
+      MaxValue0: 0
+      MaxValue1: 0
+      MaxValue2: 0
+      MaxValue3: 0
+    m_Value0: 3
+    m_Value1: 0
+    m_Value2: 0
+    m_Value3: 0
+  - m_Descriptor:
+      Type: 28
+      MinMaxFlag: 1
+      Name: DebrisCount
+      Description: 
+      DefaultValue0: 20
+      DefaultValue1: 0
+      DefaultValue2: 0
+      DefaultValue3: 0
+      MinValue0: 0
+      MinValue1: 0
+      MinValue2: 0
+      MinValue3: 0
+      MaxValue0: 0
+      MaxValue1: 0
+      MaxValue2: 0
+      MaxValue3: 0
+    m_Value0: 20
     m_Value1: 0
     m_Value2: 0
     m_Value3: 0
   m_FxSamplersList: []
   m_PlayOnStart: 1
-  m_BoundFx: {fileID: 102900000, guid: 20fd856c2f06bda4f998d90ae65d1f1b, type: 3}
-  m_FxName: Particles/Spark.pkfx
---- !u!114 &114669562861237098
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1847363724691968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92ac02b8408a9fe4190b334e8066e085, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_gainPoints: 1
-  m_score: 5
-  m_destroyTimeOutDuration: 0
-  m_destroyPrefab: {fileID: 0}
-  m_hasVoronoi: 0
-  m_particleExplosion: {fileID: 114393238569982452}
-  m_shootingGalleryController: {fileID: 0}
+  m_BoundFx: {fileID: 102900000, guid: 3f34b37cfa56f7d4681ad0a7bbf49046, type: 3}
+  m_FxName: Particles/Explosion.pkfx
 --- !u!137 &137143396265978000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

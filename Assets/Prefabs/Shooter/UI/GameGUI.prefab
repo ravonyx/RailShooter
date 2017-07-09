@@ -374,6 +374,7 @@ GameObject:
   - component: {fileID: 114878114957540656}
   - component: {fileID: 114620989730629946}
   - component: {fileID: 114282903808081462}
+  - component: {fileID: 114873602929830570}
   m_Layer: 0
   m_Name: GameGUI
   m_TagString: Untagged
@@ -984,7 +985,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Hold <b>FIRE</b> to play again!
+  m_Text: 'Hold <b>FIRE</b> to play next level !
 
     Press <b>BACK</b> to return to the menu.'
 --- !u!114 &114585662141440772
@@ -1305,7 +1306,22 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Level Done !
+  m_Text: Tutorial Done !
+--- !u!114 &114873602929830570
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1702014481856492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927e2929c2ab79e4d8c23db91acd05f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LookatCamera: 1
+  m_UIElement: {fileID: 224120363235656934}
+  m_camInputManager: {fileID: 0}
+  m_RotateWithCamera: 1
 --- !u!114 &114878114957540656
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2069,7 +2085,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1442630586629754}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 8.1}
+  m_LocalPosition: {x: 0, y: 0, z: 7.56}
   m_LocalScale: {x: 0.07, y: 0.07, z: 0.07}
   m_Children:
   - {fileID: 224133326950307054}
@@ -2251,7 +2267,7 @@ CanvasGroup:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1452419838870736}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -2262,7 +2278,7 @@ CanvasGroup:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1699460056544664}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -2284,7 +2300,7 @@ CanvasGroup:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1442630586629754}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0

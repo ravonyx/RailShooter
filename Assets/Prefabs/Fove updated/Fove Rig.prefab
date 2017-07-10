@@ -589,8 +589,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SelectionDuration: 1
-  m_HideOnStart: 0
-  m_Selection: {fileID: 0}
+  m_HideOnStart: 1
+  m_Selection: {fileID: 114880455828742250}
   m_camInputManager: {fileID: 0}
 --- !u!114 &114347487271451790
 MonoBehaviour:
@@ -678,7 +678,7 @@ MonoBehaviour:
   m_lifeToRemoveFlyEnemy: 0
   m_timeRegen: 2
   m_timeLose: 0
-  m_FXHealth: {fileID: 0}
+  m_FXHealth: {fileID: 114491883559589456}
   m_lifeBarContainer: {fileID: 0}
   m_lifeBarContainerVR: {fileID: 0}
   m_railShooterController: {fileID: 0}
@@ -1066,7 +1066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31957ab02a8654b448736febf48c16e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FadeImage: {fileID: 0}
+  m_FadeImage: {fileID: 114201368918165414}
   m_DefaultSnapshot: {fileID: 24500003, guid: 3c034867c6b5e9c49a6afc51d6679306, type: 2}
   m_FadedSnapshot: {fileID: 24559432, guid: 3c034867c6b5e9c49a6afc51d6679306, type: 2}
   m_FadeColor: {r: 0, g: 0, b: 0, a: 1}
@@ -1138,8 +1138,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff17147c9606014f8e8f74f255d466a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Image: {fileID: 0}
-  m_ReticleTransform: {fileID: 0}
+  m_Image: {fileID: 114013313816156216}
+  m_ReticleTransform: {fileID: 224821115344567974}
   m_camInputManager: {fileID: 0}
 --- !u!114 &114880455828742250
 MonoBehaviour:

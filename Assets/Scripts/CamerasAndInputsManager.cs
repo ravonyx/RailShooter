@@ -70,8 +70,6 @@ namespace RailShooter.Utils
                 m_currentCamera = m_VRCam;
                 m_mouseCam.transform.parent.gameObject.SetActive(false);
                 m_foveCam.transform.parent.gameObject.SetActive(false);
-
-              
             }
             else
             {

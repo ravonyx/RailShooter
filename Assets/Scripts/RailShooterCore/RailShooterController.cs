@@ -63,7 +63,7 @@ namespace RailShooter.Assets
 
             if (m_camInputsManager.CurrentInputName == "Touch")
             {
-
+                Debug.Log("Pouet");
                 m_selectionRadial = m_touch.GetComponent<SelectionRadial>();
                 m_reticle = m_touch.GetComponent<Reticle>();
             }

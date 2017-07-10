@@ -14,6 +14,9 @@ namespace RailShooter.Utils
         [SerializeField]
         private Camera m_foveCam;
 
+        [SerializeField]
+        bool m_foveActive = false;
+
 
         [SerializeField]
         private GameObject m_OneArmWeapon;
@@ -55,11 +58,20 @@ namespace RailShooter.Utils
             m_currentInputs = GetComponent<Inputs>();
             //TODO : add fove camera
             //set the current camera
-            if (VRSettings.enabled)
+            if(m_foveActive)
+            {
+                m_currentCamera = m_foveCam;
+                m_VRCam.transform.parent.gameObject.SetActive(false);
+                m_mouseCam.transform.parent.gameObject.SetActive(false);
+            }
+
+            else if (VRSettings.enabled)
             {
                 m_currentCamera = m_VRCam;
                 m_mouseCam.transform.parent.gameObject.SetActive(false);
                 m_foveCam.transform.parent.gameObject.SetActive(false);
+
+              
             }
             else
             {

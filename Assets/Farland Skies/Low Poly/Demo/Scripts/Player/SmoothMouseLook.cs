@@ -41,7 +41,7 @@ public class SmoothMouseLook : MonoBehaviour
 
     protected void Update()
     {
-        if (!Input.GetButton("Fire2")) return;
+        if (!Input.GetButton("Fire1")) return;
 
         switch (axes)
         {

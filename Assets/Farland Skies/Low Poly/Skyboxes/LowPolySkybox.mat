@@ -42,7 +42,7 @@ Material:
     - first:
         name: _SunTex
       second:
-        m_Texture: {fileID: 2800000, guid: eb1e18ae3dbe9f348a7bc0d71a5cc811, type: 3}
+        m_Texture: {fileID: 2800000, guid: bec1a30e00a480146aef8d1d037a846c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -51,10 +51,10 @@ Material:
       second: 1
     - first:
         name: _CloudsHeight
-      second: 0
+      second: 0.219
     - first:
         name: _CloudsRotation
-      second: 0
+      second: 57
     - first:
         name: _Exponent
       second: 1
@@ -63,7 +63,7 @@ Material:
       second: 1
     - first:
         name: _MoonSize
-      second: 0.75
+      second: 1
     - first:
         name: _StarsExtinction
       second: 2
@@ -79,16 +79,16 @@ Material:
     m_Colors:
     - first:
         name: _BottomColor
-      second: {r: 0.016868481, g: 0, b: 0.47794116, a: 1}
+      second: {r: 0.4446501, g: 0.52205884, b: 0.5152286, a: 1}
     - first:
         name: _CloudsTint
-      second: {r: 0.50799215, g: 0.48885787, b: 0.7656204, a: 1}
+      second: {r: 0.3882353, g: 0.43529415, b: 0.6614379, a: 1}
     - first:
         name: _MiddleColor
-      second: {r: 1, g: 0.61764705, b: 0.9578093, a: 1}
+      second: {r: 0.01673428, g: 0.17464347, b: 0.32352942, a: 1}
     - first:
         name: _MoonTint
-      second: {r: 0.491, g: 0.53774476, b: 1, a: 1}
+      second: {r: 0.4556863, g: 0.52156866, b: 0.5764706, a: 1}
     - first:
         name: _SkyBottomColor
       second: {r: 0.016868481, g: 0, b: 0.47794116, a: 0}
@@ -112,10 +112,10 @@ Material:
       second: {r: 0.2794118, g: 0.6421905, b: 1, a: 0}
     - first:
         name: _StarsTint
-      second: {r: 1, g: 1, b: 1, a: 1}
+      second: {r: 0.62745106, g: 0.62745106, b: 0.62745106, a: 1}
     - first:
         name: _SunTint
-      second: {r: 0.703, g: 0.55044055, b: 0.366966, a: 1}
+      second: {r: 0.7421569, g: 0.4563726, b: 0.5230392, a: 0}
     - first:
         name: _TopColor
-      second: {r: 0.2794118, g: 0.6421905, b: 1, a: 1}
+      second: {r: 0.454361, g: 0.15991381, b: 0.875, a: 1}

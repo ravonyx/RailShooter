@@ -214,25 +214,11 @@ namespace RailShooter.Assets
             //hide the explanations UI if game over before end
             m_reticle.Hide();
             yield return StartCoroutine(m_UIController.ShowGameOverUI());
-
-            m_inputWarnings.TurnOnDoubleTapWarnings();
-            m_inputWarnings.TurnOnSingleTapWarnings();
             yield return StartCoroutine(m_selectionRadial.WaitForSelectionRadialToFill());
-
-            m_inputWarnings.TurnOffDoubleTapWarnings();
-            m_inputWarnings.TurnOffSingleTapWarnings();
             yield return StartCoroutine(m_UIController.HideGameOverUI());
-
             yield return StartCoroutine(m_cameraFade.BeginFadeOut(true));
-            m_pathWalker.Reset();
 
-            m_camera.transform.parent.localPosition = m_start.position;
-            m_camera.transform.parent.localPosition = m_start.position;
-
-            m_camera.transform.localRotation = m_start.rotation;
-            yield return StartCoroutine(m_cameraFade.BeginFadeIn(true));
-
-            StartCoroutine(Start());
+            SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
         }
     }
 }

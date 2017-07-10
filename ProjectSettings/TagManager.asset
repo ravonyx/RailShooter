@@ -10,6 +10,7 @@ TagManager:
   - GunContainer
   - Projectile
   - FlyEnemy
+  - Env
   layers:
   - Default
   - TransparentFX

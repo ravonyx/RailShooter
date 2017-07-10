@@ -120,5 +120,11 @@ namespace RailShooter.Assets
                 transform.LookAt(m_player.position);
             }
         }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.tag == "Env")
+                Remove();
+        }
     }
 }

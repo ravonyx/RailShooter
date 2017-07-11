@@ -51,10 +51,10 @@ Material:
       second: 1
     - first:
         name: _CloudsHeight
-      second: -0.146
+      second: -0.178
     - first:
         name: _CloudsRotation
-      second: 180
+      second: 0
     - first:
         name: _Exponent
       second: 1
@@ -63,7 +63,7 @@ Material:
       second: 1
     - first:
         name: _MoonSize
-      second: 1.27
+      second: 0.75
     - first:
         name: _StarsExtinction
       second: 2
@@ -79,16 +79,16 @@ Material:
     m_Colors:
     - first:
         name: _BottomColor
-      second: {r: 0.0745026, g: 0.080135114, b: 0.19117647, a: 1}
+      second: {r: 0.016868481, g: 0, b: 0.47794116, a: 1}
     - first:
         name: _CloudsTint
-      second: {r: 0.7794118, g: 0.555904, b: 0.555904, a: 0.966}
+      second: {r: 0.50799215, g: 0.48885787, b: 0.7656204, a: 1}
     - first:
         name: _MiddleColor
-      second: {r: 0.1703071, g: 0.19616541, b: 0.36764705, a: 1}
+      second: {r: 0.30246916, g: 0.29974046, b: 0.4852941, a: 1}
     - first:
         name: _MoonTint
-      second: {r: 0.34439877, g: 0.47794116, b: 0.47794116, a: 0.559}
+      second: {r: 0.491, g: 0.53774476, b: 1, a: 0.566}
     - first:
         name: _SkyBottomColor
       second: {r: 0.016868481, g: 0, b: 0.47794116, a: 0}
@@ -112,10 +112,10 @@ Material:
       second: {r: 0.2794118, g: 0.6421905, b: 1, a: 0}
     - first:
         name: _StarsTint
-      second: {r: 0.62745106, g: 0.62745106, b: 0.62745106, a: 1}
+      second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _SunTint
-      second: {r: 0.7421569, g: 0.4563726, b: 0.5230392, a: 0}
+      second: {r: 0.703, g: 0.55044055, b: 0.366966, a: 1}
     - first:
         name: _TopColor
-      second: {r: 0.36797145, g: 0.43983254, b: 0.6102941, a: 1}
+      second: {r: 0.2794118, g: 0.6421905, b: 1, a: 1}

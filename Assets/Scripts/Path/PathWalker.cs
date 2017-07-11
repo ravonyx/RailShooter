@@ -70,9 +70,8 @@ public class PathWalker : MonoBehaviour
 
         transform.rotation = Quaternion.LookRotation(m_path.GetPathPoint(m_progress).forward);
 
-        transform.position = new Vector3(transformedPos.x, transformedPos.y + m_deltaY, transformedPos.z);
-        if (m_enemy)
-            transform.rotation = Quaternion.LookRotation(m_path.GetPathPoint(m_progress).forward);
+        transform.position = new Vector3(transformedPos.x, transformedPos.y, transformedPos.z);
+        transform.Translate(Vector3.up * m_deltaY);
     }
 
     public IEnumerator PlayUpdate()
@@ -93,7 +92,6 @@ public class PathWalker : MonoBehaviour
             Vector3 position = m_path.GetPathPoint(m_progress).point;
             m_dist = Vector3.Distance(position, m_path.GetPathPoint(m_path.stopPoints[m_indexStopPoint]).point);
         }
-
         m_walking = false;
         m_indexStopPoint++;
     }

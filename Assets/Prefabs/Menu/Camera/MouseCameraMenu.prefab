@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 114454637252142996}
   - component: {fileID: 114775690928168512}
   - component: {fileID: 114698155801204060}
+  - component: {fileID: 114699815492167864}
   m_Layer: 11
   m_Name: MouseCamera
   m_TagString: MainCamera
@@ -202,7 +203,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.02
-  far clip plane: 400
+  far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
@@ -399,6 +400,18 @@ MonoBehaviour:
   m_showDebugRay: 1
   m_impactParticles: {fileID: 0}
   m_camInputManager: {fileID: 0}
+--- !u!114 &114699815492167864
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1032444056858978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f5219f2a2c09be469b42928f6eec470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DoubleClickTime: 0.3
 --- !u!114 &114710550329095186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -443,8 +456,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   threshold: 0.25
-  intensity: 0.75
-  blurSize: 1
+  intensity: 0.1
+  blurSize: 0.7
   blurIterations: 1
   blurType: 0
   fastBloomShader: {fileID: 4800000, guid: 68a00c837b82e4c6d92e7da765dc5f1d, type: 3}

@@ -108,7 +108,6 @@ GameObject:
   - component: {fileID: 81588403595127786}
   - component: {fileID: 114749151726269616}
   - component: {fileID: 114517841678514956}
-  - component: {fileID: 114392788155454944}
   - component: {fileID: 114664275892716780}
   - component: {fileID: 114568509391660450}
   - component: {fileID: 114860278299871222}
@@ -116,6 +115,7 @@ GameObject:
   - component: {fileID: 114295487070063328}
   - component: {fileID: 114666259191061860}
   - component: {fileID: 114871429053505040}
+  - component: {fileID: 114496687218091974}
   m_Layer: 0
   m_Name: VRCamera
   m_TagString: MainCamera
@@ -334,13 +334,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1226799265087108}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 30e94eca1f948fc408642ebc47351943, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.9988356}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -367,12 +367,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   threshold: 0.25
-  intensity: 0.75
-  blurSize: 1
+  intensity: 0.1
+  blurSize: 0.7
   blurIterations: 1
   blurType: 0
   fastBloomShader: {fileID: 4800000, guid: 68a00c837b82e4c6d92e7da765dc5f1d, type: 3}
---- !u!114 &114392788155454944
+--- !u!114 &114496687218091974
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -380,12 +380,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1579928326499018}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efc21d660b6557940a0cce1888e22fed, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f5219f2a2c09be469b42928f6eec470, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_menuSceneName: MainMenu
-  m_cameraFade: {fileID: 114517841678514956}
-  m_camInputManager: {fileID: 0}
+  m_DoubleClickTime: 0.3
 --- !u!114 &114517841678514956
 MonoBehaviour:
   m_ObjectHideFlags: 1

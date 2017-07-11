@@ -117,19 +117,32 @@ namespace RailShooter.Assets
             //move the weapon in function of Type of Inputs
             if (m_camInputManager.CurrentInputName == "Mouse")
             {
-                transform.rotation = m_cameraTransform.rotation;
                 transform.position = m_cameraTransform.position;
+                transform.rotation = m_cameraTransform.rotation;
             }
             else if (m_camInputManager.CurrentInputName == "Gamepad")
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, InputTracking.GetLocalRotation(VRNode.Head),
-                m_Damping * (1 - Mathf.Exp(k_DampingCoef * Time.deltaTime)));
-
                 transform.position = m_cameraTransform.position;
 
-                Quaternion lookAtRotation = Quaternion.LookRotation(m_VRReticle.ReticleTransform.position - m_gunContainer.position);
-                m_gunContainer.rotation = Quaternion.Slerp(m_gunContainer.rotation, lookAtRotation, m_GunContainerSmoothing * Time.deltaTime);
+                if (m_camInputManager.CurrentCamera.name == "VRCamera")
+                {
+                    transform.rotation = Quaternion.Slerp(transform.rotation, InputTracking.GetLocalRotation(VRNode.Head),
+                    m_Damping * (1 - Mathf.Exp(k_DampingCoef * Time.deltaTime)));
+
+                    Quaternion lookAtRotation = Quaternion.LookRotation(m_VRReticle.ReticleTransform.position - m_gunContainer.position);
+                    m_gunContainer.rotation = Quaternion.Slerp(m_gunContainer.rotation, lookAtRotation, m_GunContainerSmoothing * Time.deltaTime);
+                }
+                else if (m_camInputManager.CurrentCamera.name == "FoveInterface")
+                {
+                    Quaternion quat = FoveInterface.GetHMDRotation();
+                    transform.rotation = Quaternion.Slerp(transform.rotation, quat,
+                    m_Damping * (1 - Mathf.Exp(k_DampingCoef * Time.deltaTime)));
+
+                    Quaternion lookAtRotation = Quaternion.LookRotation(m_VRReticle.ReticleTransform.position - m_gunContainer.position);
+                    m_gunContainer.rotation = Quaternion.Slerp(m_gunContainer.rotation, lookAtRotation, m_GunContainerSmoothing * Time.deltaTime);
+                }
             }
+
             else if (m_camInputManager.CurrentInputName == "Touch")
             {
                 //Update anchors of touch weapon

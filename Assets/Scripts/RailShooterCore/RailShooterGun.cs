@@ -183,7 +183,7 @@ namespace RailShooter.Assets
         private IEnumerator Fire(Transform target)
         {
             if (target != null && target.name == "Health")
-                m_playerHealth.StartCoroutine("EvolveLife", true);
+                m_playerHealth.StartCoroutine("EvolveLife");
 
 
             m_GunAudio.Play();

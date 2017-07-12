@@ -49,16 +49,13 @@ public class RailShooterPlayer : MonoBehaviour
         m_audio = GetComponent<AudioSource>();
     }
 
-    public IEnumerator EvolveLife(bool increase)
+    public IEnumerator EvolveLife()
     {
         float timer = 0f;
         m_FXHealth.StartEffect();
         while (timer <= m_timeRegen)
         {
-            if(increase)
-                m_currentLife += 1.0f;
-            else
-                m_currentLife -= 1.0f;
+            m_currentLife += 3.0f;
 
             float lifeValue = m_currentLife / m_lifeMax;
             m_lifeBar.fillAmount = lifeValue;

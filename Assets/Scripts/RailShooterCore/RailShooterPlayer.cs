@@ -56,9 +56,20 @@ public class RailShooterPlayer : MonoBehaviour
         while (timer <= m_timeRegen)
         {
             m_currentLife += 3.0f;
-
+            if (m_currentLife > m_lifeMax)
+                m_currentLife = m_lifeMax;
             float lifeValue = m_currentLife / m_lifeMax;
             m_lifeBar.fillAmount = lifeValue;
+
+            Color color = Color.white;
+            if (m_currentLife <= m_lifeMax && m_currentLife >= ((m_lifeMax / 3) * 2))
+                ColorUtility.TryParseHtmlString("#00FF17FF", out color);
+            else if (m_currentLife < ((m_lifeMax / 3) * 2) && m_currentLife >= ((m_lifeMax / 3)))
+                ColorUtility.TryParseHtmlString("#FF8E36FF", out color);
+            else
+                color = Color.red;
+
+            m_lifeBar.color = color;
 
             timer += 1;
             yield return new WaitForSeconds(1.0f);
